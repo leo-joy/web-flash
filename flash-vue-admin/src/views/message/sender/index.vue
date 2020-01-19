@@ -3,9 +3,9 @@
         <div class="block">
             <el-row>
                 <el-col :span="24">
-                    <el-button type="success" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
-                    <el-button type="primary" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-                    <el-button type="danger" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+                    <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
+                    <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
+                    <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
                 </el-col>
             </el-row>
         </div>
@@ -41,7 +41,7 @@
                 :title="formTitle"
                 :visible.sync="formVisible"
                 width="70%">
-            <el-form ref="form" :model="form" :rules="rules" label-width="150px">
+            <el-form ref="form" :model="form" :rules="rules" label-width="120px">
                 <el-row>
                     <el-col :span="12">
                         <el-form-item label="名称"  >
@@ -66,8 +66,7 @@
 
 <script src="./t_message_sender.js"></script>
 
-
 <style rel="stylesheet/scss" lang="scss" scoped>
-    @import "src/styles/common.scss";
+    @import "@/styles/common.scss";
 </style>
 

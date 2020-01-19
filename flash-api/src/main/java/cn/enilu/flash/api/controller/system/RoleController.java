@@ -8,18 +8,16 @@ import cn.enilu.flash.bean.entity.system.Role;
 import cn.enilu.flash.bean.entity.system.User;
 import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
-import cn.enilu.flash.bean.exception.GunsException;
+import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.bean.vo.node.Node;
 import cn.enilu.flash.bean.vo.node.ZTreeNode;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.service.system.RoleService;
 import cn.enilu.flash.service.system.UserService;
 import cn.enilu.flash.service.system.impl.ConstantFactory;
-import cn.enilu.flash.utils.BeanUtil;
-import cn.enilu.flash.utils.Convert;
-import cn.enilu.flash.utils.Maps;
-import cn.enilu.flash.utils.ToolUtil;
+import cn.enilu.flash.utils.*;
 import cn.enilu.flash.warpper.RoleWarpper;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
@@ -60,7 +58,11 @@ public class RoleController extends BaseController {
     @BussinessLog(value = "编辑角色", key = "name", dict = RoleDict.class)
     @RequiresPermissions(value = {Permission.ROLE_EDIT})
     public Object save(@Valid Role role){
-        roleService.saveOrUpdate(role);
+        if(role.getId()==null) {
+            roleService.insert(role);
+        }else{
+            roleService.update(role);
+        }
         return Rets.success();
     }
     @RequestMapping(method = RequestMethod.DELETE)
@@ -68,16 +70,19 @@ public class RoleController extends BaseController {
     @RequiresPermissions(value = {Permission.ROLE_DEL})
     public Object remove(@RequestParam Long roleId){
         logger.info("id:{}",roleId);
-        if (ToolUtil.isEmpty(roleId)) {
-            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        if (roleId==null) {
+            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
         if(roleId.intValue()<2){
             return Rets.failure("不能删除初始角色");
         }
-
+        List<User> userList = userService.queryAll(SearchFilter.build("roleid", SearchFilter.Operator.EQ,String.valueOf(roleId)));
+        if(!userList.isEmpty()){
+            return Rets.failure("有用户使用该角色，禁止删除");
+        }
         //不能删除超级管理员角色
-        if(roleId.equals(Const.ADMIN_ROLE_ID)){
-            throw new GunsException(BizExceptionEnum.CANT_DELETE_ADMIN);
+        if(roleId.intValue() ==Const.ADMIN_ROLE_ID){
+            return Rets.failure("禁止删除超级管理员角色");
         }
         //缓存被删除的角色名称
         LogObjectHolder.me().set(ConstantFactory.me().getSingleRoleName(roleId));
@@ -90,8 +95,8 @@ public class RoleController extends BaseController {
     @RequiresPermissions(value = {Permission.ROLE_EDIT})
     public Object setAuthority(Long roleId, String
             permissions) {
-        if (ToolUtil.isOneEmpty(roleId)) {
-            throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+        if (BeanUtil.isOneEmpty(roleId)) {
+            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
         roleService.setAuthority(roleId, permissions);
         return Rets.success();
@@ -107,7 +112,7 @@ public class RoleController extends BaseController {
         User user = userService.get(idUser);
         String roleIds = user.getRoleid();
         List<ZTreeNode> roleTreeList = null;
-        if (ToolUtil.isEmpty(roleIds)) {
+        if (StringUtil.isEmpty(roleIds)) {
             roleTreeList = roleService.roleTreeList();
         } else {
             Long[] roleArray = Convert.toLongArray(",", roleIds);

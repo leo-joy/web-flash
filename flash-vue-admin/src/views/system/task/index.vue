@@ -3,19 +3,19 @@
     <div class="block">
       <el-row  :gutter="20">
         <el-col :span="6">
-          <el-input v-model="listQuery.name" placeholder="请输入任务名"></el-input>
+          <el-input v-model="listQuery.name" size="mini" placeholder="请输入任务名"></el-input>
         </el-col>
         <el-col :span="6">
-          <el-button type="success" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
-          <el-button type="primary" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
+          <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
       </el-row>
       <br>
       <el-row>
         <el-col :span="24">
-          <el-button type="success" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
-          <el-button type="primary" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
-          <el-button type="danger" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
+          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
+          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
+          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
         </el-col>
       </el-row>
     </div>
@@ -71,7 +71,7 @@
       :title="formTitle"
       :visible.sync="formVisible"
       width="70%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="80px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="12">
             <el-form-item label="任务名" prop="name">

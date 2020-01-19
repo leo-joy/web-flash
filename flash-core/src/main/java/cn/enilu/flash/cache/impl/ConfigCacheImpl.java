@@ -1,10 +1,11 @@
 package cn.enilu.flash.cache.impl;
 
 import cn.enilu.flash.bean.entity.system.Cfg;
+import cn.enilu.flash.bean.enumeration.ConfigKeyEnum;
 import cn.enilu.flash.cache.CacheDao;
 import cn.enilu.flash.cache.ConfigCache;
 import cn.enilu.flash.dao.system.CfgRepository;
-import cn.enilu.flash.utils.StringUtils;
+import cn.enilu.flash.utils.StringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ConfigCacheImpl implements ConfigCache {
 
     @Override
     public Object get(String key) {
-        return (String) cacheDao.hget(EhcacheDao.CONSTANT,key);
+        return (String) cacheDao.hget(CacheDao.CONSTANT,key);
     }
 
     @Override
@@ -46,21 +47,26 @@ public class ConfigCacheImpl implements ConfigCache {
     @Override
     public String get(String key, String def) {
         String ret = (String) get(key);
-        if(StringUtils.isEmpty(ret)){
+        if(StringUtil.isEmpty(ret)){
             return ret;
         }
         return ret;
     }
 
+    @Override
+    public String get(ConfigKeyEnum configKeyEnum) {
+        return get(configKeyEnum.getValue(),null);
+    }
+
 
     @Override
     public void set(String key, Object val) {
-        cacheDao.hset(EhcacheDao.CONSTANT,key,val);
+        cacheDao.hset(CacheDao.CONSTANT,key,val);
     }
 
     @Override
     public void del(String key, String val) {
-        cacheDao.hdel(EhcacheDao.CONSTANT,val);
+        cacheDao.hdel(CacheDao.CONSTANT,val);
     }
 
     @Override
@@ -69,7 +75,7 @@ public class ConfigCacheImpl implements ConfigCache {
         List<Cfg> list = cfgRepository.findAll();
         if (list != null && !list.isEmpty()) {
             for (Cfg cfg : list) {
-                if (StringUtils.isNotEmpty(cfg.getCfgName()) && StringUtils.isNotEmpty(cfg.getCfgValue())) {
+                if (StringUtil.isNotEmpty(cfg.getCfgName()) && StringUtil.isNotEmpty(cfg.getCfgValue())) {
                     set(cfg.getCfgName(),cfg.getCfgValue());
                 }
             }

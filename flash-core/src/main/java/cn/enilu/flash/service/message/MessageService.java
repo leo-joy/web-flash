@@ -11,7 +11,7 @@ import cn.enilu.flash.dao.message.MessagetemplateRepository;
 import cn.enilu.flash.service.BaseService;
 import cn.enilu.flash.service.message.email.EmailSender;
 import cn.enilu.flash.service.message.sms.SmsSender;
-import cn.enilu.flash.utils.StringUtils;
+import cn.enilu.flash.utils.StringUtil;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import org.apache.commons.lang.text.StrSubstitutor;
@@ -116,7 +116,6 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
         message.setType(0);
         message.setState(sendResult ? 1 : 2);
         message.setReceiver(receiver);
-        message.setCreateTime(new Date());
         message.setContent(content);
         messageRepository.save(message);
 
@@ -134,7 +133,7 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
         for (String oneReceiver : receivers) {
             try {
 
-                if (StringUtils.isNotEmpty(oneReceiver)) {
+                if (StringUtil.isNotEmpty(oneReceiver)) {
                     success = smsSender.sendSms(tplCode, oneReceiver, args, content);
                 }
             } catch (Exception e) {
@@ -175,7 +174,7 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
     private String getTpl(MessageTemplate messageTemplate) {
         MessageSender messageSender = messagesenderRepository.findById(messageTemplate.getIdMessageSender()).get();
 
-        if (messageSender != null && StringUtils.isNotEmpty(messageSender.getTplCode())) {
+        if (messageSender != null && StringUtil.isNotEmpty(messageSender.getTplCode())) {
             return messageSender.getTplCode();
         } else {
             return null;

@@ -15,9 +15,10 @@ module.exports = {
         editLinks: true,
         editLinkText: '编辑此页面！',
         nav: [
-            {text: '文档', link: '/'},
+            {text: '指南', link: '/base/preface'},
             {text: '功能',
                 items:[
+                    {text: '国际化',link:'/action/i18n'},
                     {text: '导出excel',link:'/feature/exportExcel'},
                     {text: '定时任务',link:'/action/task'},
                     {text: '缓存',link:'/action/cache'},
@@ -25,24 +26,26 @@ module.exports = {
                     {text: 'CMS',link:'/feature/cms'}
                 ]
             },
-            {text: '周边',
+            {text: '更多',
                 items:[
                     {text: '代码生成',link:'/ecosystem/code-generator'},
                     {text: '数据库文档生成',link:'/ecosystem/database-doc-generator'},
+                    {text:'ChangeLog',link:'https://github.com/enilu/web-flash/blob/master/CHANGELOG.md'}
                 ]
             },
             {text: '捐赠',link:'/donate'},
             {text: '资源',link:'/resource'},
 
-            {text: '项目主页', link: 'https://github.com/enilu/web-flash'},
+            {text: 'Gitee', link: 'https://gitee.com/enilu/web-flash'},
 
 
         ],
         sidebar: [
             {
-                title: '基本准备',
+                title: '基础',
                 collapsable: false,
                 children: [
+                    '/base/preface',
                     '/base/jdkAndMaven',
                     '/base/modules'
                 ]
@@ -59,7 +62,7 @@ module.exports = {
                 ]
             },
             {
-                title: '基本功能介绍',
+                title: '基础',
                 collapsable: false,
                 children: [
                     '/feature/modules',
@@ -73,8 +76,10 @@ module.exports = {
                     '/feature/exportExcel',
                     '/feature/messageCenter',
                     '/feature/cms.md'
+
                 ]
-            },{
+            },
+           {
                 title: '进阶',
                 collapsable: false,
                 children: [
@@ -82,7 +87,8 @@ module.exports = {
                     '/action/cache',
                     '/action/task',
                     '/action/jpaauditing.md',
-                    '/action/validator'
+                    '/action/validator',
+                    '/action/deploy'
 
 
                 ]

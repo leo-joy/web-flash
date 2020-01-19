@@ -15,7 +15,7 @@
 - 2 可以临时禁用一个任务。
 - 3 看定时任务执行的历史日志。
 
-## 具体用法
+## 实现方法
 web-flash对定时任务管理功能的实现如下。
 
 ## 表结构
@@ -58,9 +58,8 @@ CREATE TABLE `t_sys_task_log` (
 
 比如我创建一个测试任务类
 ```java
-package cn.enilu.guns.service.task.job;
-import cn.enilu.guns.service.task.JobExecuter;
-import com.alibaba.fastjson.JSON;
+package cn.enilu.flash.service.task.job;
+import cn.enilu.flash.service.task.JobExecuter;
 import org.springframework.stereotype.Component;
 @Component
 public class HelloJob extends JobExecuter {

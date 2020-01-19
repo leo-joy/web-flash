@@ -7,7 +7,7 @@ import ${table.basePackageName}.bean.core.BussinessLog;
 import ${table.basePackageName}.bean.constant.factory.PageFactory;
 import ${table.basePackageName}.bean.dictmap.CommonDict;
 import ${table.basePackageName}.bean.enumeration.BizExceptionEnum;
-import ${table.basePackageName}.bean.exception.GunsException;
+import ${table.basePackageName}.bean.exception.ApplicationException;
 import ${table.basePackageName}.bean.vo.front.Rets;
 
 import ${table.basePackageName}.utils.Maps;
@@ -36,14 +36,18 @@ public class ${table.ControllerClassName} {
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑${table.Label}", key = "name",dict= CommonDict.class)
 	public Object save(@ModelAttribute ${table.EntityClassName} ${table.EntityInstanceName}){
-		${table.ServiceInstanceName}.saveOrUpdate(${table.EntityInstanceName});
+		if(${table.EntityInstanceName}.getId()==null){
+			${table.ServiceInstanceName}.insert(${table.EntityInstanceName});
+		}else {
+			${table.ServiceInstanceName}.update(${table.EntityInstanceName});
+		}
 		return Rets.success();
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除${table.Label}", key = "id",dict= CommonDict.class)
 	public Object remove(Long id){
-		if (ToolUtil.isEmpty(id)) {
-			throw new GunsException(BizExceptionEnum.REQUEST_NULL);
+		if (id == null) {
+			throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
 		}
 		${table.ServiceInstanceName}.delete(id);
 		return Rets.success();

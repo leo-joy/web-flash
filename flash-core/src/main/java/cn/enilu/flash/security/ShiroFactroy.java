@@ -11,7 +11,8 @@ import cn.enilu.flash.dao.system.RoleRepository;
 import cn.enilu.flash.dao.system.UserRepository;
 import cn.enilu.flash.service.system.impl.ConstantFactory;
 import cn.enilu.flash.utils.Convert;
-import cn.enilu.flash.utils.HttpKit;
+import cn.enilu.flash.utils.HttpUtil;
+import cn.enilu.flash.utils.StringUtil;
 import org.apache.shiro.authc.CredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
@@ -64,7 +65,7 @@ public class ShiroFactroy     {
 
 
     public ShiroUser shiroUser(User user) {
-        ShiroUser shiroUser = tokenCache.getUser(HttpKit.getToken());
+        ShiroUser shiroUser = tokenCache.getUser(HttpUtil.getToken());
         if(shiroUser!=null){
             return shiroUser;
         }
@@ -87,15 +88,22 @@ public class ShiroFactroy     {
             roleNameList.add(role.getName());
             roleCodeList.add(role.getTips());
             permissions.addAll(menuRepository.getResCodesByRoleId(roleId));
-            resUrls.addAll(menuRepository.getResUrlsByRoleId(roleId));
+            List<String> list = menuRepository.getResUrlsByRoleId(roleId);
+             for(String resUrl:list) {
+                if(StringUtil.isNotEmpty(resUrl)) {
+                 resUrls.add(resUrl);
+                }
+             }
+
 
         }
         shiroUser.setRoleList(roleList);
         shiroUser.setRoleNames(roleNameList);
         shiroUser.setRoleCodes(roleCodeList);
         shiroUser.setPermissions(permissions);
+
         shiroUser.setUrls(resUrls);
-        tokenCache.setUser(HttpKit.getToken(),shiroUser);
+        tokenCache.setUser(HttpUtil.getToken(),shiroUser);
         return shiroUser;
     }
 

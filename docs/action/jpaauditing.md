@@ -15,7 +15,7 @@
 ### 实体类添加注解
 
 - 首先在实体中对应的字段加上上述4个注解
-- 在web-flash中我们提取了一个基础实体类BaseEntity，并将对应的字段添加上述4个注解,所有需要记录维护信息的表对应的实体都集成该类
+- 在web-flash中我们抽象了了一个基础实体类BaseEntity，并将对应的字段添加上述4个注解,所有需要记录维护信息的表对应的实体都继承该类
 ```java
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -63,25 +63,42 @@ public class ApiApplication extends SpringBootServletInitializer {
 ```java
 @Configuration
 public class UserIDAuditorConfig implements AuditorAware<Long> {
-    @Autowired
-    private TokenCache tokenCache;
     @Override
     public Optional<Long> getCurrentAuditor() {
         try {
-            String token = HttpKit.getRequest().getHeader("Authorization");
-            if (StringUtils.isNotEmpty(token)) {
-                return Optional.of(tokenCache.get(token));
+            String token = HttpUtil.getRequest().getHeader("Authorization");
+            if (StringUtil.isNotEmpty(token)) {
+                return Optional.of(JwtUtil.getUserId(token));
             }
         }catch (Exception e){
             //返回系统用户id
-            return Optional.of(-1L);
+            return Optional.of(Constants.SYSTEM_USER_ID);
         }
         //返回系统用户id
-        return Optional.of(-1L);
+        return Optional.of(Constants.SYSTEM_USER_ID);
     }
 }
 ```
 - 正常情况下用户通过浏览器进行系统管理操作，后台可以可以获取请求的request对象进而获取当前操作用户id，
-但是有时候后台系统线程（比如定时任务）进行更改系统数据的时候并没有对应的request，
-所以指定当前操作用户id为-1，即认定位系统自身对数据进行操作。
+但是有时候后台系统线程（比如定时任务）更新数据的时候并没有对应的request，
+所以指定当前操作用户id为-1，即认定为系统自身对数据进行操作。
 
+
+- 在系统自动设置审计信息的实体上添加注解:@EntityListeners(AuditingEntityListener.class),以配置参数实体Cfg为例：
+```java
+@Entity(name="t_sys_cfg")
+@Table(appliesTo = "t_sys_cfg",comment = "系统参数")
+@Data
+@EntityListeners(AuditingEntityListener.class)
+public class Cfg  extends BaseEntity {
+    @NotBlank(message = "参数名并能为空")
+    @Column(name = "cfg_name",columnDefinition = "VARCHAR(256) COMMENT '参数名'")
+    private String cfgName;
+    @NotBlank(message = "参数值不能为空")
+    @Column(name = "cfg_value",columnDefinition = "VARCHAR(512) COMMENT '参数值'")
+    private String cfgValue;
+    @Column(name = "cfg_desc",columnDefinition = "TEXT COMMENT '备注'")
+    private String cfgDesc;
+
+}
+```
