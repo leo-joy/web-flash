@@ -20,10 +20,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Array;
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 高频方法集合类
@@ -116,6 +113,64 @@ public class ToolUtil {
             return str.substring(0, str.length() - suffix.length());
         }
         return str;
+    }
+
+    /**
+     * 对象是否为空
+     *
+     * @param obj String,List,Map,Object[],int[],long[]
+     * @return
+     */
+    @SuppressWarnings("rawtypes")
+    public static boolean isEmpty(Object o) {
+        if (o == null) {
+            return true;
+        }
+        if (o instanceof String) {
+            if ("".equals(o.toString().trim())) {
+                return true;
+            }
+        } else if (o instanceof List) {
+            if (((List) o).size() == 0) {
+                return true;
+            }
+        } else if (o instanceof Map) {
+            if (((Map) o).size() == 0) {
+                return true;
+            }
+        } else if (o instanceof Set) {
+            if (((Set) o).size() == 0) {
+                return true;
+            }
+        } else if (o instanceof Object[]) {
+            if (((Object[]) o).length == 0) {
+                return true;
+            }
+        } else if (o instanceof int[]) {
+            if (((int[]) o).length == 0) {
+                return true;
+            }
+        } else if (o instanceof long[]) {
+            if (((long[]) o).length == 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 对象组中是否存在 Empty Object
+     *
+     * @param os 对象组
+     * @return
+     */
+    public static boolean isOneEmpty(Object... os) {
+        for (Object o : os) {
+            if (isEmpty(o)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

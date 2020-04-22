@@ -22,4 +22,15 @@ public class FileInfo extends BaseEntity {
     @Transient
     private String ablatePath;
 
+    @Column
+    private Long mainModuleId;
+    @Column
+    private String mainModuleName;
+    @Column
+    private Long sonModuleId;
+    @Column
+    private String sonModuleName;
+    @Column
+    private String fileStatus;
+
 }

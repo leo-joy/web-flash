@@ -22,6 +22,7 @@ export default {
   methods: {
     init() {
       this.downloadUrl = getApiUrl() + '/file/download?idFile='
+      //this.downloadUrl = 'http://127.0.0.1:8082/file/download?idFile='
       this.fetchData()
     },
     fetchData() {

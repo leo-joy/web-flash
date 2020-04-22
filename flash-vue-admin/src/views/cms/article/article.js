@@ -89,10 +89,12 @@ export default {
       }
       getList(queryData).then(response => {
         this.list = response.data.records
+        //console.log(response.data.records);
         for (var index in this.list) {
           const item = this.list[index]
           item.img = getApiUrl() + '/file/getImgStream?idFile=' + item.img
         }
+        //console.log(item);
         this.listLoading = false
         this.total = response.data.total
       })

@@ -1,7 +1,7 @@
 *.iml
 **/target
 **/node_modules
-
+.DS_Store
 .idea
 package-lock.json
 docs/.vuepress/dist
@@ -11,6 +11,8 @@ docs/.vuepress/dist
 .vscode
 .settings
 .project
+log/
 vue-element-admin/
 vue-admin-template/
 vue-admin-template-tabnav/
+runtime/

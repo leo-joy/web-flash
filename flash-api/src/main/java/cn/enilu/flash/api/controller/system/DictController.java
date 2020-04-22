@@ -37,7 +37,6 @@ public class DictController extends BaseController {
      * 获取所有字典列表
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    @RequiresPermissions(value = {Permission.DICT})
     public Object list(String name) {
 
         if(StringUtil.isNotEmpty(name)){

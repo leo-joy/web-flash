@@ -58,5 +58,8 @@ public interface Permission {
     String FILE = "file";
     String FILE_UPLOAD = "fileUpload";
 
+    //公司基本信息
+    String BUSINESS_LICENSE = "businessLicense";
+    String BUSINESSLICENSE_EDIT = "editBusinesslicense";
 
 }

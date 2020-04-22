@@ -478,7 +478,7 @@ CREATE TABLE `t_sys_notice` (
 -- ----------------------------
 -- Records of t_sys_notice
 -- ----------------------------
-INSERT INTO `t_sys_notice` VALUES ('1', '1', '2017-01-11 08:53:20', '1', '2019-01-08 23:30:58', '欢迎使用web-flash后台管理系统', '世界', '10');
+INSERT INTO `t_sys_notice` VALUES ('1', '1', '2017-01-11 08:53:20', '1', '2020-01-08 23:30:58', '欢迎使用雅居乐法人系统后台管理系统', '世界', '10');
 
 -- ----------------------------
 -- Table structure for `t_sys_operation_log`

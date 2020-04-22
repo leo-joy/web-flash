@@ -1,10 +1,12 @@
 package cn.enilu.flash.service.system;
 
 
+import cn.enilu.flash.bean.entity.system.CompanyPermission;
 import cn.enilu.flash.bean.entity.system.Relation;
 import cn.enilu.flash.bean.entity.system.Role;
 import cn.enilu.flash.bean.vo.node.Node;
 import cn.enilu.flash.bean.vo.node.ZTreeNode;
+import cn.enilu.flash.dao.system.CompanyPermissionRepository;
 import cn.enilu.flash.dao.system.RelationRepository;
 import cn.enilu.flash.dao.system.RoleRepository;
 import cn.enilu.flash.service.BaseService;
@@ -27,6 +29,10 @@ public class RoleService extends BaseService<Role,Long,RoleRepository> {
     private RoleRepository roleRepository;
     @Autowired
     private RelationRepository relationRepository;
+    @Autowired
+    private CompanyPermissionRepository companyPermissionRepository;
+
+
 
     public List<ZTreeNode> roleTreeList() {
         List list = roleRepository.roleTreeList();
@@ -71,6 +77,19 @@ public class RoleService extends BaseService<Role,Long,RoleRepository> {
             relation.setRoleid(roleId);
             relation.setMenuid(id);
             relationRepository.save(relation);
+        }
+    }
+
+    public void setCompanyAuthority(Long roleId, String ids) {
+        // 删除该角色所有公司的权限
+        companyPermissionRepository.deleteByRoleId(roleId);
+
+        // 添加新的权限
+        for (Long id : Convert.toLongArray(true, Convert.toStrArray(",", ids))) {
+            CompanyPermission companyPermission = new CompanyPermission();
+            companyPermission.setRoleid(roleId);
+            companyPermission.setCompanyid(id);
+            companyPermissionRepository.save(companyPermission);
         }
     }
 

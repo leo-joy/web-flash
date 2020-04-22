@@ -102,6 +102,18 @@ public class RoleController extends BaseController {
         return Rets.success();
     }
 
+     @RequestMapping(value = "/saveCompanyPermisson",method = RequestMethod.POST)
+    @BussinessLog(value = "配置角色公司权限", key = "roleId", dict = RoleDict.class)
+    @RequiresPermissions(value = {Permission.ROLE_EDIT})
+    public Object setCompanyAuthority(Long roleId, String
+            permissions) {
+        if (ToolUtil.isOneEmpty(roleId)) {
+            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+        }
+        roleService.setCompanyAuthority(roleId, permissions);
+        return Rets.success();
+    }
+
 
     /**
      * 获取角色树

@@ -7,3 +7,19 @@ export function getList(params) {
     params
   })
 }
+
+export function getEnterpriseFiles(params) {
+  return request({
+    url: '/fileMgr/enterpriseFiles',
+    method: 'get',
+    params
+  })
+}
+
+export function getListIds(params) {
+  return request({
+    url: '/fileMgr/listIds',
+    method: 'get',
+    params
+  })
+}

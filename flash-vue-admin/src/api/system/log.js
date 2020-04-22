@@ -10,7 +10,7 @@ export function getList(params) {
 
 export function queryByUser() {
   return request({
-    url:'/log/queryByUser',
+    url: '/log/queryByUser',
     method: 'get'
   })
 }

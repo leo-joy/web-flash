@@ -29,6 +29,9 @@ const mutations = {
   },
   SET_ROLES:(state,roles) => {
     state.roles = roles
+  },
+  SET_COMPANYS:(state,companys) => {
+    state.companys = companys
   }
 }
 
@@ -58,12 +61,13 @@ const actions = {
           reject('Verification failed, please Login again.')
         }
         console.log('data',data)
-        const { name, profile,permissions,roles } = data
+        const { name, profile,permissions,roles,companys } = data
         commit('SET_NAME', name)
         commit('SET_AVATAR', profile.avatar)
         commit('SET_PROFILE',profile)
         commit('SET_ROLES',roles)
         commit('SET_PERMISSIONS',permissions)
+        commit('SET_COMPANYS',companys)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -81,6 +85,7 @@ const actions = {
         commit('SET_PROFILE',{})
         commit('SET_ROLES',[])
         commit('SET_PERMISSIONS',[])
+        commit('SET_COMPANYS',[])
         removeToken()
         resetRouter()
         resolve()

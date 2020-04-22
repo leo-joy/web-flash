@@ -30,10 +30,34 @@ public class UserFactory {
             user.setPhone(userDto.getPhone());
             user.setEmail(userDto.getEmail());
             user.setBirthday(userDto.getBirthday());
+
+            user.setAcademic(userDto.getAcademic());
+            user.setSpecialty(userDto.getSpecialty());
+            user.setPost(userDto.getPost());
+            user.setDuty(userDto.getDuty());
+            user.setExperience(userDto.getExperience());
+            user.setType(userDto.getType());
+
+            user.setWorkNumber(userDto.getWorkNumber());
+            user.setEnglishSurnames(userDto.getEnglishSurnames());
+            user.setEnglishName(userDto.getEnglishName());
+            user.setChineseNameBefore(userDto.getChineseNameBefore());
+            user.setEnglishNameBefore(userDto.getEnglishNameBefore());
+            user.setChineseNameAlias(userDto.getChineseNameAlias());
+            user.setEnglishNameAlias(userDto.getEnglishNameAlias());
+            user.setAddress(userDto.getAddress());
+            user.setRegion(userDto.getRegion());
+            user.setIdentityCardChinese(userDto.getIdentityCardChinese());
+            user.setIdentityCardHk(userDto.getIdentityCardHk());
+            user.setPassportNo(userDto.getPassportNo());
+            user.setPassportNational(userDto.getPassportNational());
+            
             if(userDto.getStatus()!=null){
                 user.setStatus(userDto.getStatus());
             }
             return user;
+
+
         }
     }
 }

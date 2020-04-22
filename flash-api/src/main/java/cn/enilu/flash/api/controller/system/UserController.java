@@ -41,15 +41,23 @@ public class UserController extends BaseController {
     @Autowired
     private UserService userService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    @RequiresPermissions(value = {Permission.USER})
-    public Object list(@RequestParam(required = false) String account,
-                       @RequestParam(required = false) String name){
+    public Object list(@RequestParam(required = false) String name,
+                       @RequestParam(required = false) String account,
+                       @RequestParam(required = false) String type,
+                       @RequestParam(required = false) String id
+                       ){
         Page page = new PageFactory().defaultPage();
         if(StringUtil.isNotEmpty(name)){
             page.addFilter(SearchFilter.build("name", SearchFilter.Operator.LIKE, name));
         }
         if(StringUtil.isNotEmpty(account)){
             page.addFilter(SearchFilter.build("account", SearchFilter.Operator.LIKE, account));
+        }
+        if(StringUtil.isNotEmpty(type)){
+            page.addFilter(SearchFilter.build("type", SearchFilter.Operator.EQ, type));
+        }
+        if(StringUtil.isNotEmpty(id)){
+            page.addFilter(SearchFilter.build("id", SearchFilter.Operator.EQ, id));
         }
         page.addFilter(SearchFilter.build("status",SearchFilter.Operator.GT,0));
         page = userService.queryPage(page);

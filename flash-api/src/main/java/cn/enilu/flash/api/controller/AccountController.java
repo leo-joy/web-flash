@@ -7,6 +7,7 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.core.log.LogManager;
 import cn.enilu.flash.core.log.LogTaskFactory;
 import cn.enilu.flash.security.ShiroFactroy;
+import cn.enilu.flash.service.legalperson.BusinessLicenseService;
 import cn.enilu.flash.service.system.UserService;
 import cn.enilu.flash.utils.HttpUtil;
 import cn.enilu.flash.utils.MD5;
@@ -23,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -38,6 +40,9 @@ public class AccountController extends BaseController{
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private BusinessLicenseService businessLicenseService;
 
     /**
      * 用户登录<br>
@@ -92,6 +97,10 @@ public class AccountController extends BaseController{
             ShiroUser shiroUser = ShiroFactroy.me().shiroUser(user);
             Map map = Maps.newHashMap("name",user.getName(),"role","admin","roles", shiroUser.getRoleCodes());
             map.put("permissions",shiroUser.getUrls());
+
+            List companys = businessLicenseService.getCompanysByRoleIds(shiroUser.getRoleList());
+            map.put("companys",companys);
+
             Map profile = (Map) Mapl.toMaplist(user);
             profile.put("dept",shiroUser.getDeptName());
             profile.put("roles",shiroUser.getRoleNames());

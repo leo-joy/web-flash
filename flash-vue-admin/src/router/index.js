@@ -44,6 +44,14 @@ export const constantRoutes = [
   },
 
   {
+    path: '/enterprisemanage',
+    component: () => import('@/views/lpm/enterprisemanage/index'),
+    hidden: true
+  },
+
+  
+
+  {
     path: '/',
     component: Layout,
     redirect: '/dashboard',

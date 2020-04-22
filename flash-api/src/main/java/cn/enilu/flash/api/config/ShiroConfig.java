@@ -72,6 +72,34 @@ public class ShiroConfig {
         filterRuleMap.put("/images/**","anon");
         filterRuleMap.put("/configuration/security","anon");
         filterRuleMap.put("/configuration/ui","anon");
+
+        //营业执照信息列表请求获取不拦截
+        filterRuleMap.put("/lpm/businesslicense/list","anon");
+        filterRuleMap.put("/lpm/capital/list","anon");
+        filterRuleMap.put("/lpm/invest/company/list","anon");
+        filterRuleMap.put("/lpm/branch/company/list","anon");
+
+
+        //数据字典列表请求获取不拦截
+        filterRuleMap.put("/dict/list","anon");
+
+        //用户列表请求不拦截
+        filterRuleMap.put("/user/list","anon");
+
+        //组织机构树列表请求不拦截
+        filterRuleMap.put("/dept/list","anon");
+
+        //文件id获取不拦截
+        filterRuleMap.put("/fileMgr/listIds","anon");
+        //获取企业文件列表不拦截
+        filterRuleMap.put("/fileMgr/enterpriseFiles","anon");
+
+
+        //文件下载不拦截
+        filterRuleMap.put("/file/download","anon");
+        filterRuleMap.put("/file/getImgStream","anon");
+        filterRuleMap.put("/file/getImgBase64","anon");
+
         //druid监控地址不拦截
         filterRuleMap.put("/druid/**","anon");
         //登录登出不拦截

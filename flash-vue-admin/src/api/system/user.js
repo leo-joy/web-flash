@@ -38,7 +38,7 @@ export function changeStatus(userId) {
   return request({
     url: '/user/changeStatus',
     method: 'get',
-    params:{
+    params: {
       userId
     }
   })

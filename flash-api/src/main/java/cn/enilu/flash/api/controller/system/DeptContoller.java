@@ -35,11 +35,11 @@ public class DeptContoller extends BaseController {
     @Autowired
     private DeptService deptService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    @RequiresPermissions(value = {Permission.DEPT})
     public Object list(){
         List<DeptNode> list = deptService.queryAllNode();
         return Rets.success(list);
     }
+
     @RequestMapping(method = RequestMethod.POST)
     @BussinessLog(value = "编辑部门", key = "simplename", dict = DeptDict.class)
     @RequiresPermissions(value = {Permission.DEPT_EDIT})

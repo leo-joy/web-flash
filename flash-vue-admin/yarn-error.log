@@ -1,0 +1,103 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.7/bin:/usr/local/opt/ruby/bin:/Users/leo/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/opt/X11/bin:/Users/leo/Applications/Go/bin:/Users/leo/Documents/go/bin:/Library/Java/JavaVirtualMachines/jdk1.8.0_151.jdk/Contents/Home/bin:/leo/local/mysql/bin:/Users/leo/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Applications/VMware Fusion.app/Contents/Public:/usr/local/go/bin:/opt/X11/bin:/Users/leo/java/apache-maven-3.6.1/bin:/Users/leo/.rvm/bin
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  10.14.1
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: https://registry.yarnpkg.com/echarts/-/echarts-4.6.0.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141292:19)
+      at Object.onceWrapper (events.js:273:13)
+      at ClientRequest.emit (events.js:182:13)
+      at TLSSocket.emitRequestTimeout (_http_client.js:661:40)
+      at Object.onceWrapper (events.js:273:13)
+      at TLSSocket.emit (events.js:182:13)
+      at TLSSocket.Socket._onTimeout (net.js:449:8)
+      at ontimeout (timers.js:436:11)
+      at tryOnTimeout (timers.js:300:5)
+      at listOnTimeout (timers.js:263:5)
+
+npm manifest: 
+  {
+    "name": "flash-vue-admin",
+    "version": "4.1.0",
+    "description": "A web-flash Admin with Element UI & axios & iconfont & permission control & lint",
+    "author": "enilu<enilut@qq.com>",
+    "license": "MIT",
+    "scripts": {
+      "dev": "vue-cli-service serve",
+      "build:prod": "vue-cli-service build",
+      "build:stage": "vue-cli-service build --mode staging",
+      "preview": "node build/index.js --preview",
+      "lint": "eslint --ext .js,.vue src",
+      "test:unit": "jest --clearCache && vue-cli-service test:unit",
+      "test:ci": "npm run lint && npm run test:unit",
+      "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
+    },
+    "dependencies": {
+      "axios": "0.18.0",
+      "element-ui": "2.11.0",
+      "js-cookie": "2.2.0",
+      "normalize.css": "7.0.0",
+      "nprogress": "0.2.0",
+      "path-to-regexp": "2.4.0",
+      "vue": "2.6.10",
+      "vue-echarts": "^3.1.2",
+      "vue-i18n": "7.3.2",
+      "vue-router": "3.0.6",
+      "vuex": "3.1.1",
+      "webpack-dev-server": "3.3.1"
+    },
+    "devDependencies": {
+      "autoprefixer": "8.5.0",
+      "@babel/core": "7.0.0",
+      "@babel/register": "7.0.0",
+      "@vue/cli-plugin-babel": "3.6.0",
+      "@vue/cli-plugin-eslint": "3.6.0",
+      "@vue/cli-plugin-unit-jest": "3.6.3",
+      "@vue/cli-service": "3.6.0",
+      "@vue/test-utils": "1.0.0-beta.29",
+      "babel-core": "7.0.0-bridge.0",
+      "babel-eslint": "10.0.1",
+      "babel-jest": "23.6.0",
+      "chalk": "2.4.2",
+      "connect": "3.6.6",
+      "eslint": "5.15.3",
+      "eslint-plugin-vue": "5.2.2",
+      "html-webpack-plugin": "3.2.0",
+      "mockjs": "1.0.1-beta3",
+      "node-sass": "^4.9.0",
+      "runjs": "^4.3.2",
+      "sass-loader": "^7.1.0",
+      "script-ext-html-webpack-plugin": "2.1.3",
+      "script-loader": "0.7.2",
+      "serve-static": "^1.13.2",
+      "svg-sprite-loader": "4.1.3",
+      "svgo": "1.2.2",
+      "vue-template-compiler": "2.6.10"
+    },
+    "engines": {
+      "node": ">=8.9",
+      "npm": ">= 3.0.0"
+    },
+    "browserslist": [
+      "> 1%",
+      "last 2 versions",
+      "not ie <= 8"
+    ]
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

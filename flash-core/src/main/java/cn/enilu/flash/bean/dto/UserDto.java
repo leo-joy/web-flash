@@ -37,5 +37,26 @@ public class UserDto{
 	private Integer version;
 	private String avatar;
 
+	private String academic;
+	private String specialty;
+	private String post;
+	private String duty;
+	private String experience;
+	private String type;
+
+	private String workNumber;
+	private String englishSurnames;
+	private String englishName;
+	private String chineseNameBefore;
+	private String englishNameBefore;
+	private String chineseNameAlias;
+	private String englishNameAlias;
+	private String address;
+	private String region;
+	private String identityCardChinese;
+	private String identityCardHk;
+	private String passportNo;
+	private String passportNational;
+
 
 }

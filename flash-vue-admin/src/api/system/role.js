@@ -8,7 +8,6 @@ export function getList(params) {
   })
 }
 
-
 export function save(params) {
   return request({
     url: '/role',
@@ -27,7 +26,7 @@ export function remove(roleId) {
   })
 }
 
-export  function roleTreeListByIdUser(idUser){
+export function roleTreeListByIdUser(idUser) {
   return request({
     url: '/role/roleTreeListByIdUser',
     method: 'get',
@@ -37,11 +36,26 @@ export  function roleTreeListByIdUser(idUser){
   })
 }
 
-
 export function savePermissons(params) {
   return request({
     url: '/role/savePermisson',
     method: 'post',
+    params
+  })
+}
+
+export function saveCompanyPermissons(params) {
+  return request({
+    url: '/role/saveCompanyPermisson',
+    method: 'post',
+    params
+  })
+}
+
+export function companyListByRoleId(params) {
+  return request({
+    url: '/sys/company/permission/listByRoleId',
+    method: 'get',
     params
   })
 }

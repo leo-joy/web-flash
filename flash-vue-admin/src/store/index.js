@@ -6,7 +6,7 @@ import settings from './modules/settings'
 import user from './modules/user'
 import tagsView from './modules/tagsView'
 import menu from './modules/menu'
-//import permission from './modules/permission'
+// import permission from './modules/permission'
 
 Vue.use(Vuex)
 

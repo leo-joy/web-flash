@@ -1,0 +1,138 @@
+{
+    "upward": {
+        "direction": "upward",
+        "name": "origin",
+        "children": [
+            {
+                "name": "崇升投资有限公司",
+                "hasHumanholding":true,
+                "amount":"5000万",
+                "percent":"100%",
+                "receiptor": "陈卓林",
+                "children": [
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"60万",
+                        "percent":"69%",
+                        "children": []
+                    },
+                    {
+                        "name": "公司或股东名字公司",
+                        "hasHumanholding":false,
+                        "children": [
+                            {
+                                "name": "公司或股东名字",
+                                "hasHumanholding":false,
+                                "children": []
+                            },
+                            {
+                                "name": "公司或股东名字",
+                                "hasHumanholding":false,
+                                "children": []
+                            }
+                        ]
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    },
+    "downward": {
+        "direction": "downward",
+        "name": "origin",
+        "children": [
+            {
+                "name": "广州振中建设有限公司",
+                "hasHumanholding":false,
+                "hasChildren":true,
+                "amount":"5000万",
+                "percent":"100%",
+                "children": [
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": []
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": []
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": [{
+                            "name": "公司或股东名字",
+                            "hasHumanholding":false,
+                            "amount":"1000万",
+                            "percent":"50%",
+                            "children": []
+                        },{
+                            "name": "公司或股东名字",
+                            "hasHumanholding":false,
+                            "amount":"1000万",
+                            "percent":"50%",
+                            "children": []
+                        }]
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": []
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": []
+                    }
+                ]
+            },
+            {
+                "name": "雅居乐资本管理（广州）有限公司",
+                "hasHumanholding":false,
+                "hasChildren":true,
+                "amount":"5000万",
+                "percent":"100%",
+                "children": [
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"3000万",
+                        "percent":"60%",
+                        "children": []
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": []
+                    },
+                    {
+                        "name": "公司或股东名字",
+                        "hasHumanholding":false,
+                        "amount":"1000万",
+                        "percent":"20%",
+                        "children": []
+                    }
+                ]
+            }
+        ]
+    }
+
+}

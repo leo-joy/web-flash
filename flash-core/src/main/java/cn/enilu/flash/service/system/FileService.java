@@ -3,12 +3,15 @@ package cn.enilu.flash.service.system;
 import cn.enilu.flash.bean.constant.cache.Cache;
 import cn.enilu.flash.bean.constant.cache.CacheKey;
 import cn.enilu.flash.bean.entity.system.FileInfo;
+import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.ConfigKeyEnum;
+import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.cache.ConfigCache;
 import cn.enilu.flash.cache.TokenCache;
 import cn.enilu.flash.dao.system.FileInfoRepository;
 import cn.enilu.flash.security.JwtUtil;
 import cn.enilu.flash.service.BaseService;
+import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.XlsUtils;
 import org.jxls.common.Context;
 import org.jxls.expression.JexlExpressionEvaluator;
@@ -112,6 +115,67 @@ public class FileService extends BaseService<FileInfo,Long,FileInfoRepository> {
             fileInfo.setRealFileName(file.getName());
             insert(fileInfo);
             return fileInfo;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 更新文件信息
+     * @param filesId
+     * @param mainModuleId
+     * @param mainModuleName
+     * @param sonModuleId
+     * @param sonModuleName
+     * @param fileStatus
+     * @returnd
+     */
+    public FileInfo update(String filesId, Long mainModuleId, String mainModuleName, Long sonModuleId, String sonModuleName, String fileStatus){
+        try {
+            String cut = " ";	// 分割串，此处为一个空格
+            if(ToolUtil.isEmpty(filesId)) {
+                return null;
+            }
+            String[] newFiles = filesId.split(cut);	// 分割成数组
+            for (String id : newFiles) {
+                if (ToolUtil.isEmpty(id)) {
+                    throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+                }
+                FileInfo fileInfo = fileInfoRepository.getOne(Long.valueOf(id).longValue());
+                fileInfo.setMainModuleId(mainModuleId);
+                fileInfo.setMainModuleName(mainModuleName);
+                fileInfo.setSonModuleId(sonModuleId);
+                fileInfo.setSonModuleName(sonModuleName);
+                fileInfo.setFileStatus(fileStatus);
+                fileInfoRepository.save(fileInfo);
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * 更新文件的状态信息
+     * @param filesId
+     * @param fileStatus
+     * @returnd
+     */
+    public FileInfo updateFileStatus(String filesId, String fileStatus){
+        try {
+            String cut = " ";	// 分割串，此处为一个空格
+            String[] newFiles = filesId.split(cut);	// 分割成数组
+            for (String id : newFiles) {
+                if (ToolUtil.isEmpty(id)) {
+                    throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+                }
+                FileInfo fileInfo = fileInfoRepository.getOne(Long.valueOf(id).longValue());
+                fileInfo.setFileStatus(fileStatus);
+                fileInfoRepository.save(fileInfo);
+            }
+            return null;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

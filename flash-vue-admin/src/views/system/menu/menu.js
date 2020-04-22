@@ -25,6 +25,8 @@ export default {
         code: '',
         url: '',
         pcode: '',
+        component: '',
+        icon: '',
         ismenu: 1,
         num: 1
       },
@@ -35,7 +37,7 @@ export default {
         ],
         code: [
           { required: true, message: '请输入编码', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
+          { min: 2, max: 30, message: '长度在 2 到 30 个字符', trigger: 'blur' }
         ],
         url: [
           { required: true, message: '请输入请求地址', trigger: 'blur' }
@@ -88,6 +90,12 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           const menuData = self.form
+          if (menuData.component === '') {
+            delete menuData.component
+          }
+          if (menuData.icon === '') {
+            delete menuData.icon
+          }
           delete menuData.parent
           delete menuData.children
           save(menuData).then(response => {
@@ -136,10 +144,10 @@ export default {
             type: 'success'
           })
           this.fetchData()
-        }).catch(err =>{
+        }).catch(err => {
           this.$notify.error({
             title: '错误',
-            message:err,
+            message: err
           })
         })
       })

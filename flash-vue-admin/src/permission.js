@@ -13,8 +13,10 @@ const whiteList = ['/login'] // no redirect whitelist
 router.beforeEach(async(to, from, next) => {
   // start progress bar
   NProgress.start()
+  console.log(to)
   // set page title
-  document.title = getPageTitle(to.meta.title)
+  document.title = getPageTitle(to.name)
+  // document.title = getPageTitle(to.meta.title+ '|')
 
   // determine whether the user has logged in
   const hasToken = getToken()
@@ -32,7 +34,7 @@ router.beforeEach(async(to, from, next) => {
         try {
           // get user info
           store.dispatch('user/getInfo')
-          const accessRoutes  = await store.dispatch('menu/getSideMenus');
+          const accessRoutes = await store.dispatch('menu/getSideMenus')
           router.addRoutes(accessRoutes)
           next({ ...to, replace: true })
         } catch (error) {

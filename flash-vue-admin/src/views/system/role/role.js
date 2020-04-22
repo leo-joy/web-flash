@@ -1,6 +1,7 @@
-import { remove, getList, save, savePermissons } from '@/api/system/role'
+import { remove, getList, save, savePermissons, saveCompanyPermissons, companyListByRoleId } from '@/api/system/role'
 import { list as getDeptList } from '@/api/system/dept'
 import { menuTreeListByRoleId } from '@/api/system/menu'
+import { getList as getCompanyList } from '@/api/lpm/businesslicense'
 
 export default {
   data() {
@@ -62,7 +63,36 @@ export default {
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+
+      permissonCompanyVisible: false,
+      searchType: 'enterpriseName',
+      keyword: '',
+      options: [{
+        value: 'enterpriseName',
+        label: '企业名称'
+      }, {
+        value: 'unifiedSocialCreditCode',
+        label: '社会信用代码'
+      }, {
+        value: 'legalRepresentative',
+        label: '法定代表人'
+      }
+      ],
+      companyListQuery: {
+        page: 1,
+        limit: 100,
+        deptName: '',
+        deptId: '',
+        id: undefined
+      },
+      companyTotal: 0,
+      companyList: null,
+      companyListLoading: true,
+
+      multipleSelection: [],
+
+      companyPermissons: []
     }
   },
   filters: {
@@ -201,17 +231,19 @@ export default {
               type: 'success'
             })
             this.fetchData()
-          }).catch( err=> {
+          }).catch(err => {
             this.$notify.error({
               title: '错误',
-              message:err,
+              message: err
             })
           })
         }).catch(() => {
         })
       }
     },
-    openPermissions() {
+    openPermissions() { // 功能权限
+      this.companyListQuery.deptName = ''
+      this.deptTree.show = false
       if (this.checkSel()) {
         menuTreeListByRoleId(this.selRow.id).then(response => {
           this.permissons = response.data.treeData
@@ -221,7 +253,7 @@ export default {
       }
     },
     savePermissions() {
-      let checkedNodes =this.$refs.permissonTree.getCheckedNodes(false,true)
+      const checkedNodes = this.$refs.permissonTree.getCheckedNodes(false, true)
       let menuIds = ''
       for (var index in checkedNodes) {
         menuIds += checkedNodes[index].id + ','
@@ -247,6 +279,124 @@ export default {
       this.form.pid = data.id
       this.form.pName = data.name
       this.roleTree.show = false
+    },
+
+    searchCompany() {
+      if (this.searchType === 'enterpriseName') {
+        this.companyListQuery.enterpriseName = this.keyword
+      }
+      if (this.searchType === 'unifiedSocialCreditCode') {
+        this.companyListQuery.unifiedSocialCreditCode = this.keyword
+      }
+      if (this.searchType === 'legalRepresentative') {
+        this.companyListQuery.legalRepresentative = this.keyword
+      }
+      this.fetchCompanyData()
+    },
+    handleCompanyDeptNodeClick(data, node) {
+      this.companyListQuery.pIds = data.id
+      this.companyListQuery.deptName = data.simplename
+      this.deptTree.show = false
+      this.fetchCompanyData()
+    },
+
+    openCompanyPermissions() { // 公司权限
+      if (this.checkSel()) {
+        const companyRoleQuery = {
+          page: 1,
+          limit: 1000,
+          roleId: this.selRow.id
+        }
+        companyListByRoleId(companyRoleQuery).then(response => {
+          var tempArr = []
+          if (response.data.records && response.data.records.length > 0) {
+            for (let i = 0; i < response.data.records.length; i++) {
+              tempArr.push(response.data.records[i].companyid)
+            }
+          }
+          this.companyPermissons = tempArr
+          this.checkedCompanyPermissionKeys = response.data.tempArr
+          this.permissonCompanyVisible = true
+          this.fetchCompanyData()
+        })
+      }
+    },
+
+    fetchCompanyData() {
+      this.companyListLoading = true
+
+      // const companys = this.$store.state.user.companys
+      if (this.companyPermissons && this.companyPermissons.length > 0) {
+        // this.companyListQuery.ids = this.companyPermissons.toString()
+        // this.companyListQuery.page = 1
+      } else {
+        this.companyListQuery.ids = ''
+      }
+      getCompanyList(this.companyListQuery).then(response => {
+        this.companyList = response.data.records
+        this.companyListLoading = false
+        this.companyTotal = response.data.total
+        this.companyListQuery.enterpriseName = ''
+        this.companyListQuery.unifiedSocialCreditCode = ''
+        this.companyListQuery.legalRepresentative = ''
+        this.initCompanyChecked()
+      })
+    },
+
+    // 初始化公司选中状态
+    initCompanyChecked() {
+      const _this = this
+      setTimeout(() => {
+        _this.companyList.forEach(row => {
+          let bool = false
+          if (_this.companyPermissons.indexOf(row.id) >= 0) {
+            bool = true
+          } else {
+            bool = false
+          }
+          _this.$refs.companytable.toggleRowSelection(row, bool)
+        })
+      }, 100)
+    },
+
+    fetchCompanyNext() {
+      this.companyListQuery.page = this.companyListQuery.page + 1
+      this.fetchCompanyData()
+    },
+    fetchCompanyPrev() {
+      this.companyListQuery.page = this.companyListQuery.page - 1
+      this.fetchCompanyData()
+    },
+    fetchCompanyPage(page) {
+      this.companyListQuery.page = page
+      this.fetchCompanyData()
+    },
+    changeCompanySize(limit) {
+      this.companyListQuery.limit = limit
+      this.fetchCompanyData()
+    },
+
+    handleSelectionChange(val) {
+      this.multipleSelection = val
+    },
+    saveCompanyPermissions() { // 公司权限保存
+      const checkedNodes = this.multipleSelection
+      let companyIds = ''
+      for (var index in checkedNodes) {
+        companyIds += checkedNodes[index].id + ','
+      }
+      console.log(companyIds)
+      const data = {
+        roleId: this.selRow.id,
+        permissions: companyIds
+      }
+      saveCompanyPermissons(data).then(response => {
+        this.permissonCompanyVisible = false
+        this.$message({
+          message: '提交成功',
+          type: 'success'
+        })
+      })
     }
 
   }

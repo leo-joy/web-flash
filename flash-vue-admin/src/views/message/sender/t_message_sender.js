@@ -7,8 +7,8 @@ export default {
       formTitle: '添加消息发送者',
       isAdd: true,
       form: {
-        name:'',
-        className:'',
+        name: '',
+        className: '',
         id: ''
       },
       listQuery: {
@@ -34,7 +34,7 @@ export default {
   },
   computed: {
 
-    //表单验证
+    // 表单验证
     rules() {
       return {
         // cfgName: [
@@ -94,14 +94,14 @@ export default {
     },
     resetForm() {
       this.form = {
-        name:'',
-        className:'',
+        name: '',
+        className: '',
         id: ''
       }
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加消息发送者',
+      this.formTitle = '添加消息发送者'
       this.formVisible = true
       this.isAdd = true
     },
@@ -109,8 +109,8 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-      name:this.form.name,
-      className:this.form.className,
+            name: this.form.name,
+            className: this.form.className,
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -152,17 +152,16 @@ export default {
           type: 'warning'
         }).then(() => {
           remove(id).then(response => {
-              console.log(response)
-              this.$message({
-                message: this.$t('common.optionSuccess'),
-                type: 'success'
-              })
-              this.fetchData()
-
+            console.log(response)
+            this.$message({
+              message: this.$t('common.optionSuccess'),
+              type: 'success'
+            })
+            this.fetchData()
           }).catch(err => {
             this.$notify.error({
               title: '错误',
-              message:err,
+              message: err
             })
           })
         })

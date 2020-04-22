@@ -7,26 +7,26 @@
         </el-col>
       </el-row>
     </div>
-    <el-table :data="list" v-loading="listLoading" element-loading-text="Loading" border fit highlight-current-row>
+    <el-table v-loading="listLoading" :data="list" element-loading-text="Loading" border fit highlight-current-row>
 
       <el-table-column label="任务名">
         <template slot-scope="scope">
-          {{scope.row.name}}
+          {{ scope.row.name }}
         </template>
       </el-table-column>
       <el-table-column label="执行时间">
         <template slot-scope="scope">
-          {{scope.row.execAt}}
+          {{ scope.row.execAt }}
         </template>
       </el-table-column>
       <el-table-column label="执行结果">
         <template slot-scope="scope">
-          {{scope.row.execSuccess === 1 ? '成功' : '失败'}}
+          {{ scope.row.execSuccess === 1 ? '成功' : '失败' }}
         </template>
       </el-table-column>
       <el-table-column label="异常信息">
         <template slot-scope="scope">
-          {{scope.row.jobExecption}}
+          {{ scope.row.jobExecption }}
         </template>
       </el-table-column>
 
@@ -41,13 +41,12 @@
       @size-change="changeSize"
       @current-change="fetchPage"
       @prev-click="fetchPrev"
-      @next-click="fetchNext">
-    </el-pagination>
+      @next-click="fetchNext"
+    />
   </div>
 </template>
 
 <script src="./log.js"></script>
-
 
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/common.scss";

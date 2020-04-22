@@ -3,14 +3,14 @@ import request from '@/utils/request'
 export function tree() {
   return request({
     url: '/dept/tree',
-    method: 'get',
+    method: 'get'
   })
 }
 
 export function list() {
   return request({
     url: '/dept/list',
-    method: 'get',
+    method: 'get'
   })
 }
 
