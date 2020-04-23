@@ -35,17 +35,10 @@ module.exports = {
     },
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target:`http://localhost:8082`,
+        target: `http://localhost:8082`, // 本地环境
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
-        }
-      },
-      [process.env.CA_API]: {
-        target:`https://signtest.agile.com.cn:8082`,
-        changeOrigin: true,
-        pathRewrite: {
-          ['^' + process.env.CA_API]: ''
         }
       }
     },

@@ -58,7 +58,8 @@
 		console.log(window.location.hash.replace('#','')*1)
 		// 初始化股权架构图
 		var id = window.location.hash.replace('#','')*1 || 1
-		initChartData('/dev-api', id)
+		//initChartData('/dev-api', id)
+		initChartData('/prod-api', id)
 		//initChartData('http://10.1.19.76:8092', id)
 		//initChartData('http://10.1.10.35:8092', id)
 

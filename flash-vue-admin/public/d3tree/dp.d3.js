@@ -1,6 +1,6 @@
 var originUrl = 'http://127.0.0.1:8082' // 本地服务器接口地址
 // var originUrl = 'http://10.1.19.76:8092'; // 测试服务器接口地址
-// var originUrl = 'http://10.1.10.35:8092'; // 正式服务器接口地址
+//var originUrl = 'http://faren.agile.com.cn/prod-api'; // 正式服务器接口地址
 var allData = {}
 var mysvg = []
 var rootName = '' // 根节点的名字
