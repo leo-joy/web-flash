@@ -87,17 +87,19 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="24">
-            <el-form-item label="公司名称">
+            <el-form-item label="公司名称" prop="enterpriseName">
               <el-input
                 v-model="form.enterpriseName"
+                :disabled="true"
                 placeholder="请选择公司"
                 readonly="readonly"
-                @click.native="companyTree.show = !companyTree.show"
+                @click.native="companyTree.show = (!companyTree.show && false)"
               />
               <el-tree
                 v-if="companyTree.show"
                 empty-text="暂无数据"
                 :expand-on-click-node="false"
+                :default-checked-keys="[1]"
                 :data="companyList"
                 :props="companyTree.defaultProps"
                 class="input-tree"
@@ -111,17 +113,17 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="知识产权登记证号">
+            <el-form-item label="知识产权登记证号" prop="propertyRegisterCode">
               <el-input v-model="form.propertyRegisterCode" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="名称">
+            <el-form-item label="名称" prop="propertyName">
               <el-input v-model="form.propertyName" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="种类">
+            <el-form-item label="种类" prop="propertyType">
               <el-select v-model="form.propertyType" placeholder="请选择">
                 <el-option
                   v-for="item in propertyTypeList"
@@ -133,22 +135,22 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="出质人名称">
+            <el-form-item label="出质人名称" prop="pledgorName">
               <el-input v-model="form.pledgorName" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="质权人名称">
+            <el-form-item label="质权人名称" prop="pledgeeName">
               <el-input v-model="form.pledgeeName" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="质权登记期限">
+            <el-form-item label="质权登记期限" prop="pledgeeCertificateNumber">
               <el-input v-model="form.pledgeeCertificateNumber" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="状态">
+            <el-form-item label="状态" prop="status">
               <el-select v-model="form.status" placeholder="请选择">
                 <el-option
                   v-for="item in statusList"
@@ -160,7 +162,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="经办人">
+            <el-form-item label="经办人" prop="responsiblePerson">
               <el-input v-model="form.responsiblePerson" minlength="1" />
             </el-form-item>
           </el-col>

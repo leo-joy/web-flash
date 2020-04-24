@@ -86,17 +86,19 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="200px">
         <el-row>
           <el-col :span="24">
-            <el-form-item label="公司名称">
+            <el-form-item label="公司名称" prop="enterpriseName">
               <el-input
                 v-model="form.enterpriseName"
+                :disabled="true"
                 placeholder="请选择公司"
                 readonly="readonly"
-                @click.native="companyTree.show = !companyTree.show"
+                @click.native="companyTree.show = (!companyTree.show && false)"
               />
               <el-tree
                 v-if="companyTree.show"
                 empty-text="暂无数据"
                 :expand-on-click-node="false"
+                :default-checked-keys="[1]"
                 :data="companyList"
                 :props="companyTree.defaultProps"
                 class="input-tree"
@@ -116,32 +118,32 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="出质人">
+            <el-form-item label="出质人" prop="pledgor">
               <el-input v-model="form.pledgor" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="证照/证件号码(出质人)">
+            <el-form-item label="证照/证件号码(出质人)" prop="pledgorCertificateNumber">
               <el-input v-model="form.pledgorCertificateNumber" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="出质股权数额">
+            <el-form-item label="出质股权数额" prop="pledgeStockContribution">
               <el-input v-model="form.pledgeStockContribution" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="质权人">
+            <el-form-item label="质权人" prop="pledgee">
               <el-input v-model="form.pledgee" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="证照/证件号码(质权人)">
+            <el-form-item label="证照/证件号码(质权人)" prop="pledgeeCertificateNumber">
               <el-input v-model="form.pledgeeCertificateNumber" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="股权出质设立登记日期">
+            <el-form-item label="股权出质设立登记日期" prop="stockPledgeRegisterDate">
               <el-date-picker
                 v-model="form.stockPledgeRegisterDate"
                 type="date"
@@ -162,7 +164,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="12" prop="responsiblePerson">
             <el-form-item label="经办人">
               <el-input v-model="form.responsiblePerson" minlength="1" />
             </el-form-item>

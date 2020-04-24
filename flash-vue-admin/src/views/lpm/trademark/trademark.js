@@ -52,6 +52,26 @@ export default {
         accessoryFiles: '',
         id: ''
       },
+      rules: {
+        enterpriseName: [
+          { required: true, message: '请选择公司名称', trigger: 'blur' }
+        ],
+        trademarkRegisterCode: [
+          { required: true, message: '请填写注册号', trigger: 'blur' }
+        ],
+        trademarkName: [
+          { required: true, message: '请填写商标名称', trigger: 'blur' }
+        ],
+        trademarkType: [
+          { required: true, message: '请选择类别', trigger: 'blur' }
+        ],
+        trademarkRegisterDate: [
+          { required: true, message: '请填写注册日期', trigger: 'blur' }
+        ],
+        responsiblePerson: [
+          { required: true, message: '请填写经办人', trigger: 'blur' }
+        ]
+      },
       listQuery: {
         page: 1,
         limit: 20,
@@ -75,15 +95,15 @@ export default {
   },
   computed: {
 
-    // 表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
-    }
+    // // 表单验证
+    // rules() {
+    //   return {
+    //     // cfgName: [
+    //     //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
+    //     //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
+    //     // ]
+    //   }
+    // }
   },
   created() {
     this.init()
@@ -96,6 +116,7 @@ export default {
     },
     fetchData() {
       this.listLoading = true
+      this.listQuery.enterpriseCode = this.$route.query.id
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -106,6 +127,7 @@ export default {
         this.trademarkTypeList = getDictList(response.data[0].detail)
       })
 
+      this.companyListQuery.id = this.$route.query.id
       getEnterpriseList(this.companyListQuery).then(response => {
         this.companyList = response.data.records
         this.listLoading = false
@@ -163,6 +185,10 @@ export default {
       this.formTitle = '添加商标信息'
       this.formVisible = true
       this.isAdd = true
+
+      // 设置新增企业初始值;
+      this.form.enterpriseName = this.companyList[0].enterpriseName
+      this.form.enterpriseCode = this.companyList[0].id
     },
     save() {
       this.$refs['form'].validate((valid) => {

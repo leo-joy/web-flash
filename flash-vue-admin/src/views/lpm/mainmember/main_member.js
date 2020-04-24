@@ -196,7 +196,7 @@ export default {
       this.isAdd = true
       this.directorTags = []
 
-      // 设置新增股东的初始值;
+      // 设置新增企业初始值;
       this.form.enterpriseName = this.companyList[0].enterpriseName
       this.form.enterpriseCode = this.companyList[0].id
 

@@ -56,6 +56,14 @@ export default {
         accessoryFiles: '',
         id: ''
       },
+      rules: {
+        enterpriseName: [
+          { required: true, message: '请选择公司名称', trigger: 'blur' }
+        ],
+        statementContent: [
+          { required: true, message: '请填写声明内容', trigger: 'blur' }
+        ]
+      },
       listQuery: {
         page: 1,
         limit: 20,
@@ -80,14 +88,14 @@ export default {
   computed: {
 
     // 表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
-    }
+    // rules() {
+    //   return {
+    //     // cfgName: [
+    //     //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
+    //     //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
+    //     // ]
+    //   }
+    // }
   },
   created() {
     this.init()
@@ -110,7 +118,7 @@ export default {
       dictList({ name: '是否正副本【证照废弃声明】' }).then(response => {
         this.transcriptStatusList = getDictList(response.data[0].detail)
       })
-
+      this.companyListQuery.id = this.$route.query.id
       dictList({ name: '是否补领【证照废弃声明】' }).then(response => {
         this.replaceStatusList = getDictList(response.data[0].detail)
       })
@@ -174,6 +182,10 @@ export default {
       this.formTitle = '添加证照作废声明'
       this.formVisible = true
       this.isAdd = true
+
+      // 设置新增企业初始值;
+      this.form.enterpriseName = this.companyList[0].enterpriseName
+      this.form.enterpriseCode = this.companyList[0].id
     },
     save() {
       this.$refs['form'].validate((valid) => {

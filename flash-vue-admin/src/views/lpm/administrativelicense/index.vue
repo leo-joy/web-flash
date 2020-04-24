@@ -80,17 +80,19 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="24">
-            <el-form-item label="公司名称">
+            <el-form-item label="公司名称" prop="enterpriseName">
               <el-input
                 v-model="form.enterpriseName"
+                :disabled="true"
                 placeholder="请选择公司"
                 readonly="readonly"
-                @click.native="companyTree.show = !companyTree.show"
+                @click.native="companyTree.show = (!companyTree.show && false)"
               />
               <el-tree
                 v-if="companyTree.show"
                 empty-text="暂无数据"
                 :expand-on-click-node="false"
+                :default-checked-keys="[1]"
                 :data="companyList"
                 :props="companyTree.defaultProps"
                 class="input-tree"
@@ -134,12 +136,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="许可机关">
+            <el-form-item label="许可机关" prop="permissionOrg">
               <el-input v-model="form.permissionOrg" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="许可内容">
+            <el-form-item label="许可内容" prop="permissionContent">
               <el-input v-model="form.permissionContent" type="textarea" />
             </el-form-item>
           </el-col>

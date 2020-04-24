@@ -56,6 +56,18 @@ export default {
         accessoryFiles: '',
         id: ''
       },
+      rules: {
+        enterpriseName: [
+          { required: true, message: '请选择公司名称', trigger: 'blur' }
+        ],
+        permissionOrg: [
+          { required: true, message: '请填写许可机关', trigger: 'blur' }
+        ],
+        permissionContent: [
+          { required: true, message: '请填写许可内容', trigger: 'blur' }
+        ]
+
+      },
       listQuery: {
         page: 1,
         limit: 10,
@@ -80,14 +92,14 @@ export default {
   computed: {
 
     // 表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
-    }
+    // rules() {
+    //   return {
+    //     // cfgName: [
+    //     //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
+    //     //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
+    //     // ]
+    //   }
+    // }
   },
   created() {
     this.init()
@@ -110,7 +122,7 @@ export default {
       dictList({ name: '状态【行政许可信息】' }).then(response => {
         this.statusList = getDictList(response.data[0].detail)
       })
-
+      this.companyListQuery.id = this.$route.query.id
       getEnterpriseList(this.companyListQuery).then(response => {
         this.companyList = response.data.records
         this.listLoading = false
@@ -171,6 +183,10 @@ export default {
       this.formTitle = '添加行政许可信息'
       this.formVisible = true
       this.isAdd = true
+
+      // 设置新增企业初始值;
+      this.form.enterpriseName = this.companyList[0].enterpriseName
+      this.form.enterpriseCode = this.companyList[0].id
     },
     save() {
       this.$refs['form'].validate((valid) => {
