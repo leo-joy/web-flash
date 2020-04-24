@@ -95,7 +95,8 @@ public class ShiroConfig {
         filterRuleMap.put("/fileMgr/enterpriseFiles","anon");
 
 
-        //文件下载不拦截
+        //文件上传下载不拦截
+        filterRuleMap.put("/file/upload","anon");
         filterRuleMap.put("/file/download","anon");
         filterRuleMap.put("/file/getImgStream","anon");
         filterRuleMap.put("/file/getImgBase64","anon");

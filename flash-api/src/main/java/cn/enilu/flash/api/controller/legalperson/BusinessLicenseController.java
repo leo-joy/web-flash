@@ -40,7 +40,6 @@ public class BusinessLicenseController {
 	private BusinessLicenseService businessLicenseService;
 
 	@RequestMapping(method = RequestMethod.GET)
-	@RequiresPermissions(value = {Permission.BUSINESS_LICENSE})
 	public Object get(@Param("id") Long id) {
 		BusinessLicense businessLicense = businessLicenseService.get(id);
 		return Rets.success(businessLicense);

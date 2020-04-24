@@ -31,8 +31,8 @@ public class FileController extends BaseController {
      * @param multipartFile
      * @return
      */
+//    @RequiresPermissions(value = {Permission.FILE_UPLOAD})
     @RequestMapping(method = RequestMethod.POST)
-    @RequiresPermissions(value = {Permission.FILE_UPLOAD})
     public Object upload(@RequestPart("file") MultipartFile multipartFile) {
 
         try {
