@@ -1,11 +1,9 @@
 import { remove, getList, save } from '@/api/lpm/businesslicense'
 import { parseTime } from '@/utils'
 import { getList as dictList } from '@/api/system/dict'
-import { showDictLabel, getDictNum } from '@/utils/common'
+import { showDictLabel } from '@/utils/common'
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
-import axios from 'axios'
-// axios.defaults.withCredentials = true
 
 export default {
   directives: { permission },
@@ -211,127 +209,6 @@ export default {
           return false
         }
       })
-    },
-    initCA() {
-      // const num = getDictNum(this.currencyDict, '港元')
-      // console.log('num:', num)
-      const list = this.list
-      const _this = this
-      if (list && list.length > 0) {
-        for (let i = 0; i < list.length; i++) {
-          this.caInit(list[i], _this)
-        }
-      }
-    },
-    caInit(oldItem, _this) {
-      if ((oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) && (oldItem.initCa) * 1 !== 1) {
-        let url = 'https://signtest.agile.com.cn:8082/ec-webservice/interface/everifyServer?appId=cfb6b6eef1b6462a8e0d360a9f9417cb'
-        if (oldItem.unifiedSocialCreditCode) {
-          url = url + '&unCreditCode=' + oldItem.unifiedSocialCreditCode + '&keywordType=3'
-        } else {
-          url = url + '&enterpriseName=' + oldItem.enterpriseName + '&keywordType=1'
-        }
-
-        axios.get(url)
-          .then(function(res) {
-            console.log('查询无结果:', res.data.resultMessage !== '查询无结果')
-            console.log(_this.enterpriseType)
-            if (res.data.statusCode === '200') {
-              const data = JSON.parse(res.data.statusMessage)
-              if (data.resultMessage === '查询无结果') {
-                return '查询无结果'
-              }
-              console.log('qweqweqwe')
-              console.log(data)
-              // 统一社会信息代码
-              const unifiedSocialCreditCode = data.unCreditCode || oldItem.unifiedSocialCreditCode
-              // 企业名称
-              const enterpriseName = data.enterpriseName || oldItem.enterpriseName
-              // 企业法人
-              const legalRepresentative = data.leagalPerson || oldItem.legalRepresentative
-              // 企业编号
-              const enterpriseCode = data.unitCode || oldItem.enterpriseCode
-              // 企业类型
-              const type = getDictNum(_this.enterpriseType, data.enterpriseType) || oldItem.type
-              // 注册地址
-              const registeredAddress = data.address || oldItem.registeredAddress
-              // 成立日期
-              const setupDate = data.establishDate || oldItem.setupDate
-              // 核准日期
-              const approvalDate = data.checkDate || oldItem.approvalDate
-              // 营业日期自
-              const operatingPeriodFrom = data.businessStart || oldItem.operatingPeriodFrom
-              // 营业日期至
-              const operatingPeriodEnd = data.businessEnd || oldItem.operatingPeriodEnd
-              // 登记机关
-              const registrationAuthority = data.belongOrg || oldItem.registrationAuthority
-              // 经营范围
-              const businessScope = data.scope || oldItem.businessScope
-
-              // 注册资本
-              const registeredCapital = data.registCapital || oldItem.registeredCapital || 0
-              // 币种
-              let currency = '1'
-              if (data.registCapital.indexOf('人民币') > -1) {
-                currency = getDictNum(_this.currencyDict, '人民币')
-              } else if (data.registCapital.indexOf('美元') > -1) {
-                currency = getDictNum(_this.currencyDict, '美元')
-              } else if (data.registCapital.indexOf('港') > -1) {
-                currency = getDictNum(_this.currencyDict, '港元')
-              } else if (data.registCapital.indexOf('澳') > -1) {
-                currency = getDictNum(_this.currencyDict, '澳元')
-              } else {
-                currency = oldItem.currency || '1'
-              }
-
-              save({
-                unifiedSocialCreditCode: unifiedSocialCreditCode, // 统一社会信息代码
-                enterpriseCode: enterpriseCode, // 企业编号
-                enterpriseName: enterpriseName, // 企业名称
-                legalRepresentative: legalRepresentative, // 法定代表人
-                type: type, // 企业类型
-                registeredAddress: registeredAddress, // 注册地址
-                setupDate: setupDate ? parseTime(setupDate, '{y}-{m}-{d}') : '', // 成立日期
-                approvalDate: approvalDate ? parseTime(approvalDate, '{y}-{m}-{d}') : '', // 核准日期
-                operatingPeriodFrom: operatingPeriodFrom ? parseTime(operatingPeriodFrom, '{y}-{m}-{d}') : '', // 营业期限自
-                operatingPeriodEnd: operatingPeriodEnd ? parseTime(operatingPeriodEnd, '{y}-{m}-{d}') : '', // 营业期限至
-                registrationAuthority: registrationAuthority, // 登记机关
-                businessScope: businessScope, // 经营范围
-                registeredCapital: parseFloat(registeredCapital).toFixed(1), // 注册资本
-                currency: currency, // 币种
-                initCa: 1, // 是否工商初始化过， 1 是
-                registrationType: oldItem.registrationType || 1, // 企业注册类型
-                registrationPlace: oldItem.registrationPlace || 1, // 企业注册地
-
-                enterpriseNameEn: oldItem.enterpriseNameEn, // 企业英文名称
-                enterpriseNameBusiness: oldItem.enterpriseNameBusiness, // 企业商用名称
-                customType: oldItem.customType || 1, // 自定义企业类型
-
-                achieveDate: oldItem.achieveDate ? parseTime(oldItem.achieveDate, '{y}-{m}-{d}') : '', // 取得日期
-                registrationStatus: oldItem.registrationStatus || '1', // 登记状态
-                businessAddress: oldItem.businessAddress, // 经营地址
-                remark: oldItem.remark, // 备注
-                pid: oldItem.pid,
-                pIds: oldItem.pIds,
-                pName: oldItem.pName,
-                id: oldItem.id
-              }).then(response => {
-                _this.$message({
-                  message: _this.$t('common.optionSuccess'),
-                  type: 'success'
-                })
-              })
-            } else {
-              console.error('CA 请求失败')
-            }
-          })
-          .catch(function(err) {
-            console.log('33333')
-            console.error(err)
-          })
-      } else {
-        console.log('统一社会信用代码或企业名称为空！请检查')
-      }
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {

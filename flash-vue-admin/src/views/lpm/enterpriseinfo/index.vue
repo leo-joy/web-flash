@@ -39,28 +39,27 @@
                 />
               </el-select>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="11">
               <el-input v-model="keyword" placeholder="请输入搜索关键字" />
             </el-col>
 
-            <el-col :span="8">
+            <el-col :span="9">
               <el-button
                 type="success"
                 icon="el-icon-search"
                 @click.native="search"
               >{{ $t('button.search') }}</el-button>
               <el-button
+                v-permission="['/lpm/businesslicenseEdit']"
                 type="success"
                 icon="el-icon-add"
                 @click.native="addCompany('/lpm/businesslicenseEdit')"
               >{{ $t('button.add') }}</el-button>
               <el-button
-                v-permission="['/lpm/businesslicenseEdit']"
+                v-permission="['/businesslicense/ca']"
                 type="primary"
-                icon="el-icon-edit"
-                size="small"
-                @click.native="initCA()"
-              >{{ $t('button.edit') }}</el-button>
+                @click.native="businessCirclesSynErgodic()"
+              >{{ $t('button.businessCirclesSyn') }}</el-button>
             </el-col>
 
           </el-row>
@@ -93,8 +92,9 @@
               width="100"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column label="操作" width="80">
+            <el-table-column label="操作" width="120">
               <template slot-scope="scope">
+                <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>
                 <el-button type="text" @click="detail(scope.row)">详情</el-button>
               </template>
             </el-table-column>

@@ -125,7 +125,8 @@ export default {
     cancel: '取消',
     clear: '清除',
     back: '返回',
-    export: '导出'
+    export: '导出',
+    businessCirclesSyn: '同步工商数据'
   },
   common: {
     mustSelectOne: '请选中操作项!',

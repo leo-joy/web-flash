@@ -24,13 +24,6 @@
             size="small"
             @click.native="remove"
           >{{ $t('button.delete') }}</el-button>
-          <el-button
-            v-permission="['/lpm/businesslicenseEdit']"
-            type="primary"
-            icon="el-icon-edit"
-            size="small"
-            @click.native="initCA()"
-          >{{ $t('button.edit') }}</el-button>
         </el-col>
       </el-row>
     </div>

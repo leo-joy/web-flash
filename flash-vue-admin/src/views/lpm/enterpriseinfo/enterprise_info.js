@@ -226,13 +226,14 @@ export default {
       })
       return false
     },
-    edit() {
-      if (this.checkSel()) {
-        this.isAdd = false
-        this.form = this.selRow
-        this.formTitle = '编辑注册公司'
-        this.formVisible = true
-      }
+    edit(id) {
+      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
+      // if (this.checkSel()) {
+      //   this.isAdd = false
+      //   this.form = this.selRow
+      //   this.formTitle = '编辑注册公司'
+      //   this.formVisible = true
+      // }
     },
     remove() {
       if (this.checkSel()) {
@@ -312,18 +313,21 @@ export default {
       // 动态修改样式
       this.$refs.treecontainer.style.height = clientHeight - 124 + 'px'
     },
-    initCA() {
+
+    // 批量工商同步
+    businessCirclesSynErgodic() {
       // const num = getDictNum(this.currencyDict, '港元')
       // console.log('num:', num)
       const list = this.list
       const _this = this
       if (list && list.length > 0) {
         for (let i = 0; i < list.length; i++) {
-          this.caInit(list[i], _this)
+          this.businessCirclesSyn(list[i], _this)
         }
       }
     },
-    caInit(oldItem, _this) {
+    // 单条工商数据同步
+    businessCirclesSyn(oldItem, _this) {
       if ((oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) && (oldItem.initCa) * 1 !== 1) {
         let url = 'https://signtest.agile.com.cn:8082/ec-webservice/interface/everifyServer?appId=cfb6b6eef1b6462a8e0d360a9f9417cb'
         if (oldItem.unifiedSocialCreditCode) {
@@ -341,8 +345,6 @@ export default {
               if (data.resultMessage === '查询无结果') {
                 return '查询无结果'
               }
-              console.log('qweqweqwe')
-              console.log(data)
               // 统一社会信息代码
               const unifiedSocialCreditCode = data.unCreditCode || oldItem.unifiedSocialCreditCode
               // 企业名称
@@ -372,18 +374,19 @@ export default {
               const registeredCapital = data.registCapital || oldItem.registeredCapital || 0
               // 币种
               let currency = '1'
-              if (data.registCapital.indexOf('人民币') > -1) {
-                currency = getDictNum(_this.currencyDict, '人民币')
-              } else if (data.registCapital.indexOf('美元') > -1) {
-                currency = getDictNum(_this.currencyDict, '美元')
-              } else if (data.registCapital.indexOf('港') > -1) {
-                currency = getDictNum(_this.currencyDict, '港元')
-              } else if (data.registCapital.indexOf('澳') > -1) {
-                currency = getDictNum(_this.currencyDict, '澳元')
-              } else {
-                currency = oldItem.currency || '1'
+              if (data.registCapital) {
+                if (data.registCapital.indexOf('人民币') > -1) {
+                  currency = getDictNum(_this.currencyDict, '人民币')
+                } else if (data.registCapital.indexOf('美元') > -1) {
+                  currency = getDictNum(_this.currencyDict, '美元')
+                } else if (data.registCapital.indexOf('港') > -1) {
+                  currency = getDictNum(_this.currencyDict, '港元')
+                } else if (data.registCapital.indexOf('澳') > -1) {
+                  currency = getDictNum(_this.currencyDict, '澳元')
+                } else {
+                  currency = oldItem.currency || '1'
+                }
               }
-
               save({
                 unifiedSocialCreditCode: unifiedSocialCreditCode, // 统一社会信息代码
                 enterpriseCode: enterpriseCode, // 企业编号
@@ -426,7 +429,6 @@ export default {
             }
           })
           .catch(function(err) {
-            console.log('33333')
             console.error(err)
           })
       } else {
