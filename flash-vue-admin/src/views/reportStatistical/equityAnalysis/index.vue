@@ -101,7 +101,7 @@ export default {
 
   data() {
     return {
-      src: '/d3tree/index.html?#1',
+      src: '/d3tree/index.html?#906',
       searchType: 'enterpriseName',
       keyword: '',
       options: [{
