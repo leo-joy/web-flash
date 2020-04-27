@@ -253,7 +253,7 @@
       <el-pagination
         background
         layout="total, sizes, prev, pager, next, jumper"
-        :page-sizes="[5, 10, 20, 50, 100, 500, 1000]"
+        :page-sizes="[5, 10, 20, 50, 100, 500, 1500]"
         :page-size="companyListQuery.limit"
         :total="companyTotal"
         @size-change="changeCompanySize"
