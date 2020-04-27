@@ -43,22 +43,20 @@ export const constantRoutes = [
     hidden: true
   },
 
-  {
-    path: '/enterprisemanage',
-    component: () => import('@/views/lpm/enterprisemanage/index'),
-    hidden: true
-  },
-
-  
+  // {
+  //   path: '/enterprisemanage',
+  //   component: () => import('@/views/lpm/enterprisemanage/index'),
+  //   hidden: true
+  // },
 
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/enterpriseinfo',
     children: [{
       path: 'dashboard',
       name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
+      component: () => import('@/views/lpm/enterpriseinfo/index'),
       meta: { title: 'dashboard', icon: 'dashboard', affix: true }
     }]
   },

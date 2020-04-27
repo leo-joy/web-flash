@@ -227,7 +227,8 @@ export default {
       return false
     },
     edit(id) {
-      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
+      this.$router.push({ path: '/enterprisemanage', query: { id: id }})
+      // this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
       // if (this.checkSel()) {
       //   this.isAdd = false
       //   this.form = this.selRow
