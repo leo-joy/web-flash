@@ -1,6 +1,6 @@
-var originUrl = 'http://127.0.0.1:8082' // 本地服务器接口地址
+//var originUrl = 'http://127.0.0.1:8082' // 本地服务器接口地址
 // var originUrl = 'http://10.1.19.76:8092'; // 测试服务器接口地址
-//var originUrl = 'http://faren.agile.com.cn/prod-api'; // 正式服务器接口地址
+var originUrl = 'http://faren.agile.com.cn/prod-api'; // 正式服务器接口地址
 var allData = {}
 var mysvg = []
 var rootName = '' // 根节点的名字
@@ -34,7 +34,7 @@ var initChartData = function(url, id) {
       investCompanyData = investCompanyData.data.records
 
       // 请求分公司数据
-      d3.xhr(url + '/lpm/branch/company/list?page=1&limit=1000&enterpriseCode=' + rootCompanyId, function(err, XMLHttpRequest) {
+      d3.xhr(url + '/lpm/invest/company/list?page=1&limit=1000&enterpriseCode=' + rootCompanyId, function(err, XMLHttpRequest) {
         if (err) {
           return false
         }
@@ -397,7 +397,7 @@ treeChart.prototype.graphTree = function(config) {
         if (forUpward) {
           str = !d.realityCapitalContribution ? '' : '认缴金额：' + d.realityCapitalContribution + '万元'
         } else {
-          str = !d.amount ? '' : '注册资本：' + d.amount + '万元'
+          str = !d.amount ? '' : '认缴金额：' + d.amount + '万元'
         }
         return (str.length > 13) ? str.substr(0, 13) + '..' : str
       })
@@ -630,9 +630,9 @@ treeChart.prototype.graphTree = function(config) {
         isExpand = !isExpand
         if (d.hasChildren) {
           if (isExpand) {
-            d3.select(_that).select('.isExpand').text('-')
-          } else {
             d3.select(_that).select('.isExpand').text('+')
+          } else {
+            d3.select(_that).select('.isExpand').text('-')
           }
         }
 
