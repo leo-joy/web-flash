@@ -174,7 +174,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="认缴出资方式">
+            <el-form-item label="认缴出资方式" prop="subscribedCapitalType">
               <el-select v-model="form.subscribedCapitalType" placeholder="请选择">
                 <el-option
                   v-for="item in subscribedCapitalTypeList"
@@ -186,8 +186,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="认缴出资额（万元）">
-              <el-input v-model="form.subscribedCapitalContribution" minlength="1" />
+            <el-form-item label="认缴出资额（万元）" prop="subscribedCapitalContribution">
+              <el-input v-model.number="form.subscribedCapitalContribution" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -201,7 +201,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="实缴出资方式">
+            <el-form-item label="实缴出资方式" prop="realityCapitalType">
               <el-select v-model="form.realityCapitalType" placeholder="请选择">
                 <el-option
                   v-for="item in realityCapitalTypeList"
@@ -213,8 +213,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="实缴出资额（万元）">
-              <el-input v-model="form.realityCapitalContribution" minlength="1" />
+            <el-form-item label="实缴出资额（万元）" prop="realityCapitalContribution">
+              <el-input v-model.number="form.realityCapitalContribution" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -228,12 +228,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="占比（%）">
-              <el-input v-model="form.proportion" minlength="1" />
+            <el-form-item label="占比（%）" prop="proportion">
+              <el-slider v-model="form.proportion" show-input />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="股东类型">
+            <el-form-item label="股东类型" prop="shareholderType">
               <el-select v-model="form.shareholderType" placeholder="请选择">
                 <el-option
                   v-for="item in typeList"
@@ -245,7 +245,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="状态">
+            <el-form-item label="状态" prop="status">
               <el-select v-model="form.status" placeholder="请选择">
                 <el-option
                   v-for="item in statusList"
@@ -257,7 +257,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="经办人">
+            <el-form-item label="经办人" prop="responsiblePerson">
               <el-input v-model="form.responsiblePerson" minlength="1" />
             </el-form-item>
           </el-col>

@@ -61,7 +61,8 @@ export default {
           { required: true, message: '请填写登记机关', trigger: 'blur' }
         ],
         byAssureBondContribution: [
-          { required: true, message: '请填写被担保债权数额', trigger: 'blur' }
+          { required: true, message: '请填写被担保债权数额', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
         ]
       },
       listQuery: {

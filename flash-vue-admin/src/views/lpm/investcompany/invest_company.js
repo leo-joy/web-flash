@@ -80,7 +80,8 @@ export default {
           { required: true, message: '股权占比不能为空', trigger: 'blur' }
         ],
         realityCapitalContribution: [
-          { required: true, message: '认缴金额不能为空', trigger: 'blur' }
+          { required: true, message: '认缴金额不能为空', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
         ]
       }
     }

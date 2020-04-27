@@ -67,7 +67,9 @@ export default {
           { required: true, message: '请填写出质人证件号码', trigger: 'blur' }
         ],
         pledgeStockContribution: [
-          { required: true, message: '请填写出质股权数额', trigger: 'blur' }
+          { required: true, message: '请填写出质股权数额', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+
         ],
         pledgee: [
           { required: true, message: '请填写质权人', trigger: 'blur' }

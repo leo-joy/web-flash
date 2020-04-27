@@ -108,10 +108,32 @@ export default {
     // 表单验证
     rules() {
       return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
+        enterpriseName: [
+          { required: true, message: '请选择所属公司名称', trigger: 'blur' }
+        ],
+        subscribedCapitalType: [
+          { required: true, message: '请选择认缴出资方式', trigger: 'blur' }
+        ],
+        subscribedCapitalContribution: [
+          { required: true, message: '认缴出资额不能为空', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+        ],
+        realityCapitalType: [
+          { required: true, message: '请选择实缴出资方式', trigger: 'blur' }
+        ],
+        realityCapitalContribution: [
+          { required: true, message: '实缴出资额不能为空', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+        ],
+        shareholderType: [
+          { required: true, message: '请选择股东类型', trigger: 'blur' }
+        ],
+        status: [
+          { required: true, message: '请选择状态', trigger: 'blur' }
+        ],
+        responsiblePerson: [
+          { required: true, message: '请填写经办人', trigger: 'blur' }
+        ]
       }
     }
   },

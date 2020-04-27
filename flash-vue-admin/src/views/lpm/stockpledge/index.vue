@@ -129,7 +129,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="出质股权数额" prop="pledgeStockContribution">
-              <el-input v-model="form.pledgeStockContribution" minlength="1" />
+              <el-input v-model.number="form.pledgeStockContribution" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">

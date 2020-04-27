@@ -124,7 +124,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="被担保债权数额" prop="byAssureBondContribution">
-              <el-input v-model="form.byAssureBondContribution" minlength="1" />
+              <el-input v-model.number="form.byAssureBondContribution" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">

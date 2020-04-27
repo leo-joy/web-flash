@@ -80,7 +80,8 @@ export default {
           { required: true, message: '请输入企业名称', trigger: 'blur' }
         ],
         registeredCapital: [
-          { required: true, message: '请输入注册资本金额', trigger: 'blur' }
+          { required: true, message: '请输入注册资本金额', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
         ]
       },
       listQuery: {

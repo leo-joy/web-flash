@@ -54,7 +54,7 @@
     <el-pagination
       background
       layout="total, sizes, prev, pager, next, jumper"
-      :page-sizes="[10, 20, 50, 100,500]"
+      :page-sizes="[10, 20, 50, 100, 500]"
       :page-size="listQuery.limit"
       :total="total"
       @size-change="changeSize"
@@ -112,16 +112,17 @@
               </el-autocomplete>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="股权占比（%）" prop="proportion">
-              <el-input v-model="form.proportion" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
+          <el-col :span="8">
             <el-form-item label="认缴金额（万元）" prop="realityCapitalContribution">
-              <el-input v-model="form.realityCapitalContribution" minlength="1" />
+              <el-input v-model.number="form.realityCapitalContribution" />
             </el-form-item>
           </el-col>
+          <el-col :span="16">
+            <el-form-item label="股权占比（%）" prop="proportion">
+              <el-slider v-model="form.proportion" show-input />
+            </el-form-item>
+          </el-col>
+          
         </el-row>
         <br>
         <br>
