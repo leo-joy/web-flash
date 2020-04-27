@@ -113,9 +113,9 @@
               </el-autocomplete>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col :span="24">
             <el-form-item label="股权占比（%）" prop="proportion">
-              <el-input v-model="form.proportion" minlength="1" />
+              <el-slider v-model="form.proportion" show-input />
             </el-form-item>
           </el-col>
         </el-row>

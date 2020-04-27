@@ -94,14 +94,14 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="序号">
-              <el-input v-model="form.serialNumber" minlength="1" />
+            <el-form-item label="序号" prop="serialNumber">
+              <el-input v-model.number="form.serialNumber" minlength="1" />
             </el-form-item>
           </el-col>
 
           <el-col :span="12">
-            <el-form-item label="报送年度">
-              <el-input v-model="form.submissionYear" minlength="1" />
+            <el-form-item label="报送年度" prop="submissionYear">
+              <el-input v-model.number="form.submissionYear" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">

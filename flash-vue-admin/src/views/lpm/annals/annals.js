@@ -48,6 +48,13 @@ export default {
       rules: {
         enterpriseName: [
           { required: true, message: '请选择公司名称', trigger: 'blur' }
+        ],
+        serialNumber: [
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+        ],
+        submissionYear: [
+          { required: true, message: '请输入年度', trigger: 'blur' },
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
         ]
       },
       listQuery: {
