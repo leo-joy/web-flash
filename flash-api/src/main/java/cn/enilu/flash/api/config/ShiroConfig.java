@@ -101,6 +101,9 @@ public class ShiroConfig {
         filterRuleMap.put("/file/getImgStream","anon");
         filterRuleMap.put("/file/getImgBase64","anon");
 
+        //日志不拦截
+        filterRuleMap.put("/log/list","anon");
+
         //druid监控地址不拦截
         filterRuleMap.put("/druid/**","anon");
         //登录登出不拦截

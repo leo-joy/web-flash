@@ -36,7 +36,6 @@ public class LogController extends BaseController {
      */
     @RequestMapping("/list")
     @ResponseBody
-    @RequiresPermissions(value = {Permission.LOG})
     public Object list(@RequestParam(required = false) String beginTime,
                        @RequestParam(required = false) String endTime,
                        @RequestParam(required = false) String logName,
