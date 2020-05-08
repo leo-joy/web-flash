@@ -105,7 +105,6 @@ export default {
     // }
   },
   created() {
-    this.initPermission(this.$store.getters.permissions)
     this.init()
   },
   mounted() {
