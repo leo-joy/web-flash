@@ -6,12 +6,12 @@
 
     <div class="right-menu">
 
-      <template>
+      <!-- <template>
         <a target="_blank" href="http://58.248.168.206:4001/" style="vertical-align: text-bottom;color:lightblue;">测试链接</a>
       </template>
       <template>
         <lang-select class="international right-menu-item" />
-      </template>
+      </template> -->
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
           <img class="user-avatar" src="@/assets/img/avatar.gif">

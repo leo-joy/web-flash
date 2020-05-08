@@ -81,7 +81,7 @@
           @next-click="fetchNext"
         ></el-pagination>
       </el-tab-pane> -->
-      <el-tab-pane label="第三方公司股东" name="second">
+      <el-tab-pane label="合作单位" name="second">
         <div class="block">
           <el-row>
             <el-col :span="24">

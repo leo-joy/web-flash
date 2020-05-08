@@ -10,7 +10,7 @@
     >
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
-        <lang-select class="set-language" />
+        <!-- <lang-select class="set-language" /> -->
       </div>
 
       <el-form-item prop="username">
@@ -50,7 +50,7 @@
         @click.native.prevent="handleLogin"
       >{{ $t('login.logIn') }}</el-button>
 
-      <div style="position:relative">
+      <!-- <div style="position:relative">
         <div class="tips">
           <span>{{ $t('login.username') }} : admin</span>
           <span>{{ $t('login.password') }} : admin</span>
@@ -59,7 +59,7 @@
           <span style="margin-right:18px;">{{ $t('login.username') }} : developer</span>
           <span>{{ $t('login.password') }} : developer</span>
         </div>
-      </div>
+      </div> -->
     </el-form>
   </div>
 </template>

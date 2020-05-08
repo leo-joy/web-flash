@@ -10,7 +10,6 @@
         <p><span class="title"><i class="el-icon-phone" />&nbsp;&nbsp;{{ user.phone }}</span></p>
         <p><span class="title"><i class="el-icon-message" />&nbsp;&nbsp;{{ user.email }}</span></p>
         <p><span class="title"><i class="el-icon-open" />&nbsp;&nbsp;{{ user.status == '1'?'启用' : '禁用' }}</span></p>
-        <p><span class="title"><i class="el-icon-location-outline" />&nbsp;&nbsp;上海市浦东大道290弄</span></p>
       </el-col>
       <el-col :span="18" style="padding-left:10px;">
         <el-tabs v-model="activeName" @tab-click="handleClick">
@@ -24,10 +23,7 @@
             <span>{{ user.name }}</span>
           </el-form-item>
           <el-form-item label="性别">
-            <span> {{ user.sex = 1 ? '男' : '女' }}</span>
-          </el-form-item>
-          <el-form-item label="生日">
-            <span> {{ user.birthday }}</span>
+            <span> {{ user.sex == 1 ? '男' : '女' }}</span>
           </el-form-item>
           <h3>联系信息</h3>
           <el-form-item label="手机">
@@ -35,9 +31,6 @@
           </el-form-item>
           <el-form-item label="邮箱">
             <span> {{ user.email }}</span>
-          </el-form-item>
-          <el-form-item label="地址">
-            <span> 浦东大道290弄</span>
           </el-form-item>
         </el-form>
       </el-col>

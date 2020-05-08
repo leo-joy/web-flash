@@ -1,6 +1,6 @@
 export default {
   route: {
-    dashboard: '首页',
+    dashboard: '工作台',
     system: '系统管理',
     operationMgr: '运维管理',
     cms: 'CMS管理',
@@ -30,14 +30,16 @@ export default {
     /**
      * 公司信息管理
      */
-    lpm: '公司信息管理',
-    enterpriseInfo: '公司基本信息',
+    lpm: '企业管理',
+    enterpriseInfo: '企业信息管理',
+    enterpriseManage: '编辑公司基本信息',
     detailEnterpriseinfo: '公司详细信息',
-    shareholderManage: '股东信息',
+    shareholderManage: '合作单位管理',
+    editCompany: '公司变更',
     filesManage: '附件管理',
     // 子菜单
     businessLicense: '营业执照',
-    editBusinessLicense: '编辑营业执照',
+    editBusinessLicense: '公司注册',
     mainmember: '主要人员信息',
     shareholder: '股东信息',
     seal: '印章信息',
@@ -59,7 +61,7 @@ export default {
      */
     companymanage: '公司治理结构',
     // 子菜单
-    advancedUser: '高级管理人员',
+    advancedUser: '企业人员管理',
 
     /**
      * 清算退出管理
@@ -68,7 +70,7 @@ export default {
     // 子菜单
     companyCancel: '公司注销',
     companyRevoked: '公司吊销',
-    equityExit: '公司股权退出',
+    equityExit: '公司清算退出',
     shutdownBusiness: '终止经营',
 
     /**
@@ -100,7 +102,7 @@ export default {
     logOut: '退出登录',
     profile: '个人资料',
     updatePwd: '修改密码',
-    dashboard: '首页',
+    dashboard: '我的首页',
     github: '项目地址',
     screenfull: '全屏',
     theme: '换肤',
@@ -118,6 +120,7 @@ export default {
   button: {
     add: '添加',
     edit: '修改',
+    modity: '变更',
     delete: '删除',
     search: '搜索',
     reset: '重置',
