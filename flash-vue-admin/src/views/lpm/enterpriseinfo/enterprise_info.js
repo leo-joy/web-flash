@@ -131,6 +131,9 @@ export default {
       dictList({ name: '企业类型' }).then(response => {
         this.enterpriseType = response.data[0].detail
       })
+      dictList({ name: '登记状态【营业执照】' }).then(response => {
+        this.registrationStatusBL = response.data[0].detail
+      })
       dictList({ name: '币种' }).then(response => {
         this.currencyDict = response.data[0].detail
       })
@@ -321,17 +324,14 @@ export default {
     },
     // 格式化 企业类型
     formatterEnterpriseType(row) {
-      dictList({ name: '企业类型' }).then(response => {
-        this.enterpriseType = response.data[0].detail
-      })
+      // dictList({ name: '企业类型' }).then(response => {
+      //   this.enterpriseType = response.data[0].detail
+      // })
       const res = showDictLabel(this.enterpriseType, row.type)
       return res
     },
     // 格式化 登记状态
     formatterRegistrationStatus(row) {
-      dictList({ name: '登记状态【营业执照】' }).then(response => {
-        this.registrationStatusBL = response.data[0].detail
-      })
       const res = showDictLabel(this.registrationStatusBL, row.registrationStatus)
       return res
     },
