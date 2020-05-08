@@ -165,16 +165,16 @@ export default {
       }
     },
     addHK() {
-      this.$router.push({ path: '/lpm/businesslicense/edit', query: { registrationType: 2 }})
+      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 2 }})
     },
     addOther() {
-      this.$router.push({ path: '/lpm/businesslicense/edit', query: { registrationType: 3 }})
+      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 3 }})
     },
     add() {
       if (this.$route.meta.registrationType) {
-        this.$router.push({ path: '/lpm/businesslicense/edit', query: { registrationType: this.$route.meta.registrationType }})
+        this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: this.$route.meta.registrationType }})
       } else {
-        this.$router.push({ path: '/lpm/businesslicense/edit' })
+        this.$router.push({ path: '/lpm/businesslicenseEdit' })
       }
       // this.resetForm()
       // this.formTitle = '添加营业执照'
@@ -234,9 +234,9 @@ export default {
     edit() {
       if (this.checkSel()) {
         if (this.$route.meta.registrationType) {
-          this.$router.push({ path: '/lpm/businesslicense/edit', query: { id: this.selRow.id, registrationType: this.$route.meta.registrationType }})
+          this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: this.selRow.id, registrationType: this.$route.meta.registrationType }})
         } else {
-          this.$router.push({ path: '/lpm/businesslicense/edit', query: { id: this.selRow.id }})
+          this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: this.selRow.id }})
         }
       }
       // if (this.checkSel()) {
