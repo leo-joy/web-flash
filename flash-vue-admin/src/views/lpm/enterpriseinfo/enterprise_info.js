@@ -27,6 +27,7 @@ export default {
         label: '法定代表人'
       }
       ],
+      deptRadio: '27',
       deptTree: {
         show: false,
         data: [],
@@ -50,7 +51,7 @@ export default {
       },
       listQuery: {
         page: 1,
-        limit: 10,
+        limit: 500,
         id: undefined
       },
       total: 0,
@@ -104,6 +105,15 @@ export default {
       deptList().then(response => {
         this.deptTree.data = response.data
       })
+      if (this.$store.state.user.companys) {
+        console.log(11);
+        this.deptRadio = '24'
+        this.listQuery.pIds = 24
+      } else {
+        console.log(2);
+        this.deptRadio = '27'
+        this.listQuery.pIds = 27
+      }
       this.fetchData()
     },
     fetchData() {
@@ -117,6 +127,9 @@ export default {
         this.listQuery.enterpriseName = ''
         this.listQuery.unifiedSocialCreditCode = ''
         this.listQuery.legalRepresentative = ''
+      })
+      dictList({ name: '企业类型' }).then(response => {
+        this.enterpriseType = response.data[0].detail
       })
       dictList({ name: '币种' }).then(response => {
         this.currencyDict = response.data[0].detail
@@ -236,6 +249,16 @@ export default {
       //   this.formVisible = true
       // }
     },
+    modify(id) {
+      this.$router.push({ path: '/editCompany', query: { id: id }})
+      // this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
+      // if (this.checkSel()) {
+      //   this.isAdd = false
+      //   this.form = this.selRow
+      //   this.formTitle = '编辑注册公司'
+      //   this.formVisible = true
+      // }
+    },
     remove() {
       if (this.checkSel()) {
         var id = this.selRow.id
@@ -278,7 +301,13 @@ export default {
       if (!value) return true
       return data.simplename.indexOf(value) !== -1
     },
+    handleRadioClick() {
+      console.log('val:', this.deptRadio)
+      this.listQuery.pIds = this.deptRadio
+      this.fetchData()
+    },
     handleLeftNodeClick(data, node) {
+      console.log(data.id)
       this.listQuery.pIds = data.id
       this.fetchData()
     },
@@ -330,6 +359,7 @@ export default {
     // 单条工商数据同步
     businessCirclesSyn(oldItem, _this) {
       if ((oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) && (oldItem.initCa) * 1 !== 1) {
+      // if (oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) {
         let url = 'https://signtest.agile.com.cn:8082/ec-webservice/interface/everifyServer?appId=cfb6b6eef1b6462a8e0d360a9f9417cb'
         if (oldItem.unifiedSocialCreditCode) {
           url = url + '&unCreditCode=' + oldItem.unifiedSocialCreditCode + '&keywordType=3'
@@ -340,7 +370,7 @@ export default {
         axios.get(url)
           .then(function(res) {
             console.log('查询无结果:', res.data.resultMessage !== '查询无结果')
-            console.log(_this.enterpriseType)
+            console.log('企业类型：', _this.enterpriseType)
             if (res.data.statusCode === '200') {
               const data = JSON.parse(res.data.statusMessage)
               if (data.resultMessage === '查询无结果') {
@@ -355,7 +385,7 @@ export default {
               // 企业编号
               const enterpriseCode = data.unitCode || oldItem.enterpriseCode
               // 企业类型
-              const type = getDictNum(_this.enterpriseType, data.enterpriseType) || oldItem.type
+              const type = getDictNum(_this.enterpriseType, data.enterpriseType.replace('（', '(').replace('）', ')')) || oldItem.type
               // 注册地址
               const registeredAddress = data.address || oldItem.registeredAddress
               // 成立日期

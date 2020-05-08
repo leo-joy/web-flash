@@ -13,7 +13,72 @@
         </el-col>
       </el-row>-->
       <el-row>
-        <el-col :span="5">
+        <el-col :span="2">
+          <template>
+            <el-radio v-model="deptRadio" label="24" @change="handleRadioClick">全部企业</el-radio>
+          </template>
+        </el-col>
+        <el-col :span="22">
+          <template>
+            <el-radio v-model="deptRadio" label="244" @change="handleRadioClick">控股公司</el-radio>
+            <el-radio v-model="deptRadio" label="51" @change="handleRadioClick">雅生活集团</el-radio>
+            <el-radio v-model="deptRadio" label="103" @change="handleRadioClick">雅城集团</el-radio>
+            <el-radio v-model="deptRadio" label="104" @change="handleRadioClick">教育集团</el-radio>
+            <el-radio v-model="deptRadio" label="102" @change="handleRadioClick">环保集团</el-radio>
+            <el-radio v-model="deptRadio" label="106" @change="handleRadioClick">资本集团</el-radio>
+            <el-radio v-model="deptRadio" label="105" @change="handleRadioClick">房管集团</el-radio>
+            <el-radio v-model="deptRadio" label="107" @change="handleRadioClick">商业集团</el-radio>
+          </template>
+        </el-col>
+      </el-row>
+      <br>
+      <el-row>
+        <el-col :span="2">
+          <template>
+            <el-radio v-model="deptRadio" label="27" @change="handleRadioClick">地产集团</el-radio>
+          </template>
+        </el-col>
+        <el-col :span="22">
+          <template>
+            <el-radio v-model="deptRadio" label="30" border size="mini" @change="handleRadioClick">集团本部</el-radio>
+            <el-radio v-model="deptRadio" label="32" border size="mini" @change="handleRadioClick">广州区域</el-radio>
+            <el-radio v-model="deptRadio" label="37" border size="mini" @change="handleRadioClick">中山区域</el-radio>
+            <el-radio v-model="deptRadio" label="38" border size="mini" @change="handleRadioClick">深圳区域</el-radio>
+            <el-radio v-model="deptRadio" label="43" border size="mini" @change="handleRadioClick">北京区域</el-radio>
+            <el-radio v-model="deptRadio" label="40" border size="mini" @change="handleRadioClick">上海区域</el-radio>
+            <el-radio v-model="deptRadio" label="41" border size="mini" @change="handleRadioClick">南京区域</el-radio>
+          </template>
+        </el-col>
+      </el-row>
+      <br>
+      <el-row>
+        <el-col :span="2">
+          <div>&nbsp;</div>
+        </el-col>
+        <el-col :span="22">
+          <template>
+            <el-radio v-model="deptRadio" label="46" border size="mini" @change="handleRadioClick">重庆区域</el-radio>
+            <el-radio v-model="deptRadio" label="42" border size="mini" @change="handleRadioClick">西安区域</el-radio>
+            <el-radio v-model="deptRadio" label="39" border size="mini" @change="handleRadioClick">海南区域</el-radio>
+            <el-radio v-model="deptRadio" label="44" border size="mini" @change="handleRadioClick">武汉区域</el-radio>
+            <el-radio v-model="deptRadio" label="45" border size="mini" @change="handleRadioClick">云南区域</el-radio>
+            <!-- <el-button
+                v-permission="['/lpm/businesslicenseEdit']"
+                type="success"
+                icon="el-icon-add"
+                @click.native="addCompany('/lpm/businesslicenseEdit')"
+              >{{ $t('button.add') }}</el-button> -->
+            <el-button
+              v-permission="['/businesslicense/ca']"
+              type="primary"
+              @click.native="businessCirclesSynErgodic()"
+            >{{ $t('button.businessCirclesSyn') }}</el-button>
+          </template>
+        </el-col>
+      </el-row>
+      <br>
+      <el-row>
+        <!-- <el-col :span="5">
           <el-input v-model="filterText" class="filterInput" placeholder="输入关键字进行树过滤" />
           <div ref="treecontainer" class="filter-tree">
             <el-tree
@@ -26,8 +91,8 @@
             />
           </div>
 
-        </el-col>
-        <el-col :span="19">
+        </el-col> -->
+        <el-col :span="24">
           <el-row :gutter="24">
             <el-col :span="4">
               <el-select v-model="searchType" placeholder="搜索类型">
@@ -39,27 +104,16 @@
                 />
               </el-select>
             </el-col>
-            <el-col :span="11">
+            <el-col :span="17">
               <el-input v-model="keyword" placeholder="请输入搜索关键字" />
             </el-col>
 
-            <el-col :span="9">
+            <el-col :span="3">
               <el-button
                 type="success"
                 icon="el-icon-search"
                 @click.native="search"
               >{{ $t('button.search') }}</el-button>
-              <el-button
-                v-permission="['/lpm/businesslicenseEdit']"
-                type="success"
-                icon="el-icon-add"
-                @click.native="addCompany('/lpm/businesslicenseEdit')"
-              >{{ $t('button.add') }}</el-button>
-              <el-button
-                v-permission="['/businesslicense/ca']"
-                type="primary"
-                @click.native="businessCirclesSynErgodic()"
-              >{{ $t('button.businessCirclesSyn') }}</el-button>
             </el-col>
 
           </el-row>
@@ -67,33 +121,35 @@
           <el-table
             v-loading="listLoading"
             :data="list"
-            height="550"
             element-loading-text="Loading"
             border
             highlight-current-row
+            class="my-table"
+            empty-text="暂无数据或您没有权限查看相关数据"
             @current-change="handleCurrentChange"
           >
             <el-table-column type="index" width="50" />
-            <el-table-column label="企业编码">
+            <el-table-column label="企业编码" width="120">
               <template slot-scope="scope">{{ scope.row.enterpriseCode }}</template>
             </el-table-column>
             <el-table-column label="企业名称">
               <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
             </el-table-column>
-            <el-table-column label="社会信用代码">
+            <el-table-column label="社会信用代码" width="190">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
             </el-table-column>
-            <el-table-column label="法定代表人">
+            <el-table-column label="法定代表人" width="100">
               <template slot-scope="scope">{{ scope.row.legalRepresentative }}</template>
             </el-table-column>
             <el-table-column
               prop="registrationStatus"
               label="登记状态"
-              width="100"
+              width="80"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column label="操作" width="120">
+            <el-table-column label="操作" width="160">
               <template slot-scope="scope">
+                <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
                 <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>
                 <el-button type="text" @click="detail(scope.row)">详情</el-button>
               </template>
@@ -172,6 +228,9 @@
 .filter-tree {
   overflow-y: auto;
   height: 500px;
+}
+.my-table >>> td {
+  padding: 0 0;
 }
 </style>
 

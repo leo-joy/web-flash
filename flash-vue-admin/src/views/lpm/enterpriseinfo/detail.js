@@ -521,7 +521,7 @@ export default {
     },
 
     detail(row) {
-      this.$router.push({ path: '/lpm/enterpriseinfo/detail', query: { id: row.id }})
+      this.$router.push({ path: '/lpm/detailEnterpriseinfo', query: { id: row.id }})
     },
 
     userDetail(row, type, name) {
