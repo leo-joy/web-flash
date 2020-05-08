@@ -63,7 +63,7 @@ export default {
   },
   data() {
     return {
-      tabPosition: 'right'
+      tabPosition: 'left'
     }
   }
 }
