@@ -2,7 +2,6 @@
 import { Loading } from 'element-ui'
 import { getApiUrl } from '@/utils/utils'
 import { getToken } from '@/utils/auth'
-import { isPermissions } from '@/utils/common'
 import { getListIds } from '@/api/cms/fileInfo'
 import { getList as getEnterpriseList } from '@/api/lpm/businesslicense'
 import { getList as getUserList } from '@/api/system/user'
@@ -113,14 +112,6 @@ export default {
     // this.restaurants = this.loadAll();
   },
   methods: {
-    // 初始化功能权限
-    initPermission(permissions) {
-      this.permissions = permissions
-    },
-    // 判断功能权限
-    hasMenu(url) {
-      return isPermissions(this.permissions, url)
-    },
     init() {
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
