@@ -150,8 +150,7 @@ export default {
         this.listQuery.legalRepresentative = ''
       })
     },
-    search() {
-      console.log(this.searchType === 'enterpriseName')
+    initSearchParams() {
       if (this.searchType === 'enterpriseName') {
         this.listQuery.enterpriseName = this.keyword
       }
@@ -161,6 +160,10 @@ export default {
       if (this.searchType === 'legalRepresentative') {
         this.listQuery.legalRepresentative = this.keyword
       }
+    },
+    search() {
+      this.initSearchParams()
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
@@ -176,18 +179,22 @@ export default {
     },
     fetchNext() {
       this.listQuery.page = this.listQuery.page + 1
+      this.initSearchParams()
       this.fetchData()
     },
     fetchPrev() {
       this.listQuery.page = this.listQuery.page - 1
+      this.initSearchParams()
       this.fetchData()
     },
     fetchPage(page) {
       this.listQuery.page = page
+      this.initSearchParams()
       this.fetchData()
     },
     changeSize(limit) {
       this.listQuery.limit = limit
+      this.initSearchParams()
       this.fetchData()
     },
     handleCurrentChange(currentRow, oldCurrentRow) {

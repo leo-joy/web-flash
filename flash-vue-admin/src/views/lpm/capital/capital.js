@@ -151,11 +151,11 @@ export default {
       this.listQuery.enterpriseCode = this.$route.query.id
       getList(this.listQuery).then(response => {
         var records = response.data.records
-        if (records && records.length > 0) {
-          records.map((item) => {
-            item.proportion = item.proportion * 100
-          })
-        }
+        // if (records && records.length > 0) {
+        //   records.map((item) => {
+        //     item.proportion = item.proportion * 100
+        //   })
+        // }
         this.list = records
         this.listLoading = false
         this.total = response.data.total
@@ -289,7 +289,7 @@ export default {
             realityCapitalType: this.form.realityCapitalType,
             realityCapitalContribution: parseFloat(this.form.realityCapitalContribution).toFixed(1),
             realityCapitalDate: parseTime(this.form.realityCapitalDate, '{y}-{m}-{d}'),
-            proportion: this.form.proportion / 100,
+            proportion: this.form.proportion,
             shareholderMold: this.form.shareholderMold,
             shareholderType: this.form.shareholderType,
             status: this.form.status,
