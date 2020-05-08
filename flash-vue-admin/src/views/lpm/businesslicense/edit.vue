@@ -95,28 +95,25 @@
           </el-col> -->
           <el-col :span="12">
             <el-form-item label="企业注册地">
-              <el-select v-model="form.registrationPlace" placeholder="请选择">
+              <el-cascader
+                v-model="form.registrationPlace"
+                :options="provinces"
+                @change="handleChange"
+              />
+              <!-- <el-select v-model="form.registrationPlace" placeholder="请选择">
                 <el-option
                   v-for="item in registrationPlaceList"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
                 />
-              </el-select>
+              </el-select> -->
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="法定代表人">
               <el-input
                 v-model="form.legalRepresentative"
-                minlength="1"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="注册资本(万元)" prop="registeredCapital">
-              <el-input
-                v-model.number="form.registeredCapital"
                 minlength="1"
               />
             </el-form-item>
@@ -133,7 +130,14 @@
               </el-select>
             </el-form-item>
           </el-col>
-
+          <el-col :span="12">
+            <el-form-item label="注册资本(万元)" prop="registeredCapital">
+              <el-input
+                v-model.number="form.registeredCapital"
+                minlength="1"
+              />
+            </el-form-item>
+          </el-col>
           <el-col :span="12">
             <el-form-item label="成立日期">
               <el-date-picker
@@ -232,7 +236,7 @@
           </el-col> -->
           <el-col :span="24">
             <el-form-item label="经营范围">
-              <el-input v-model="form.businessScope" type="textarea" />
+              <el-input v-model="form.businessScope" type="textarea" rows="5" />
             </el-form-item>
           </el-col>
           <el-col :span="24">
