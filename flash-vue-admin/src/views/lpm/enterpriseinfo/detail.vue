@@ -61,10 +61,6 @@
   </div>
 </template>
 <style lang="scss">
-.el-collapse-item__wrap {
-  border: #ebeff5 dashed 1px;
-  border-radius: 10px;
-}
 .dp-table-expand {
   font-size: 0;
 }
@@ -97,17 +93,6 @@
 .botmBtnContainer {
   text-align: center;
   padding: 20px;
-}
-//
-.my-menu-vertical {
- position:fixed;
- top:180px;
- right:30px;
- z-index:10;
-}
-.my-menu-vertical .el-menu-item {
-  height:36px;
-  line-height: 36px;
 }
 </style>
 <script>
