@@ -430,17 +430,17 @@ export default {
       })
 
       // 股权及出资信息数据
-      administrativelicense({ enterpriseCode: id, page: 1, limit: 20 }).then(response => {
-        this.administrativelicenseData = response.data.records
-        var accessoryArr = ['accessoryFiles']
-        this.getFilesList('Administrativelicense', accessoryArr, response.data.records)
-      })
-
-      // 行政许可信息数据
       capital({ enterpriseCode: id, page: 1, limit: 20 }).then(response => {
         this.capitalData = response.data.records
         var accessoryArr = ['accessoryFiles']
         this.getFilesList('Capital', accessoryArr, response.data.records)
+      })
+
+      // 行政许可信息数据
+      administrativelicense({ enterpriseCode: id, page: 1, limit: 20 }).then(response => {
+        this.administrativelicenseData = response.data.records
+        var accessoryArr = ['accessoryFiles']
+        this.getFilesList('Administrativelicense', accessoryArr, response.data.records)
       })
 
       // 行政处罚信息数据
