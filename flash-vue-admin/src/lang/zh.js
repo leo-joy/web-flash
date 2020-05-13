@@ -83,7 +83,7 @@ export default {
      */
     reportStatistical: '报表统计分析',
     // 子菜单
-    equityAnalysis: '股权统计',
+    equityAnalysis: '股权架构图',
     reportOutput: '报表导出'
 
   },

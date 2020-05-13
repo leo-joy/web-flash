@@ -128,12 +128,11 @@
             empty-text="暂无数据或您没有权限查看相关数据"
             @current-change="handleCurrentChange"
           >
-            <el-table-column type="index" width="50" />
-            <el-table-column label="企业编码" width="120">
-              <template slot-scope="scope">{{ scope.row.enterpriseCode }}</template>
-            </el-table-column>
+            <el-table-column label="序号" type="index" width="50" />
             <el-table-column label="企业名称">
-              <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
+              <template slot-scope="scope">
+                <el-button type="text" @click="detail(scope.row)">{{ scope.row.enterpriseName }}</el-button>
+              </template>
             </el-table-column>
             <el-table-column label="社会信用代码" width="190">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
@@ -147,11 +146,11 @@
               width="80"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column label="操作" width="160">
+            <el-table-column label="操作" width="120">
               <template slot-scope="scope">
                 <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
                 <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>
-                <el-button type="text" @click="detail(scope.row)">详情</el-button>
+                <!-- <el-button type="text" @click="detail(scope.row)">详情</el-button> -->
               </template>
             </el-table-column>
           </el-table>
@@ -161,6 +160,7 @@
             layout="total, sizes, prev, pager, next, jumper"
             :page-sizes="[10, 20, 50, 100,500]"
             :page-size="listQuery.limit"
+            :current-page="listQuery.page"
             :total="total"
             @size-change="changeSize"
             @current-change="fetchPage"

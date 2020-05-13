@@ -51,7 +51,7 @@ export default {
       },
       listQuery: {
         page: 1,
-        limit: 500,
+        limit: 20,
         id: undefined
       },
       total: 0,
@@ -124,6 +124,7 @@ export default {
         this.list = response.data.records
         this.listLoading = false
         this.total = response.data.total
+        this.listQuery.page = response.data.current || 1
         this.listQuery.enterpriseName = ''
         this.listQuery.unifiedSocialCreditCode = ''
         this.listQuery.legalRepresentative = ''
@@ -305,12 +306,11 @@ export default {
       return data.simplename.indexOf(value) !== -1
     },
     handleRadioClick() {
-      console.log('val:', this.deptRadio)
       this.listQuery.pIds = this.deptRadio
+      this.listQuery.page = 1
       this.fetchData()
     },
     handleLeftNodeClick(data, node) {
-      console.log(data.id)
       this.listQuery.pIds = data.id
       this.fetchData()
     },
