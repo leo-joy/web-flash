@@ -15,6 +15,5 @@ public class CompanyModifyService extends BaseService<CompanyModify,Long,Company
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private CompanyModifyRepository companyModifyRepository;
-
 }
 

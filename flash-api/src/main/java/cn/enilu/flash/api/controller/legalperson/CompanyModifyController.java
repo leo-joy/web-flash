@@ -1,6 +1,7 @@
 package cn.enilu.flash.api.controller.legalperson;
 
 import cn.enilu.flash.bean.entity.legalperson.CompanyModify;
+import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.legalperson.CompanyModifyService;
 
 import cn.enilu.flash.bean.core.BussinessLog;
@@ -28,8 +29,9 @@ public class CompanyModifyController {
 	private CompanyModifyService companyModifyService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public Object list() {
+	public Object list(@RequestParam(required = false) String enterpriseId) {
 	Page<CompanyModify> page = new PageFactory<CompanyModify>().defaultPage();
+		page.addFilter("enterpriseId", SearchFilter.Operator.EQ,enterpriseId);
 		page = companyModifyService.queryPage(page);
 		return Rets.success(page);
 	}

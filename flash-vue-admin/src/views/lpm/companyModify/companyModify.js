@@ -13,11 +13,14 @@ export default {
     return {
       formVisible: false,
       formTitle: '添加企业变更',
+      activeNames: ['1', '2', '3'],
       companyListQuery: {
         page: 1,
         limit: 1000,
         id: undefined
       },
+      user: {},
+      businesslicenseData: {},
       companyList: [],
       companyTree: {
         show: false,
@@ -36,6 +39,14 @@ export default {
 
       isAdd: true,
       form: {
+        affiliatedUnit: '',
+        applyDepartment: '',
+        applicant: '',
+        applyTime: '',
+        applicantContact: '',
+        applyType: '',
+        applyReason: '',
+        modifyDate: '',
         enterpriseId: '',
         enterpriseNameState: '',
         enterpriseNameOld: '',
@@ -48,6 +59,26 @@ export default {
         businessScopeNew: '',
         otherFiles: '',
         id: ''
+      },
+      rules: {
+        affiliatedUnit: [
+          { required: true, message: '请填写单位信息', trigger: 'blur' }
+        ],
+        applyDepartment: [
+          { required: true, message: '请填写申请部门', trigger: 'blur' }
+        ],
+        applicant: [
+          { required: true, message: '请填写申请人', trigger: 'blur' }
+        ],
+        applicantContact: [
+          { required: true, message: '请填写办理人联系方式', trigger: 'blur' }
+        ],
+        applyReason: [
+          { required: true, message: '请填写申请理由', trigger: 'blur' }
+        ],
+        modifyDate: [
+          { required: true, message: '请填写变更日期', trigger: 'blur' }
+        ]
       },
       listQuery: {
         page: 1,
@@ -73,26 +104,28 @@ export default {
   computed: {
 
     // 表单验证
-    rules() {
-      return {
-        // cfgName: [
-        //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
-        //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
-        // ]
-      }
-    }
+    // rules() {
+    //   return {
+    //     // cfgName: [
+    //     //   { required: true, message: this.$t('config.name') + this.$t('common.isRequired'), trigger: 'blur' },
+    //     //   { min: 3, max: 2000, message: this.$t('config.name') + this.$t('config.lengthValidation'), trigger: 'blur' }
+    //     // ]
+    //   }
+    // }
   },
   created() {
     this.init()
   },
   methods: {
     init() {
+      this.user = this.$store.state.user.profile
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
       this.fetchData()
     },
     fetchData() {
       this.listLoading = true
+      this.listQuery.enterpriseId = this.$route.query.id
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -140,6 +173,14 @@ export default {
     },
     resetForm() {
       this.form = {
+        affiliatedUnit: '',
+        applyDepartment: '',
+        applicant: '',
+        applyTime: '',
+        applicantContact: '',
+        applyType: '',
+        applyReason: '',
+        modifyDate: '',
         enterpriseId: '',
         enterpriseNameState: '',
         enterpriseNameOld: '',
@@ -160,16 +201,35 @@ export default {
       this.formVisible = true
       this.isAdd = true
 
+      // 申请申请人相关信息
+      this.form.affiliatedUnit = this.companyList[0].enterpriseName
+      // this.form.affiliatedUnit = this.user.dept
+      this.form.applyDepartment = '人力行政部'
+      this.form.applicant = this.user.name
+      this.form.applicantContact = this.user.phone
+
       // 设置企业旧的初始值;
+      this.businesslicenseData = this.companyList[0]
       this.form.enterpriseId = this.companyList[0].id
       this.form.enterpriseNameOld = this.companyList[0].enterpriseName
       this.form.registeredAddressOld = this.companyList[0].registeredAddress
       this.form.businessScopeOld = this.companyList[0].businessScope
     },
+    next() {
+      if (this.active++ > 2) this.active = 0
+    },
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
+            affiliatedUnit: this.form.affiliatedUnit,
+            applyDepartment: this.form.applyDepartment,
+            applicant: this.form.applicant,
+            applyTime: this.form.applyTime,
+            applicantContact: this.form.applicantContact,
+            applyType: this.form.applyType,
+            applyReason: this.form.applyReason,
+            modifyDate: this.form.modifyDate,
             enterpriseId: this.form.enterpriseId,
             enterpriseNameState: this.form.enterpriseNameState,
             enterpriseNameOld: this.form.enterpriseNameOld,
@@ -211,6 +271,19 @@ export default {
         this.form = this.selRow
         this.formTitle = '编辑企业变更'
         this.formVisible = true
+        this.businesslicenseData = this.companyList[0]
+
+        if (this.form.enterpriseNameState === 'true') {
+          this.form.enterpriseNameState = true
+        }
+
+        if (this.form.registeredAddressState === 'true') {
+          this.form.registeredAddressState = true
+        }
+
+        if (this.form.businessScopeState === 'true') {
+          this.form.businessScopeState = true
+        }
 
         if (this.selRow.accessoryFiles) {
           this.accessoryFilesList = []

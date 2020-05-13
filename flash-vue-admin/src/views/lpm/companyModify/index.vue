@@ -19,59 +19,19 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="企业id">
+      <el-table-column label="企业id" width="80">
         <template slot-scope="scope">
           {{ scope.row.enterpriseId }}
         </template>
       </el-table-column>
-      <el-table-column label="企业名称变更状态">
-        <template slot-scope="scope">
-          {{ scope.row.enterpriseNameState }}
-        </template>
-      </el-table-column>
-      <el-table-column label="旧企业名称">
+      <el-table-column label="企业名称">
         <template slot-scope="scope">
           {{ scope.row.enterpriseNameOld }}
         </template>
       </el-table-column>
-      <el-table-column label="新企业名称">
-        <template slot-scope="scope">
-          {{ scope.row.enterpriseNameNew }}
-        </template>
-      </el-table-column>
-      <el-table-column label="注册地址变更状态">
-        <template slot-scope="scope">
-          {{ scope.row.registeredAddressState }}
-        </template>
-      </el-table-column>
-      <el-table-column label="旧注册地址">
+      <el-table-column label="注册地址">
         <template slot-scope="scope">
           {{ scope.row.registeredAddressOld }}
-        </template>
-      </el-table-column>
-      <el-table-column label="新注册地址">
-        <template slot-scope="scope">
-          {{ scope.row.registeredAddressNew }}
-        </template>
-      </el-table-column>
-      <el-table-column label="经营范围变更状态">
-        <template slot-scope="scope">
-          {{ scope.row.businessScopeState }}
-        </template>
-      </el-table-column>
-      <el-table-column label="旧经营范围">
-        <template slot-scope="scope">
-          {{ scope.row.businessScopeOld }}
-        </template>
-      </el-table-column>
-      <el-table-column label="新经营范围">
-        <template slot-scope="scope">
-          {{ scope.row.businessScopeNew }}
-        </template>
-      </el-table-column>
-      <el-table-column label="其他文件">
-        <template slot-scope="scope">
-          {{ scope.row.otherFiles }}
         </template>
       </el-table-column>
     </el-table>
@@ -91,88 +51,171 @@
     <el-dialog
       :title="formTitle"
       :visible.sync="formVisible"
-      width="70%"
+      width="80%"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
     >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="企业id">
-              <el-input v-model="form.enterpriseId" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="企业名称变更状态">
-              <el-input v-model="form.enterpriseNameState" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="旧企业名称">
-              <el-input v-model="form.enterpriseNameOld" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="新企业名称">
-              <el-input v-model="form.enterpriseNameNew" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="注册地址变更状态">
-              <el-input v-model="form.registeredAddressState" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="旧注册地址">
-              <el-input v-model="form.registeredAddressOld" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="新注册地址">
-              <el-input v-model="form.registeredAddressNew" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="经营范围变更状态">
-              <el-input v-model="form.businessScopeState" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="旧经营范围">
-              <el-input v-model="form.businessScopeOld" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="新经营范围">
-              <el-input v-model="form.businessScopeNew" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="其他文件">
-              <el-input v-model="form.otherFiles" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="详情附件">
-              <el-upload
-                class="upload-demo"
-                :action="uploadUrl"
-                :headers="uploadHeaders"
-                :file-list="accessoryFilesList"
-                :before-upload="handleBeforeUpload"
-                :on-remove="handleRemoveFile"
-                :on-success="accessoryFilesUploadSuccess"
-                :on-preview="hanglePreview"
-              >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传文件，且不超过10MB</div>
-              </el-upload>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-          <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
-        </el-form-item>
+        <el-collapse v-model="activeNames">
+          <el-collapse-item name="1" title="一、填写申请人相关信息">
+            <el-row>
+              <el-col :span="16">
+                <el-form-item label="单位" prop="affiliatedUnit">
+                  <el-input v-model="form.affiliatedUnit" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请部门" prop="applyDepartment">
+                  <el-input v-model="form.applyDepartment" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请人" prop="applicant">
+                  <el-input v-model="form.applicant" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="联系方式" prop="applicantContact">
+                  <el-input v-model="form.applicantContact" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请时间">
+                  <el-date-picker
+                    v-model="form.applyTime"
+                    type="datetime"
+                    placeholder="选择日期时间"
+                  />
+                </el-form-item>
+              </el-col>
+              <el-col :span="16">
+                <el-form-item label="申请理由" prop="applyReason">
+                  <el-input v-model="form.applyReason" type="textarea" rows="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请类型">
+                  <el-input v-model="form.applyType" minlength="1" />
+                </el-form-item>
+              </el-col>
 
+            </el-row>
+          </el-collapse-item>
+          <el-collapse-item name="2" title="二、填写变更事项相关信息">
+            <el-row lass="dp-row">
+              <el-col :span="1">&nbsp;
+              </el-col>
+              <el-col :span="11">
+                <h2 style="color:#176c6b;">企业名称：{{ businesslicenseData.enterpriseName }}</h2>
+              </el-col>
+              <el-col :span="8">
+                <h4>统一社会信用代码：{{ businesslicenseData.unifiedSocialCreditCode }}</h4>
+              </el-col>
+              <el-col :span="4">
+                <h4>法定代表人：{{ businesslicenseData.legalRepresentative }}</h4>
+              </el-col>
+            </el-row>
+            <el-row>
+              <!-- <el-col :span="12">
+                <el-form-item label="企业id">
+                  <el-input v-model="form.enterpriseId" minlength="1" />
+                </el-form-item>
+              </el-col> -->
+              <el-col :span="18">
+                <el-form-item label="变更类型">
+                  <el-checkbox v-model="form.enterpriseNameState" label="企业名称变更" />
+                  <el-checkbox v-model="form.registeredAddressState" label="注册地址变更" />
+                  <el-checkbox v-model="form.businessScopeState" label="经营范围变更" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="6">
+                <el-form-item label="变更日期" prop="modifyDate">
+                  <el-date-picker
+                    v-model="form.modifyDate"
+                    type="date"
+                    placeholder="选择日期"
+                    style="width: 100%;"
+                  />
+                </el-form-item>
+
+              </el-col>
+              <el-col v-if="form.enterpriseNameState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>变更企业名称</span>
+                  </div>
+                  <el-row>
+                    <el-col :span="12">
+                      <el-form-item label="原企业名称">
+                        <el-input v-model="form.enterpriseNameOld" :disabled="true" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="新企业名称">
+                        <el-input v-model="form.enterpriseNameNew" minlength="1" />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+
+                </el-card>
+                <br>
+              </el-col>
+              <el-col v-if="form.registeredAddressState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>变更注册地址</span>
+                  </div>
+                  <el-form-item label="原注册地址">
+                    <el-input v-model="form.registeredAddressOld" :disabled="true" />
+                  </el-form-item>
+                  <el-form-item label="新注册地址">
+                    <el-input v-model="form.registeredAddressNew" minlength="1" />
+                  </el-form-item>
+                </el-card>
+                <br>
+              </el-col>
+              <el-col v-if="form.businessScopeState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>变更经营范围</span>
+                  </div>
+                  <el-form-item label="原经营范围">
+                    <el-input v-model="form.businessScopeOld" :disabled="true" type="textarea" rows="5" />
+                  </el-form-item>
+                  <el-form-item label="新经营范围">
+                    <el-input v-model="form.businessScopeNew" type="textarea" rows="5" />
+                  </el-form-item>
+                </el-card>
+                <br>
+              </el-col>
+            </el-row>
+          </el-collapse-item>
+          <el-collapse-item name="3" title="三、上传相关的申请变更文件">
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="详情附件">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="accessoryFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="handleRemoveFile"
+                    :on-success="accessoryFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传文件，且不超过10MB</div>
+                  </el-upload>
+                </el-form-item>
+                <el-form-item>
+                  <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
+                  <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-collapse-item>
+        </el-collapse>
       </el-form>
     </el-dialog>
   </div>
@@ -182,5 +225,24 @@
 
 <style rel="stylesheet/scss" lang="scss" scoped>
     @import "src/styles/common.scss";
+    .dp-row {
+      padding: 5px;
+    }
+    .text {
+    font-size: 14px;
+  }
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
 </style>
 
