@@ -85,7 +85,7 @@ export default {
     },
     reversedProportion() {
       // `this` 指向 vm 实例
-      return this.form.proportion * 100
+      return this.form.proportion
     }
   },
   created() {
@@ -102,11 +102,6 @@ export default {
       this.listQuery.enterpriseCode = this.$route.query.id
       getList(this.listQuery).then(response => {
         var records = response.data.records
-        if (records && records.length > 0) {
-          records.map((item) => {
-            item.proportion = item.proportion * 100
-          })
-        }
         this.list = records
         this.list
         this.listLoading = false
