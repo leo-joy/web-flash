@@ -145,7 +145,7 @@ public class BusinessLicenseController {
 		page.addFilter("enterpriseName", SearchFilter.Operator.LIKE,enterpriseName);
 		page.addFilter("unifiedSocialCreditCode", SearchFilter.Operator.LIKE,unifiedSocialCreditCode);
 		page.addFilter("legalRepresentative", SearchFilter.Operator.LIKE,legalRepresentative);
-		page.addFilter("pIds", SearchFilter.Operator.LIKE,pIds);
+		page.addFilter("pIds", SearchFilter.Operator.LIKE,'-'+pIds+'_');
 		page.addFilter("id", SearchFilter.Operator.EQ,id);
 		if(ids != null && !ids.isEmpty()) {
 			ArrayList lists = new ArrayList(Arrays.asList(ids.split(",")));
