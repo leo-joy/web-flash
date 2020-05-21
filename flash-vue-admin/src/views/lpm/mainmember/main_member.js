@@ -417,7 +417,7 @@ export default {
       // getUserList(this.listUserQuery).then(response => {
       //   this.restaurants = response.data.records
       // })
-      this.$router.push({ path: '/companymanage/personinfo' })
+      this.$router.push({ path: '/advancedUser/1' })
       console.log(ev)
     }
 
