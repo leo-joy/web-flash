@@ -20,14 +20,14 @@
         </el-col>
         <el-col :span="22">
           <template>
-            <el-radio v-model="deptRadio" label="244" @change="handleRadioClick">控股公司</el-radio>
-            <el-radio v-model="deptRadio" label="51" @change="handleRadioClick">雅生活集团</el-radio>
-            <el-radio v-model="deptRadio" label="103" @change="handleRadioClick">雅城集团</el-radio>
-            <el-radio v-model="deptRadio" label="104" @change="handleRadioClick">教育集团</el-radio>
-            <el-radio v-model="deptRadio" label="102" @change="handleRadioClick">环保集团</el-radio>
-            <el-radio v-model="deptRadio" label="106" @change="handleRadioClick">资本集团</el-radio>
-            <el-radio v-model="deptRadio" label="105" @change="handleRadioClick">房管集团</el-radio>
-            <el-radio v-model="deptRadio" label="107" @change="handleRadioClick">商业集团</el-radio>
+            <el-radio v-model="deptRadio" label="_244_" @change="handleRadioClick">控股公司</el-radio>
+            <el-radio v-model="deptRadio" label="-51_" @change="handleRadioClick">雅生活集团</el-radio>
+            <el-radio v-model="deptRadio" label="_103_" @change="handleRadioClick">雅城集团</el-radio>
+            <el-radio v-model="deptRadio" label="-104_" @change="handleRadioClick">教育集团</el-radio>
+            <el-radio v-model="deptRadio" label="-102_" @change="handleRadioClick">环保集团</el-radio>
+            <el-radio v-model="deptRadio" label="_106_" @change="handleRadioClick">资本集团</el-radio>
+            <el-radio v-model="deptRadio" label="-105_" @change="handleRadioClick">房管集团</el-radio>
+            <el-radio v-model="deptRadio" label="_107_" @change="handleRadioClick">商业集团</el-radio>
           </template>
         </el-col>
       </el-row>
@@ -35,18 +35,18 @@
       <el-row>
         <el-col :span="2">
           <template>
-            <el-radio v-model="deptRadio" label="27" @change="handleRadioClick">地产集团</el-radio>
+            <el-radio v-model="deptRadio" label="-27_" @change="handleRadioClick">地产集团</el-radio>
           </template>
         </el-col>
         <el-col :span="22">
           <template>
-            <el-radio v-model="deptRadio" label="30" border size="mini" @change="handleRadioClick">集团本部</el-radio>
-            <el-radio v-model="deptRadio" label="32" border size="mini" @change="handleRadioClick">广州区域</el-radio>
-            <el-radio v-model="deptRadio" label="37" border size="mini" @change="handleRadioClick">中山区域</el-radio>
-            <el-radio v-model="deptRadio" label="38" border size="mini" @change="handleRadioClick">深圳区域</el-radio>
-            <el-radio v-model="deptRadio" label="43" border size="mini" @change="handleRadioClick">北京区域</el-radio>
-            <el-radio v-model="deptRadio" label="40" border size="mini" @change="handleRadioClick">上海区域</el-radio>
-            <el-radio v-model="deptRadio" label="41" border size="mini" @change="handleRadioClick">南京区域</el-radio>
+            <el-radio v-model="deptRadio" label="_30_" border size="mini" @change="handleRadioClick">集团本部</el-radio>
+            <el-radio v-model="deptRadio" label="-32_" border size="mini" @change="handleRadioClick">广州区域</el-radio>
+            <el-radio v-model="deptRadio" label="-37_" border size="mini" @change="handleRadioClick">中山区域</el-radio>
+            <el-radio v-model="deptRadio" label="-38_" border size="mini" @change="handleRadioClick">深圳区域</el-radio>
+            <el-radio v-model="deptRadio" label="-43_" border size="mini" @change="handleRadioClick">北京区域</el-radio>
+            <el-radio v-model="deptRadio" label="-40_" border size="mini" @change="handleRadioClick">上海区域</el-radio>
+            <el-radio v-model="deptRadio" label="-41_" border size="mini" @change="handleRadioClick">南京区域</el-radio>
           </template>
         </el-col>
       </el-row>
@@ -57,11 +57,11 @@
         </el-col>
         <el-col :span="22">
           <template>
-            <el-radio v-model="deptRadio" label="46" border size="mini" @change="handleRadioClick">重庆区域</el-radio>
-            <el-radio v-model="deptRadio" label="42" border size="mini" @change="handleRadioClick">西安区域</el-radio>
-            <el-radio v-model="deptRadio" label="39" border size="mini" @change="handleRadioClick">海南区域</el-radio>
-            <el-radio v-model="deptRadio" label="44" border size="mini" @change="handleRadioClick">武汉区域</el-radio>
-            <el-radio v-model="deptRadio" label="45" border size="mini" @change="handleRadioClick">云南区域</el-radio>
+            <el-radio v-model="deptRadio" label="-46_" border size="mini" @change="handleRadioClick">重庆区域</el-radio>
+            <el-radio v-model="deptRadio" label="-42_" border size="mini" @change="handleRadioClick">西安区域</el-radio>
+            <el-radio v-model="deptRadio" label="-39_" border size="mini" @change="handleRadioClick">海南区域</el-radio>
+            <el-radio v-model="deptRadio" label="-44_" border size="mini" @change="handleRadioClick">武汉区域</el-radio>
+            <el-radio v-model="deptRadio" label="-45_" border size="mini" @change="handleRadioClick">云南区域</el-radio>
             <!-- <el-button
                 v-permission="['/lpm/businesslicenseEdit']"
                 type="success"
