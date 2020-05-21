@@ -45,6 +45,8 @@ export default {
     seal: '印章信息',
     annals: '年报信息',
     capital: '股权及出资信息',
+    subcribeRecord: '股东认缴记录',
+    realityRecord: '股东实缴记录',
     administrativelicense: '行政许可信息',
     administrativepunish: '行政处罚信息',
     certificatecancel: '证照废弃声明',

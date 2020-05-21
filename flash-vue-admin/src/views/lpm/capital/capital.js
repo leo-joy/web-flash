@@ -11,14 +11,24 @@ import { getDictList } from '@/utils/common'
 import { showDictLabel } from '@/utils/common'
 import { remove, getList, save } from '@/api/lpm/capital'
 
+import subcribeRecord from '@/views/lpm/subcribeRecord/index.vue'
+import realityRecord from '@/views/lpm/realityRecord/index.vue'
+
+
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 export default {
   directives: { permission },
+  components: {
+    subcribeRecord,
+    realityRecord
+  },
   data() {
     return {
+      activeNames: ['1', '4'],
       formVisible: false,
       formTitle: '添加股权及出资信息',
+      enterpriseCode: '', // 公司的id
       subscribedCapitalTypeList: [], // 认缴出资方式，从数据字典中获取
       realityCapitalTypeList: [], // 实缴出资方式，从数据字典中获取
       subscribedCapitalTypeCapital: '', // 认缴出资方式
@@ -60,7 +70,7 @@ export default {
         realityCapitalType: '',
         realityCapitalContribution: '',
         realityCapitalDate: '',
-        proportion: '',
+        proportion: 0,
         shareholderMold: '1',
         shareholderType: '',
         status: '',
@@ -130,9 +140,6 @@ export default {
         ],
         status: [
           { required: true, message: '请选择状态', trigger: 'blur' }
-        ],
-        responsiblePerson: [
-          { required: true, message: '请填写经办人', trigger: 'blur' }
         ]
       }
     }
@@ -148,7 +155,8 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      this.listQuery.enterpriseCode = this.$route.query.id
+      this.enterpriseCode = this.$route.query.id
+      this.listQuery.enterpriseCode = this.enterpriseCode
       getList(this.listQuery).then(response => {
         var records = response.data.records
         // if (records && records.length > 0) {
@@ -228,7 +236,7 @@ export default {
         realityCapitalType: '',
         realityCapitalContribution: '',
         realityCapitalDate: '',
-        proportion: '',
+        proportion: 0,
         shareholderMold: 1,
         shareholderType: '',
         status: '',
@@ -258,6 +266,9 @@ export default {
       // 设置新增股东的初始值;
       this.form.enterpriseName = this.companyList[0].enterpriseName
       this.form.enterpriseCode = this.companyList[0].id
+
+      // 
+      this.accessoryFilesList = []
 
       // 请求公司股东全部列表
       getEnterpriseList({
@@ -334,6 +345,7 @@ export default {
     edit() {
       if (this.checkSel()) {
         this.isAdd = false
+        this.activeNames = ['1', '2', '3', '4']
         this.form = this.selRow
         this.formTitle = '编辑股权及出资信息'
         this.formVisible = true
@@ -353,6 +365,8 @@ export default {
               this.accessoryFilesList.push(file)
             }
           })
+        } else {
+          this.accessoryFilesList = []
         }
         // 请求公司股东全部列表
         getEnterpriseList({
