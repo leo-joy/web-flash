@@ -185,6 +185,9 @@ export default {
         this.businesslicenseData = response.data
         this.logTitle = '【 ' + response.data.enterpriseName + ' 】'
       })
+    },
+    handleClick(tab, event) {
+      console.log(tab, event)
     }
   }
 }
