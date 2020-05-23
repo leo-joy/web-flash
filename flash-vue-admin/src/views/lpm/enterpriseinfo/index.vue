@@ -140,16 +140,19 @@
             <el-table-column label="法定代表人" width="100">
               <template slot-scope="scope">{{ scope.row.legalRepresentative }}</template>
             </el-table-column>
+            <el-table-column label="成立日期" width="100">
+              <template slot-scope="scope">{{ scope.row.setupDate.replace(' 00:00:00', '') }}</template>
+            </el-table-column>
             <el-table-column
               prop="registrationStatus"
               label="登记状态"
               width="80"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column label="操作" width="120">
+            <el-table-column label="操作" width="80">
               <template slot-scope="scope">
-                <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
-                <el-button v-permission="['/lpm/businesslicenseEdit']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>
+                <el-button v-if="moduleType == '2'" v-permission="['/lpm/businesslicenseEdit']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
+                <el-button v-if="moduleType == '1'" v-permission="['/lpm/businesslicenseEdit']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>
                 <!-- <el-button type="text" @click="detail(scope.row)">详情</el-button> -->
               </template>
             </el-table-column>

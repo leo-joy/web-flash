@@ -11,6 +11,7 @@ export default {
   directives: { permission },
   data() {
     return {
+      moduleType: '1', // 1、企业信息管理模块 2、企业变更模块
       enterpriseType: '', // 企业类型
       registrationStatusBL: '', // 登记状态
       filterText: '',
@@ -114,6 +115,12 @@ export default {
         this.deptRadio = '27'
         this.listQuery.pIds = 27
       }
+
+      if (this.$route.path) {
+        const tempArr = this.$route.path.split('/')
+        this.moduleType = tempArr[tempArr.length - 1]
+      }
+
       this.fetchData()
     },
     fetchData() {

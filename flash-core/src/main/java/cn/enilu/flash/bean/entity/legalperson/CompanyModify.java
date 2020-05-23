@@ -60,7 +60,7 @@ public class CompanyModify extends BaseEntity {
     @Column(name="enterprise_id", columnDefinition = "VARCHAR(128) COMMENT '企业id'")
     private String enterpriseId;
 
-    @Column(name="enterprise_name_state", columnDefinition = "VARCHAR(32) COMMENT '企业名称变更状态'")
+    @Column(name="enterprise_name_state", columnDefinition = "VARCHAR(16) COMMENT '企业名称变更状态'")
     private String enterpriseNameState;
 
     @Column(name="enterprise_name_old", columnDefinition = "VARCHAR(128) COMMENT '旧企业名称'")
@@ -70,7 +70,7 @@ public class CompanyModify extends BaseEntity {
     private String enterpriseNameNew;
 
 
-    @Column(name="registered_address_state", columnDefinition = "VARCHAR(32) COMMENT '注册地址变更状态'")
+    @Column(name="registered_address_state", columnDefinition = "VARCHAR(16) COMMENT '注册地址变更状态'")
     private String registeredAddressState;
 
     @Column(name="registered_address_old", columnDefinition = "VARCHAR(128) COMMENT '旧注册地址'")
@@ -80,7 +80,7 @@ public class CompanyModify extends BaseEntity {
     private String registeredAddressNew;
 
 
-    @Column(name="business_scope_state", columnDefinition = "VARCHAR(32) COMMENT '经营范围变更状态'")
+    @Column(name="business_scope_state", columnDefinition = "VARCHAR(16) COMMENT '经营范围变更状态'")
     private String businessScopeState;
 
     @Column(name="business_scope_old", columnDefinition = "TEXT COMMENT '旧经营范围'")
@@ -89,6 +89,138 @@ public class CompanyModify extends BaseEntity {
     @Column(name="business_scope_new", columnDefinition = "TEXT COMMENT '新经营范围'")
     private String businessScopeNew;
 
+    @Column(name="operating_period_end_state", columnDefinition = "VARCHAR(16) COMMENT '营业期限变更状态'")
+    private String operatingPeriodEndState;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="operating_period_end_old", columnDefinition = "DATE COMMENT '原营业期限至'")
+    private Date operatingPeriodEndOld;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @Column(name="operating_period_end_new", columnDefinition = "DATE COMMENT '新营业期限至'")
+    private Date operatingPeriodEndNew;
+
+    @Column(name="legal_representative_state", columnDefinition = "VARCHAR(32) COMMENT '法人变更状态'")
+    private String legalRepresentativeState;
+
+    @Column(name="legal_representative_old", columnDefinition = "VARCHAR(128) COMMENT '旧法人'")
+    private String legalRepresentativeOld;
+
+    @Column(name="legal_representative_new", columnDefinition = "VARCHAR(128) COMMENT '新法人'")
+    private String legalRepresentativeNew;
+
+    @Column(name="legal_representative_id_old", columnDefinition = "VARCHAR(16) COMMENT '旧法人id'")
+    private String legalRepresentativeIdOld;
+
+    @Column(name="legal_representative_id_new", columnDefinition = "VARCHAR(16) COMMENT '新法人id'")
+    private String legalRepresentativeIdNew;
+
+    @Column(name="chairman_state", columnDefinition = "VARCHAR(8) COMMENT '董事长变更状态'")
+    private String chairmanState;
+
+    @Column(name="chairman_old", columnDefinition = "VARCHAR(32) COMMENT '旧董事长'")
+    private String chairmanOld;
+
+    @Column(name="chairman_new", columnDefinition = "VARCHAR(32) COMMENT '新董事长'")
+    private String chairmanNew;
+
+    @Column(name="chairman_id_old", columnDefinition = "VARCHAR(16) COMMENT '旧董事长id'")
+    private String chairmanIdOld;
+
+    @Column(name="chairman_id_new", columnDefinition = "VARCHAR(16) COMMENT '新董事长id'")
+    private String chairmanIdNew;
+
+    @Column(name="director_state", columnDefinition = "VARCHAR(8) COMMENT '董事变更状态'")
+    private String directorState;
+
+    @Column(name="director_old", columnDefinition = "VARCHAR(128) COMMENT '旧董事'")
+    private String directorOld;
+
+    @Column(name="director_new", columnDefinition = "VARCHAR(128) COMMENT '新董事'")
+    private String directorNew;
+
+    @Column(name="director_id_old", columnDefinition = "VARCHAR(64) COMMENT '旧董事id'")
+    private String directorIdOld;
+
+    @Column(name="director_id_new", columnDefinition = "VARCHAR(64) COMMENT '新董事id'")
+    private String directorIdNew;
+
+    @Column(name="supervisor_state", columnDefinition = "VARCHAR(8) COMMENT '监事变更状态'")
+    private String supervisorState;
+
+    @Column(name="supervisor_old", columnDefinition = "VARCHAR(128) COMMENT '旧监事'")
+    private String supervisorOld;
+
+    @Column(name="supervisor_new", columnDefinition = "VARCHAR(128) COMMENT '新监事'")
+    private String supervisorNew;
+
+    @Column(name="supervisor_id_old", columnDefinition = "VARCHAR(64) COMMENT '旧监事id'")
+    private String supervisorIdOld;
+
+    @Column(name="supervisor_id_new", columnDefinition = "VARCHAR(64) COMMENT '新监事id'")
+    private String supervisorIdNew;
+
+    @Column(name="general_manager_state", columnDefinition = "VARCHAR(8) COMMENT '总经理变更状态'")
+    private String generalManagerState;
+
+    @Column(name="general_manager_old", columnDefinition = "VARCHAR(32) COMMENT '旧总经理'")
+    private String generalManagerOld;
+
+    @Column(name="general_manager_new", columnDefinition = "VARCHAR(32) COMMENT '新总经理'")
+    private String generalManagerNew;
+
+    @Column(name="general_manager_id_old", columnDefinition = "VARCHAR(16) COMMENT '旧总经理id'")
+    private String generalManagerIdOld;
+
+    @Column(name="general_manager_id_new", columnDefinition = "VARCHAR(16) COMMENT '新总经理id'")
+    private String generalManagerIdNew;
+
+
+    @Column(name="shareholder_modify_state", columnDefinition = "VARCHAR(8) COMMENT '股东变更状态'")
+    private String shareholderModifyState;
+
+    @Column(name="shareholder_ids_old", columnDefinition = "VARCHAR(32) COMMENT '旧股东ids'")
+    private String shareholderIdsOld;
+
+    @Column(name="shareholder_ids_new", columnDefinition = "VARCHAR(32) COMMENT '新股东ids'")
+    private String shareholderIdsNew;
+
+
+    @Column(name="business_license_files", columnDefinition = "VARCHAR(64) COMMENT '营业执照'")
+    private String businessLicenseFiles;
+
+    @Column(name="approval_files", columnDefinition = "VARCHAR(64) COMMENT '核准文件'")
+    private String approvalFiles;
+
+    @Column(name="company_reference_register_files", columnDefinition = "VARCHAR(64) COMMENT '公司备案登记表'")
+    private String companyReferenceRegisterFiles;
+
+    @Column(name="company_modify_register_files", columnDefinition = "VARCHAR(64) COMMENT '变更事项登记表'")
+    private String companyModifyRegisterFiles;
+
+    @Column(name="company_articles_association_files",columnDefinition = "VARCHAR(64) COMMENT '公司章程'")
+    private String companyArticlesAssociationFiles;
+
+    @Column(name="shareholders_decide_files", columnDefinition = "VARCHAR(64) COMMENT '股东会决议'")
+    private String shareholdersDecideFiles;
+
+    @Column(name="senior_management_files", columnDefinition = "VARCHAR(64) COMMENT '企业高管信息确认书'")
+    private String seniorManagementFiles;
+
+    @Column(name="promise_files", columnDefinition = "VARCHAR(64) COMMENT '承诺书'")
+    private String promiseFiles;
+
+    @Column(name="delegation_files", columnDefinition = "VARCHAR(64) COMMENT '委托书'")
+    private String delegationFiles;
+
+    @Column(name="authorization_files", columnDefinition = "VARCHAR(64) COMMENT '指定代表或者共同委托代理人授权委托书'")
+    private String authorizationFiles;
+
+    @Column(name="appoint_dismiss_files", columnDefinition = "VARCHAR(64) COMMENT '任职免职书'")
+    private String appointDismissFiles;
+
+    @Column(name="other_files", columnDefinition = "VARCHAR(64) COMMENT '其它文件'")
+    private String otherFiles;
 
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '详情'")
     private String accessoryFiles;

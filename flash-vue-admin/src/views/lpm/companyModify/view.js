@@ -12,6 +12,19 @@ export default {
       id: '',
       /* 企业变更信息模块 */
       companyModifyData: [], // 企业变更信息相关数据
+
+      businessLicenseFilesListCompanyModify: [], // 营业执照
+      approvalFilesListCompanyModify: [], // 核准文件
+      companyReferenceRegisterFilesListCompanyModify: [], // 公司备案登记表
+      companyModifyRegisterFilesListCompanyModify: [], // 变更事项登记表
+      companyArticlesAssociationFilesListCompanyModify: [], // 公司章程
+      shareholdersDecideFilesListCompanyModify: [], // 股东会决议
+      seniorManagementFilesListCompanyModify: [], // 企业高管信息确认书
+      promiseFilesListCompanyModify: [], // 承诺书
+      delegationFilesListCompanyModify: [], // 委托书
+      authorizationFilesListCompanyModify: [], // 指定代表或者共同委托代理人授权委托书
+      appointDismissFilesListCompanyModify: [], // 任职免职书
+      otherFilesListCompanyModify: [], // 其它文件
       accessoryFilesListCompanyModify: [],
       listQuery: {
         page: 1,
@@ -54,7 +67,12 @@ export default {
 
       // 企业变更数据
       companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
-        var accessoryArr = ['accessoryFiles']
+        var accessoryArr = ['businessLicenseFiles', 'approvalFiles',
+          'companyReferenceRegisterFiles', 'companyModifyRegisterFiles',
+          'companyArticlesAssociationFiles', 'shareholdersDecideFiles',
+          'seniorManagementFiles', 'promiseFiles',
+          'delegationFiles', 'authorizationFiles',
+          'appointDismissFiles', 'otherFiles', 'accessoryFiles']
         this.getFilesList('CompanyModify', accessoryArr, response.data.records)
       })
     },
@@ -65,19 +83,21 @@ export default {
       if (records.length === 0) {
         return false
       }
-      for (let j = 0; j < accessoryArr.length; j++) {
-        const Module = module
-        const listQuery = {
-          page: 1,
-          limit: 20,
-          ids: records[0][accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')
-        }
-        if (records.length > 1 && accessoryArr[j] === 'accessoryFiles') {
-          var newRecords = []
-          for (let p = 0; p < records.length; p++) {
-            const tempRecord = records[p]
-            if (tempRecord['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')) {
-              const ids = tempRecord['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')
+      // for (let j = 0; j < accessoryArr.length; j++) {
+      // const Module = module
+      const listQuery = {
+        page: 1,
+        limit: 20
+        // ids: records[0][accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')
+      }
+      if (records.length > 1) {
+        var newRecords = []
+        for (let p = 0; p < records.length; p++) {
+          const Module = module
+          const tempRecord = records[p]
+          for (let j = 0; j < accessoryArr.length; j++) {
+            if (tempRecord[accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')) {
+              const ids = tempRecord[accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')
               listQuery.ids = ids
 
               if (!listQuery.ids) {
@@ -97,7 +117,6 @@ export default {
                   }
                   tempRecord[accessoryArr[j] + 'List' + Module] = fileList
                   console.log('p:', tempRecord)
-                  newRecords.push(tempRecord)
                   if (records.length === p + 1) {
                     this.companyModifyData = newRecords
                   }
@@ -105,9 +124,12 @@ export default {
               }
             }
           }
-          console.log(this.companyModifyData)
+          newRecords.push(tempRecord)
         }
+        console.log(this.companyModifyData)
+        console.log('companyModifyDataLength', this.companyModifyData.length)
       }
+      // }
     }
   }
 }

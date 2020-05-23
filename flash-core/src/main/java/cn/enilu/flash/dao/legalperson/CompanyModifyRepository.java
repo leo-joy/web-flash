@@ -6,5 +6,6 @@ import cn.enilu.flash.dao.BaseRepository;
 
 
 public interface CompanyModifyRepository extends BaseRepository<CompanyModify,Long>{
+
 }
 
