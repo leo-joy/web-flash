@@ -49,6 +49,7 @@
               <el-tab-pane label="股权出质登记"><stockpledge /></el-tab-pane>
               <el-tab-pane label="知识产权出质登记"><knowledgepledge /></el-tab-pane>
               <el-tab-pane label="商标信息"><trademark /></el-tab-pane>
+              <el-tab-pane label="税务信息"><tallage /></el-tab-pane>
             </el-tabs>
           </el-tab-pane>
           <el-tab-pane label="变更记录" name="second">
@@ -114,6 +115,7 @@ import propertypledge from '@/views/lpm/propertypledge/view.vue'
 import knowledgepledge from '@/views/lpm/knowledgepledge/view.vue'
 import stockpledge from '@/views/lpm/stockpledge/view.vue'
 import trademark from '@/views/lpm/trademark/view.vue'
+import tallage from '@/views/lpm/tallage/view.vue'
 
 import companymodify from '@/views/lpm/companyModify/view.vue'
 
@@ -136,6 +138,7 @@ export default {
     stockpledge,
     knowledgepledge,
     trademark,
+    tallage,
 
     companymodify
   },

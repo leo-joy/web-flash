@@ -59,6 +59,7 @@ export default {
     stockpledge: '股权出质登记',
     knowledgepledge: '知识产品出质登记',
     trademark: '商标信息',
+    tallage: '税务信息',
 
     /**
      * 公司治理结构

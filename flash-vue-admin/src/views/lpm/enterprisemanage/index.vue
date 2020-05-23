@@ -22,6 +22,7 @@
       <el-tab-pane label="动产抵押登记"><propertypledge /></el-tab-pane>
       <el-tab-pane label="知识产权出质登记"><stockpledge /></el-tab-pane>
       <el-tab-pane label="商标信息"><trademark /></el-tab-pane>
+      <el-tab-pane label="税务信息"><tallage /></el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -41,7 +42,7 @@ import investcompany from '@/views/lpm/investcompany/index.vue'
 import propertypledge from '@/views/lpm/propertypledge/index.vue'
 import stockpledge from '@/views/lpm/stockpledge/index.vue'
 import trademark from '@/views/lpm/trademark/index.vue'
-
+import tallage from '@/views/lpm/tallage/index.vue'
 export default {
   name: 'CompanyLayout',
   components: {
@@ -59,7 +60,8 @@ export default {
     investcompany,
     propertypledge,
     stockpledge,
-    trademark
+    trademark,
+    tallage,
   },
   data() {
     return {
