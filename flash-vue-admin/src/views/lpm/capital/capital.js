@@ -128,13 +128,6 @@ export default {
           { required: true, message: '认缴出资额不能为空', trigger: 'blur' },
           { type: 'number', message: '只能输入是数值', trigger: 'blur' }
         ],
-        realityCapitalType: [
-          { required: true, message: '请选择实缴出资方式', trigger: 'blur' }
-        ],
-        realityCapitalContribution: [
-          { required: true, message: '实缴出资额不能为空', trigger: 'blur' },
-          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
-        ],
         shareholderType: [
           { required: true, message: '请选择股东类型', trigger: 'blur' }
         ],

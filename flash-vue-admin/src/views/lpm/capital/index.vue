@@ -100,12 +100,12 @@
                   </el-radio-group>
                 </el-form-item>
               </el-col>
-              <el-col :class="[form.shareholderMold===1 ? 'dpShow' : 'dpHide']" :span="12">
+              <el-col :class="[form.shareholderMold===1 && isAdd ? 'dpShow' : 'dpHide']" :span="12">
                 <el-form-item label="企业股东" prop="shareholder">
                   <el-autocomplete
                     v-model="form.shareholder"
                     popper-class="my-autocomplete"
-                    style="min-width:500px;line-height:10px;"
+                    style="min-width:100%;line-height:10px;"
                     :fetch-suggestions="querySearchAsync"
                     placeholder="请输入股东名称"
                     @select="handleBranchCompanySelect"
@@ -125,7 +125,7 @@
                   </el-autocomplete>
                 </el-form-item>
               </el-col>
-              <el-col :class="[form.shareholderMold===2 ? 'dpShow' : 'dpHide']" :span="12">
+              <el-col :class="[form.shareholderMold===2 && isAdd ? 'dpShow' : 'dpHide']" :span="12">
                 <el-form-item label="自然人股东" prop="shareholder">
                   <el-autocomplete
                     v-model="form.shareholder"
@@ -184,12 +184,12 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="实缴出资额（万元）" prop="realityCapitalContribution">
-                  <el-input v-model.number="form.realityCapitalContribution" minlength="1" />
+                <el-form-item label="实缴出资额（万元）">
+                  <el-input v-model.number="form.realityCapitalContribution" />
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="实缴出资方式" prop="realityCapitalType">
+                <el-form-item label="实缴出资方式">
                   <el-select v-model="form.realityCapitalType" placeholder="请选择">
                     <el-option
                       v-for="item in realityCapitalTypeList"
