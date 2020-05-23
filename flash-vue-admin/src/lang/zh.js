@@ -32,10 +32,12 @@ export default {
      */
     lpm: '企业管理',
     enterpriseInfo: '企业信息管理',
+    editCompany: '企业变更',
+
     enterpriseManage: '编辑公司基本信息',
     detailEnterpriseinfo: '公司详细信息',
     shareholderManage: '合作单位管理',
-    editCompany: '公司变更',
+    editCompanyManage: '公司变更管理',
     filesManage: '附件管理',
     // 子菜单
     businessLicense: '营业执照',

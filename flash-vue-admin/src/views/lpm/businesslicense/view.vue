@@ -196,14 +196,6 @@
         </el-form>
       </el-col>
     </el-row>
-    <!-- <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
-      <el-tab-pane label="基础数据" name="first">
-
-      </el-tab-pane>
-      <el-tab-pane label="变更记录" name="second">
-        <companymodify />
-      </el-tab-pane>
-    </el-tabs> -->
     <el-dialog :title="logTitle" :visible.sync="logVisible" width="60%">
       <template>
         <el-table :data="logList" style="width: 100%">
