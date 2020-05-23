@@ -59,6 +59,9 @@ export default {
         trademarkRegisterCode: [
           { required: true, message: '请填写注册号', trigger: 'blur' }
         ],
+        serialNumber: [
+          { required: true, message: '请填写序号', trigger: 'blur' }
+        ],
         trademarkName: [
           { required: true, message: '请填写商标名称', trigger: 'blur' }
         ],

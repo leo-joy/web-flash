@@ -100,7 +100,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="序号">
+            <el-form-item label="序号" prop="serialNumber">
               <el-input v-model="form.serialNumber" minlength="1" />
             </el-form-item>
           </el-col>
