@@ -7,26 +7,35 @@
       <el-radio-button label="left">left</el-radio-button>
     </el-radio-group> -->
     <el-tabs :tab-position="tabPosition" style="height: auto;padding-top:10px">
-      <el-tab-pane label="营业执照"><div><edit /></div></el-tab-pane>
-      <el-tab-pane label="主要人员信息"><mainmember /></el-tab-pane>
+      <el-tab-pane label="营业执照"><div><edit @viewfile="viewfile" /></div></el-tab-pane>
+      <el-tab-pane label="主要人员信息"><mainmember @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="股东信息"><shareholder /></el-tab-pane>
-      <el-tab-pane label="印章信息"><seal /></el-tab-pane>
-      <el-tab-pane label="年报信息"><annals /></el-tab-pane>
-      <el-tab-pane label="股权及出资信息"><capital /></el-tab-pane>
-      <el-tab-pane label="行政许可信息"><administrativelicense /></el-tab-pane>
-      <el-tab-pane label="行政处罚信息"><administrativepunish /></el-tab-pane>
-      <el-tab-pane label="证照废弃声明"><certificatecancel /></el-tab-pane>
-      <el-tab-pane label="清算信息"><liquidation /></el-tab-pane>
+      <el-tab-pane label="印章信息"><seal @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="年报信息"><annals @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="股权及出资信息"><capital @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="行政许可信息"><administrativelicense @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="行政处罚信息"><administrativepunish @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="证照废弃声明"><certificatecancel @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="证照废弃声明"><certificatecancel @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="清算信息"><liquidation @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="分公司信息"><branchcompany /></el-tab-pane>
       <el-tab-pane label="投资企业"><investcompany /></el-tab-pane>
-      <el-tab-pane label="动产抵押登记"><propertypledge /></el-tab-pane>
-      <el-tab-pane label="知识产权出质登记"><stockpledge /></el-tab-pane>
-      <el-tab-pane label="商标信息"><trademark /></el-tab-pane>
-      <el-tab-pane label="税务信息"><tallage /></el-tab-pane>
+      <el-tab-pane label="动产抵押登记"><propertypledge @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="知识产权出质登记"><stockpledge @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="商标信息"><trademark @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="税务信息"><tallage @viewfile="viewfile" /></el-tab-pane>
     </el-tabs>
+    <el-dialog title="原文查看" :visible.sync="pdfVisible" width="60%">
+      <template>
+        <PDFView :src="src" />
+      </template>
+    </el-dialog>
   </div>
 </template>
 <script>
+import { getApiUrl } from '@/utils/utils'
+import PDFView from '@/components/PdfView/index.vue'
+
 import edit from '@/views/lpm/businesslicense/edit.vue'
 import mainmember from '@/views/lpm/mainmember/index.vue'
 import shareholder from '@/views/lpm/shareholder/index.vue'
@@ -62,10 +71,22 @@ export default {
     stockpledge,
     trademark,
     tallage,
+    PDFView
   },
   data() {
     return {
-      tabPosition: 'left'
+      tabPosition: 'left',
+      src: '',
+      pdfTitle: '原文查看器',
+      pdfVisible: false,
+      listLoading: false
+    }
+  },
+  methods: {
+    viewfile(id, fileName) {
+      this.pdfVisible = true
+      this.src =
+        getApiUrl() + '/file/download?idFile=' + id + '&fileName=' + fileName
     }
   }
 }

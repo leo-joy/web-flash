@@ -308,7 +308,7 @@ export default {
       })
     },
     hanglePreview(file) {
-      this.$router.push({ path: '/lpm/businesslicense/pdfview' })
+      this.$emit('viewfile', file.id, file.name)
     },
     handleRemoveFile(file) {
       // 删除原文时更新原文列表

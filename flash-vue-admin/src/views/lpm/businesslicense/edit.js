@@ -2249,8 +2249,7 @@ export default {
       })
     },
     hanglePreview(file) {
-      console.log(file)
-      this.$router.push({ path: '/lpm/businesslicense/pdfview' })
+      this.$emit('viewfile', file.id, file.name)
     },
 
     handleRemoveFile(file, type) {

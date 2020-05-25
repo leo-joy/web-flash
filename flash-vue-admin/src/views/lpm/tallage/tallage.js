@@ -175,7 +175,7 @@ export default {
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加税务信息',
+      this.formTitle = '添加税务信息'
       this.formVisible = true
       this.isAdd = true
 
@@ -299,7 +299,7 @@ export default {
       })
     },
     hanglePreview(file) {
-      this.$router.push({ path: '/lpm/businesslicense/pdfview' })
+      this.$emit('viewfile', file.id, file.name)
     },
     handleRemoveFile(file) {
       // 删除原文时更新原文列表

@@ -14,7 +14,6 @@ import { remove, getList, save } from '@/api/lpm/capital'
 import subcribeRecord from '@/views/lpm/subcribeRecord/index.vue'
 import realityRecord from '@/views/lpm/realityRecord/index.vue'
 
-
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 export default {
@@ -260,7 +259,7 @@ export default {
       this.form.enterpriseName = this.companyList[0].enterpriseName
       this.form.enterpriseCode = this.companyList[0].id
 
-      // 
+      //
       this.accessoryFilesList = []
 
       // 请求公司股东全部列表
@@ -439,7 +438,7 @@ export default {
       })
     },
     hanglePreview(file) {
-      this.$router.push({ path: '/lpm/businesslicense/pdfview' })
+      this.$emit('viewfile', file.id, file.name)
     },
     handleRemoveFile(file) {
       // 删除原文时更新原文列表
