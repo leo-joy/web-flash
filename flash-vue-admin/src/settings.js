@@ -14,5 +14,6 @@ module.exports = {
    */
   sidebarLogo: false,
 
-  tagsView: true
+  // 是否开启tab页 true ｜ false
+  tagsView: false
 }

@@ -107,11 +107,9 @@ export default {
         this.deptTree.data = response.data
       })
       if (this.$store.state.user.companys) {
-        console.log(11);
         this.deptRadio = '24'
         this.listQuery.pIds = 24
       } else {
-        console.log(2);
         this.deptRadio = '27'
         this.listQuery.pIds = 27
       }
@@ -348,7 +346,9 @@ export default {
     },
     changeFixed(clientHeight) {
       // 动态修改样式
-      this.$refs.treecontainer.style.height = clientHeight - 124 + 'px'
+      if (clientHeight) {
+        this.$refs.treecontainer.style.height = clientHeight - 124 + 'px'
+      }
     },
 
     // 批量工商同步

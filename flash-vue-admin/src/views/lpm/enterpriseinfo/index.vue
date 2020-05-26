@@ -46,7 +46,6 @@
             <el-radio v-model="deptRadio" label="-38_" border size="mini" @change="handleRadioClick">深圳区域</el-radio>
             <el-radio v-model="deptRadio" label="-43_" border size="mini" @change="handleRadioClick">北京区域</el-radio>
             <el-radio v-model="deptRadio" label="-40_" border size="mini" @change="handleRadioClick">上海区域</el-radio>
-            <el-radio v-model="deptRadio" label="-41_" border size="mini" @change="handleRadioClick">南京区域</el-radio>
           </template>
         </el-col>
       </el-row>
@@ -57,6 +56,7 @@
         </el-col>
         <el-col :span="22">
           <template>
+            <el-radio v-model="deptRadio" label="-41_" border size="mini" @change="handleRadioClick">南京区域</el-radio>
             <el-radio v-model="deptRadio" label="-46_" border size="mini" @change="handleRadioClick">重庆区域</el-radio>
             <el-radio v-model="deptRadio" label="-42_" border size="mini" @change="handleRadioClick">西安区域</el-radio>
             <el-radio v-model="deptRadio" label="-39_" border size="mini" @change="handleRadioClick">海南区域</el-radio>
