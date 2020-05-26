@@ -294,12 +294,27 @@ export default {
       this.fetchCompanyData()
     },
     handleCompanyDeptNodeClick(data, node) {
-      if (data.id === '24') {
-        this.companyListQuery.pIds = data.id
-      } else if (data.id === '244' || data.id === '103' || data.id === '106' || data.id === '107' || data.id === '30') {
+      if (data.id === '51' ||
+          data.id === '104' ||
+          data.id === '102' ||
+          data.id === '105' ||
+          data.id === '25' ||
+          data.id === '32' ||
+          data.id === '37' ||
+          data.id === '38' ||
+          data.id === '43' ||
+          data.id === '40' ||
+          data.id === '41' ||
+          data.id === '46' ||
+          data.id === '42' ||
+          data.id === '39' ||
+          data.id === '44' ||
+          data.id === '45') {
+        this.companyListQuery.pIds = '-' + data.id + '_'
+      } else if (data.id === '244' || data.id === '103' || data.id === '106' || data.id === '107' || data.id === '30' || data.id === '36') {
         this.companyListQuery.pIds = '_' + data.id + '_'
       } else {
-        this.companyListQuery.pIds = '-' + data.id + '_'
+        this.companyListQuery.pIds = data.id
       }
       this.companyListQuery.deptName = data.simplename
       this.deptTree.show = false
