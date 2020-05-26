@@ -204,7 +204,7 @@ public class CompanyModify extends BaseEntity {
     @Column(name="shareholders_decide_files", columnDefinition = "VARCHAR(64) COMMENT '股东会决议'")
     private String shareholdersDecideFiles;
 
-    @Column(name="senior_management_files", columnDefinition = "VARCHAR(64) COMMENT '企业高管信息确认书'")
+    @Column(name="senior_management_files", columnDefinition = "VARCHAR(64) COMMENT '董事会决议'")
     private String seniorManagementFiles;
 
     @Column(name="promise_files", columnDefinition = "VARCHAR(64) COMMENT '承诺书'")
