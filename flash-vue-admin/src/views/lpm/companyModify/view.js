@@ -19,7 +19,7 @@ export default {
       companyModifyRegisterFilesListCompanyModify: [], // 变更事项登记表
       companyArticlesAssociationFilesListCompanyModify: [], // 公司章程
       shareholdersDecideFilesListCompanyModify: [], // 股东会决议
-      seniorManagementFilesListCompanyModify: [], // 企业高管信息确认书
+      seniorManagementFilesListCompanyModify: [], // 董事会决议
       promiseFilesListCompanyModify: [], // 承诺书
       delegationFilesListCompanyModify: [], // 委托书
       authorizationFilesListCompanyModify: [], // 指定代表或者共同委托代理人授权委托书

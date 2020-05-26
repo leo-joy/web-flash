@@ -23,77 +23,77 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="变更理由" width="260">
+      <el-table-column label="变更原因" width="260">
         <template slot-scope="scope">
           {{ scope.row.applyReason }}
         </template>
       </el-table-column>
-      <el-table-column label="事项变更">
+      <el-table-column label="变更事项及内容">
         <template slot-scope="scope">
-          <div v-if="scope.row.enterpriseNameState === 'true'">
-            <span><b>企业名称变更：</b></span>
+          <div v-if="!scope.row.enterpriseNameState === false">
+            <span><b>企业名称：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.enterpriseNameOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.enterpriseNameOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.enterpriseNameNew }}</b></span>
           </div>
-          <div v-if="scope.row.legalRepresentativeState === 'true'">
-            <span><b>企业法人变更：</b></span>
+          <div v-if="!scope.row.legalRepresentativeState === false">
+            <span><b>企业法人：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.legalRepresentativeOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.legalRepresentativeOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.legalRepresentativeNew }}</b></span>
           </div>
-          <div v-if="scope.row.registeredAddressState === 'true'">
-            <span><b>注册地址变更：</b></span>
+          <div v-if="!scope.row.registeredAddressState === false">
+            <span><b>注册地址：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.registeredAddressOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.registeredAddressOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
           </div>
-          <div v-if="scope.row.operatingPeriodEndState === 'true'">
-            <span><b>经营期限变更：</b></span>
+          <div v-if="!scope.row.operatingPeriodEndState === false">
+            <span><b>经营期限：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.operatingPeriodEndOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.operatingPeriodEndOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
           </div>
-          <div v-if="scope.row.businessScopeState === 'true'">
-            <span><b>经营范围变更：</b></span>
+          <div v-if="!scope.row.businessScopeState === false">
+            <span><b>经营范围：</b></span>
             <span>原</span>
-            <span><i>{{ scope.row.businessScopeOld }}</i></span>
-            <span>新</span>
+            <span>{{ scope.row.businessScopeOld }}</span>
+            <span>变更为</span>
             <span><b>{{ scope.row.businessScopeNew }}</b></span>
           </div>
-          <div v-if="scope.row.chairmanState === 'true'">
-            <span><b>董事长变更：</b></span>
+          <div v-if="!scope.row.chairmanState === false">
+            <span><b>董事长：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.chairmanOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.chairmanOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.chairmanNew }}</b></span>
           </div>
-          <div v-if="scope.row.generalManagerState === 'true'">
-            <span><b>经理变更：</b></span>
+          <div v-if="!scope.row.generalManagerState === false">
+            <span><b>经理：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.generalManagerOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.generalManagerOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.generalManagerNew }}</b></span>
           </div>
-          <div v-if="scope.row.directorState === 'true'">
-            <span><b>董事变更：</b></span>
+          <div v-if="!scope.row.directorState === false">
+            <span><b>董事：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.directorOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.directorOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.directorNew }}</b></span>
           </div>
-          <div v-if="scope.row.supervisorState === 'true'">
-            <span><b>监事变更：</b></span>
+          <div v-if="!scope.row.supervisorState === false">
+            <span><b>监事：</b></span>
             <span>原</span>
-            <span><i style="color:red">{{ scope.row.supervisorOld }}</i></span>
-            <span>新</span>
+            <span><b style="color:red">{{ scope.row.supervisorOld }}</b></span>
+            <span>变更为</span>
             <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
           </div>
-          
+
         </template>
       </el-table-column>
       <el-table-column label="变更日期" width="120">
@@ -124,51 +124,7 @@
     >
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-collapse v-model="activeNames">
-          <el-collapse-item name="1" title="一、填写申请人相关信息">
-            <el-row>
-              <el-col :span="16">
-                <el-form-item label="单位" prop="affiliatedUnit">
-                  <el-input v-model="form.affiliatedUnit" minlength="1" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="申请部门" prop="applyDepartment">
-                  <el-input v-model="form.applyDepartment" minlength="1" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="申请人" prop="applicant">
-                  <el-input v-model="form.applicant" minlength="1" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="联系方式" prop="applicantContact">
-                  <el-input v-model="form.applicantContact" minlength="1" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="申请时间">
-                  <el-date-picker
-                    v-model="form.applyTime"
-                    type="datetime"
-                    placeholder="选择日期时间"
-                  />
-                </el-form-item>
-              </el-col>
-              <el-col :span="24">
-                <el-form-item label="申请理由" prop="applyReason">
-                  <el-input v-model="form.applyReason" type="textarea" rows="2" />
-                </el-form-item>
-              </el-col>
-              <!-- <el-col :span="8">
-                <el-form-item label="申请类型">
-                  <el-input v-model="form.applyType" minlength="1" />
-                </el-form-item>
-              </el-col> -->
-
-            </el-row>
-          </el-collapse-item>
-          <el-collapse-item name="2" title="二、填写变更事项相关信息">
+          <el-collapse-item name="2" title="填写变更事项相关信息">
             <el-row lass="dp-row">
               <el-col :span="1">&nbsp;
               </el-col>
@@ -183,22 +139,9 @@
               </el-col>
             </el-row>
             <el-row>
-              <!-- <el-col :span="12">
-                <el-form-item label="企业id">
-                  <el-input v-model="form.enterpriseId" minlength="1" />
-                </el-form-item>
-              </el-col> -->
               <el-col :span="17">
-                <el-form-item label="变更类型">
-                  <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
-                  <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
-                  <el-checkbox v-model="form.businessScopeState" label="经营范围" />
-                  <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
-                  <el-checkbox v-model="form.legalRepresentativeState" label="法定代表人" />
-                  <el-checkbox v-model="form.chairmanState" label="董事长备案" />
-                  <el-checkbox v-model="form.directorState" label="董事备案" />
-                  <el-checkbox v-model="form.supervisorState" label="监事备案" />
-                  <el-checkbox v-model="form.generalManagerState" label="经理备案" />
+                <el-form-item label="变更原因" prop="applyReason">
+                  <el-input v-model="form.applyReason" type="textarea" rows="2" />
                 </el-form-item>
               </el-col>
               <el-col :span="7">
@@ -210,7 +153,26 @@
                     style="width: 100%;"
                   />
                 </el-form-item>
-
+              </el-col>
+            </el-row>
+            <el-row>
+              <!-- <el-col :span="12">
+                <el-form-item label="企业id">
+                  <el-input v-model="form.enterpriseId" minlength="1" />
+                </el-form-item>
+              </el-col> -->
+              <el-col :span="24">
+                <el-form-item label="变更类型">
+                  <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
+                  <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
+                  <el-checkbox v-model="form.businessScopeState" label="经营范围" />
+                  <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
+                  <el-checkbox v-model="form.legalRepresentativeState" label="法定代表人" />
+                  <el-checkbox v-model="form.chairmanState" label="董事长备案" />
+                  <el-checkbox v-model="form.directorState" label="董事备案" />
+                  <el-checkbox v-model="form.supervisorState" label="监事备案" />
+                  <el-checkbox v-model="form.generalManagerState" label="经理备案" />
+                </el-form-item>
               </el-col>
               <el-col v-if="form.enterpriseNameState === true" :span="24">
                 <el-card class="box-card">
@@ -483,28 +445,28 @@
 
             </el-row>
           </el-collapse-item>
-          <el-collapse-item name="3" title="三、上传相关的申请变更文件[只能上传pdf格式文件，且不超过20MB]">
+          <el-collapse-item name="3" title="上传相关的申请变更文件[只能上传pdf格式文件，且不超过20MB]">
+
             <el-row>
-              <el-col :span="24">
-                <el-form-item label="会议纪要、合作协议等">
+              <el-col :span="12">
+                <el-form-item label="核准文件">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="accessoryFilesList"
+                    :file-list="approvalFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="accessoryFilesRemove"
-                    :on-success="accessoryFilesUploadSuccess"
+                    :on-remove="approvalFilesRemove"
+                    :on-success="approvalFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">只能上传文件，且不超过10MB</div>
+                    <div slot="tip" class="el-upload__tip">
+                      只能上传文件，且不超过10MB
+                    </div>
                   </el-upload>
                 </el-form-item>
-
               </el-col>
-            </el-row>
-            <el-row>
               <el-col :span="12">
                 <el-form-item label="营业执照">
                   <el-upload
@@ -524,16 +486,79 @@
                   </el-upload>
                 </el-form-item>
               </el-col>
+
+            </el-row>
+            <el-row>
+
               <el-col :span="12">
-                <el-form-item label="核准文件">
+                <el-form-item label="股东会决议">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="approvalFilesList"
+                    :file-list="shareholdersDecideFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="approvalFilesRemove"
-                    :on-success="approvalFilesUploadSuccess"
+                    :on-remove="shareholdersDecideFilesRemove"
+                    :on-success="shareholdersDecideFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">
+                      只能上传文件，且不超过10MB
+                    </div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="董事会决议">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="seniorManagementFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="seniorManagementFilesRemove"
+                    :on-success="seniorManagementFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">
+                      只能上传文件，且不超过10MB
+                    </div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="公司章程">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="companyArticlesAssociationFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="companyArticlesAssociationFilesRemove"
+                    :on-success="companyArticlesAssociationFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">
+                      只能上传文件，且不超过10MB
+                    </div>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="任职免职书">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="appointDismissFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="appointDismissFilesRemove"
+                    :on-success="appointDismissFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
@@ -584,46 +609,7 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="公司章程">
-                  <el-upload
-                    class="upload-demo"
-                    :action="uploadUrl"
-                    :headers="uploadHeaders"
-                    :file-list="companyArticlesAssociationFilesList"
-                    :before-upload="handleBeforeUpload"
-                    :on-remove="companyArticlesAssociationFilesRemove"
-                    :on-success="companyArticlesAssociationFilesUploadSuccess"
-                    :on-preview="hanglePreview"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">
-                      只能上传文件，且不超过10MB
-                    </div>
-                  </el-upload>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="股东会决议">
-                  <el-upload
-                    class="upload-demo"
-                    :action="uploadUrl"
-                    :headers="uploadHeaders"
-                    :file-list="shareholdersDecideFilesList"
-                    :before-upload="handleBeforeUpload"
-                    :on-remove="shareholdersDecideFilesRemove"
-                    :on-success="shareholdersDecideFilesUploadSuccess"
-                    :on-preview="hanglePreview"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">
-                      只能上传文件，且不超过10MB
-                    </div>
-                  </el-upload>
-                </el-form-item>
-              </el-col>
-            </el-row>
+
             <el-row>
               <el-col :span="12">
                 <el-form-item label="委托书">
@@ -666,27 +652,6 @@
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="24">
-                <el-form-item label="企业高管信息确认书">
-                  <el-upload
-                    class="upload-demo"
-                    :action="uploadUrl"
-                    :headers="uploadHeaders"
-                    :file-list="seniorManagementFilesList"
-                    :before-upload="handleBeforeUpload"
-                    :on-remove="seniorManagementFilesRemove"
-                    :on-success="seniorManagementFilesUploadSuccess"
-                    :on-preview="hanglePreview"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">
-                      只能上传文件，且不超过10MB
-                    </div>
-                  </el-upload>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
 
               <el-col :span="24">
                 <el-form-item label="指定代表或者共同委托代理人授权委托书">
@@ -709,25 +674,7 @@
               </el-col>
             </el-row>
             <el-row>
-              <el-col :span="12">
-                <el-form-item label="任职免职书">
-                  <el-upload
-                    class="upload-demo"
-                    :action="uploadUrl"
-                    :headers="uploadHeaders"
-                    :file-list="appointDismissFilesList"
-                    :before-upload="handleBeforeUpload"
-                    :on-remove="appointDismissFilesRemove"
-                    :on-success="appointDismissFilesUploadSuccess"
-                    :on-preview="hanglePreview"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                    <div slot="tip" class="el-upload__tip">
-                      只能上传文件，且不超过10MB
-                    </div>
-                  </el-upload>
-                </el-form-item>
-              </el-col>
+
               <el-col :span="12">
                 <el-form-item label="其它文件">
                   <el-upload
@@ -747,6 +694,65 @@
                   </el-upload>
                 </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-form-item label="会议纪要、合作协议等">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="accessoryFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="accessoryFilesRemove"
+                    :on-success="accessoryFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <div slot="tip" class="el-upload__tip">只能上传文件，且不超过10MB</div>
+                  </el-upload>
+                </el-form-item>
+
+              </el-col>
+            </el-row>
+          </el-collapse-item>
+          <el-collapse-item name="1" title="填写申请人相关信息">
+            <el-row>
+              <el-col :span="16">
+                <el-form-item label="单位" prop="affiliatedUnit">
+                  <el-input v-model="form.affiliatedUnit" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请部门" prop="applyDepartment">
+                  <el-input v-model="form.applyDepartment" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请人" prop="applicant">
+                  <el-input v-model="form.applicant" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="联系方式">
+                  <el-input v-model="form.applicantContact" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="申请时间">
+                  <el-date-picker
+                    v-model="form.applyTime"
+                    type="datetime"
+                    placeholder="选择日期时间"
+                  />
+                </el-form-item>
+              </el-col>
+              <!-- <el-col :span="8">
+                <el-form-item label="申请类型">
+                  <el-input v-model="form.applyType" minlength="1" />
+                </el-form-item>
+              </el-col> -->
+
             </el-row>
           </el-collapse-item>
         </el-collapse>

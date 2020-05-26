@@ -105,7 +105,7 @@ export default {
         companyModifyRegisterFiles: '', // 变更事项登记表
         companyArticlesAssociationFiles: '', // 公司章程
         shareholdersDecideFiles: '', // 股东会决议
-        seniorManagementFiles: '', // 企业高管信息确认书
+        seniorManagementFiles: '', // 董事会决议
         promiseFiles: '', // 承诺书
         delegationFiles: '', // 委托书
         authorizationFiles: '', // 指定代表或者共同委托代理人授权委托书
@@ -122,9 +122,6 @@ export default {
         ],
         applicant: [
           { required: true, message: '请填写申请人', trigger: 'blur' }
-        ],
-        applicantContact: [
-          { required: true, message: '请填写办理人联系方式', trigger: 'blur' }
         ],
         applyReason: [
           { required: true, message: '请填写申请理由', trigger: 'blur' }
@@ -149,7 +146,7 @@ export default {
       companyModifyRegisterFilesList: [], // 变更事项登记表
       companyArticlesAssociationFilesList: [], // 公司章程
       shareholdersDecideFilesList: [], // 股东会决议
-      seniorManagementFilesList: [], // 企业高管信息确认书
+      seniorManagementFilesList: [], // 董事会决议
       promiseFilesList: [], // 承诺书
       delegationFilesList: [], // 委托书
       authorizationFilesList: [], // 指定代表或者共同委托代理人授权委托书
@@ -191,6 +188,7 @@ export default {
       this.fetchData()
       getUserList(this.listUserQuery).then(response => {
         this.restaurants = response.data.records
+        this.add()
       })
     },
     fetchData() {
@@ -215,7 +213,6 @@ export default {
       getMainMemberList({ enterpriseCode: this.$route.query.id, page: 1, limit: 1 }).then(response => {
         if (response.data.records && response.data.records.length > 0) {
           this.mainmemberData = response.data.records[0]
-          this.add()
         }
       })
     },
@@ -310,7 +307,7 @@ export default {
         companyModifyRegisterFiles: '', // 变更事项登记表
         companyArticlesAssociationFiles: '', // 公司章程
         shareholdersDecideFiles: '', // 股东会决议
-        seniorManagementFiles: '', // 企业高管信息确认书
+        seniorManagementFiles: '', // 董事会决议
         promiseFiles: '', // 承诺书
         delegationFiles: '', // 委托书
         authorizationFiles: '', // 指定代表或者共同委托代理人授权委托书
@@ -364,7 +361,6 @@ export default {
       this.formTitle = '添加企业变更'
       this.formVisible = true
       this.isAdd = true
-      this.accessoryFilesList = []
       this.initFormInfo()
     },
     next() {
@@ -429,7 +425,7 @@ export default {
             companyModifyRegisterFiles: this.form.companyModifyRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 变更事项登记表
             companyArticlesAssociationFiles: this.form.companyArticlesAssociationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 公司章程
             shareholdersDecideFiles: this.form.shareholdersDecideFiles.replace(/(^\s*)|(\s*$)/g, ''), // 股东会决议
-            seniorManagementFiles: this.form.seniorManagementFiles.replace(/(^\s*)|(\s*$)/g, ''), // 企业高管信息确认书
+            seniorManagementFiles: this.form.seniorManagementFiles.replace(/(^\s*)|(\s*$)/g, ''), // 董事会决议
             promiseFiles: this.form.promiseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 承诺书
             delegationFiles: this.form.delegationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 委托书
             authorizationFiles: this.form.authorizationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 指定代表或者共同委托代理人授权委托书
@@ -475,7 +471,7 @@ export default {
         this.companyModifyRegisterFilesList = [] // 变更事项登记表
         this.companyArticlesAssociationFilesList = [] // 公司章程
         this.shareholdersDecideFilesList = [] // 股东会决议
-        this.seniorManagementFilesList = [] // 企业高管信息确认书
+        this.seniorManagementFilesList = [] // 董事会决议
         this.promiseFilesList = [] // 承诺书
         this.delegationFilesList = [] // 委托书
         this.authorizationFilesList = [] // 指定代表或者共同委托代理人授权委托书
@@ -788,7 +784,7 @@ export default {
     shareholdersDecideFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'shareholdersDecideFiles')
     },
-    seniorManagementFilesRemove(file) { // 企业高管信息确认书
+    seniorManagementFilesRemove(file) { // 董事会决议
       this.handleRemoveFile(file, 'seniorManagementFiles')
     },
     seniorManagementFilesUploadSuccess(response) {

@@ -128,7 +128,7 @@
           <el-row>
             <el-col :span="24" />
             <el-col v-if="item.seniorManagementFilesListCompanyModify && item.seniorManagementFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="企业高管信息确认书" :files-list="item.seniorManagementFilesListCompanyModify" />
+              <FilesListComponent file-title="董事会决议" :files-list="item.seniorManagementFilesListCompanyModify" />
             </el-col>
           </el-row>
           <el-row>
