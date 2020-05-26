@@ -244,27 +244,8 @@
               <el-input v-model="form.remark" minlength="1" />
             </el-form-item>
           </el-col>
-
-          <el-col :span="12">
-            <el-form-item label="营业执照">
-              <el-upload
-                class="upload-demo"
-                :action="uploadUrl"
-                :headers="uploadHeaders"
-                :file-list="businessLicenseList"
-                :before-upload="handleBeforeUpload"
-                :on-remove="businessLicenseRemoveFile"
-                :on-success="businessLicenseUploadSuccess"
-                :on-preview="hanglePreview"
-              >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  只能上传文件，且不超过10MB
-                </div>
-              </el-upload>
-              <!-- <el-input v-model="form.businessLicense" minlength="1"></el-input> -->
-            </el-form-item>
-          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
             <el-form-item label="核准文件">
               <el-upload
@@ -278,13 +259,29 @@
                 :on-preview="hanglePreview"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  只能上传文件，且不超过10MB
-                </div>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
-              <!-- <el-input v-model="form.approvalFiles" minlength="1"></el-input> -->
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="营业执照">
+              <el-upload
+                class="upload-demo"
+                :action="uploadUrl"
+                :headers="uploadHeaders"
+                :file-list="businessLicenseList"
+                :before-upload="handleBeforeUpload"
+                :on-remove="businessLicenseRemoveFile"
+                :on-success="businessLicenseUploadSuccess"
+                :on-preview="hanglePreview"
+              >
+                <el-button size="small" type="primary">点击上传</el-button>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
             <el-form-item label="公司章程">
               <el-upload
@@ -298,11 +295,8 @@
                 :on-preview="hanglePreview"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  只能上传文件，且不超过10MB
-                </div>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
-              <!-- <el-input v-model="form.companyArticlesAssociation" minlength="1"></el-input> -->
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -318,13 +312,12 @@
                 :on-preview="hanglePreview"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  只能上传文件，且不超过10MB
-                </div>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
-              <!-- <el-input v-model="form.shareholdersDecide" minlength="1"></el-input> -->
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
             <el-form-item label="申请注册文件">
               <el-upload
@@ -338,11 +331,8 @@
                 :on-preview="hanglePreview"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  只能上传文件，且不超过10MB
-                </div>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
-              <!-- <el-input v-model="form.applicationRegistrationFiles" minlength="1"></el-input> -->
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -358,11 +348,8 @@
                 :on-preview="hanglePreview"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">
-                  只能上传文件，且不超过10MB
-                </div>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
-              <!-- <el-input v-model="form.otherFiles" minlength="1"></el-input> -->
             </el-form-item>
           </el-col>
         </el-row>

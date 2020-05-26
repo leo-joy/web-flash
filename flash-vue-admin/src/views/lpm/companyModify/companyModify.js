@@ -124,7 +124,7 @@ export default {
           { required: true, message: '请填写申请人', trigger: 'blur' }
         ],
         applyReason: [
-          { required: true, message: '请填写申请理由', trigger: 'blur' }
+          { required: true, message: '请填写变更原因', trigger: 'blur' }
         ],
         modifyDate: [
           { required: true, message: '请填写变更日期', trigger: 'blur' }
