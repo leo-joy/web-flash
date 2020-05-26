@@ -23,6 +23,7 @@ export default {
       },
       user: {},
       businesslicenseData: {},
+      enterpriseNameLabel: '***公司',
       mainmemberData: {}, // 主要人员相关数据
       companyList: [],
       companyTree: {
@@ -38,8 +39,6 @@ export default {
       uploadHeaders: {
         'Authorization': ''
       },
-      accessoryFilesList: [],
-
       restaurants: [],
       directorTags: [], // 董事
       supervisorTags: [], // 监事
@@ -143,6 +142,7 @@ export default {
       list: null,
       listLoading: true,
       selRow: {},
+      accessoryFiles: [], // 会议纪要、合作协议等
       businessLicenseFilesList: [], // 营业执照
       approvalFilesList: [], // 核准文件
       companyReferenceRegisterFilesList: [], // 公司备案登记表
@@ -154,8 +154,8 @@ export default {
       delegationFilesList: [], // 委托书
       authorizationFilesList: [], // 指定代表或者共同委托代理人授权委托书
       appointDismissFilesList: [], // 任职免职书
-      otherFilesList: [], // 其它文件
-      accessoryFiles: [] // 详情附件
+      otherFilesList: [] // 其它文件
+
     }
   },
   filters: {
@@ -206,12 +206,16 @@ export default {
       getEnterpriseList(this.companyListQuery).then(response => {
         this.companyList = response.data.records
         this.listLoading = false
+        if (response.data.records) {
+          this.enterpriseNameLabel = '【' + response.data.records[0].enterpriseName + '】'
+        }
       })
 
       // 请求主要人员信息数据
       getMainMemberList({ enterpriseCode: this.$route.query.id, page: 1, limit: 1 }).then(response => {
         if (response.data.records && response.data.records.length > 0) {
           this.mainmemberData = response.data.records[0]
+          this.add()
         }
       })
     },
@@ -299,6 +303,7 @@ export default {
         supervisorIdOld: '',
         supervisorIdNew: '',
 
+        accessoryFiles: '', // 会议纪要、合作协议等
         businessLicenseFiles: '', // 营业执照
         approvalFiles: '', // 核准文件
         companyReferenceRegisterFiles: '', // 公司备案登记表
@@ -311,8 +316,6 @@ export default {
         authorizationFiles: '', // 指定代表或者共同委托代理人授权委托书
         appointDismissFiles: '', // 任职免职书
         otherFiles: '', // 其它文件
-
-        accessoryFiles: '',
         id: ''
       }
     },
@@ -419,7 +422,8 @@ export default {
             supervisorIdOld: this.form.supervisorIdOld,
             supervisorIdNew: this.form.supervisorIdNew,
 
-            businessLicenseFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''), // 营业执照
+            accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
+            businessLicenseFiles: this.form.businessLicenseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 营业执照
             approvalFiles: this.form.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''), // 核准文件
             companyReferenceRegisterFiles: this.form.companyReferenceRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 公司备案登记表
             companyModifyRegisterFiles: this.form.companyModifyRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 变更事项登记表
@@ -432,7 +436,6 @@ export default {
             appointDismissFiles: this.form.appointDismissFiles.replace(/(^\s*)|(\s*$)/g, ''), // 任职免职书
             otherFiles: this.form.otherFiles.replace(/(^\s*)|(\s*$)/g, ''), // 其它文件
 
-            accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id
           }).then(response => {
             this.$message({
@@ -465,6 +468,7 @@ export default {
         this.formVisible = true
         this.businesslicenseData = this.companyList[0]
         this.initFormInfo()
+        this.accessoryFilesList = [] // 会议纪要、合作协议等
         this.businessLicenseFilesList = [] // 营业执照
         this.approvalFilesList = [] // 核准文件
         this.companyReferenceRegisterFilesList = [] // 公司备案登记表
@@ -477,7 +481,6 @@ export default {
         this.authorizationFilesList = [] // 指定代表或者共同委托代理人授权委托书
         this.appointDismissFilesList = [] // 任职免职书
         this.otherFilesList = [] // 其它文件
-        this.accessoryFilesList = [] // 详情附件
 
         if (this.form.enterpriseNameState === 'true') {
           this.form.enterpriseNameState = true
@@ -531,12 +534,12 @@ export default {
           }
         }
 
-        var accessoryArr = ['businessLicenseFiles', 'approvalFiles',
+        var accessoryArr = ['accessoryFiles', 'businessLicenseFiles', 'approvalFiles',
           'companyReferenceRegisterFiles', 'companyModifyRegisterFiles',
           'companyArticlesAssociationFiles', 'shareholdersDecideFiles',
           'seniorManagementFiles', 'promiseFiles',
           'delegationFiles', 'authorizationFiles',
-          'appointDismissFiles', 'otherFiles', 'accessoryFiles']
+          'appointDismissFiles', 'otherFiles']
         for (let j = 0; j < accessoryArr.length; j++) {
           if (this.selRow[accessoryArr[j]]) {
             const filesListQuery = {
@@ -550,7 +553,6 @@ export default {
                 file.id = response.data.records[i].id
                 file.name = response.data.records[i].originalFileName
                 file.url = this.uploadUrl + '/getImgStream?idFile=' + response.data.records[i].id
-                // this.accessoryFilesList.push(file)
                 this[accessoryArr[j] + 'List'].push(file)
               }
             })
@@ -719,32 +721,8 @@ export default {
       })
     },
     hanglePreview(file) {
-      this.$emit('viewfile', file.id, file.name)
+      alert('暂时不能预览')
     },
-    // handleRemoveFile(file) {
-    //   // 删除原文时更新原文列表
-    //   // 判断删除文件的位置，等于0，是在列表首位
-    //   if (this.form.accessoryFiles.indexOf(file.id) !== 0) {
-    //     this.form.accessoryFiles = this.form.accessoryFiles.replace(' ' + file.id, '')
-    //   } else {
-    //     this.form.accessoryFiles = this.form.accessoryFiles.replace(file.id, '')
-    //   }
-    // },
-    // accessoryFilesUploadSuccess(response) {
-    //   this.loadingInstance.close()
-    //   if (response.code === 20000) {
-    //     if (this.form.accessoryFiles) {
-    //       this.form.accessoryFiles = this.form.accessoryFiles + ' ' + response.data.id
-    //     } else {
-    //       this.form.accessoryFiles = response.data.id
-    //     }
-    //   } else {
-    //     this.$message({
-    //       message: this.$t('common.uploadError'),
-    //       type: 'error'
-    //     })
-    //   }
-    // }
     handleRemoveFile(file, type) {
       // 删除原文时更新原文列表
       // 判断删除文件的位置，等于0，是在列表首位
@@ -768,6 +746,12 @@ export default {
     /**
      * 附件删除和上传成功函数
      */
+    accessoryFilesRemove(file) { // 会议纪要、合作协议等
+      this.handleRemoveFile(file, 'accessoryFiles')
+    },
+    accessoryFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'accessoryFiles')
+    },
     businessLicenseFilesRemove(file) { // 营业执照
       this.handleRemoveFile(file, 'businessLicenseFiles')
     },
@@ -839,12 +823,6 @@ export default {
     },
     otherFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'otherFiles')
-    },
-    accessoryFilesRemove(file) { // 详情附件
-      this.handleRemoveFile(file, 'accessoryFiles')
-    },
-    accessoryFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'accessoryFiles')
     }
   }
 }

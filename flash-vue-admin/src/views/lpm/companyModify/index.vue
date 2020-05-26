@@ -2,11 +2,15 @@
   <div class="app-container">
     <div class="block">
       <el-row>
-        <el-col :span="24">
+        <el-col :span="12">
           <el-button type="success" size="mini" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="edit">{{ $t('button.edit') }}</el-button>
           <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="remove">{{ $t('button.delete') }}</el-button>
         </el-col>
+        <el-col :span="12">
+          <div style="float:right">企业名称：{{ enterpriseNameLabel }}</div>
+        </el-col>
+
       </el-row>
     </div>
 
@@ -19,19 +23,82 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="企业id" width="80">
+      <el-table-column label="变更理由" width="260">
         <template slot-scope="scope">
-          {{ scope.row.enterpriseId }}
+          {{ scope.row.applyReason }}
         </template>
       </el-table-column>
-      <el-table-column label="企业名称">
+      <el-table-column label="事项变更">
         <template slot-scope="scope">
-          {{ scope.row.enterpriseNameOld }}
+          <div v-if="scope.row.enterpriseNameState === 'true'">
+            <span><b>企业名称变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.enterpriseNameOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.enterpriseNameNew }}</b></span>
+          </div>
+          <div v-if="scope.row.legalRepresentativeState === 'true'">
+            <span><b>企业法人变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.legalRepresentativeOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.legalRepresentativeNew }}</b></span>
+          </div>
+          <div v-if="scope.row.registeredAddressState === 'true'">
+            <span><b>注册地址变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.registeredAddressOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
+          </div>
+          <div v-if="scope.row.operatingPeriodEndState === 'true'">
+            <span><b>经营期限变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.operatingPeriodEndOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
+          </div>
+          <div v-if="scope.row.businessScopeState === 'true'">
+            <span><b>经营范围变更：</b></span>
+            <span>原</span>
+            <span><i>{{ scope.row.businessScopeOld }}</i></span>
+            <span>新</span>
+            <span><b>{{ scope.row.businessScopeNew }}</b></span>
+          </div>
+          <div v-if="scope.row.chairmanState === 'true'">
+            <span><b>董事长变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.chairmanOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.chairmanNew }}</b></span>
+          </div>
+          <div v-if="scope.row.generalManagerState === 'true'">
+            <span><b>经理变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.generalManagerOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.generalManagerNew }}</b></span>
+          </div>
+          <div v-if="scope.row.directorState === 'true'">
+            <span><b>董事变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.directorOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.directorNew }}</b></span>
+          </div>
+          <div v-if="scope.row.supervisorState === 'true'">
+            <span><b>监事变更：</b></span>
+            <span>原</span>
+            <span><i style="color:red">{{ scope.row.supervisorOld }}</i></span>
+            <span>新</span>
+            <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
+          </div>
+          
         </template>
       </el-table-column>
-      <el-table-column label="注册地址">
+      <el-table-column label="变更日期" width="120">
         <template slot-scope="scope">
-          {{ scope.row.registeredAddressOld }}
+          {{ scope.row.modifyDate.replace("00:00:00","") }}
         </template>
       </el-table-column>
     </el-table>
@@ -121,7 +188,7 @@
                   <el-input v-model="form.enterpriseId" minlength="1" />
                 </el-form-item>
               </el-col> -->
-              <el-col :span="18">
+              <el-col :span="17">
                 <el-form-item label="变更类型">
                   <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
                   <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
@@ -134,7 +201,7 @@
                   <el-checkbox v-model="form.generalManagerState" label="经理备案" />
                 </el-form-item>
               </el-col>
-              <el-col :span="6">
+              <el-col :span="7">
                 <el-form-item label="变更日期" prop="modifyDate">
                   <el-date-picker
                     v-model="form.modifyDate"
@@ -416,10 +483,10 @@
 
             </el-row>
           </el-collapse-item>
-          <el-collapse-item name="3" title="三、上传相关的申请变更文件">
+          <el-collapse-item name="3" title="三、上传相关的申请变更文件[只能上传pdf格式文件，且不超过20MB]">
             <el-row>
               <el-col :span="24">
-                <el-form-item label="详情附件">
+                <el-form-item label="会议纪要、合作协议等">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"

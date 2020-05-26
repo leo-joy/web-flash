@@ -85,6 +85,12 @@
           </el-row> -->
           <el-row>
             <el-col :span="24" />
+            <el-col v-if="item.accessoryFilesListCompanyModify && item.accessoryFilesListCompanyModify.length>0" :span="24">
+              <FilesListComponent file-title="会议纪要、合作协议等" :files-list="item.accessoryFilesListCompanyModify" />
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24" />
             <el-col v-if="item.businessLicenseFilesListCompanyModify && item.businessLicenseFilesListCompanyModify.length>0" :span="24">
               <FilesListComponent file-title="营业执照" :files-list="item.businessLicenseFilesListCompanyModify" />
             </el-col>
@@ -153,12 +159,6 @@
             <el-col :span="24" />
             <el-col v-if="item.otherFilesListCompanyModify && item.otherFilesListCompanyModify.length>0" :span="24">
               <FilesListComponent file-title="其他附件" :files-list="item.otherFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.accessoryFilesListCompanyModify && item.accessoryFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="相关附件" :files-list="item.accessoryFilesListCompanyModify" />
             </el-col>
           </el-row>
         </el-card>

@@ -67,12 +67,12 @@ export default {
 
       // 企业变更数据
       companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
-        var accessoryArr = ['businessLicenseFiles', 'approvalFiles',
+        var accessoryArr = ['accessoryFiles', 'businessLicenseFiles', 'approvalFiles',
           'companyReferenceRegisterFiles', 'companyModifyRegisterFiles',
           'companyArticlesAssociationFiles', 'shareholdersDecideFiles',
           'seniorManagementFiles', 'promiseFiles',
           'delegationFiles', 'authorizationFiles',
-          'appointDismissFiles', 'otherFiles', 'accessoryFiles']
+          'appointDismissFiles', 'otherFiles']
         this.getFilesList('CompanyModify', accessoryArr, response.data.records)
       })
     },
@@ -90,8 +90,8 @@ export default {
         limit: 20
         // ids: records[0][accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')
       }
-      if (records.length > 1) {
-        var newRecords = []
+      if (records.length > 0) {
+        const newRecords = []
         for (let p = 0; p < records.length; p++) {
           const Module = module
           const tempRecord = records[p]
@@ -116,8 +116,8 @@ export default {
                     fileList.push(file)
                   }
                   tempRecord[accessoryArr[j] + 'List' + Module] = fileList
-                  console.log('p:', tempRecord)
                   if (records.length === p + 1) {
+                    this.companyModifyData = []
                     this.companyModifyData = newRecords
                   }
                 })
@@ -126,8 +126,6 @@ export default {
           }
           newRecords.push(tempRecord)
         }
-        console.log(this.companyModifyData)
-        console.log('companyModifyDataLength', this.companyModifyData.length)
       }
       // }
     }
