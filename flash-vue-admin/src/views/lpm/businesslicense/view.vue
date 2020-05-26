@@ -1,7 +1,7 @@
 <template>
   <div class="dp-container">
     <el-row>
-      <el-col :span="20">
+      <el-col :span="24">
         <el-form ref="form" :model="form" :rules="rules" label-width="150px">
           <!-- <el-row class="dp-row">
                 <el-col :span="24">
@@ -27,15 +27,15 @@
               </el-row> -->
           <el-row>
             <el-col :span="24">
-              <el-form-item label="组织属性：">{{ businesslicenseData.pName }}</el-form-item>
+              <el-form-item label="组织属性：">{{grandfatherOrg}} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
-            <el-col :span="12">
+            <el-col :span="24">
               <el-form-item label="企业名称：">{{ businesslicenseData.enterpriseName }}</el-form-item>
             </el-col>
-            <el-col :span="12">
+            <el-col :span="24">
               <el-form-item v-if="businesslicenseData.enterpriseNameEn" label="企业英文名称：">{{ businesslicenseData.enterpriseNameEn }}</el-form-item>
             </el-col>
           </el-row>

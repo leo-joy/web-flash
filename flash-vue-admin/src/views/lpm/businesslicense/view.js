@@ -2,6 +2,7 @@ import { getListIds } from '@/api/cms/fileInfo'
 import { get as businesslicense } from '@/api/lpm/businesslicense'
 
 import { getList as dictList } from '@/api/system/dict'
+import { parentdept as getParentdept } from '@/api/system/dept'
 import { getList as logList } from '@/api/system/log'
 
 import { showDictLabel } from '@/utils/common'
@@ -17,6 +18,8 @@ export default {
       id: '',
       /* 营业执照模块 */
       businesslicenseData: {}, // 营业执照的相关信息
+      parentOrg: '', // 父组织机构
+      grandfatherOrg: '', // 祖级组织机构
       enterpriseType: '', // 企业类型
       customTypeBL: '', // 自定义企业类型
       registrationTypeBL: '', // 企业注册类型
@@ -105,6 +108,15 @@ export default {
         this.translateDict('币种', response.data.currency, 'currencyBL')
         this.translateDict('登记状态【营业执照】', response.data.registrationStatus, 'registrationStatusBL')
         this.getFilesList('BL', accessoryArr, arr)
+        getParentdept(response.data.pid).then(response => {
+          this.parentOrg = response.data.simplename + ' / '
+          console.log('父组织机构：', response)
+          getParentdept(response.data.id).then(response => {
+            if (response.data.simplename !== '组织机构' && response.data.simplename !== '雅居乐控股集团') {
+              this.grandfatherOrg = response.data.simplename + ' / '
+            }
+          })
+        })
       })
     },
 
@@ -210,7 +222,7 @@ export default {
     back() {
       this.$router.go(-1)
     },
-    
+
     hanglePreview(file) {
       this.$router.push({ path: '/lpm/enterpriseinfo/PDFView' })
     },

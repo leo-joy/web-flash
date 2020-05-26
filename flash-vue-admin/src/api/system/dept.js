@@ -31,3 +31,13 @@ export function del(id) {
     }
   })
 }
+
+export function parentdept(id) {
+  return request({
+    url: '/dept/parentdept',
+    method: 'get',
+    params: {
+      id: id
+    }
+  })
+}

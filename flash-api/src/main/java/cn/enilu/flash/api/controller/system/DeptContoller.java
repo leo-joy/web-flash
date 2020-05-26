@@ -40,6 +40,13 @@ public class DeptContoller extends BaseController {
         return Rets.success(list);
     }
 
+    @RequestMapping(value = "/parentdept",method = RequestMethod.GET)
+    public Object parentdept(@RequestParam  Long id){
+        Dept current = deptService.get(id);
+        Dept parent = deptService.get(current.getPid());
+        return Rets.success(parent);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     @BussinessLog(value = "编辑部门", key = "simplename", dict = DeptDict.class)
     @RequiresPermissions(value = {Permission.DEPT_EDIT})
