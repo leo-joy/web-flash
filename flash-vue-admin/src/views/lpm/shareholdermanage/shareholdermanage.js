@@ -84,7 +84,7 @@ export default {
     fetchData() {
       this.listLoading = true
 
-      this.listQuery.registrationType = 2
+      this.listQuery.registrationType = 3
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
