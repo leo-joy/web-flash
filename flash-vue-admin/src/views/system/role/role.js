@@ -294,7 +294,13 @@ export default {
       this.fetchCompanyData()
     },
     handleCompanyDeptNodeClick(data, node) {
-      this.companyListQuery.pIds = data.id
+      if (data.id === '24') {
+        this.companyListQuery.pIds = data.id
+      } else if (data.id === '244' || data.id === '103' || data.id === '106' || data.id === '107' || data.id === '30') {
+        this.companyListQuery.pIds = '_' + data.id + '_'
+      } else {
+        this.companyListQuery.pIds = '-' + data.id + '_'
+      }
       this.companyListQuery.deptName = data.simplename
       this.deptTree.show = false
       this.fetchCompanyData()
