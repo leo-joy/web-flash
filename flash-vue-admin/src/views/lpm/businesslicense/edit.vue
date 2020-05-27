@@ -353,14 +353,20 @@
             </el-form-item>
           </el-col>
         </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="save">{{
-            $t("button.submit")
-          }}</el-button>
-          <el-button @click.native="formVisible = false">{{
-            $t("button.cancel")
-          }}</el-button>
-        </el-form-item>
+        <el-row>
+          <el-col :span="19">&nbsp;</el-col>
+          <el-col :span="2">
+            <el-button style="float:right" @click.native="formVisible = false">{{
+              $t("button.cancel")
+            }}</el-button>
+          </el-col>
+          <el-col :span="2">
+            <el-button style="float:right" type="primary" @click="save">{{
+              $t("button.submit")
+            }}</el-button>
+          </el-col>
+        </el-row>
+
       </el-form>
     </div>
   </div>
