@@ -557,7 +557,7 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row>
+            <el-row v-if="false">
               <el-col :span="12">
                 <el-form-item label="公司备案登记表">
                   <el-upload
@@ -594,7 +594,7 @@
               </el-col>
             </el-row>
 
-            <el-row>
+            <el-row v-if="false">
               <el-col :span="12">
                 <el-form-item label="委托书">
                   <el-upload
@@ -631,8 +631,7 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row>
-
+            <el-row v-if="false">
               <el-col :span="24">
                 <el-form-item label="指定代表或者共同委托代理人授权委托书">
                   <el-upload
@@ -652,27 +651,7 @@
               </el-col>
             </el-row>
             <el-row>
-
               <el-col :span="12">
-                <el-form-item label="其它文件">
-                  <el-upload
-                    class="upload-demo"
-                    :action="uploadUrl"
-                    :headers="uploadHeaders"
-                    :file-list="otherFilesList"
-                    :before-upload="handleBeforeUpload"
-                    :on-remove="otherFilesRemove"
-                    :on-success="otherFilesUploadSuccess"
-                    :on-preview="hanglePreview"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
-                  </el-upload>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="24">
                 <el-form-item label="会议纪要、合作协议等">
                   <el-upload
                     class="upload-demo"
@@ -689,6 +668,23 @@
                   </el-upload>
                 </el-form-item>
 
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="其它文件">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="otherFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="otherFilesRemove"
+                    :on-success="otherFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
               </el-col>
             </el-row>
           </el-collapse-item>
@@ -710,11 +706,6 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="联系方式">
-                  <el-input v-model="form.applicantContact" minlength="1" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
                 <el-form-item label="申请时间">
                   <el-date-picker
                     v-model="form.applyTime"
@@ -723,6 +714,12 @@
                   />
                 </el-form-item>
               </el-col>
+              <el-col :span="8">
+                <el-form-item label="联系方式">
+                  <el-input v-model="form.applicantContact" minlength="1" />
+                </el-form-item>
+              </el-col>
+              
               <!-- <el-col :span="8">
                 <el-form-item label="申请类型">
                   <el-input v-model="form.applyType" minlength="1" />
