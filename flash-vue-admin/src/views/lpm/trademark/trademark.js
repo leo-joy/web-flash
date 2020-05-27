@@ -21,7 +21,7 @@ export default {
       trademarkType: '', // 类别
       companyListQuery: {
         page: 1,
-        limit: 1000,
+        limit: 2000,
         id: undefined
       },
       companyList: [],

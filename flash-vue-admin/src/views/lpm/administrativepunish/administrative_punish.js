@@ -21,7 +21,7 @@ export default {
       punishUnlawfulActType: '', // 违法行为类型
       companyListQuery: {
         page: 1,
-        limit: 1000,
+        limit: 2000,
         id: undefined
       },
       companyList: [],

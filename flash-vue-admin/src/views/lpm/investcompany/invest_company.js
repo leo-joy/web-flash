@@ -11,7 +11,7 @@ export default {
       formTitle: '添加投资企业',
       companyListQuery: {
         page: 1,
-        limit: 1000,
+        limit: 2000,
         id: undefined
       },
       companyList: [],
@@ -174,7 +174,7 @@ export default {
       // 请求投资公司全部列表
       getEnterpriseList({
         page: 1,
-        limit: 1000
+        limit: 2000
       }).then(response => {
         this.restaurants = response.data.records
       })
@@ -233,7 +233,7 @@ export default {
         // 请求投资公司全部列表
         getEnterpriseList({
           page: 1,
-          limit: 1000
+          limit: 2000
         }).then(response => {
           this.restaurants = response.data.records
         })

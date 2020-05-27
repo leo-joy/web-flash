@@ -39,7 +39,7 @@ export default {
       shareholderStatus: '', // 股东状态
       companyListQuery: {
         page: 1,
-        limit: 1000,
+        limit: 2000,
         id: undefined
       },
       companyList: [],
@@ -265,7 +265,7 @@ export default {
       // 请求公司股东全部列表
       getEnterpriseList({
         page: 1,
-        limit: 1000
+        limit: 2000
       }).then(response => {
         this.enterpriseShareholders = response.data.records
       })
@@ -363,7 +363,7 @@ export default {
         // 请求公司股东全部列表
         getEnterpriseList({
           page: 1,
-          limit: 1000
+          limit: 2000
         }).then(response => {
           this.enterpriseShareholders = response.data.records
         })
@@ -475,7 +475,7 @@ export default {
     // 搜索分公司相关函数
     querySearchAsync(queryString, cb) {
       if (queryString) {
-        var restaurants = this.restaurants
+        var restaurants = this.enterpriseShareholders
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
         cb(results)
       }

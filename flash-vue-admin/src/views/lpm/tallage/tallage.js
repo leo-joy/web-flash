@@ -17,10 +17,11 @@ export default {
       formVisible: false,
       formTitle: '添加税务信息',
       tallageTypeList: [], // 类别，从数据字典中获取
-      levyType: '', // 征收类型
+      levyType: '',
+      levyTypeList: [], // 征收类型
       companyListQuery: {
         page: 1,
-        limit: 1000,
+        limit: 2000,
         id: undefined
       },
       companyList: [],

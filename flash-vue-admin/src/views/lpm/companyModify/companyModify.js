@@ -18,7 +18,7 @@ export default {
       activeNames: ['1', '2', '3'],
       companyListQuery: {
         page: 1,
-        limit: 1000,
+        limit: 2000,
         id: undefined
       },
       user: {},
