@@ -270,9 +270,11 @@ export default {
     },
     // 搜索分公司相关函数
     querySearchAsync(queryString, cb) {
-      var restaurants = this.restaurants
-      var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
-      cb(results)
+      if (queryString) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+        cb(results)
+      }
     },
     createStateFilter(queryString) {
       return (state) => {

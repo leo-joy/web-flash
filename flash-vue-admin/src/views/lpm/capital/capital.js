@@ -474,9 +474,11 @@ export default {
     },
     // 搜索分公司相关函数
     querySearchAsync(queryString, cb) {
-      var enterpriseShareholders = this.enterpriseShareholders
-      var results = queryString ? enterpriseShareholders.filter(this.createStateFilter(queryString)) : enterpriseShareholders
-      cb(results)
+      if (queryString) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+        cb(results)
+      }
     },
     createStateFilter(queryString) {
       return (state) => {
