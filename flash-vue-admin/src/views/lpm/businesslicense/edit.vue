@@ -94,7 +94,7 @@
             </el-form-item>
           </el-col> -->
           <el-col :span="12">
-            <el-form-item label="企业注册地">
+            <el-form-item label="企业注册地" prop="registrationPlace">
               <el-cascader
                 v-model="form.registrationPlace"
                 :options="provinces"
