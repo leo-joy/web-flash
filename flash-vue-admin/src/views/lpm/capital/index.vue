@@ -100,6 +100,8 @@
                   </el-radio-group>
                 </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :class="[form.shareholderMold===1 && isAdd ? 'dpShow' : 'dpHide']" :span="12">
                 <el-form-item label="企业股东" prop="shareholder">
                   <el-autocomplete
@@ -155,7 +157,8 @@
                   <el-input v-model="form.shareholder" :disabled="true" minlength="1" />
                 </el-form-item>
               </el-col>
-
+            </el-row>
+            <el-row>
               <el-col :span="8">
                 <el-form-item label="认缴出资额（万元）" prop="subscribedCapitalContribution">
                   <el-input v-model.number="form.subscribedCapitalContribution" minlength="1" />
@@ -183,6 +186,8 @@
                   />
                 </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="8">
                 <el-form-item label="实缴出资额（万元）">
                   <el-input v-model.number="form.realityCapitalContribution" />
@@ -210,6 +215,8 @@
                   />
                 </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="8">
                 <el-form-item label="占比（%）" prop="proportion">
                   <el-slider v-model="form.proportion" show-input />
@@ -232,6 +239,8 @@
                   <el-input v-model="form.responsiblePerson" minlength="1" />
                 </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="8">
                 <el-form-item label="状态" prop="status">
                   <el-select v-model="form.status" placeholder="请选择">

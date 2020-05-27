@@ -118,7 +118,8 @@
               <el-switch v-model="form.status" />
             </el-form-item>
           </el-col>
-
+        </el-row>
+        <el-row>
           <el-col v-if="this.userParamType === '1'" :span="8">
             <el-form-item label="工号" prop="workNumber">
               <el-input v-model="form.workNumber" />
@@ -170,6 +171,8 @@
               <el-input v-model="form.englishNameAlias"></el-input>
             </el-form-item>
           </el-col> -->
+        </el-row>
+        <el-row>
           <el-col :span="8">
             <el-form-item label="邮箱" prop="email">
               <el-input v-model="form.email" />
@@ -185,7 +188,8 @@
               <el-input v-model="form.identityCardHk" />
             </el-form-item>
           </el-col>
-
+        </el-row>
+        <el-row>
           <el-col :span="16">
             <el-form-item label="地址" prop="address">
               <el-input v-model="form.address" />
