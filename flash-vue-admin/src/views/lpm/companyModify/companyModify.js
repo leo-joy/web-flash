@@ -188,14 +188,14 @@ export default {
       this.fetchData()
       getUserList(this.listUserQuery).then(response => {
         this.restaurants = response.data.records
-        this.add()
+        // this.add()
       })
     },
     fetchData() {
       this.listLoading = true
       this.listQuery.enterpriseId = this.$route.query.id
       getList(this.listQuery).then(response => {
-        this.list = response.data.records
+        this.list = response.data
         this.listLoading = false
         this.total = response.data.total
       })
@@ -379,40 +379,40 @@ export default {
             applyReason: this.form.applyReason,
             modifyDate: this.form.modifyDate,
             enterpriseId: this.form.enterpriseId,
-            enterpriseNameState: this.form.enterpriseNameState,
+            enterpriseNameState: this.form.enterpriseNameState === 'true' ? this.form.enterpriseNameState : '',
             enterpriseNameOld: this.form.enterpriseNameOld,
             enterpriseNameNew: this.form.enterpriseNameNew,
-            registeredAddressState: this.form.registeredAddressState,
+            registeredAddressState: this.form.registeredAddressState === 'true' ? this.form.registeredAddressState : '',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
-            operatingPeriodEndState: this.form.operatingPeriodEndState,
+            operatingPeriodEndState: this.form.operatingPeriodEndState === 'true' ? this.form.operatingPeriodEndState : '',
             operatingPeriodEndOld: this.form.operatingPeriodEndOld,
             operatingPeriodEndNew: this.form.operatingPeriodEndNew,
-            businessScopeState: this.form.businessScopeState,
+            businessScopeState: this.form.businessScopeState === 'true' ? this.form.businessScopeState : '',
             businessScopeOld: this.form.businessScopeOld,
             businessScopeNew: this.form.businessScopeNew,
-            legalRepresentativeState: this.form.legalRepresentativeState,
+            legalRepresentativeState: this.form.legalRepresentativeState === 'true' ? this.form.legalRepresentativeState : '',
             legalRepresentativeOld: this.form.legalRepresentativeOld,
             legalRepresentativeNew: this.form.legalRepresentativeNew,
-            chairmanState: this.form.chairmanState,
+            chairmanState: this.form.chairmanState === 'true' ? this.form.chairmanState : '',
             chairmanOld: this.form.chairmanOld,
             chairmanNew: this.form.chairmanNew,
             chairmanIdOld: this.form.chairmanIdOld,
             chairmanIdNew: this.form.chairmanIdNew,
 
-            generalManagerState: this.form.generalManagerState,
+            generalManagerState: this.form.generalManagerState === 'true' ? this.form.generalManagerState : '',
             generalManagerOld: this.form.generalManagerOld,
             generalManagerNew: this.form.generalManagerNew,
             generalManagerIdOld: this.form.generalManagerIdOld,
             generalManagerIdNew: this.form.generalManagerIdNew,
 
-            directorState: this.form.directorState,
+            directorState: this.form.directorState === 'true' ? this.form.directorState : '',
             directorOld: this.form.directorOld,
             directorNew: this.form.directorNew,
             directorIdOld: this.form.directorIdOld,
             directorIdNew: this.form.directorIdNew,
 
-            supervisorState: this.form.supervisorState,
+            supervisorState: this.form.supervisorState === 'true' ? this.form.supervisorState : '',
             supervisorOld: this.form.supervisorOld,
             supervisorNew: this.form.supervisorNew,
             supervisorIdOld: this.form.supervisorIdOld,

@@ -73,7 +73,7 @@ export default {
           'seniorManagementFiles', 'promiseFiles',
           'delegationFiles', 'authorizationFiles',
           'appointDismissFiles', 'otherFiles']
-        this.getFilesList('CompanyModify', accessoryArr, response.data.records)
+        this.getFilesList('CompanyModify', accessoryArr, response.data)
       })
     },
 
