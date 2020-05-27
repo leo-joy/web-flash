@@ -28,7 +28,9 @@
               />
               <el-tree
                 v-if="deptTree.show"
+                style="height:300px"
                 empty-text="暂无数据"
+                :default-expand-all="true"
                 :expand-on-click-node="false"
                 :data="deptTree.data"
                 :props="deptTree.defaultProps"

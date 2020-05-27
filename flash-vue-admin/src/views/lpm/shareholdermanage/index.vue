@@ -116,33 +116,21 @@
           highlight-current-row
           @current-change="handleCurrentChange"
         >
+          <el-table-column
+            type="index"
+            width="55"
+          />
+          <el-table-column label="企业名称">
+            <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
+          </el-table-column>
           <el-table-column label="统一社会信用代码" width="200">
             <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
           </el-table-column>
-          <el-table-column label="企业名称" width="400">
-            <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
-          </el-table-column>
-          <el-table-column
-            prop="type"
-            label="企业类型"
-            width="150"
-            :formatter="formatterEnterpriseType"
-          />
-
           <el-table-column label="法定代表人" width="150">
             <template slot-scope="scope">{{ scope.row.legalRepresentative }}</template>
           </el-table-column>
-          <el-table-column label="注册资本" width="100">
-            <template slot-scope="scope">{{ scope.row.registeredCapital }}</template>
-          </el-table-column>
           <el-table-column label="成立日期" width="150">
             <template slot-scope="scope">{{ scope.row.setupDate.replace(' 00:00:00','') }}</template>
-          </el-table-column>
-          <el-table-column label="登记机关" width="300">
-            <template slot-scope="scope">{{ scope.row.registrationAuthority }}</template>
-          </el-table-column>
-          <el-table-column label="核准日期" width="150">
-            <template slot-scope="scope">{{ scope.row.approvalDate.replace(' 00:00:00','') }}</template>
           </el-table-column>
           <el-table-column
             prop="registrationStatus"
