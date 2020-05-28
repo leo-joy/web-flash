@@ -2215,7 +2215,12 @@ export default {
               message: this.$t('common.optionSuccess'),
               type: 'success'
             })
-            this.back()
+            if (response.success) {
+              this.$router.push({ path: '/enterprisemanage', query: { id: response.data.id }})
+            } else {
+              this.back()
+            }
+            //
           })
         } else {
           return false

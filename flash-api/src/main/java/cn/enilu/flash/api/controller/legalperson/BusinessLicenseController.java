@@ -98,7 +98,7 @@ public class BusinessLicenseController {
 		Long otherFilesModuleId = Long.valueOf(1000005).longValue();
 		String otherFilesModuleName = "其他文件";
 		fileService.update(otherFiles, mainModuleId, mainModuleName, otherFilesModuleId, otherFilesModuleName, fileStatus);
-		return Rets.success();
+		return Rets.success(response);
 	}
 
 
