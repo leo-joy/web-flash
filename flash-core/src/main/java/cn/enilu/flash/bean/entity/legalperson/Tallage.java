@@ -44,6 +44,9 @@ public class Tallage extends BaseEntity {
     @Column(name="levy_type", columnDefinition = "VARCHAR(16) COMMENT '征收方式'")
     private String levyType;
 
+    @Column(name="status", columnDefinition = "VARCHAR(16) COMMENT '状态'")
+    private String status;
+
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '详情'")
     private String accessoryFiles;
 }
