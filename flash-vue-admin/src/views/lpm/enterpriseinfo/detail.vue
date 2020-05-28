@@ -33,7 +33,7 @@
         <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
           <el-tab-pane label="基础数据" name="first">
             <el-tabs :tab-position="tabPosition" style="height: auto;padding-top:10px">
-              <el-tab-pane label="营业执照"><div><businesslicense /></div></el-tab-pane>
+              <el-tab-pane label="基本信息"><div><businesslicense /></div></el-tab-pane>
               <el-tab-pane label="主要人员信息"><mainmember /></el-tab-pane>
               <el-tab-pane label="股东信息"><shareholder /></el-tab-pane>
               <el-tab-pane label="印章信息"><seal /></el-tab-pane>

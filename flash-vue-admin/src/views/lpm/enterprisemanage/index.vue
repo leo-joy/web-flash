@@ -1,13 +1,33 @@
 <template>
   <div>
+    <el-row lass="dp-row">
+      <el-col :span="1">&nbsp;
+      </el-col>
+      <el-col :span="22">
+        <h2 style="color:#176c6b;">{{ businesslicenseData.enterpriseName }}</h2>
+      </el-col>
+    </el-row>
+    <el-row lass="dp-row">
+      <el-col :span="1">&nbsp;
+      </el-col>
+      <el-col :span="8">
+        <h4>统一社会信用代码：{{ businesslicenseData.unifiedSocialCreditCode }}</h4>
+      </el-col>
+      <el-col :span="5">
+        <h4>法定代表人：{{ businesslicenseData.legalRepresentative }}</h4>
+      </el-col>
+      <el-col :span="5">
+        <h4>成立日期：{{ businesslicenseData.setupDate?businesslicenseData.setupDate.replace(' 00:00:00',''):'' }}</h4>
+      </el-col>
+    </el-row>
     <!-- <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
       <el-radio-button label="top">top</el-radio-button>
       <el-radio-button label="right">right</el-radio-button>
       <el-radio-button label="bottom">bottom</el-radio-button>
       <el-radio-button label="left">left</el-radio-button>
     </el-radio-group> -->
-    <el-tabs :tab-position="tabPosition" style="height: auto;padding-top:10px">
-      <el-tab-pane label="营业执照"><div><edit @viewfile="viewfile" /></div></el-tab-pane>
+    <el-tabs :tab-position="tabPosition" type="border-card">
+      <el-tab-pane label="基本信息"><div><edit @viewfile="viewfile" /></div></el-tab-pane>
       <el-tab-pane label="主要人员信息"><mainmember @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="股东信息"><shareholder /></el-tab-pane>
       <el-tab-pane label="印章信息"><seal @viewfile="viewfile" /></el-tab-pane>
@@ -32,7 +52,15 @@
     </el-dialog>
   </div>
 </template>
+<style lang="scss">
+.dp-row {
+  padding: 10px;
+}
+
+</style>
 <script>
+import { get as getBusinesslicense } from '@/api/lpm/businesslicense'
+
 import { getApiUrl } from '@/utils/utils'
 import PDFView from '@/components/PdfView/index.vue'
 
@@ -79,10 +107,25 @@ export default {
       src: '',
       pdfTitle: '原文查看器',
       pdfVisible: false,
-      listLoading: false
+      listLoading: false,
+      /* 营业执照模块 */
+      businesslicenseData: {} // 营业执照的相关信息
     }
   },
+  created() {
+    this.init()
+  },
   methods: {
+    // 初始化功能权限
+    init() {
+      // 获取企业的id
+      const id = this.$route.query.id
+      // 请求营业执照信息
+      getBusinesslicense(id).then(response => {
+        this.businesslicenseData = response.data
+        this.logTitle = '【 ' + response.data.enterpriseName + ' 】'
+      })
+    },
     viewfile(id, fileName) {
       this.pdfVisible = true
       this.src =
