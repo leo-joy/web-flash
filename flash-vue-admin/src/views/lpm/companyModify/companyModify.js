@@ -379,40 +379,40 @@ export default {
             applyReason: this.form.applyReason,
             modifyDate: this.form.modifyDate,
             enterpriseId: this.form.enterpriseId,
-            enterpriseNameState: this.form.enterpriseNameState === 'true' ? this.form.enterpriseNameState : '',
+            enterpriseNameState: this.form.enterpriseNameState ? this.form.enterpriseNameState : 'false',
             enterpriseNameOld: this.form.enterpriseNameOld,
             enterpriseNameNew: this.form.enterpriseNameNew,
-            registeredAddressState: this.form.registeredAddressState === 'true' ? this.form.registeredAddressState : '',
+            registeredAddressState: this.form.registeredAddressState ? this.form.registeredAddressState : 'false',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
-            operatingPeriodEndState: this.form.operatingPeriodEndState === 'true' ? this.form.operatingPeriodEndState : '',
+            operatingPeriodEndState: this.form.operatingPeriodEndState ? this.form.operatingPeriodEndState : 'false',
             operatingPeriodEndOld: this.form.operatingPeriodEndOld,
             operatingPeriodEndNew: this.form.operatingPeriodEndNew,
-            businessScopeState: this.form.businessScopeState === 'true' ? this.form.businessScopeState : '',
+            businessScopeState: this.form.businessScopeState ? this.form.businessScopeState : 'false',
             businessScopeOld: this.form.businessScopeOld,
             businessScopeNew: this.form.businessScopeNew,
-            legalRepresentativeState: this.form.legalRepresentativeState === 'true' ? this.form.legalRepresentativeState : '',
+            legalRepresentativeState: this.form.legalRepresentativeState ? this.form.legalRepresentativeState : 'false',
             legalRepresentativeOld: this.form.legalRepresentativeOld,
             legalRepresentativeNew: this.form.legalRepresentativeNew,
-            chairmanState: this.form.chairmanState === 'true' ? this.form.chairmanState : '',
+            chairmanState: this.form.chairmanState ? this.form.chairmanState : 'false',
             chairmanOld: this.form.chairmanOld,
             chairmanNew: this.form.chairmanNew,
             chairmanIdOld: this.form.chairmanIdOld,
             chairmanIdNew: this.form.chairmanIdNew,
 
-            generalManagerState: this.form.generalManagerState === 'true' ? this.form.generalManagerState : '',
+            generalManagerState: this.form.generalManagerState ? this.form.generalManagerState : 'false',
             generalManagerOld: this.form.generalManagerOld,
             generalManagerNew: this.form.generalManagerNew,
             generalManagerIdOld: this.form.generalManagerIdOld,
             generalManagerIdNew: this.form.generalManagerIdNew,
 
-            directorState: this.form.directorState === 'true' ? this.form.directorState : '',
+            directorState: this.form.directorState ? this.form.directorState : 'false',
             directorOld: this.form.directorOld,
             directorNew: this.form.directorNew,
             directorIdOld: this.form.directorIdOld,
             directorIdNew: this.form.directorIdNew,
 
-            supervisorState: this.form.supervisorState === 'true' ? this.form.supervisorState : '',
+            supervisorState: this.form.supervisorState ? this.form.supervisorState : 'false',
             supervisorOld: this.form.supervisorOld,
             supervisorNew: this.form.supervisorNew,
             supervisorIdOld: this.form.supervisorIdOld,
@@ -459,11 +459,11 @@ export default {
     edit() {
       if (this.checkSel()) {
         this.isAdd = false
+        this.initFormInfo()
         this.form = this.selRow
         this.formTitle = '编辑企业变更'
         this.formVisible = true
         this.businesslicenseData = this.companyList[0]
-        this.initFormInfo()
         this.accessoryFilesList = [] // 会议纪要、合作协议等
         this.businessLicenseFilesList = [] // 营业执照
         this.approvalFilesList = [] // 核准文件

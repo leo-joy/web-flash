@@ -30,68 +30,82 @@
       </el-table-column>
       <el-table-column label="变更事项及内容">
         <template slot-scope="scope">
-          <div v-if="!scope.row.enterpriseNameState === false">
+          <div v-if="scope.row.enterpriseNameState+'' === 'true'">
             <span><b>企业名称：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.enterpriseNameOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.enterpriseNameNew }}</b></span>
           </div>
-          <div v-if="!scope.row.legalRepresentativeState === false">
+          <div v-if="scope.row.legalRepresentativeState+'' === 'true'">
             <span><b>企业法人：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.legalRepresentativeOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.legalRepresentativeNew }}</b></span>
           </div>
-          <div v-if="!scope.row.registeredAddressState === false">
+          <div v-if="scope.row.registeredAddressState+'' === 'true'">
             <span><b>注册地址：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.registeredAddressOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
           </div>
-          <div v-if="!scope.row.operatingPeriodEndState === false">
+          <div v-if="scope.row.operatingPeriodEndState+'' === 'true'">
             <span><b>经营期限：</b></span>
             <span>原</span>
-            <span><b style="color:red">{{ scope.row.operatingPeriodEndOld }}</b></span>
+            <span><b style="color:red">{{ scope.row.operatingPeriodEndOld.replace("00:00:00","") }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
           </div>
-          <div v-if="!scope.row.businessScopeState === false">
+          <div v-if="scope.row.businessScopeState+'' === 'true'">
             <span><b>经营范围：</b></span>
             <span>原</span>
             <span>{{ scope.row.businessScopeOld }}</span>
             <span>变更为</span>
             <span><b>{{ scope.row.businessScopeNew }}</b></span>
           </div>
-          <div v-if="!scope.row.chairmanState === false">
-            <span><b>董事长：</b></span>
+          <div v-if="scope.row.chairmanState+'' === 'true'">
+            <span><b>董事长：</b>{{ scope.row.chairmanState }}</span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.chairmanOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.chairmanNew }}</b></span>
           </div>
-          <div v-if="!scope.row.generalManagerState === false">
+          <div v-if="scope.row.generalManagerState+'' === 'true'">
             <span><b>经理：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.generalManagerOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.generalManagerNew }}</b></span>
           </div>
-          <div v-if="!scope.row.directorState === false">
+          <div v-if="scope.row.directorState+'' === 'true'">
             <span><b>董事：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.directorOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.directorNew }}</b></span>
           </div>
-          <div v-if="!scope.row.supervisorState === false">
+          <div v-if="scope.row.supervisorState+'' === 'true'">
             <span><b>监事：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.supervisorOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
+          </div>
+          <div
+            v-if="scope.row.enterpriseNameState+'' === 'false'
+              && scope.row.legalRepresentativeState+'' === 'false'
+              && scope.row.registeredAddressState+'' === 'false'
+              && scope.row.operatingPeriodEndState+'' === 'false'
+              && scope.row.businessScopeState+'' === 'false'
+              && scope.row.chairmanState+'' === 'false'
+              && scope.row.generalManagerState+'' === 'false'
+              && scope.row.directorState+'' === 'false'
+              && scope.row.supervisorState+'' === 'false'
+            "
+          >
+            <span>无变更事项</span>
           </div>
 
         </template>
@@ -102,7 +116,7 @@
         </template>
       </el-table-column>
     </el-table>
-
+    <br>
     <el-pagination
       background
       layout="total, sizes, prev, pager, next, jumper"
@@ -719,7 +733,7 @@
                   <el-input v-model="form.applicantContact" minlength="1" />
                 </el-form-item>
               </el-col>
-              
+
               <!-- <el-col :span="8">
                 <el-form-item label="申请类型">
                   <el-input v-model="form.applyType" minlength="1" />

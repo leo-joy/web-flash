@@ -5,8 +5,11 @@
         <el-card>
 
           <el-row>
-            <el-col :span="24">
+            <el-col :span="20">
               <h4>变更理由：{{ item.applyReason }}</h4>
+            </el-col>
+            <el-col :span="4">
+              <h4>日期：{{ item.modifyDate.replace("00:00:00","") }}</h4>
             </el-col>
             <el-col :span="24">
               <table class="dp-table" border="1">
