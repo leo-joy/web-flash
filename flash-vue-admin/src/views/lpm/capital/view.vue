@@ -46,13 +46,13 @@
         />
         <el-table-column
           prop="realityCapitalContribution"
-          label="实缴出资额（万元）"
+          label="认缴出资额（万元）"
           width="100"
         />
-        <el-table-column label="实缴出资日期" width="120">
+        <el-table-column label="认缴出资日期" width="120">
           <template
             slot-scope="scope"
-          >{{ scope.row.realityCapitalDate.replace(' 00:00:00','') }}</template>
+          >{{ scope.row.subscribedCapitalDate.replace(' 00:00:00','') }}</template>
         </el-table-column>
       </el-table>
     </el-col>
