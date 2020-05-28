@@ -28,20 +28,20 @@ export default {
     msgSender: '消息发送器',
 
     /**
-     * 公司信息管理
+     * 企业信息管理
      */
     lpm: '企业管理',
     enterpriseInfo: '企业信息管理',
     editCompany: '企业变更',
 
-    enterpriseManage: '编辑公司基本信息',
-    detailEnterpriseinfo: '公司详细信息',
+    enterpriseManage: '编辑企业基本信息',
+    detailEnterpriseinfo: '企业详细信息',
     shareholderManage: '合作单位管理',
-    editCompanyManage: '公司变更管理',
+    editCompanyManage: '企业变更管理',
     filesManage: '附件管理',
     // 子菜单
     businessLicense: '营业执照',
-    editBusinessLicense: '公司注册',
+    editBusinessLicense: '企业注册',
     mainmember: '主要人员信息',
     shareholder: '股东信息',
     seal: '印章信息',
@@ -62,9 +62,9 @@ export default {
     tallage: '税务信息',
 
     /**
-     * 公司治理结构
+     * 企业治理结构
      */
-    companymanage: '公司治理结构',
+    companymanage: '企业治理结构',
     // 子菜单
     advancedUser: '企业人员管理',
 
@@ -73,15 +73,15 @@ export default {
      */
     liquidationManage: '清算退出管理',
     // 子菜单
-    companyCancel: '公司注销',
-    companyRevoked: '公司吊销',
-    equityExit: '公司清算退出',
+    companyCancel: '企业注销',
+    companyRevoked: '企业吊销',
+    equityExit: '企业清算退出',
     shutdownBusiness: '终止经营',
 
     /**
      * 三会治理
      */
-    threeMeetingManage: '公司治理结构',
+    threeMeetingManage: '企业治理结构',
 
     /**
      * 报表统计分析
