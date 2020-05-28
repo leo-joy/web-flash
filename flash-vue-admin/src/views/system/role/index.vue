@@ -140,37 +140,18 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog
-      title="权限配置"
-      :visible.sync="permissonVisible"
-      width="25%"
-    >
+    <el-dialog title="功能权限配置" :visible.sync="permissonVisible" width="40%">
       <el-form>
         <el-row>
-          <el-col :span="12">
-            <el-tree
-              ref="permissonTree"
-              :data="permissons"
-              show-checkbox
-              node-key="id"
-              :default-checked-keys="checkedPermissionKeys"
-              :props="defaultProps"
-            />
-
+          <el-col :span="24">
+            <el-form-item>
+              <el-button size="mini" type="primary" @click="savePermissions">保存权限配置</el-button>
+            </el-form-item>
           </el-col>
-        </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="savePermissions">{{ $t('button.submit') }}</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog>
-
-    <el-dialog title="功能权限配置" :visible.sync="permissonVisible" width="30%">
-      <el-form>
-        <el-row>
-          <el-col :span="12">
+          <el-col :span="24">
             <el-tree
               ref="permissonTree"
+              empty-text="暂无数据"
               :data="permissons"
               show-checkbox
               node-key="id"
@@ -178,14 +159,17 @@
               :props="defaultProps"
             />
           </el-col>
+          <el-col :span="24">
+            <el-form-item>
+              <br>
+              <el-button size="mini" type="primary" @click="savePermissions">保存权限配置</el-button>
+            </el-form-item>
+          </el-col>
         </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="savePermissions">{{ $t('button.submit') }}</el-button>
-        </el-form-item>
       </el-form>
     </el-dialog>
 
-    <el-dialog title="公司权限配置" :visible.sync="permissonCompanyVisible" width="60%">
+    <el-dialog title="公司权限配置" :visible.sync="permissonCompanyVisible" width="80%">
       <el-row>
         <el-col :span="18">
           <el-input
@@ -196,7 +180,9 @@
           />
           <el-tree
             v-if="deptTree.show"
+            style="height:300px"
             empty-text="暂无数据"
+            :default-expand-all="true"
             :expand-on-click-node="false"
             :data="deptList"
             :props="deptTree.defaultProps"
@@ -245,8 +231,14 @@
         <el-table-column label="企业名称">
           <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
         </el-table-column>
-        <el-table-column label="法定代表人" width="100">
+        <el-table-column label="统一社会信用代码" width="200">
+          <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
+        </el-table-column>
+        <el-table-column label="法定代表人" width="120">
           <template slot-scope="scope">{{ scope.row.legalRepresentative }}</template>
+        </el-table-column>
+        <el-table-column label="成立日期" width="120">
+          <template slot-scope="scope">{{ scope.row.setupDate.replace(' 00:00:00','') }}</template>
         </el-table-column>
       </el-table>
       <br>
@@ -269,4 +261,7 @@
 <script src="./role.js"></script>
 <style rel="stylesheet/scss" lang="scss" scoped>
   @import "src/styles/common.scss";
+  .el-tree-node__children .el-tree-node {
+    float: left;
+  }
 </style>
