@@ -118,6 +118,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 5,
+        registrationType: 1,
         id: undefined
       },
       total: 0,
