@@ -53,7 +53,7 @@ var initChartData = function(url, id) {
             element['receiptor'] = element.legalRepresentative
             element['hasChildren'] = true
             element['amount'] = element.registeredCapital
-            element['realityCapitalContribution'] = element.realityCapitalContribution
+            element['subscribedCapitalContribution'] = element.subscribedCapitalContribution
             element['percent'] = element.proportion
             element['children'] = []
           })
@@ -395,7 +395,7 @@ treeChart.prototype.graphTree = function(config) {
       .text(function(d) {
         var str = ''
         if (forUpward) {
-          str = !d.realityCapitalContribution ? '' : '认缴金额：' + d.realityCapitalContribution + '万元'
+          str = !d.subscribedCapitalContribution ? '' : '认缴金额：' + d.subscribedCapitalContribution + '万元'
         } else {
           str = !d.amount ? '' : '认缴金额：' + d.amount + '万元'
         }
@@ -609,6 +609,7 @@ treeChart.prototype.graphTree = function(config) {
           obj['hasHumanholding'] = false
           obj['hasChildren'] = false
           obj['amount'] = investCompanyData[i].registeredCapital
+          obj['subscribedCapitalContribution'] = investCompanyData[i].subscribedCapitalContribution
           obj['percent'] = investCompanyData[i].proportion
           obj['children'] = []
           d._children.push(obj)
