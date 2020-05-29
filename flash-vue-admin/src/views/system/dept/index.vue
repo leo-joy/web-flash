@@ -70,6 +70,7 @@
                 @click.native="showTree = !showTree"
               />
               <el-tree
+                v-if="showTree"
                 style="height:260px"
                 empty-text="暂无数据"
                 :default-expand-all="true"
