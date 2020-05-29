@@ -20,6 +20,7 @@ export default {
         id: undefined
       },
       companyList: [],
+      companyListLength: 0,
       companyTree: {
         show: false,
         defaultProps: {
@@ -121,6 +122,7 @@ export default {
       this.listQuery.enterpriseCode = this.$route.query.id
       getList(this.listQuery).then(response => {
         this.list = response.data.records
+        this.companyListLength = this.list.length
         this.listLoading = false
         this.total = response.data.total
       })

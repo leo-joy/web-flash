@@ -4,6 +4,7 @@
       <el-row>
         <el-col :span="24">
           <el-button
+            v-if="companyListLength === 0"
             v-permission="['/mainmember/add']"
             type="success"
             icon="el-icon-plus"
