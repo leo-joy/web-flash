@@ -7,10 +7,10 @@
     <el-row class="user-content" style="">
       <el-col :span="6" class="profile">
         <img class="user-avatar" src="@/assets/img/avatar.gif"><br>
-        <p><span class="title"><i class="el-icon-phone" />&nbsp;&nbsp;{{ user.phone }}</span></p>
+        <!-- <p><span class="title"><i class="el-icon-phone" />&nbsp;&nbsp;{{ user.phone }}</span></p> -->
         <p><span class="title"><i class="el-icon-message" />&nbsp;&nbsp;{{ user.email }}</span></p>
         <p><span class="title"><i class="el-icon-open" />&nbsp;&nbsp;{{ user.status == '1'?'启用' : '禁用' }}</span></p>
-        <p><span class="title"><i class="el-icon-location-outline" />&nbsp;&nbsp;上海市浦东大道290弄</span></p>
+        <!-- <p><span class="title"><i class="el-icon-location-outline" />&nbsp;&nbsp;上海市浦东大道290弄</span></p> -->
       </el-col>
       <el-col :span="18" style="padding-left:10px;">
         <el-tabs v-model="activeName" @tab-click="handleClick">

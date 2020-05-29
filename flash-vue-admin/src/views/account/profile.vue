@@ -26,9 +26,9 @@
             <span> {{ user.sex == 1 ? '男' : '女' }}</span>
           </el-form-item>
           <h3>联系信息</h3>
-          <el-form-item label="手机">
+          <!-- <el-form-item label="手机">
             <span>{{ user.phone }}</span>
-          </el-form-item>
+          </el-form-item> -->
           <el-form-item label="邮箱">
             <span> {{ user.email }}</span>
           </el-form-item>
