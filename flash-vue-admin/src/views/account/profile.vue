@@ -7,7 +7,7 @@
     <el-row class="user-content" style="">
       <el-col :span="6" class="profile">
         <img class="user-avatar" src="@/assets/img/avatar.gif"><br>
-        <p><span class="title"><i class="el-icon-phone" />&nbsp;&nbsp;{{ user.phone }}</span></p>
+        <!-- <p><span class="title"><i class="el-icon-phone" />&nbsp;&nbsp;{{ user.phone }}</span></p> -->
         <p><span class="title"><i class="el-icon-message" />&nbsp;&nbsp;{{ user.email }}</span></p>
         <p><span class="title"><i class="el-icon-open" />&nbsp;&nbsp;{{ user.status == '1'?'启用' : '禁用' }}</span></p>
       </el-col>
