@@ -13,11 +13,13 @@
       <el-table-column width="180">
         <template slot-scope="scope">
           <el-button
+            v-permission="['/file/view']"
             icon="el-icon-log"
             size="mini"
             @click.native="viewPdf(scope.row.id,scope.row.name)"
           >查看</el-button>
           <el-button
+            v-permission="['/file/download']"
             icon="el-icon-log"
             size="mini"
             @click.native="download(scope.row.id,scope.row.name)"
@@ -36,8 +38,10 @@
 <script>
 import { getApiUrl } from '@/utils/utils'
 import PDFView from '@/components/PdfView/index.vue'
-
+// 权限判断指令
+import permission from '@/directive/permission/index.js'
 export default {
+  directives: { permission },
   components: { PDFView },
 
   props: {
