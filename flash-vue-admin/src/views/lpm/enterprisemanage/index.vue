@@ -29,7 +29,7 @@
     <el-tabs :tab-position="tabPosition" type="border-card">
       <el-tab-pane label="基本信息"><div><edit @viewfile="viewfile" /></div></el-tab-pane>
       <el-tab-pane label="主要人员信息"><mainmember @viewfile="viewfile" /></el-tab-pane>
-      <el-tab-pane label="股东信息"><shareholder /></el-tab-pane>
+      <!-- <el-tab-pane label="股东信息"><shareholder /></el-tab-pane> -->
       <el-tab-pane label="印章信息"><seal @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="年报信息"><annals @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="股权及出资信息"><capital @viewfile="viewfile" /></el-tab-pane>
@@ -66,7 +66,7 @@ import PDFView from '@/components/PdfView/index.vue'
 
 import edit from '@/views/lpm/businesslicense/edit.vue'
 import mainmember from '@/views/lpm/mainmember/index.vue'
-import shareholder from '@/views/lpm/shareholder/index.vue'
+// import shareholder from '@/views/lpm/shareholder/index.vue'
 import seal from '@/views/lpm/seal/index.vue'
 import annals from '@/views/lpm/annals/index.vue'
 import capital from '@/views/lpm/capital/index.vue'
@@ -85,7 +85,7 @@ export default {
   components: {
     edit,
     mainmember,
-    shareholder,
+    // shareholder,
     seal,
     annals,
     capital,
