@@ -381,6 +381,7 @@
                     <el-col :span="24">
                       <el-form-item label="新董事" prop="director">
                         <el-autocomplete
+                          v-model="directorValue"
                           popper-class="my-autocomplete"
                           :fetch-suggestions="querySearchAsync"
                           style="width: 100%;"
@@ -426,6 +427,7 @@
                     <el-col :span="24">
                       <el-form-item label="新监事" prop="supervisor">
                         <el-autocomplete
+                          v-model="supervisorValue"
                           popper-class="my-autocomplete"
                           :fetch-suggestions="querySearchAsync"
                           style="width: 100%;"

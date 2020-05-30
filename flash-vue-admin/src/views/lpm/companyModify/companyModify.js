@@ -42,6 +42,8 @@ export default {
       restaurants: [],
       directorTags: [], // 董事
       supervisorTags: [], // 监事
+      directorValue: '',
+      supervisorValue: '',
       listUserQuery: {
         page: 1,
         limit: 20000,
