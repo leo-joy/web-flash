@@ -49,7 +49,7 @@ var initChartData = function(url, id) {
           obj['name'] = 'origin'
           companyData.forEach(element => {
             element['name'] = element.branchCompanyName
-            element['hasHumanholding'] = element.shareholderMold === 1
+            element['hasHumanholding'] = element.legalRepresentative && element.shareholderMold === 1
             element['receiptor'] = element.legalRepresentative
             element['hasChildren'] = true
             element['amount'] = element.registeredCapital
