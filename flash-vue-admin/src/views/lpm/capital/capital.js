@@ -493,7 +493,7 @@ export default {
         return
       }
       var result = this.list.filter(word => word.branchCompanyCode === item.id)
-      if (result.length > 0) {
+      if (result.length > 0 && this.isAdd) {
         alert('此股东已经添加')
         return
       }

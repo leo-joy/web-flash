@@ -92,7 +92,7 @@
                   />
                 </el-form-item>
               </el-col>
-              <el-col :class="[isAdd? 'dpShow' : 'dpHide']" :span="12">
+              <el-col :class="[form.shareholderMold===1 && isAdd? 'dpShow' : 'dpHide']" :span="12">
                 <el-form-item label="类型">
                   <el-radio-group v-model="form.shareholderMold" @change="handleChangeRadio">
                     <el-radio :label="1">企业股东</el-radio>
@@ -102,7 +102,7 @@
               </el-col>
             </el-row>
             <el-row>
-              <el-col :class="[form.shareholderMold===1 && isAdd ? 'dpShow' : 'dpHide']" :span="12">
+              <el-col :class="[form.shareholderMold===1 ? 'dpShow' : 'dpHide']" :span="12">
                 <el-form-item label="企业股东" prop="shareholder">
                   <el-autocomplete
                     v-model="form.shareholder"
@@ -127,7 +127,7 @@
                   </el-autocomplete>
                 </el-form-item>
               </el-col>
-              <el-col :class="[form.shareholderMold===2 && isAdd ? 'dpShow' : 'dpHide']" :span="12">
+              <el-col :class="[form.shareholderMold===2 ? 'dpShow' : 'dpHide']" :span="12">
                 <el-form-item label="自然人股东" prop="shareholder">
                   <el-autocomplete
                     v-model="form.shareholder"
