@@ -66,13 +66,13 @@ export default {
     },
     download(id, fileName) {
       window.location.href =
-        getApiUrl() + '/file/download?idFile=' + id + '&fileName=' + fileName
+        getApiUrl() + '/file/download?idFile=' + id + '&fileName=' + encodeURI(fileName)
     },
 
     viewPdf(id, fileName) {
       this.pdfVisible = true
       this.src =
-        getApiUrl() + '/file/download?idFile=' + id + '&fileName=' + fileName
+        getApiUrl() + '/file/download?idFile=' + id + '&fileName=' + encodeURI(fileName)
     }
   }
 }
