@@ -79,7 +79,9 @@ export default {
       selRow: {},
       restaurants: [],
       directorTags: [], // 董事
-      state: '',
+      supervisorTags: [], // 董事
+      directorState: '',
+      supervisorState: '',
       timeout: null
     }
   },
@@ -187,6 +189,7 @@ export default {
       this.formVisible = true
       this.isAdd = true
       this.directorTags = []
+      this.supervisorTags = []
 
       // 设置新增企业初始值;
       this.form.enterpriseName = this.companyList[0].enterpriseName
@@ -247,6 +250,15 @@ export default {
           const directorArr = this.selRow.director.split('、')
           for (let j = 0; j < directorIdArr.length; j++) {
             this.directorTags.push({ name: directorArr[j], id: directorIdArr[j] })
+          }
+        }
+
+        if (this.selRow.supervisorId) {
+          this.supervisorTags = []
+          const supervisorIdArr = this.selRow.supervisorId.split('、')
+          const supervisorArr = this.selRow.supervisor.split('、')
+          for (let j = 0; j < supervisorIdArr.length; j++) {
+            this.supervisorTags.push({ name: supervisorArr[j], id: supervisorIdArr[j] })
           }
         }
 
@@ -414,8 +426,48 @@ export default {
       console.log(this.directorTags)
     },
     handleSupervisorSelect(item) {
-      this.form.supervisorId = item.id
-      this.form.supervisor = item.name
+      console.log(item)
+      console.log(this.form.supervisor)
+      if (this.form.supervisor) {
+        if (this.form.supervisor.indexOf(item.name) === -1) {
+          this.form.supervisorId = this.form.supervisorId + '、' + item.id
+          this.form.supervisor = this.form.supervisor + '、' + item.name
+          this.supervisorTags.push({ id: item.id, name: item.name })
+        } else {
+          this.form.supervisorId = this.form.supervisorId
+          this.form.supervisor = this.form.supervisor
+        }
+      } else {
+        this.form.supervisorId = item.id
+        this.form.supervisor = item.name
+        this.supervisorTags.push({ id: item.id, name: item.name })
+      }
+    },
+    handleSupervisorDelete(id, name) {
+      var result = this.supervisorTags.filter(word => word.id !== id)
+      console.log(result)
+      this.supervisorTags = result.length > 0 ? result : []
+      const n = (this.form.supervisorId.split('、')).length - 1
+      console.log(this.form.supervisorId)
+      console.log(this.form.supervisor)
+      console.log(n)
+      if (n > 0) {
+        console.log('多个')
+        if (this.form.supervisor.indexOf(name) !== 0) {
+          this.form.supervisorId = this.form.supervisorId.replace('、' + id, '')
+          this.form.supervisor = this.form.supervisor.replace('、' + name, '')
+        } else {
+          this.form.supervisorId = this.form.supervisorId.replace(id + '、', '')
+          this.form.supervisor = this.form.supervisor.replace(name + '、', '')
+        }
+      } else {
+        console.log('单个')
+        this.form.supervisorId = this.form.supervisorId.replace(id, '')
+        this.form.supervisor = this.form.supervisor.replace(name, '')
+      }
+      console.log(this.form.supervisorId)
+      console.log(this.form.supervisor)
+      console.log(this.supervisorTags)
     },
     handleIconClick(ev) {
       // getUserList(this.listUserQuery).then(response => {

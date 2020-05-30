@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="24">
           <el-button
-            v-if="companyListLength === 0"
+            v-if="companyListLength < 2"
             v-permission="['/mainmember/add']"
             type="success"
             icon="el-icon-plus"
@@ -113,7 +113,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="总经理" prop="generalManager">
+            <el-form-item label="总经理">
               <el-autocomplete
                 v-model="form.generalManager"
                 popper-class="my-autocomplete"
@@ -133,33 +133,12 @@
               </el-autocomplete>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
-            <el-form-item label="监事">
-              <el-autocomplete
-                v-model="form.supervisor"
-                popper-class="my-autocomplete"
-                :fetch-suggestions="querySearchAsync"
-                placeholder="请输入监事姓名"
-                @select="handleSupervisorSelect"
-              >
-                <i
-                  slot="suffix"
-                  class="el-icon-circle-plus-outline el-input__icon"
-                  @click="handleIconClick"
-                />
-                <template slot-scope="{ item }" style="width:300px">
-                  <div class="name">{{ item.name }}</div>
-                  <span class="addr">部门：{{ item.deptName }}</span>
-                </template>
-              </el-autocomplete>
-            </el-form-item>
-          </el-col>
           <el-col :span="24">
-            <el-form-item label="董事" prop="director">
+            <el-form-item label="董事">
               <div>
                 <el-col :span="24">
                   <el-autocomplete
-                    v-model="state"
+                    v-model="directorState"
                     popper-class="my-autocomplete"
                     :fetch-suggestions="querySearchAsync"
                     placeholder="请输入董事姓名"
@@ -185,6 +164,42 @@
                 </el-col>
                 <!-- <el-col :span="16">
                   <el-input v-model="form.director" minlength="1"></el-input>
+                </el-col>-->
+              </div>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="监事" prop="supervisor">
+              <div>
+                <el-col :span="24">
+                  <el-autocomplete
+                    v-model="supervisorState"
+                    popper-class="my-autocomplete"
+                    :fetch-suggestions="querySearchAsync"
+                    placeholder="请输入监事姓名"
+                    @select="handleSupervisorSelect"
+                  >
+                    <i
+                      slot="suffix"
+                      class="el-icon-circle-plus-outline el-input__icon"
+                      @click="handleIconClick"
+                    />
+                    <el-tag
+                      v-for="tag in supervisorTags"
+                      slot="append"
+                      :key="tag.name"
+                      closable
+                      @close="handleSupervisorDelete(tag.id, tag.name)"
+                    >{{ tag.name }}</el-tag>
+                    <template slot-scope="{ item }">
+                      <div class="name">{{ item.name }}</div>
+                      <span class="addr">部门：{{ item.deptName }}</span>
+                    </template>
+                  </el-autocomplete>
+                </el-col>
+                <!-- <el-col :span="16">
+                  <el-input v-model="form.supervisor" minlength="1"></el-input>
                 </el-col>-->
               </div>
             </el-form-item>
