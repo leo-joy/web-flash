@@ -55,6 +55,15 @@ export default {
           { required: true, message: '请输入用户名', trigger: 'blur' },
           { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
         ],
+        phone: [
+          { required: true, message: '请输入手机号', trigger: 'blur' }
+        ],
+        password: [
+          { required: true, message: '请输入密码', trigger: 'blur' }
+        ],
+        rePassword: [
+          { required: true, message: '请输入确认密码', trigger: 'blur' }
+        ],
         email: [
           { required: true, message: '请输入email', trigger: 'blur' }
         ]
@@ -190,6 +199,14 @@ export default {
             }
             form.birthday = parseTime(form.birthday, '{y}-{m}-{d}')
             form.createtime = parseTime(form.createtime)
+            form.academic = form.academic
+            form.specialty = form.specialty
+            form.post = form.post
+            form.duty = form.duty
+            form.experience = form.experience
+            form.type = form.type
+            form.password = form.password?form.password:'123456' // 密码
+            form.rePassword = form.rePassword?form.rePassword:'123456' // 重复密码
             console.log(form)
             saveUser(form).then(response => {
               this.$message({

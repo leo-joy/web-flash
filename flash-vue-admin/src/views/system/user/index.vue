@@ -110,7 +110,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="账户" prop="account">
-              <el-input v-model="form.account" minlength="1" />
+              <el-input v-model="form.account" :disabled="!isAdd" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -132,12 +132,12 @@
               <el-input v-model="form.email" />
             </el-form-item>
           </el-col>
-          <el-col v-show="isAdd" :span="12">
+          <el-col v-if="isAdd" :span="12">
             <el-form-item label="密码" prop="password">
               <el-input v-model="form.password" type="password" />
             </el-form-item>
           </el-col>
-          <el-col v-show="isAdd" :span="12">
+          <el-col v-if="isAdd" :span="12">
             <el-form-item label="确认密码" prop="rePassword">
               <el-input v-model="form.rePassword" type="password" />
             </el-form-item>
