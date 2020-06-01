@@ -134,7 +134,7 @@
                 <el-button type="text" @click="detail(scope.row)">{{ scope.row.enterpriseName }}</el-button>
               </template>
             </el-table-column>
-            <el-table-column label="社会信用代码" width="190">
+            <el-table-column label="社会信用代码" width="210">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
             </el-table-column>
             <el-table-column label="法定代表人" width="100">
