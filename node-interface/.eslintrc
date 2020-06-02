@@ -1,0 +1,21 @@
+{
+    "parser": "babel-eslint",
+    "env": {
+      "node": true,
+      "jest": true
+    },
+    "extends": [
+        "airbnb-base",
+    ],
+    "plugins": [
+        "jest"
+    ],
+    "globals": {
+        "__DEV__": true
+    },
+    "rules": {
+        "import/extensions": "off",
+        "import/no-unresolved": "error",
+        "import/no-extraneous-dependencies": "off",
+    }
+}
