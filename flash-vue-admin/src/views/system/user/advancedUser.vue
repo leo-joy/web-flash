@@ -24,21 +24,21 @@
       <el-row>
         <el-col :span="24">
           <el-button
-            v-permission="['/mgr/add']"
+            v-permission="['/businesslicense/add']"
             type="success"
             size="small"
             icon="el-icon-plus"
             @click.native="add"
           >{{ $t('button.add') }}</el-button>
           <el-button
-            v-permission="['/mgr/edit']"
+            v-permission="['/businesslicense/edit']"
             type="primary"
             size="small"
             icon="el-icon-edit"
             @click.native="edit"
           >{{ $t('button.edit') }}</el-button>
           <el-button
-            v-permission="['/mgr/delete']"
+            v-permission="['/businesslicense/delete']"
             type="danger"
             size="small"
             icon="el-icon-delete"
