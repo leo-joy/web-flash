@@ -3,6 +3,8 @@ import { parseTime } from '@/utils'
 import { getList } from '@/api/lpm/businesslicense'
 import { list as deptList } from '@/api/system/dept'
 import { getList as dictList } from '@/api/system/dict'
+import { getList as mainmemberList } from '@/api/lpm/mainmember'
+
 import { showDictLabel, getDictNum } from '@/utils/common'
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
@@ -26,6 +28,18 @@ export default {
       }, {
         value: 'legalRepresentative',
         label: '法定代表人'
+      }, {
+        value: 'chairman',
+        label: '董事长'
+      }, {
+        value: 'director',
+        label: '董事'
+      }, {
+        value: 'supervisor',
+        label: '监事'
+      }, {
+        value: 'generalManager',
+        label: '总经理'
       }
       ],
       deptRadio: '27',
@@ -119,24 +133,6 @@ export default {
         this.moduleType = tempArr[tempArr.length - 1]
       }
 
-      this.fetchData()
-    },
-    fetchData() {
-      this.listLoading = true
-      // 如果进入企业管理模块和变更模块进行，公司权限过滤
-      if (this.moduleType === '1' || this.moduleType === '2') {
-        this.companys = this.$store.state.user.companys
-      }
-      this.listQuery.ids = this.companys ? this.companys.toString() : ''
-      getList(this.listQuery).then(response => {
-        this.list = response.data.records
-        this.listLoading = false
-        this.total = response.data.total
-        this.listQuery.page = response.data.current || 1
-        this.listQuery.enterpriseName = ''
-        this.listQuery.unifiedSocialCreditCode = ''
-        this.listQuery.legalRepresentative = ''
-      })
       dictList({ name: '企业类型' }).then(response => {
         this.enterpriseType = response.data[0].detail
       })
@@ -146,6 +142,59 @@ export default {
       dictList({ name: '币种' }).then(response => {
         this.currencyDict = response.data[0].detail
       })
+
+      this.fetchData()
+    },
+    fetchData() {
+      this.listLoading = true
+      if ((this.searchType === 'chairman' ||
+          this.searchType === 'director' ||
+          this.searchType === 'supervisor' ||
+          this.searchType === 'generalManager') && this.keyword) {
+        const listQuery = {
+          page: 1,
+          limit: 2000
+        }
+        listQuery[this.searchType] = this.keyword
+        mainmemberList(listQuery).then(response => {
+          console.log(response)
+          const records = response.data.records
+          const pIds = []
+          for (let i = 0; i < records.length; i++) {
+            pIds.push(records[i].enterpriseCode)
+          }
+
+          // 如果进入企业管理模块和变更模块进行，公司权限过滤
+          if (this.moduleType === '1' || this.moduleType === '2') {
+            this.companys = this.$store.state.user.companys
+          }
+          this.listQuery.ids = pIds.length > 0 ? pIds.toString() : '2000000'
+          getList(this.listQuery).then(response => {
+            this.list = response.data.records
+            this.listLoading = false
+            this.total = response.data.total
+            this.listQuery.page = response.data.current || 1
+            this.listQuery.enterpriseName = ''
+            this.listQuery.unifiedSocialCreditCode = ''
+            this.listQuery.legalRepresentative = ''
+          })
+        })
+      } else {
+        // 如果进入企业管理模块和变更模块进行，公司权限过滤
+        if (this.moduleType === '1' || this.moduleType === '2') {
+          this.companys = this.$store.state.user.companys
+        }
+        this.listQuery.ids = this.companys ? this.companys.toString() : ''
+        getList(this.listQuery).then(response => {
+          this.list = response.data.records
+          this.listLoading = false
+          this.total = response.data.total
+          this.listQuery.page = response.data.current || 1
+          this.listQuery.enterpriseName = ''
+          this.listQuery.unifiedSocialCreditCode = ''
+          this.listQuery.legalRepresentative = ''
+        })
+      }
     },
     initSearchParams() {
       if (this.searchType === 'enterpriseName') {
@@ -323,12 +372,8 @@ export default {
       this.fetchData()
     },
     detail(row) {
-      console.log(row)
-      this.$router.push({ path: '/lpm/detailEnterpriseinfo', query: { id: row.id }})
-      // this.resetForm()
-      // this.formTitle = '添加营业执照'
-      // this.formVisible = true
-      // this.isAdd = true
+      const routeUrl = this.$router.resolve({ path: '/lpm/detailEnterpriseinfo', query: { id: row.id }})
+      window.open(routeUrl.href, '_blank')
     },
     // 格式化 企业类型
     formatterEnterpriseType(row) {
@@ -475,6 +520,11 @@ export default {
       } else {
         console.log('统一社会信用代码或企业名称为空！请检查')
       }
+    },
+
+    // 获取主要人员信息列表
+    searchTypeHander(val) {
+      this.memberType = val
     }
   }
 }

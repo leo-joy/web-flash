@@ -29,9 +29,17 @@ public class MainMemberController {
 	private MainMemberService mainMemberService;
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public Object list(@RequestParam(required = false) String enterpriseCode) {
+	public Object list(@RequestParam(required = false) String enterpriseCode,
+					   @RequestParam(required = false) String chairman,
+					   @RequestParam(required = false) String director,
+					   @RequestParam(required = false) String supervisor,
+					   @RequestParam(required = false) String generalManager) {
 	Page<MainMember> page = new PageFactory<MainMember>().defaultPage();
 		page.addFilter("enterpriseCode", SearchFilter.Operator.EQ,enterpriseCode);
+		page.addFilter("chairman", SearchFilter.Operator.LIKE,chairman);
+		page.addFilter("director", SearchFilter.Operator.LIKE,director);
+		page.addFilter("supervisor", SearchFilter.Operator.LIKE,supervisor);
+		page.addFilter("generalManager", SearchFilter.Operator.LIKE,generalManager);
 		page = mainMemberService.queryPage(page);
 		return Rets.success(page);
 	}

@@ -95,7 +95,7 @@
         <el-col :span="24">
           <el-row :gutter="24">
             <el-col :span="4">
-              <el-select v-model="searchType" placeholder="搜索类型">
+              <el-select v-model="searchType" @change="searchTypeHander" placeholder="搜索类型">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
