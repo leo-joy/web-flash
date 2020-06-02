@@ -149,7 +149,7 @@
               width="80"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column label="操作" width="80">
+            <el-table-column v-if="moduleType !== 'dashboard'" label="操作" width="80">
               <template slot-scope="scope">
                 <el-button v-if="moduleType == '2'" v-permission="['/editCompany']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
                 <el-button v-if="moduleType == '1'" v-permission="['/enterprisemanage']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>

@@ -123,7 +123,10 @@ export default {
     },
     fetchData() {
       this.listLoading = true
-      this.companys = this.$store.state.user.companys
+      // 如果进入企业管理模块和变更模块进行，公司权限过滤
+      if (this.moduleType === '1' || this.moduleType === '2') {
+        this.companys = this.$store.state.user.companys
+      }
       this.listQuery.ids = this.companys ? this.companys.toString() : ''
       getList(this.listQuery).then(response => {
         this.list = response.data.records
