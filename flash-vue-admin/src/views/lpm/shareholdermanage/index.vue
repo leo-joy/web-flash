@@ -84,7 +84,7 @@
       <el-tab-pane label="合作单位" name="second">
         <div class="block">
           <el-row>
-            <el-col :span="24">
+            <el-col :span="10">
               <el-button
                 v-permission="['/businesslicense/add']"
                 type="success"
@@ -106,6 +106,18 @@
                 icon="el-icon-delete"
                 @click.native="remove"
               >{{ $t('button.delete') }}</el-button>
+            </el-col>
+            <el-col :span="11">
+              <el-input v-model="keyword" size="small" placeholder="请输入搜索企业名称" />
+            </el-col>
+            <el-col :span="1">&nbsp;</el-col>
+            <el-col :span="2">
+              <el-button
+                type="success"
+                size="small" 
+                icon="el-icon-search"
+                @click.native="search"
+              >{{ $t('button.search') }}</el-button>
             </el-col>
           </el-row>
         </div>

@@ -17,6 +17,7 @@ export default {
       enterpriseType: '', // 企业类型
       registrationStatusBL: '', // 登记状态
       isAdd: true,
+      keyword: '',
       form: {
         unifiedSocialCreditCode: '',
         enterpriseName: '',
@@ -106,6 +107,8 @@ export default {
       })
     },
     search() {
+      this.listQuery.enterpriseName = this.keyword
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
