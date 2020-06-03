@@ -84,8 +84,8 @@
           <el-row>
             <el-col :span="12">
               <el-form-item
-                label="注册资本(万元)："
-              >{{ businesslicenseData.registeredCapital }} {{ currencyBL }}</el-form-item>
+                label="注册资本："
+              >{{ businesslicenseData.registeredCapital }} 万{{ currencyBL }}</el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item
