@@ -66,7 +66,7 @@
             <span><b>{{ scope.row.businessScopeNew }}</b></span>
           </div>
           <div v-if="scope.row.chairmanState+'' === 'true'">
-            <span><b>董事长：</b>{{ scope.row.chairmanState }}</span>
+            <span><b>董事长：</b></span>
             <span>原</span>
             <span><b style="color:red">{{ scope.row.chairmanOld }}</b></span>
             <span>变更为</span>
