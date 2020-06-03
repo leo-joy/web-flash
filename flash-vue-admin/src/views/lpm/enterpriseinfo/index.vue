@@ -28,6 +28,7 @@
             <el-radio v-model="deptRadio" label="_106_" @change="handleRadioClick">资本集团</el-radio>
             <el-radio v-model="deptRadio" label="-105_" @change="handleRadioClick">房管集团</el-radio>
             <el-radio v-model="deptRadio" label="_107_" @change="handleRadioClick">商业集团</el-radio>
+            <el-radio v-model="deptRadio" label="_246_" @change="handleRadioClick">城更集团</el-radio>
           </template>
         </el-col>
       </el-row>
