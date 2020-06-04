@@ -1006,7 +1006,7 @@ export default {
       // 请求自然人股东全部列表
       getUserList({
         page: 1,
-        limit: 10000
+        limit: 50000
       }).then(response => {
         this.naturalPersonShareholders = response.data.records
       })
