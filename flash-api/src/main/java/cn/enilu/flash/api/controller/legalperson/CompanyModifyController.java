@@ -11,6 +11,7 @@ import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
 
+import cn.enilu.flash.service.system.LogObjectHolder;
 import cn.enilu.flash.utils.Maps;
 import cn.enilu.flash.utils.StringUtil;
 import cn.enilu.flash.utils.ToolUtil;
@@ -49,12 +50,15 @@ public class CompanyModifyController {
 	@RequestMapping(method = RequestMethod.POST)
 	@BussinessLog(value = "编辑企业变更", key = "name",dict= CommonDict.class)
 	public Object save(@ModelAttribute CompanyModify tLpmCompanyModify){
+		CompanyModify response;
 		if(tLpmCompanyModify.getId()==null){
-			companyModifyService.insert(tLpmCompanyModify);
+			response = companyModifyService.insert(tLpmCompanyModify);
 		}else {
-			companyModifyService.update(tLpmCompanyModify);
+			CompanyModify old = companyModifyService.get(tLpmCompanyModify.getId());
+			LogObjectHolder.me().set(old);
+			response = companyModifyService.update(tLpmCompanyModify);
 		}
-		return Rets.success();
+		return Rets.success(response);
 	}
 	@RequestMapping(method = RequestMethod.DELETE)
 	@BussinessLog(value = "删除企业变更", key = "id",dict= CommonDict.class)
