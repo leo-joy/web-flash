@@ -73,10 +73,33 @@
                   <td>{{ item.supervisorNew }}</td>
                   <td>{{ item.modifyDate.replace("00:00:00","") }}</td>
                 </tr>
+                <tr v-if="item.shareholderModifyState === 'true'">
+                  <td>股东变更</td>
+                  <td>
+                    <el-row>
+                      <el-col v-for="sonItemOld in item.shareholderOldList" :key="sonItemOld.id" :span="24">
+                        <h4>股东：{{ sonItemOld.shareholder }}</h4>
+                        <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
+                        <div><hr></hr></div>
+                      </el-col>
+                    </el-row>
+                  </td>
+                  <td>
+                    <el-row>
+                      <el-col v-for="sonItemNew in item.shareholderNewList" :key="sonItemNew.id" :span="24">
+                        <h4>股东：{{ sonItemNew.shareholder }}</h4>
+                        <h5>认缴出资额：{{ sonItemNew.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemNew.proportion }}%</h5>
+                        <div><hr></hr></div>
+                      </el-col>
+                    </el-row>
+                  </td>
+                  <td>{{ item.modifyDate.replace("00:00:00","") }}</td>
+                </tr>
               </table>
             </el-col>
-          </el-row>
-          <!-- <el-row>
+          </el-row></el-card>
+        </el-row>
+        <!-- <el-row>
             <el-col :span="24">
               <h4 v-if="item.enterpriseNameState === 'true'"><b>企业名称变更：</b>由【 <i>{{ item.enterpriseNameOld }}</i>】变更为 【<i>{{ item.enterpriseNameNew }}</i>】</h4>
               <h4 v-if="item.registeredAddressState === 'true'"><b>注册地址变更：</b>由【 {{ item.registeredAddressOld }}】变更为 【{{ item.registeredAddressNew }}】</h4>
@@ -86,84 +109,84 @@
               <p>变更理由：{{ item.applyReason }}</p>
             </el-col>
           </el-row> -->
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.approvalFilesListCompanyModify && item.approvalFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="核准文件" :files-list="item.approvalFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.businessLicenseFilesListCompanyModify && item.businessLicenseFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="营业执照" :files-list="item.businessLicenseFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.shareholdersDecideFilesListCompanyModify && item.shareholdersDecideFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="股东会决议" :files-list="item.shareholdersDecideFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.seniorManagementFilesListCompanyModify && item.seniorManagementFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="董事会决议" :files-list="item.seniorManagementFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.companyArticlesAssociationFilesListCompanyModify && item.companyArticlesAssociationFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="公司章程" :files-list="item.companyArticlesAssociationFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.appointDismissFilesListCompanyModify && item.appointDismissFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="任职免职书" :files-list="item.appointDismissFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24" />
-            <el-col v-if="item.otherFilesListCompanyModify && item.otherFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="其他附件" :files-list="item.otherFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row v-if="false">
-            <el-col :span="24" />
-            <el-col v-if="item.accessoryFilesListCompanyModify && item.accessoryFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="会议纪要、合作协议等" :files-list="item.accessoryFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row v-if="false">
-            <el-col :span="24" />
-            <el-col v-if="item.companyReferenceRegisterFilesListCompanyModify && item.companyReferenceRegisterFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="公司备案登记表" :files-list="item.companyReferenceRegisterFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row v-if="false">
-            <el-col :span="24" />
-            <el-col v-if="item.companyModifyRegisterFilesListCompanyModify && item.companyModifyRegisterFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="变更事项登记表" :files-list="item.companyModifyRegisterFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row v-if="false">
-            <el-col :span="24" />
-            <el-col v-if="item.promiseFilesListCompanyModify && item.promiseFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="承诺书" :files-list="item.promiseFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row v-if="false">
-            <el-col :span="24" />
-            <el-col v-if="item.delegationFilesListCompanyModify && item.delegationFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="委托书" :files-list="item.delegationFilesListCompanyModify" />
-            </el-col>
-          </el-row>
-          <el-row v-if="false">
-            <el-col :span="24" />
-            <el-col v-if="item.authorizationFilesListCompanyModify && item.authorizationFilesListCompanyModify.length>0" :span="24">
-              <FilesListComponent file-title="指定代表或者共同委托代理人授权委托书" :files-list="item.authorizationFilesListCompanyModify" />
-            </el-col>
-          </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.approvalFilesListCompanyModify && item.approvalFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="核准文件" :files-list="item.approvalFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.businessLicenseFilesListCompanyModify && item.businessLicenseFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="营业执照" :files-list="item.businessLicenseFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.shareholdersDecideFilesListCompanyModify && item.shareholdersDecideFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="股东会决议" :files-list="item.shareholdersDecideFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.seniorManagementFilesListCompanyModify && item.seniorManagementFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="董事会决议" :files-list="item.seniorManagementFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.companyArticlesAssociationFilesListCompanyModify && item.companyArticlesAssociationFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="公司章程" :files-list="item.companyArticlesAssociationFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.appointDismissFilesListCompanyModify && item.appointDismissFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="任职免职书" :files-list="item.appointDismissFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24" />
+          <el-col v-if="item.otherFilesListCompanyModify && item.otherFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="其他附件" :files-list="item.otherFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row v-if="false">
+          <el-col :span="24" />
+          <el-col v-if="item.accessoryFilesListCompanyModify && item.accessoryFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="会议纪要、合作协议等" :files-list="item.accessoryFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row v-if="false">
+          <el-col :span="24" />
+          <el-col v-if="item.companyReferenceRegisterFilesListCompanyModify && item.companyReferenceRegisterFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="公司备案登记表" :files-list="item.companyReferenceRegisterFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row v-if="false">
+          <el-col :span="24" />
+          <el-col v-if="item.companyModifyRegisterFilesListCompanyModify && item.companyModifyRegisterFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="变更事项登记表" :files-list="item.companyModifyRegisterFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row v-if="false">
+          <el-col :span="24" />
+          <el-col v-if="item.promiseFilesListCompanyModify && item.promiseFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="承诺书" :files-list="item.promiseFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row v-if="false">
+          <el-col :span="24" />
+          <el-col v-if="item.delegationFilesListCompanyModify && item.delegationFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="委托书" :files-list="item.delegationFilesListCompanyModify" />
+          </el-col>
+        </el-row>
+        <el-row v-if="false">
+          <el-col :span="24" />
+          <el-col v-if="item.authorizationFilesListCompanyModify && item.authorizationFilesListCompanyModify.length>0" :span="24">
+            <FilesListComponent file-title="指定代表或者共同委托代理人授权委托书" :files-list="item.authorizationFilesListCompanyModify" />
+          </el-col>
+        </el-row>
         </el-card>
       </el-timeline-item>
       <el-timeline-item v-if="companyModifyData.length === 0">

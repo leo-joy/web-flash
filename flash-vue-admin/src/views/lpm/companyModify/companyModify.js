@@ -3,6 +3,10 @@ import { getList as getEnterpriseList } from '@/api/lpm/businesslicense'
 import { getList, remove, save } from '@/api/lpm/companyModify'
 import { getList as getMainMemberList } from '@/api/lpm/mainmember'
 import { getList as getUserList } from '@/api/system/user'
+import { getList as dictList } from '@/api/system/dict'
+import { getDictList } from '@/utils/common'
+import { remove as removeCapitalModify, getList as getCapitalModifyList, save as saveCapitalModify } from '@/api/lpm/capitalModify'
+
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 import { getToken } from '@/utils/auth'
@@ -101,6 +105,10 @@ export default {
         supervisorIdOld: '',
         supervisorIdNew: '',
 
+        shareholderModifyState: '',
+        shareholderIdsOld: '',
+        shareholderIdsNew: '',
+
         businessLicenseFiles: '', // 营业执照
         approvalFiles: '', // 核准文件
         companyReferenceRegisterFiles: '', // 公司备案登记表
@@ -137,7 +145,7 @@ export default {
         limit: 20,
         id: undefined
       },
-      total: 0,
+      // total: 0,
       list: null,
       listLoading: true,
       selRow: {},
@@ -153,7 +161,80 @@ export default {
       delegationFilesList: [], // 委托书
       authorizationFilesList: [], // 指定代表或者共同委托代理人授权委托书
       appointDismissFilesList: [], // 任职免职书
-      otherFilesList: [] // 其它文件
+      otherFilesList: [], // 其它文件
+
+      /**
+       * 股权变更 -----start------
+       */
+
+      formCapitalModifyVisible: false,
+      formCapitalModifyTitle: '添加股东及出资信息变更',
+      isCapitalModifyAdd: true,
+      subscribedCapitalTypeList: [], // 认缴出资方式，从数据字典中获取
+      realityCapitalTypeList: [], // 实缴出资方式，从数据字典中获取
+      typeList: [], // 类型，从数据字典中获取
+      statusList: [], // 状态，从数据字典中获取
+      enterpriseShareholders: [], // 公司股东列表
+      naturalPersonShareholders: [], // 自然人股东列表
+      formCapitalModify: {
+        enterpriseCode: '',
+        enterpriseName: '',
+        serialIdModify: '',
+        modifyStatusType: '',
+        serialNumber: '',
+        shareholder: '',
+        subscribedCapitalType: '',
+        subscribedCapitalContribution: '',
+        subscribedCapitalDate: '',
+        realityCapitalType: '',
+        realityCapitalContribution: '',
+        realityCapitalDate: '',
+        responsiblePerson: '',
+        shareholderType: '',
+        shareholderMold: 1,
+        proportion: 0,
+        status: '',
+        branchCompanyName: '',
+        branchCompanyCode: '',
+        id: ''
+      },
+
+      // companyListQuery: {
+      //   page: 1,
+      //   limit: 2000,
+      //   id: undefined
+      // },
+      // companyList: [],
+      // companyTree: {
+      //   show: false,
+      //   defaultProps: {
+      //     id: 'id',
+      //     label: 'enterpriseName',
+      //     children: 'children'
+      //   }
+      // },
+
+      listCapitalModifyOldQuery: {
+        page: 1,
+        limit: 20,
+        modifyStatusType: 0,
+        id: undefined
+      },
+      listCapitalModifyOld: [],
+      listCapitalModifyOldLoading: true,
+
+      listCapitalModifyNewQuery: {
+        page: 1,
+        limit: 20,
+        modifyStatusType: 1,
+        id: undefined
+      },
+      listCapitalModifyNew: [],
+      listCapitalModifyNewLoading: true,
+      selCapitalModifyRow: {}
+      /**
+       * 股权变更 -----end------
+       */
 
     }
   },
@@ -199,7 +280,7 @@ export default {
       getList(this.listQuery).then(response => {
         this.list = response.data
         this.listLoading = false
-        this.total = response.data.total
+        // this.total = response.data.total
       })
 
       this.companyListQuery.id = this.$route.query.id
@@ -231,22 +312,6 @@ export default {
     },
     handleClose() {
 
-    },
-    fetchNext() {
-      this.listQuery.page = this.listQuery.page + 1
-      this.fetchData()
-    },
-    fetchPrev() {
-      this.listQuery.page = this.listQuery.page - 1
-      this.fetchData()
-    },
-    fetchPage(page) {
-      this.listQuery.page = page
-      this.fetchData()
-    },
-    changeSize(limit) {
-      this.listQuery.limit = limit
-      this.fetchData()
     },
     handleCurrentChange(currentRow, oldCurrentRow) {
       this.selRow = currentRow
@@ -302,6 +367,10 @@ export default {
         supervisorIdOld: '',
         supervisorIdNew: '',
 
+        shareholderModifyState: '',
+        shareholderIdsOld: '',
+        shareholderIdsNew: '',
+
         accessoryFiles: '', // 会议纪要、合作协议等
         businessLicenseFiles: '', // 营业执照
         approvalFiles: '', // 核准文件
@@ -317,6 +386,19 @@ export default {
         otherFiles: '', // 其它文件
         id: ''
       }
+      this.accessoryFiles = [] // 会议纪要、合作协议等
+      this.businessLicenseFilesList = [] // 营业执照
+      this.approvalFilesList = [] // 核准文件
+      this.companyReferenceRegisterFilesList = [] // 公司备案登记表
+      this.companyModifyRegisterFilesList = [] // 变更事项登记表
+      this.companyArticlesAssociationFilesList = [] // 公司章程
+      this.shareholdersDecideFilesList = [] // 股东会决议
+      this.seniorManagementFilesList = [] // 董事会决议
+      this.promiseFilesList = [] // 承诺书
+      this.delegationFilesList = [] // 委托书
+      this.authorizationFilesList = [] // 指定代表或者共同委托代理人授权委托书
+      this.appointDismissFilesList = [] // 任职免职书
+      this.otherFilesList = [] // 其它文件
     },
     initFormInfo() {
       // 申请申请人相关信息
@@ -364,13 +446,26 @@ export default {
       this.formVisible = true
       this.isAdd = true
       this.initFormInfo()
+      this.initCapitalModify()
     },
     next() {
       if (this.active++ > 2) this.active = 0
     },
+    getShareholderIds(data) {
+      const tempArr = []
+      if (data && data.length > 0) {
+        for (let i = 0; i < data.length; i++) {
+          tempArr.push(data[i].id)
+        }
+      }
+      return tempArr
+    },
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
+          const shareholderIdsOldArr = this.getShareholderIds(this.listCapitalModifyOld)
+          const shareholderIdsNewArr = this.getShareholderIds(this.listCapitalModifyNew)
+
           save({
             affiliatedUnit: this.form.affiliatedUnit,
             applyDepartment: this.form.applyDepartment,
@@ -420,6 +515,10 @@ export default {
             supervisorIdOld: this.form.supervisorIdOld,
             supervisorIdNew: this.form.supervisorIdNew,
 
+            shareholderModifyState: this.form.shareholderModifyState ? this.form.shareholderModifyState : 'false',
+            shareholderIdsOld: shareholderIdsOldArr.toString(),
+            shareholderIdsNew: shareholderIdsNewArr.toString(),
+
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             businessLicenseFiles: this.form.businessLicenseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 营业执照
             approvalFiles: this.form.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''), // 核准文件
@@ -440,6 +539,46 @@ export default {
               message: this.$t('common.optionSuccess'),
               type: 'success'
             })
+            if (response.success) {
+              const arrayObject = this.listCapitalModifyOld
+              const tempArr = arrayObject.concat(this.listCapitalModifyNew)
+              console.log('response:', response)
+              console.log('tempArr:', tempArr)
+              if (tempArr && tempArr.length > 0 && response.data.shareholderModifyState === 'true') {
+                for (let i = 0; i < tempArr.length; i++) {
+                  const tempObj = tempArr[i]
+                  saveCapitalModify({
+                    enterpriseCode: tempObj.enterpriseCode,
+                    enterpriseName: tempObj.enterpriseName,
+                    serialIdModify: response.data.id,
+                    modifyStatusType: tempObj.modifyStatusType,
+                    serialNumber: tempObj.serialNumber,
+                    shareholder: tempObj.shareholder,
+                    subscribedCapitalType: tempObj.subscribedCapitalType,
+                    subscribedCapitalContribution: tempObj.subscribedCapitalContribution,
+                    subscribedCapitalDate: tempObj.subscribedCapitalDate,
+                    realityCapitalType: tempObj.realityCapitalType,
+                    realityCapitalContribution: tempObj.realityCapitalContribution,
+                    realityCapitalDate: tempObj.realityCapitalDate,
+                    responsiblePerson: tempObj.responsiblePerson,
+                    shareholderType: tempObj.shareholderType,
+                    shareholderMold: tempObj.shareholderMold,
+                    proportion: tempObj.proportion,
+                    status: tempObj.status,
+                    branchCompanyName: tempObj.branchCompanyName,
+                    branchCompanyCode: tempObj.branchCompanyCode,
+                    id: tempObj.id
+                  }).then(response => {
+                    this.$message({
+                      message: this.$t('common.optionSuccess'),
+                      type: 'success'
+                    })
+                  })
+                }
+              }
+            } else {
+              this.back()
+            }
             this.fetchData()
             this.formVisible = false
           })
@@ -532,6 +671,10 @@ export default {
           }
         }
 
+        if (this.form.shareholderModifyState === 'true') {
+          this.form.shareholderModifyState = true
+        }
+
         var accessoryArr = ['accessoryFiles', 'businessLicenseFiles', 'approvalFiles',
           'companyReferenceRegisterFiles', 'companyModifyRegisterFiles',
           'companyArticlesAssociationFiles', 'shareholdersDecideFiles',
@@ -556,6 +699,8 @@ export default {
             })
           }
         }
+
+        this.initCapitalModify()
       }
     },
     remove() {
@@ -823,6 +968,329 @@ export default {
     },
     otherFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'otherFiles')
+    },
+
+    /**
+       * 股权变更 -----start------
+       */
+    initCapitalModify() {
+      dictList({ name: '认缴出资方式【股权及出资信息】' }).then(response => {
+        this.subscribedCapitalTypeList = getDictList(response.data[0].detail)
+      })
+
+      dictList({ name: '实缴出资方式【股权及出资信息】' }).then(response => {
+        this.realityCapitalTypeList = getDictList(response.data[0].detail)
+      })
+
+      dictList({ name: '类型【股东信息】' }).then(response => {
+        this.typeList = getDictList(response.data[0].detail)
+      })
+
+      dictList({ name: '状态【股东信息】' }).then(response => {
+        this.statusList = getDictList(response.data[0].detail)
+      })
+      this.companyListQuery.id = this.$route.query.id
+      getEnterpriseList(this.companyListQuery).then(response => {
+        this.companyList = response.data.records
+        this.listLoading = false
+      })
+
+      // 请求公司股东全部列表
+      getEnterpriseList({
+        page: 1,
+        limit: 2000
+      }).then(response => {
+        this.enterpriseShareholders = response.data.records
+      })
+
+      // 请求自然人股东全部列表
+      getUserList({
+        page: 1,
+        limit: 10000
+      }).then(response => {
+        this.naturalPersonShareholders = response.data.records
+      })
+      this.fetchCapitalModifyOldData()
+      this.fetchCapitalModifyNewData()
+    },
+    fetchCapitalModifyOldData() {
+      this.listCapitalModifyOldLoading = true
+      this.listCapitalModifyOldQuery.serialIdModify = this.form.id + ',new'
+      getCapitalModifyList(this.listCapitalModifyOldQuery).then(response => {
+        this.listCapitalModifyOld = response.data.records || []
+        this.listCapitalModifyOldLoading = false
+      })
+    },
+    fetchCapitalModifyNewData() {
+      this.listCapitalModifyNewLoading = true
+      this.listCapitalModifyNewQuery.serialIdModify = this.form.id + ',new'
+      getCapitalModifyList(this.listCapitalModifyNewQuery).then(response => {
+        this.listCapitalModifyNew = response.data.records || []
+        this.listCapitalModifyNewLoading = false
+      })
+    },
+    resetCapitalModify() {
+      this.listCapitalModifyOldQuery.id = ''
+      this.fetchCapitalModifyOldData()
+    },
+    handleCapitalModifyFilter() {
+      this.listCapitalModifyOldQuery.page = 1
+      this.getCapitalModifyList()
+    },
+    handleCapitalModifyClose() {
+
+    },
+    handleCurrentCapitalModifyOldChange(currentRow, oldCurrentRow) {
+      this.selCapitalModifyRow = currentRow
+    },
+    handleCurrentCapitalModifyNewChange(currentRow, oldCurrentRow) {
+      this.selCapitalModifyRow = currentRow
+    },
+    resetCapitalModifyForm() {
+      this.formCapitalModify = {
+        enterpriseCode: this.businesslicenseData.id,
+        enterpriseName: this.businesslicenseData.enterpriseName,
+        serialIdModify: 'new',
+        modifyStatusType: '',
+        serialNumber: '',
+        shareholder: '',
+        subscribedCapitalType: '',
+        subscribedCapitalContribution: '',
+        subscribedCapitalDate: '',
+        realityCapitalType: '',
+        realityCapitalContribution: '',
+        realityCapitalDate: '',
+        responsiblePerson: '',
+        shareholderMold: 1,
+        shareholderType: '',
+        proportion: 0,
+        status: '',
+        branchCompanyName: '',
+        branchCompanyCode: '',
+        id: ''
+      }
+    },
+    addCapitalModifyOld() {
+      this.resetCapitalModifyForm()
+      this.formCapitalModifyTitle = '添加股东及出资信息'
+      this.formCapitalModifyVisible = true
+      this.isCapitalModifyAdd = true
+      this.formCapitalModify.modifyStatusType = 0
+      this.formCapitalModify.enterpriseCode = this.businesslicenseData.id
+      this.formCapitalModify.enterpriseName = this.businesslicenseData.enterpriseName
+    },
+    addCapitalModifyNew() {
+      this.resetCapitalModifyForm()
+      this.formCapitalModifyTitle = '添加股东及出资信息'
+      this.formCapitalModifyVisible = true
+      this.isCapitalModifyAdd = true
+      this.formCapitalModify.modifyStatusType = 1
+      this.formCapitalModify.enterpriseCode = this.businesslicenseData.id
+      this.formCapitalModify.enterpriseName = this.businesslicenseData.enterpriseName
+    },
+    saveCapitalModify() {
+      this.$refs['formCapitalModify'].validate((valid) => {
+        if (valid) {
+          saveCapitalModify({
+            enterpriseCode: this.formCapitalModify.enterpriseCode,
+            enterpriseName: this.formCapitalModify.enterpriseName,
+            serialIdModify: 'new',
+            modifyStatusType: this.formCapitalModify.modifyStatusType,
+            serialNumber: this.formCapitalModify.serialNumber,
+            shareholder: this.formCapitalModify.shareholder,
+            subscribedCapitalType: this.formCapitalModify.subscribedCapitalType,
+            subscribedCapitalContribution: this.formCapitalModify.subscribedCapitalContribution,
+            subscribedCapitalDate: this.formCapitalModify.subscribedCapitalDate,
+            realityCapitalType: this.formCapitalModify.realityCapitalType,
+            realityCapitalContribution: this.formCapitalModify.realityCapitalContribution,
+            realityCapitalDate: this.formCapitalModify.realityCapitalDate,
+            responsiblePerson: this.formCapitalModify.responsiblePerson,
+            shareholderType: this.formCapitalModify.shareholderType,
+            shareholderMold: this.formCapitalModify.shareholderMold,
+            proportion: this.formCapitalModify.proportion,
+            status: this.formCapitalModify.status,
+            branchCompanyName: this.formCapitalModify.branchCompanyName,
+            branchCompanyCode: this.formCapitalModify.branchCompanyCode,
+            id: this.formCapitalModify.id
+          }).then(response => {
+            this.$message({
+              message: this.$t('common.optionSuccess'),
+              type: 'success'
+            })
+            this.fetchCapitalModifyOldData()
+            this.fetchCapitalModifyNewData()
+            this.formCapitalModifyVisible = false
+          })
+        } else {
+          return false
+        }
+      })
+    },
+    checkCapitalModifySel() {
+      if (this.selCapitalModifyRow && this.selCapitalModifyRow.id) {
+        return true
+      }
+      this.$message({
+        message: this.$t('common.mustSelectOne'),
+        type: 'warning'
+      })
+      return false
+    },
+    editCapitalModifyOld() {
+      if (this.checkCapitalModifySel()) {
+        this.isCapitalModifyAdd = false
+        this.formCapitalModify = this.selCapitalModifyRow
+        this.formCapitalModifyTitle = '编辑股东及出资信息变更'
+        this.formCapitalModifyVisible = true
+        this.modifyStatusType = true
+      }
+    },
+    editCapitalModifyNew() {
+      if (this.checkCapitalModifySel()) {
+        this.isCapitalModifyAdd = false
+        this.formCapitalModify = this.selCapitalModifyRow
+        this.formCapitalModifyTitle = '编辑股东及出资信息变更'
+        this.formCapitalModifyVisible = true
+      }
+    },
+    removeCapitalModifyOld() {
+      if (this.checkCapitalModifySel()) {
+        var id = this.selCapitalModifyRow.id
+        this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
+          confirmButtonText: this.$t('button.submit'),
+          cancelButtonText: this.$t('button.cancel'),
+          type: 'warning'
+        }).then(() => {
+          removeCapitalModify(id).then(response => {
+            this.$message({
+              message: this.$t('common.optionSuccess'),
+              type: 'success'
+            })
+            this.fetchCapitalModifyOldData()
+          }).catch(err => {
+            this.$notify.error({
+              title: '错误',
+              message: err
+            })
+          })
+        }).catch(() => {
+        })
+      }
+    },
+    removeCapitalModifyNew() {
+      if (this.checkCapitalModifySel()) {
+        var id = this.selCapitalModifyRow.id
+        this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
+          confirmButtonText: this.$t('button.submit'),
+          cancelButtonText: this.$t('button.cancel'),
+          type: 'warning'
+        }).then(() => {
+          removeCapitalModify(id).then(response => {
+            this.$message({
+              message: this.$t('common.optionSuccess'),
+              type: 'success'
+            })
+            this.fetchCapitalModifyNewData()
+          }).catch(err => {
+            this.$notify.error({
+              title: '错误',
+              message: err
+            })
+          })
+        }).catch(() => {
+        })
+      }
+    },
+    handleChangeRadio() {
+      console.log(this.isCapitalModifyAdd)
+      console.log(this.formCapitalModify.shareholder)
+      if (this.isCapitalModifyAdd) {
+        this.formCapitalModify.shareholder = ''
+      }
+    },
+    // 搜索分公司相关函数
+    querySearchCompanyAsync(queryString, cb) {
+      if (queryString) {
+        var restaurants = this.enterpriseShareholders
+        var results = queryString ? restaurants.filter(this.createStateCompanyFilter(queryString)) : restaurants
+        cb(results)
+      }
+    },
+    createStateCompanyFilter(queryString) {
+      return (state) => {
+        // return (state.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        return (state.enterpriseName.indexOf(queryString) === 0)
+      }
+    },
+    handleBranchCompanySelect(item) {
+      // console.log(this.list)
+      if (item.id === this.formCapitalModify.enterpriseCode) {
+        alert('不能选本身公司')
+        return
+      }
+      var result = []
+      if (this.formCapitalModify.modifyStatusType === 0) {
+        result = this.listCapitalModifyOld.filter(word => word.branchCompanyCode === item.id)
+      } else {
+        result = this.listCapitalModifyNew.filter(word => word.branchCompanyCode === item.id)
+      }
+      if (result.length > 0 && this.isCapitalModifyAdd) {
+        alert('此股东已经添加')
+        return
+      }
+      this.formCapitalModify.shareholder = item.enterpriseName
+      this.formCapitalModify.branchCompanyName = item.name
+      this.formCapitalModify.branchCompanyCode = item.id
+    },
+    handleIconClickShareholder(ev) {
+      // getUserList(this.listUserQuery).then(response => {
+      //   this.enterpriseShareholders = response.data.records
+      // })
+      alert('如果没有搜索到，如有权限可以新增股东信息')
+      console.log(ev)
+    },
+    // 搜索自然人股东相关函数
+    querySearchNaturalPersonAsync(queryString, cb) {
+      var naturalPersonShareholders = this.naturalPersonShareholders
+      var results = queryString ? naturalPersonShareholders.filter(this.createStateNaturalPersonFilter(queryString)) : naturalPersonShareholders
+      cb(results)
+    },
+    createStateNaturalPersonFilter(queryString) {
+      return (state) => {
+        // return (state.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        return (state.name.indexOf(queryString) === 0)
+      }
+    },
+    handleNaturalPersonSelect(item) {
+      // console.log(this.list)
+      if (item.id === this.formCapitalModify.enterpriseCode) {
+        alert('不能选本身公司')
+        return
+      }
+      var result = []
+
+      if (this.formCapitalModify.modifyStatusType === 0) {
+        result = this.listCapitalModifyOld.filter(word => word.branchCompanyCode === item.id)
+      } else {
+        result = this.listCapitalModifyNew.filter(word => word.branchCompanyCode === item.id)
+      }
+      if (result.length > 0) {
+        alert('此股东已经添加')
+        return
+      }
+      this.formCapitalModify.shareholder = item.name
+      this.formCapitalModify.branchCompanyName = item.name
+      this.formCapitalModify.branchCompanyCode = item.id
+    },
+    handleIconNaturalPersonClick(ev) {
+      // getUserList(this.listUserQuery).then(response => {
+      //   this.enterpriseShareholders = response.data.records
+      // })
+      alert('如果没有搜索到，如有权限可以新增股东信息')
+      console.log(ev)
     }
+    /**
+       * 股权变更 -----end------
+       */
   }
 }

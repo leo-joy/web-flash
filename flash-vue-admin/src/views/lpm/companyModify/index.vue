@@ -93,6 +93,9 @@
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
           </div>
+          <div v-if="scope.row.shareholderModifyState+'' === 'true'">
+            <span><b>股东或股权有变更</b></span>
+          </div>
           <div
             v-if="scope.row.enterpriseNameState+'' === 'false'
               && scope.row.legalRepresentativeState+'' === 'false'
@@ -103,6 +106,7 @@
               && scope.row.generalManagerState+'' === 'false'
               && scope.row.directorState+'' === 'false'
               && scope.row.supervisorState+'' === 'false'
+              && scope.row.shareholderModifyState+'' === 'false'
             "
           >
             <span>无变更事项</span>
@@ -117,7 +121,7 @@
       </el-table-column>
     </el-table>
     <br>
-    <el-pagination
+    <!-- <el-pagination
       background
       layout="total, sizes, prev, pager, next, jumper"
       :page-sizes="[10, 20, 50, 100,500]"
@@ -127,7 +131,7 @@
       @current-change="fetchPage"
       @prev-click="fetchPrev"
       @next-click="fetchNext"
-    />
+    /> -->
 
     <el-dialog
       :title="formTitle"
@@ -186,6 +190,7 @@
                   <el-checkbox v-model="form.directorState" label="董事备案" />
                   <el-checkbox v-model="form.supervisorState" label="监事备案" />
                   <el-checkbox v-model="form.generalManagerState" label="经理备案" />
+                  <el-checkbox v-model="form.shareholderModifyState" label="股东变更" />
                 </el-form-item>
               </el-col>
               <el-col v-if="form.enterpriseNameState === true" :span="24">
@@ -459,6 +464,120 @@
                 <br>
               </el-col>
 
+              <el-col v-if="form.shareholderModifyState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>股东变更</span>
+                  </div>
+                  <el-row>
+                    <el-col>
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>原股东</span>
+                        </div>
+                        <div class="block">
+                          <el-row>
+                            <el-col :span="24">
+                              <el-button type="success" size="mini" icon="el-icon-plus" @click.native="addCapitalModifyOld">{{ $t('button.add') }}</el-button>
+                              <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="editCapitalModifyOld">{{ $t('button.edit') }}</el-button>
+                              <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="removeCapitalModifyOld">{{ $t('button.delete') }}</el-button>
+                            </el-col>
+                          </el-row>
+                        </div>
+                        <el-table
+                          v-loading="listCapitalModifyOldLoading"
+                          :data="listCapitalModifyOld"
+                          element-loading-text="Loading"
+                          border
+                          fit
+                          highlight-current-row
+                          @current-change="handleCurrentCapitalModifyOldChange"
+                        >
+                          <!-- <el-table-column label="是否是新变更" width="60">
+                            <template slot-scope="scope">
+                              {{ scope.row.modifyStatusType }}
+                            </template>
+                          </el-table-column> -->
+                          <el-table-column label="股东">
+                            <template slot-scope="scope">
+                              {{ scope.row.shareholder }}
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="认缴出资额（万元）" width="150">
+                            <template slot-scope="scope">
+                              {{ scope.row.subscribedCapitalContribution }}
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="认缴日期" width="150">
+                            <template slot-scope="scope">
+                              {{ scope.row.subscribedCapitalDate.replace(' 00:00:00','') }}
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="占比（%）" width="100">
+                            <template slot-scope="scope">
+                              {{ scope.row.proportion }}
+                            </template>
+                          </el-table-column>
+                        </el-table>
+                      </el-card>
+                    </el-col>
+                  </el-row>
+                  <el-row>
+                    <el-col>
+                      <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                          <span>变更后股东</span>
+                        </div>
+                        <div class="block">
+                          <el-row>
+                            <el-col :span="24">
+                              <el-button type="success" size="mini" icon="el-icon-plus" @click.native="addCapitalModifyNew">{{ $t('button.add') }}</el-button>
+                              <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="editCapitalModifyNew">{{ $t('button.edit') }}</el-button>
+                              <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="removeCapitalModifyNew">{{ $t('button.delete') }}</el-button>
+                            </el-col>
+                          </el-row>
+                        </div>
+                        <el-table
+                          v-loading="listCapitalModifyNewLoading"
+                          :data="listCapitalModifyNew"
+                          element-loading-text="Loading"
+                          border
+                          fit
+                          highlight-current-row
+                          @current-change="handleCurrentCapitalModifyNewChange"
+                        >
+                          <!-- <el-table-column label="是否是新变更" width="60">
+                            <template slot-scope="scope">
+                              {{ scope.row.modifyStatusType }}
+                            </template>
+                          </el-table-column> -->
+                          <el-table-column label="股东">
+                            <template slot-scope="scope">
+                              {{ scope.row.shareholder }}
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="认缴出资额（万元）" width="150">
+                            <template slot-scope="scope">
+                              {{ scope.row.subscribedCapitalContribution }}
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="认缴日期" width="150">
+                            <template slot-scope="scope">
+                              {{ scope.row.subscribedCapitalDate.replace(' 00:00:00','') }}
+                            </template>
+                          </el-table-column>
+                          <el-table-column label="占比（%）" width="100">
+                            <template slot-scope="scope">
+                              {{ scope.row.proportion }}
+                            </template>
+                          </el-table-column>
+                        </el-table>
+                      </el-card>
+                    </el-col>
+                  </el-row>
+
+                </el-card>
+              </el-col>
             </el-row>
           </el-collapse-item>
           <el-collapse-item name="3" title="上传相关的申请变更文件[只能上传pdf格式文件，且不超过20MB]">
@@ -751,6 +870,208 @@
         <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
       </span>
     </el-dialog>
+
+    <el-dialog
+      :title="formCapitalModifyTitle"
+      :visible.sync="formCapitalModifyVisible"
+      width="80%"
+    >
+      <el-form ref="formCapitalModify" :model="formCapitalModify" :rules="rules" label-width="160px">
+        <el-row>
+          <!-- <el-col :span="12">
+            <el-form-item label="所属企业编码">
+              <el-input v-model="formCapitalModify.enterpriseCode" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="变更序号">
+              <el-input v-model="formCapitalModify.serialIdModify" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="是否是新变更">
+              <el-input v-model="formCapitalModify.modifyStatusType" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="序号">
+              <el-input v-model="formCapitalModify.serialNumber" minlength="1" />
+            </el-form-item>
+          </el-col> -->
+          <el-col :span="12">
+            <el-form-item label="所属企业名称">
+              <el-input v-model="formCapitalModify.enterpriseName" :disabled="true" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :class="[isCapitalModifyAdd? 'dpShow' : 'dpHide']" :span="12">
+            <el-form-item label="类型">
+              <el-radio-group v-model="formCapitalModify.shareholderMold" @change="handleChangeRadio">
+                <el-radio :label="1">企业股东</el-radio>
+                <el-radio :label="2">自然人股东</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :class="[formCapitalModify.shareholderMold*1===1 ? 'dpShow' : 'dpHide']" :span="12">
+            <el-form-item label="企业股东" prop="shareholder">
+              <el-autocomplete
+                v-model="formCapitalModify.shareholder"
+                popper-class="my-autocomplete"
+                style="min-width:100%;line-height:10px;"
+                :fetch-suggestions="querySearchCompanyAsync"
+                placeholder="请输入股东名称"
+                @select="handleBranchCompanySelect"
+              >
+                <i
+                  slot="suffix"
+                  class="el-icon-circle-plus-outline el-input__icon"
+                  @click="handleIconClickShareholder"
+                />
+                <template slot-scope="{ item }" style="width:300px">
+                  <div class="name">{{ item.enterpriseName }}</div>
+                  <span
+                    class="addr"
+                  >法人：{{ item.legalRepresentative }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="addr">地址：{{ item.businessAddress }}</span>
+                </template>
+              </el-autocomplete>
+            </el-form-item>
+          </el-col>
+          <el-col :class="[formCapitalModify.shareholderMold*1===2 ? 'dpShow' : 'dpHide']" :span="12">
+            <el-form-item label="自然人股东" prop="shareholder">
+              <el-autocomplete
+                v-model="formCapitalModify.shareholder"
+                popper-class="my-autocomplete"
+                style="min-width:100%;line-height:10px;"
+                :fetch-suggestions="querySearchNaturalPersonAsync"
+                placeholder="请输入股东名称"
+                @select="handleNaturalPersonSelect"
+              >
+                <i
+                  slot="suffix"
+                  class="el-icon-circle-plus-outline el-input__icon"
+                  @click="handleIconNaturalPersonClick"
+                />
+                <template slot-scope="{ item }" style="width:300px">
+                  <div class="name">{{ item.name }}</div>
+                  <span
+                    class="addr"
+                  >部门：{{ item.deptName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="addr">性别：{{ item.sexName }}</span>
+                </template>
+              </el-autocomplete>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="股东">
+              <el-input v-model="formCapitalModify.shareholder" :disabled="true" minlength="1" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="认缴出资方式">
+              <el-select v-model="formCapitalModify.subscribedCapitalType" placeholder="请选择">
+                <el-option
+                  v-for="item in subscribedCapitalTypeList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="认缴出资额（万元）">
+              <el-input v-model.number="formCapitalModify.subscribedCapitalContribution" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="认缴出资日期">
+              <el-date-picker
+                v-model="formCapitalModify.subscribedCapitalDate"
+                type="date"
+                placeholder="选择日期"
+                style="width: 100%;"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="实缴出资方式">
+              <el-select v-model="formCapitalModify.realityCapitalType" placeholder="请选择">
+                <el-option
+                  v-for="item in realityCapitalTypeList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="实缴出资额（万元）">
+              <el-input v-model.number="formCapitalModify.realityCapitalContribution" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="实缴出资日期">
+              <el-date-picker
+                v-model="formCapitalModify.realityCapitalDate"
+                type="date"
+                placeholder="选择日期"
+                style="width: 100%;"
+              />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="8">
+            <el-form-item label="股东类型">
+              <el-select v-model="formCapitalModify.shareholderType" placeholder="请选择">
+                <el-option
+                  v-for="item in typeList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="状态">
+              <el-select v-model="formCapitalModify.status" placeholder="请选择">
+                <el-option
+                  v-for="item in statusList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="经办人">
+              <el-input v-model="formCapitalModify.responsiblePerson" minlength="1" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="占比（%）">
+              <el-slider v-model="formCapitalModify.proportion" show-input />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item>
+          <el-button type="primary" @click="saveCapitalModify">{{ $t('button.submit') }}</el-button>
+          <el-button @click.native="formCapitalModifyVisible = false">{{ $t('button.cancel') }}</el-button>
+        </el-form-item>
+
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
@@ -758,6 +1079,12 @@
 
 <style rel="stylesheet/scss" lang="scss" scoped>
     @import "src/styles/common.scss";
+    .dpShow {
+  display: block;
+}
+.dpHide {
+  display: none;
+}
     .dp-row {
       padding: 5px;
     }
