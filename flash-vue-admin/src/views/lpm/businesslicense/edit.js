@@ -85,6 +85,12 @@ export default {
         registeredCapital: [
           { required: true, message: '请输入注册资本金额', trigger: 'blur' },
           { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+        ],
+        currency: [
+          { required: true, message: '请选择币种', trigger: 'blur' }
+        ],
+        registrationType: [
+          { required: true, message: '请选择企业注册类型', trigger: 'blur' }
         ]
       },
       listQuery: {

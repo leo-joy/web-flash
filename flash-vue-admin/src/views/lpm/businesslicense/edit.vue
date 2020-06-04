@@ -44,14 +44,14 @@
               <el-input v-model="form.enterpriseName" minlength="1" />
             </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <!-- <el-col :span="24">
             <el-form-item label="企业英文名称">
               <el-input
                 v-model="form.enterpriseNameEn"
                 minlength="1"
               />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <!-- <el-col :span="24">
             <el-form-item label="企业商用名称">
               <el-input v-model="form.enterpriseNameBusiness" minlength="1"></el-input>
@@ -121,7 +121,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="币种">
+            <el-form-item label="币种" prop="currency">
               <el-select v-model="form.currency" placeholder="请选择">
                 <el-option
                   v-for="item in currencyList"
@@ -199,7 +199,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="企业注册类型">
+            <el-form-item label="企业注册类型" prop="registrationType">
               <el-select v-model="form.registrationType" placeholder="请选择">
                 <el-option
                   v-for="item in registrationTypeList"
