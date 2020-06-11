@@ -138,6 +138,9 @@ export default {
         ],
         modifyDate: [
           { required: true, message: '请填写变更日期', trigger: 'blur' }
+        ],
+        shareholder: [
+          { required: true, message: '请选中股东名称', trigger: 'blur' }
         ]
       },
       listQuery: {
@@ -747,7 +750,9 @@ export default {
       }
     },
     handleIconClick(ev) {
-      this.$router.push({ path: '/advancedUser/1' })
+      const routeUrl = this.$router.resolve({ path: '/advancedUser/1' })
+      window.open(routeUrl.href, '_blank')
+      // this.$router.push({ path: '/advancedUser/1' })
       console.log(ev)
     },
     handleChairmanSelect(item) {
@@ -1246,21 +1251,12 @@ export default {
       // getUserList(this.listUserQuery).then(response => {
       //   this.enterpriseShareholders = response.data.records
       // })
-      alert('如果没有搜索到，如有权限可以新增股东信息')
+      // alert('如果没有搜索到，如有权限可以新增股东信息')
+      const routeUrl = this.$router.resolve({ path: '/lpm/businesslicenseEdit' })
+      window.open(routeUrl.href, '_blank')
       console.log(ev)
     },
-    // 搜索自然人股东相关函数
-    querySearchNaturalPersonAsync(queryString, cb) {
-      var naturalPersonShareholders = this.naturalPersonShareholders
-      var results = queryString ? naturalPersonShareholders.filter(this.createStateNaturalPersonFilter(queryString)) : naturalPersonShareholders
-      cb(results)
-    },
-    createStateNaturalPersonFilter(queryString) {
-      return (state) => {
-        // return (state.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
-        return (state.name.indexOf(queryString) === 0)
-      }
-    },
+
     handleNaturalPersonSelect(item) {
       // console.log(this.list)
       if (item.id === this.formCapitalModify.enterpriseCode) {
@@ -1281,13 +1277,6 @@ export default {
       this.formCapitalModify.shareholder = item.name
       this.formCapitalModify.branchCompanyName = item.name
       this.formCapitalModify.branchCompanyCode = item.id
-    },
-    handleIconNaturalPersonClick(ev) {
-      // getUserList(this.listUserQuery).then(response => {
-      //   this.enterpriseShareholders = response.data.records
-      // })
-      alert('如果没有搜索到，如有权限可以新增股东信息')
-      console.log(ev)
     }
     /**
        * 股权变更 -----end------

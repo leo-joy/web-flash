@@ -913,13 +913,19 @@
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">
+            <el-form-item label="股东" prop="shareholder">
+              <el-input v-model="formCapitalModify.shareholder" :disabled="true" minlength="1" />
+            </el-form-item>
+          </el-col>
           <el-col :class="[formCapitalModify.shareholderMold*1===1 ? 'dpShow' : 'dpHide']" :span="12">
-            <el-form-item label="企业股东" prop="shareholder">
+            <el-form-item label="企业股东">
               <el-autocomplete
                 v-model="formCapitalModify.shareholder"
                 popper-class="my-autocomplete"
                 style="min-width:100%;line-height:10px;"
                 :fetch-suggestions="querySearchCompanyAsync"
+                :select-when-unmatched="true"
                 placeholder="请输入股东名称"
                 @select="handleBranchCompanySelect"
               >
@@ -939,33 +945,26 @@
             </el-form-item>
           </el-col>
           <el-col :class="[formCapitalModify.shareholderMold*1===2 ? 'dpShow' : 'dpHide']" :span="12">
-            <el-form-item label="自然人股东" prop="shareholder">
+            <el-form-item label="自然人股东">
               <el-autocomplete
-                v-model="formCapitalModify.shareholder"
+                v-model="form.shareholder"
+                style="width:350px"
                 popper-class="my-autocomplete"
-                style="min-width:100%;line-height:10px;"
-                :fetch-suggestions="querySearchNaturalPersonAsync"
-                placeholder="请输入股东名称"
+                :fetch-suggestions="querySearchAsync"
+                placeholder="请输入姓名"
                 @select="handleNaturalPersonSelect"
               >
                 <i
                   slot="suffix"
                   class="el-icon-circle-plus-outline el-input__icon"
-                  @click="handleIconNaturalPersonClick"
+                  @click="handleIconClick"
                 />
-                <template slot-scope="{ item }" style="width:300px">
-                  <div class="name">{{ item.name }}</div>
-                  <span
-                    class="addr"
-                  >部门：{{ item.deptName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span class="addr">性别：{{ item.sexName }}</span>
+                <template slot-scope="{ item }">
+                  <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                  <span class="addr">电话：{{ item.phone }}</span>
+                  <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
                 </template>
               </el-autocomplete>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="股东">
-              <el-input v-model="formCapitalModify.shareholder" :disabled="true" minlength="1" />
             </el-form-item>
           </el-col>
         </el-row>
