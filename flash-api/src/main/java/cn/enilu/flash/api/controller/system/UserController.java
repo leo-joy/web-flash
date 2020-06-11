@@ -59,7 +59,9 @@ public class UserController extends BaseController {
         if(StringUtil.isNotEmpty(id)){
             page.addFilter(SearchFilter.build("id", SearchFilter.Operator.EQ, id));
         }
-        page.addFilter(SearchFilter.build("status",SearchFilter.Operator.GT,0));
+        // page.addFilter(SearchFilter.build("status",SearchFilter.Operator.GT,0));
+        page.addFilter(SearchFilter.build("status",SearchFilter.Operator.EQ,1));
+
         page = userService.queryPage(page);
         List list = (List) new UserWarpper(BeanUtil.objectsToMaps(page.getRecords())).warp();
         page.setRecords(list);
