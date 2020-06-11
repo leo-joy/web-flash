@@ -7,13 +7,17 @@ var rootName = '' // 根节点的名字
 var rootRectWidth = 0 // 根节点rect的宽度
 var downwardLength = 0 // 下方展开树的个数
 var upwardLength = 0 // 上方展开树的个数
+var rootWidth = 1366 //画布的宽度
+var rootHeight = 768 //画布的高度
 /**
  * 初始化数据加载。
  * @param {url} 远程接口地址.
  * @param {id}  根公司的id
  */
-var initChartData = function(url, id) {
+var initChartData = function(url, id, rootWidth, rootHeight) {
   console.log('股权架构图请求后台接口地')
+  rootWidth = rootWidth || 1366 // 画布的宽度
+  rootHeight = rootHeight || 768 // 画布的高度
   // 请求根节点公司数据
   d3.xhr(url + '/lpm/businesslicense/list?page=1&limit=1&id=' + id, function(err, XMLHttpRequest) {
     if (err) {
@@ -122,11 +126,11 @@ treeChart.prototype.getTreeConfig = function() {
   // 确定绘制画布的边界
   var treeConfig = { 'margin': { 'top': 10, 'right': 5, 'bottom': 0, 'left': 30 }}
   // This will be the maximum dimensions
-  // 如果要保存整个架构图，就要加大画布的尺寸， 比如：1366 设置为 3000
+  // 如果要保存整个架构图，就要加大画布的尺寸， 比如：rootWidth 1366 设置为 3000
   // 画布的宽度
-  treeConfig.chartWidth = (1366 - treeConfig.margin.right - treeConfig.margin.left)
+  treeConfig.chartWidth = (rootWidth - treeConfig.margin.right - treeConfig.margin.left)
   // 画布的高度
-  treeConfig.chartHeight = (768 - treeConfig.margin.top - treeConfig.margin.bottom)
+  treeConfig.chartHeight = (rootHeight - treeConfig.margin.top - treeConfig.margin.bottom)
   // 开始绘制的中心点的x,y坐标
   treeConfig.centralHeight = treeConfig.chartHeight / 2
   treeConfig.centralWidth = treeConfig.chartWidth / 2

@@ -101,7 +101,7 @@ export default {
 
   data() {
     return {
-      src: '/d3tree/index.html?#906',
+      src: '/d3tree/index.html?id=906',
       searchType: 'enterpriseName',
       keyword: '',
       options: [{
@@ -202,7 +202,7 @@ export default {
       this.selRow = currentRow
     },
     viewArchitecture(id) {
-      this.src = '/d3tree/index.html?id=' + id + '#' + id
+      this.src = '/d3tree/index.html?width=1366&height=768&id=' + id
       this.dialog = false
     }
   }

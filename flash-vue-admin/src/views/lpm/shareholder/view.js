@@ -12,6 +12,7 @@ export default {
   components: { FilesListComponent },
   data() {
     return {
+      src: '',
       id: '',
       /* 股东信息模块 */
       shareholderData: [], // 股东信息相关数据
@@ -56,6 +57,8 @@ export default {
     init() {
       // 获取企业的id
       const id = this.$route.query.id
+
+      this.src = '/d3tree/index.html?width=900&height=500&id=' + id + '#' + id
 
       // 请求股东信息数据
       capital({ enterpriseCode: id, page: 1, limit: 20 }).then(response => {
@@ -117,6 +120,15 @@ export default {
       })
       const res = showDictLabel(this.shareholderStatus, row.status)
       return res
+    },
+    // 企业详情
+    detail(row) {
+      if (row.branchCompanyCode) {
+        const routeUrl = this.$router.resolve({ path: '/lpm/detailEnterpriseinfo', query: { id: row.branchCompanyCode }})
+        window.open(routeUrl.href, '_blank')
+      } else {
+        alert('没有匹配到对应的公司')
+      }
     }
   }
 }

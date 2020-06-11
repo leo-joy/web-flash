@@ -111,11 +111,13 @@ export default {
         getParentdept(response.data.pid).then(response => {
           this.parentOrg = response.data.simplename + ' / '
           console.log('父组织机构：', response)
-          getParentdept(response.data.id).then(response => {
-            if (response.data.simplename !== '组织机构' && response.data.simplename !== '雅居乐控股集团') {
-              this.grandfatherOrg = response.data.simplename + ' / '
-            }
-          })
+          if (response.data.pid !== '0') {
+            getParentdept(response.data.id).then(response => {
+              if (response.data.simplename !== '组织机构' && response.data.simplename !== '雅居乐控股集团') {
+                this.grandfatherOrg = response.data.simplename + ' / '
+              }
+            })
+          }
         })
       })
     },

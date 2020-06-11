@@ -57,9 +57,21 @@
 	<script type="text/javascript">
 		console.log(window.location.hash.replace('#','')*1)
 		// 初始化股权架构图
-		var id = window.location.hash.replace('#','')*1 || 1
-		//initChartData('/dev-api', id)
-		initChartData('/prod-api', id)
+		var id = getQueryVariable('id')*1 || 1
+		var rootWidth = getQueryVariable('width')*1 || 1366
+		var rootHeight = getQueryVariable('height')*1 || 768
+		initChartData('/dev-api', id, rootWidth, rootHeight)
+		function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+					var pair = vars[i].split("=");
+					if(pair[0] == variable){return pair[1];}
+			}
+			return(false);
+		}
+		//initChartData('/prod-api', id)
 		//initChartData('http://10.1.19.76:8092', id)
 		//initChartData('http://10.1.10.35:8092', id)
 
