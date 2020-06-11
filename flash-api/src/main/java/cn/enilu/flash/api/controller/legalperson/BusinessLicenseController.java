@@ -1,6 +1,7 @@
 package cn.enilu.flash.api.controller.legalperson;
 
 import cn.enilu.flash.bean.entity.legalperson.BusinessLicense;
+import cn.enilu.flash.bean.entity.legalperson.CompanyModify;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.system.FileService;
@@ -20,6 +21,7 @@ import cn.enilu.flash.utils.ToolUtil;
 import cn.enilu.flash.utils.factory.Page;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lpm/businesslicense")
@@ -153,6 +156,10 @@ public class BusinessLicenseController {
 		}
 		page.addFilter("registrationType", SearchFilter.Operator.EQ,registrationType);
 		page.addFilter("registrationStatus", SearchFilter.Operator.EQ,registrationStatus);
+		// 添加排序规则
+		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC,"type"));
+
+		page.setSort(sort);
 		page = businessLicenseService.queryPage(page);
 		return Rets.success(page);
 	}
