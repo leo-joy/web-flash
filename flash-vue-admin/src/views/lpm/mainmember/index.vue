@@ -91,10 +91,11 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="12">
             <el-form-item label="董事长">
               <el-autocomplete
                 v-model="form.chairman"
+                style="width:100%"
                 popper-class="my-autocomplete"
                 :fetch-suggestions="querySearchAsync"
                 placeholder="请输入姓名"
@@ -105,17 +106,19 @@
                   class="el-icon-circle-plus-outline el-input__icon"
                   @click="handleIconClick"
                 />
-                <template slot-scope="{ item }" style="width:300px">
-                  <div class="name">{{ item.name }}</div>
-                  <span class="addr">部门：{{ item.deptName }}</span>
+                <template slot-scope="{ item }">
+                  <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                  <span class="addr">电话：{{ item.phone }}</span>
+                  <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
                 </template>
               </el-autocomplete>
             </el-form-item>
           </el-col>
-          <el-col :span="8">
+          <el-col :span="12">
             <el-form-item label="总经理">
               <el-autocomplete
                 v-model="form.generalManager"
+                style="width:100%"
                 popper-class="my-autocomplete"
                 :fetch-suggestions="querySearchAsync"
                 placeholder="请输入姓名"
@@ -126,9 +129,10 @@
                   class="el-icon-circle-plus-outline el-input__icon"
                   @click="handleIconClick"
                 />
-                <template slot-scope="{ item }" style="width:300px">
-                  <div class="name">{{ item.name }}</div>
-                  <span class="addr">部门：{{ item.deptName }}</span>
+                <template slot-scope="{ item }">
+                  <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                  <span class="addr">电话：{{ item.phone }}</span>
+                  <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
                 </template>
               </el-autocomplete>
             </el-form-item>
@@ -139,6 +143,7 @@
                 <el-col :span="24">
                   <el-autocomplete
                     v-model="directorState"
+                    style="width:100%"
                     popper-class="my-autocomplete"
                     :fetch-suggestions="querySearchAsync"
                     placeholder="请输入董事姓名"
@@ -157,8 +162,9 @@
                       @close="handleDirectorDelete(tag.id, tag.name)"
                     >{{ tag.name }}</el-tag>
                     <template slot-scope="{ item }">
-                      <div class="name">{{ item.name }}</div>
-                      <span class="addr">部门：{{ item.deptName }}</span>
+                      <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                      <span class="addr">电话：{{ item.phone }}</span>
+                      <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
                     </template>
                   </el-autocomplete>
                 </el-col>
@@ -175,6 +181,7 @@
                 <el-col :span="24">
                   <el-autocomplete
                     v-model="supervisorState"
+                    style="width:100%"
                     popper-class="my-autocomplete"
                     :fetch-suggestions="querySearchAsync"
                     placeholder="请输入监事姓名"
@@ -193,8 +200,9 @@
                       @close="handleSupervisorDelete(tag.id, tag.name)"
                     >{{ tag.name }}</el-tag>
                     <template slot-scope="{ item }">
-                      <div class="name">{{ item.name }}</div>
-                      <span class="addr">部门：{{ item.deptName }}</span>
+                      <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                      <span class="addr">电话：{{ item.phone }}</span>
+                      <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
                     </template>
                   </el-autocomplete>
                 </el-col>
