@@ -1,6 +1,8 @@
-import { remove, save } from '@/api/lpm/businesslicense'
+import { getOne as getBusinesslicenseOne, remove, save } from '@/api/lpm/businesslicense'
 import { parseTime } from '@/utils'
 import { getList } from '@/api/lpm/businesslicense'
+import { getList as getInvestCompanyList, save as investCompanySave } from '@/api/lpm/investcompany'
+
 import { list as deptList } from '@/api/system/dept'
 import { getList as dictList } from '@/api/system/dict'
 import { getList as mainmemberList } from '@/api/lpm/mainmember'
@@ -525,6 +527,293 @@ export default {
     // 获取主要人员信息列表
     searchTypeHander(val) {
       this.memberType = val
+    },
+
+    // 批量同步投资企业
+    async investCompanySynErgodic() {
+      // const num = getDictNum(this.currencyDict, '港元')
+      // console.log('num:', num)
+      const list = this.list
+      const _this = this
+      if (list && list.length > 0) {
+        for (let i = 0; i < list.length; i++) {
+          await this.investCompanySyn(list[i], _this)
+        }
+      }
+    },
+
+    // 同步投资企业
+    async investCompanySyn(currentCompany, pThis) {
+      const _this = pThis
+      const initInvest = currentCompany.initInvest
+      if (initInvest !== '1') {
+        // 1、获取企业名称
+        const enterpriseName = currentCompany.enterpriseName
+        // 2、通过企查查接口获取投资企业信息
+        const investCompanyList = await this.getSingleInvestCompany(enterpriseName)
+        console.log('investCompanyList-2', investCompanyList)
+
+        const currentInvestList = await getInvestCompanyList({ enterpriseCode: currentCompany.id, page: 1, limit: 100 })
+        console.log('investList---', currentInvestList.data.records)
+
+        // 3、循环遍历投资企业
+
+        for (let i = 0; i < investCompanyList.length; i++) {
+          const investCompany = await this.getInvestCompany(investCompanyList[i].Name)
+          console.log('investCompany', investCompany)
+          if (investCompany && investCompany.length === 1) {
+          // 如在数据库中已有投资企业
+            await this.singleInvestCompanySyn(investCompanyList[i], investCompany[0], currentCompany, currentInvestList, _this)
+          } else {
+            const newInvestCompany = await this.createInvestCompany(investCompanyList[i], _this)
+            console.log('newInvestCompany', newInvestCompany)
+            if (newInvestCompany.data) {
+              await this.singleInvestCompanySyn(investCompanyList[i], newInvestCompany.data, currentCompany, currentInvestList, _this)
+            }
+          }
+        }
+        // 更新公司的是否同步投资公司
+        await this.initInvestCompany(currentCompany)
+      } else {
+        console.log(currentCompany.enterpriseName + ', 这家公司已经与企查查同步比对过投资企业！')
+      }
+    },
+    // 获取单条企业的投资企业
+    async getSingleInvestCompany(enterpriseName) {
+      const investmentUrl = '/interface/qcc/api/investcompanylist?enterpriseName=' + enterpriseName
+      // 创建实例时设置配置的默认值
+      const instance = axios.create({
+        baseURL: 'http://localhost:3000', // node接口服务地址
+        withCredentials: false // 表示跨域请求时是否需要使用凭证
+      })
+      // 获取投资企业列表
+      const investCompanyList = await instance.get(investmentUrl)
+
+      // console.log('接口返回的投资企业数据：', investCompanyList)
+      // 如企业列表有值则返回，如无值则返回空数组
+      if (investCompanyList !== null &&
+          investCompanyList.status === 200 &&
+          investCompanyList.data.Result !== null &&
+          investCompanyList.data.Status === '200' &&
+          investCompanyList.data.Result.length > 0) {
+        return investCompanyList.data.Result
+      } else {
+        this.$message({
+          message: this.$t('common.searchResultEmpty'),
+          type: 'success'
+        })
+        return []
+      }
+    },
+
+    // 创建投资企业
+    async createInvestCompany(res, _this) {
+      const data = res
+      // 统一社会信息代码
+      const unifiedSocialCreditCode = data.CreditCode
+      // 企业名称
+      const enterpriseName = data.Name
+      // 企业法人
+      const legalRepresentative = data.OperName
+      // 企业类型
+      const type = getDictNum(_this.enterpriseType, data.EconKind.replace('（', '(').replace('）', ')'))
+      // 成立日期
+      const setupDate = data.StartDate
+      // 注册资本
+      const registeredCapital = data.RegistCapi || 0
+      // 币种
+      let currency = '1'
+      if (data.registCapital) {
+        if (data.registCapital.indexOf('人民币') > -1) {
+          currency = getDictNum(_this.currencyDict, '人民币')
+        } else if (data.registCapital.indexOf('美元') > -1) {
+          currency = getDictNum(_this.currencyDict, '美元')
+        } else if (data.registCapital.indexOf('港') > -1) {
+          currency = getDictNum(_this.currencyDict, '港元')
+        } else if (data.registCapital.indexOf('澳') > -1) {
+          currency = getDictNum(_this.currencyDict, '澳元')
+        } else {
+          currency = '1'
+        }
+      }
+      const businesslicense = await save({
+        unifiedSocialCreditCode: unifiedSocialCreditCode, // 统一社会信息代码
+        // enterpriseCode: enterpriseCode, // 企业编号
+        enterpriseName: enterpriseName, // 企业名称
+        legalRepresentative: legalRepresentative, // 法定代表人
+        type: type, // 企业类型
+        // registeredAddress: registeredAddress, // 注册地址
+        setupDate: setupDate ? parseTime(setupDate, '{y}-{m}-{d}') : '', // 成立日期
+        // approvalDate: approvalDate ? parseTime(approvalDate, '{y}-{m}-{d}') : '', // 核准日期
+        // operatingPeriodFrom: operatingPeriodFrom ? parseTime(operatingPeriodFrom, '{y}-{m}-{d}') : '', // 营业期限自
+        // operatingPeriodEnd: operatingPeriodEnd ? parseTime(operatingPeriodEnd, '{y}-{m}-{d}') : '', // 营业期限至
+        // registrationAuthority: registrationAuthority, // 登记机关
+        // businessScope: businessScope, // 经营范围
+        registeredCapital: parseFloat(registeredCapital).toFixed(1), // 注册资本
+        currency: currency, // 币种
+        // initCa: 0, // 是否工商初始化过， 1 是
+        registrationType: 5, // 企业注册类型 1、国内企业 2、香港及境外企业 3、合作单位 4、体外公司 5、被投资企业(新创建)
+        // registrationPlace: oldItem.registrationPlace || 1, // 企业注册地
+
+        // enterpriseNameEn: oldItem.enterpriseNameEn, // 企业英文名称
+        // enterpriseNameBusiness: oldItem.enterpriseNameBusiness, // 企业商用名称
+        // customType: oldItem.customType || 1, // 自定义企业类型
+
+        // achieveDate: oldItem.achieveDate ? parseTime(oldItem.achieveDate, '{y}-{m}-{d}') : '', // 取得日期
+        registrationStatus: '1', // 登记状态
+        // businessAddress: oldItem.businessAddress, // 经营地址
+        // remark: oldItem.remark, // 备注
+        pid: '36',
+        pIds: '-0_|-35_|_36_1|',
+        pName: '新创建投资公司'
+        // id: oldItem.id
+      })
+      if (businesslicense.success) {
+        return businesslicense
+      } else {
+        return {}
+      }
+    },
+
+    // 初始化投资企业
+    async initInvestCompany(pCurrentCompany, _this) {
+      const currentCompany = pCurrentCompany
+      currentCompany.initInvest = 1 // 是否同步过投资公司 1 是
+      const businesslicense = await save({
+        unifiedSocialCreditCode: currentCompany.unifiedSocialCreditCode,
+        enterpriseName: currentCompany.enterpriseName,
+        enterpriseNameEn: currentCompany.enterpriseNameEn,
+        enterpriseNameBusiness: currentCompany.enterpriseNameBusiness,
+        enterpriseCode: currentCompany.enterpriseCode,
+        type: currentCompany.type,
+        customType: currentCompany.customType,
+        registrationType: currentCompany.registrationType,
+        registrationPlace: currentCompany.registrationPlace,
+        legalRepresentative: currentCompany.legalRepresentative,
+        registeredCapital: parseFloat(currentCompany.registeredCapital).toFixed(1) || 0,
+        currency: currentCompany.currency,
+        setupDate: currentCompany.setupDate ? parseTime(currentCompany.setupDate, '{y}-{m}-{d}') : '',
+        achieveDate: currentCompany.achieveDate ? parseTime(currentCompany.achieveDate, '{y}-{m}-{d}') : '',
+        operatingPeriodFrom: currentCompany.operatingPeriodFrom ? parseTime(currentCompany.operatingPeriodFrom, '{y}-{m}-{d}') : '',
+        operatingPeriodEnd: currentCompany.operatingPeriodEnd ? parseTime(currentCompany.operatingPeriodEnd, '{y}-{m}-{d}') : '',
+        registrationAuthority: currentCompany.registrationAuthority,
+        approvalDate: currentCompany.approvalDate ? parseTime(currentCompany.approvalDate, '{y}-{m}-{d}') : '',
+        registrationStatus: currentCompany.registrationStatus,
+        registeredAddress: currentCompany.registeredAddress,
+        businessAddress: currentCompany.businessAddress,
+        remark: currentCompany.remark,
+        businessScope: currentCompany.businessScope,
+        businessLicense: currentCompany.businessLicense.replace(/(^\s*)|(\s*$)/g, ''),
+        approvalFiles: currentCompany.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''),
+        companyArticlesAssociation: currentCompany.companyArticlesAssociation.replace(/(^\s*)|(\s*$)/g, ''),
+        shareholdersDecide: currentCompany.shareholdersDecide.replace(/(^\s*)|(\s*$)/g, ''),
+        applicationRegistrationFiles: currentCompany.applicationRegistrationFiles.replace(/(^\s*)|(\s*$)/g, ''),
+        otherFiles: currentCompany.otherFiles.replace(/(^\s*)|(\s*$)/g, ''),
+        pid: currentCompany.pid,
+        pIds: currentCompany.pIds,
+        pName: currentCompany.pName,
+        id: currentCompany.id,
+        initCa: currentCompany.initCa, // CA 是否同步
+        initInvest: 1 // 是否同步过投资公司 1 是
+      })
+      if (businesslicense.success) {
+        return businesslicense
+      } else {
+        return {}
+      }
+    },
+
+    // 在法人系统的企业表中查询是否同名的投资企业
+    async getInvestCompany(enterpriseName) {
+      const listQuery = {
+        page: 1,
+        limit: 1,
+        enterpriseName: enterpriseName
+      }
+      const businesslicense = await getBusinesslicenseOne(listQuery)
+      if (businesslicense.success && businesslicense.data.records.length === 1) {
+        return businesslicense.data.records
+      } else {
+        return []
+      }
+    },
+
+    /**
+     * 单条投资企业数据同步到投资列表
+     * @param {*} investCompany  接口中返回的单条投资企业信息
+     * @param {*} businesslicense  法人系统企业表中获取到的投资企业基本信息
+     * @param {*} _this //
+     */
+    async singleInvestCompanySyn(investCompany, businesslicense, currentCompany, investList, _this) {
+      // 传入businesslicense对象，是为了获取投资企业的在法人系统中的id
+      console.log('investCompany---', investCompany)
+      console.log('businesslicense---', businesslicense)
+      console.log('currentCompany---', currentCompany)
+      if (investCompany && businesslicense) {
+        // 判断投资企业是否已经添加过
+        if (investList && investList.success && investList.data.records.length > 0) {
+          var result = investList.data.records.filter(word => word.branchCompanyCode === businesslicense.id)
+          if (result.length > 0) {
+            console.log('这家投资公司已经添加')
+            return
+          }
+        }
+
+        // 所属企业名称
+        const enterpriseName = currentCompany.enterpriseName
+        // 所属企业名称
+        const enterpriseCode = currentCompany.id
+
+        // 出资比例
+        const proportion = investCompany.FundedRatio.replace('%', '') * 1
+        // 投资企业名称
+        const branchCompanyName = investCompany.Name
+        // 法定代表人
+        const legalRepresentative = investCompany.OperName
+        // 注册资本
+        const registeredCapital = investCompany.RegistCapi
+        // 成立日期
+        const setupDate = investCompany.establishDate
+
+        // 企业类型
+        const type = businesslicense.type
+        // 投资企业id
+        const branchCompanyCode = businesslicense.id
+        // 货币类型
+        const currency = businesslicense.currency
+        // 备注
+        const remark = businesslicense.remark
+        // 状态
+        const registrationStatus = businesslicense.registrationStatus
+
+        investCompanySave({
+          enterpriseName: enterpriseName, // 所属企业名称
+          enterpriseCode: enterpriseCode, // 所属企业编码
+          branchCompanyName: branchCompanyName, // 被投资企业名称
+          branchCompanyCode: branchCompanyCode, // 被投资企业的id
+          legalRepresentative: legalRepresentative, // 法定代表人
+          setupDate: setupDate ? parseTime(setupDate, '{y}-{m}-{d}') : '', // 成立日期
+          type: type, // 企业类型
+          // customType: _this.form.customType,
+          // registrationType: _this.form.registrationType,
+          // registrationPlace: _this.form.registrationPlace,
+          registeredCapital: parseFloat(registeredCapital).toFixed(1), // 注册资本
+          currency: currency,
+          registrationStatus: registrationStatus,
+          proportion: proportion * 1, // 投资占比
+          remark: remark, // 备注
+          realityCapitalContribution: parseFloat(registeredCapital).toFixed(1) // 投资额
+          // id: _this.form.id
+
+        }).then(response => {
+          _this.$message({
+            message: _this.$t('common.optionSuccess'),
+            type: 'success'
+          })
+        })
+      } else {
+        console.log('投资企业关联失败！请检查')
+      }
     }
   }
 }

@@ -47,6 +47,12 @@
             <el-radio v-model="deptRadio" label="-38_" border size="mini" @change="handleRadioClick">深圳区域</el-radio>
             <el-radio v-model="deptRadio" label="-43_" border size="mini" @change="handleRadioClick">北京区域</el-radio>
             <el-radio v-model="deptRadio" label="-40_" border size="mini" @change="handleRadioClick">上海区域</el-radio>
+            <el-button
+              v-permission="['/businesslicense/ca']"
+              type="primary"
+              size="small"
+              @click.native="businessCirclesSynErgodic()"
+            >{{ $t('button.businessCirclesSyn') }}</el-button>
           </template>
         </el-col>
       </el-row>
@@ -72,8 +78,9 @@
             <el-button
               v-permission="['/businesslicense/ca']"
               type="primary"
-              @click.native="businessCirclesSynErgodic()"
-            >{{ $t('button.businessCirclesSyn') }}</el-button>
+              size="small"
+              @click.native="investCompanySynErgodic()"
+            >同步投资公司</el-button>
           </template>
         </el-col>
       </el-row>
@@ -150,6 +157,9 @@
               width="80"
               :formatter="formatterRegistrationStatus"
             />
+            <el-table-column label="投资同步状态" width="140">
+              <template slot-scope="scope">{{ scope.row.initInvest }}</template>
+            </el-table-column>
             <el-table-column v-if="moduleType !== 'dashboard'" label="操作" width="80">
               <template slot-scope="scope">
                 <el-button v-if="moduleType == '2'" v-permission="['/editCompany']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
