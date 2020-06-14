@@ -51,6 +51,13 @@
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
           </div>
+          <div v-if="scope.row.ownershipState+'' === 'true'">
+            <span><b>改制：</b></span>
+            <span>原</span>
+            <span><b style="color:red">{{ scope.row.ownershipOld }}</b></span>
+            <span>变更为</span>
+            <span><b style="color:green">{{ scope.row.ownershipNew }}</b></span>
+          </div>
           <div v-if="scope.row.operatingPeriodEndState+'' === 'true'">
             <span><b>经营期限：</b></span>
             <span>原</span>
@@ -107,6 +114,7 @@
             v-if="scope.row.enterpriseNameState+'' === 'false'
               && scope.row.legalRepresentativeState+'' === 'false'
               && scope.row.registeredAddressState+'' === 'false'
+              && scope.row.ownershipState+'' === 'false'
               && scope.row.operatingPeriodEndState+'' === 'false'
               && scope.row.businessScopeState+'' === 'false'
               && scope.row.constitutionState+'' === 'false'
@@ -191,6 +199,7 @@
                 <el-form-item label="变更类型">
                   <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
                   <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
+                  <el-checkbox v-model="form.ownershipState" label="改制" />
                   <el-checkbox v-model="form.businessScopeState" label="经营范围" />
                   <el-checkbox v-model="form.constitutionState" label="章程" />
                   <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
@@ -263,6 +272,20 @@
                   </el-form-item>
                   <el-form-item label="新注册地址">
                     <el-input v-model="form.registeredAddressNew" minlength="1" />
+                  </el-form-item>
+                </el-card>
+                <br>
+              </el-col>
+              <el-col v-if="form.ownershipState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>改制</span>
+                  </div>
+                  <el-form-item label="改制前">
+                    <el-input v-model="form.ownershipOld" />
+                  </el-form-item>
+                  <el-form-item label="改制后">
+                    <el-input v-model="form.ownershipNew" minlength="1" />
                   </el-form-item>
                 </el-card>
                 <br>

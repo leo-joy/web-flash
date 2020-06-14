@@ -72,6 +72,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        ownershipState: '',
+        ownershipOld: '',
+        ownershipNew: '',
         operatingPeriodEndState: '',
         operatingPeriodEndOld: '',
         operatingPeriodEndNew: '',
@@ -339,6 +342,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        ownershipState: '',
+        ownershipOld: '',
+        ownershipNew: '',
         operatingPeriodEndState: '',
         operatingPeriodEndOld: '',
         operatingPeriodEndNew: '',
@@ -491,6 +497,9 @@ export default {
             registeredAddressState: this.form.registeredAddressState ? this.form.registeredAddressState : 'false',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
+            ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
+            ownershipOld: this.form.ownershipOld,
+            ownershipNew: this.form.ownershipNew,
             operatingPeriodEndState: this.form.operatingPeriodEndState ? this.form.operatingPeriodEndState : 'false',
             operatingPeriodEndOld: this.form.operatingPeriodEndOld,
             operatingPeriodEndNew: this.form.operatingPeriodEndNew,
@@ -637,6 +646,10 @@ export default {
 
         if (this.form.registeredAddressState === 'true') {
           this.form.registeredAddressState = true
+        }
+
+        if (this.form.ownershipState === 'true') {
+          this.form.ownershipState = true
         }
 
         if (this.form.operatingPeriodEndState === 'true') {

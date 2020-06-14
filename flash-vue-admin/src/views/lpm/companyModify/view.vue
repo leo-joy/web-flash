@@ -37,6 +37,12 @@
                   <td>{{ item.registeredAddressNew }}</td>
                   <td>{{ item.modifyDate.replace("00:00:00","") }}</td>
                 </tr>
+                <tr v-if="item.ownershipState === 'true'">
+                  <td>改制</td>
+                  <td>{{ item.ownershipOld }}</td>
+                  <td>{{ item.ownershipNew }}</td>
+                  <td>{{ item.modifyDate.replace("00:00:00","") }}</td>
+                </tr>
                 <tr v-if="item.operatingPeriodEndState === 'true'">
                   <td>经营期限变更</td>
                   <td>{{ item.operatingPeriodEndOld.replace("00:00:00","") }}</td>
