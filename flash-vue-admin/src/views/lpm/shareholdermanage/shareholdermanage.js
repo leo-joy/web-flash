@@ -97,6 +97,9 @@ export default {
       if (this.activeName === 'five') {
         this.listQuery.registrationType = 5
       }
+      if (this.activeName === 'six') {
+        this.listQuery.registrationType = 6
+      }
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -197,6 +200,9 @@ export default {
     },
     add5() {
       this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 5 }})
+    },
+    add6() {
+      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 6 }})
     },
     add() {
       if (this.$route.meta.registrationType) {
