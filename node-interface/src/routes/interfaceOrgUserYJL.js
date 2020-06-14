@@ -203,9 +203,7 @@ router.get("/api", function (req, res, next) {
  * @date     2017-12-12
  * @author   zhanglei
  */
-router.get(
-  "/api/tree",
-  async(function* (req, res, next) {
+router.get("/api/tree", async(function* (req, res, next) {
     try {
       //代码区
       const _res = res;
@@ -234,11 +232,10 @@ router.get(
             //获取公司数据与部门数据的接口
             //				var urlOne = 'http://10.1.19.154:8099/uapws/service/IDeptAllServer?wsdl';
             //				var url = 'http://10.1.19.154:8099/uapws/service/CorpAllServer?wsdl';
-            var urlOne =
-              "http://10.1.19.61:80/uapws/service/nc.yjl.da.deptall.IDeptAll?wsdl";
+            var urlOne ="http://10.1.19.61:80/uapws/service/nc.yjl.da.deptall.IDeptAll?wsdl";
             var url = "http://10.1.19.61:80/uapws/service/CorpAllServer?wsdl";
             var args = {};
-            var wsdlOptions = {};
+            var wsdlOptions = {'key':'0fae898c074343729843ac2ce64d3931'};
             let corpData = [];
             let deptData = [];
 
@@ -252,6 +249,9 @@ router.get(
                   console.log(err);
                 }
                 console.log(result);
+                if(!result.dates) {
+                  return false
+                }
                 corpData = result["return"]["dates"];
                 console.log("从接口获取的公司corp数量：" + corpData.length);
 
@@ -332,10 +332,9 @@ router.get(
             mysqlConn.end();
             //获取公司数据与部门数据的接口
             //				var url = 'http://10.1.19.154:8099/uapws/service/IPsndocAllServer?wsdl';
-            var url =
-              "http://10.1.19.61:80/uapws/service/IPsndocAllServer?wsdl";
+            var url ="http://10.1.19.61:80/uapws/service/IPsndocAllServer?wsdl";
             var args = {};
-            var wsdlOptions = {};
+            var wsdlOptions = {'key':'0fae898c074343729843ac2ce64d3931'};
             let userData = [];
 
             soap.createClient(url, wsdlOptions, function (err, client) {
