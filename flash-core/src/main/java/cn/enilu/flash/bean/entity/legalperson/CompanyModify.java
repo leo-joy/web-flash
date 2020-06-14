@@ -185,7 +185,16 @@ public class CompanyModify extends BaseEntity {
     @Column(name="shareholder_ids_new", columnDefinition = "VARCHAR(32) COMMENT '新股东ids'")
     private String shareholderIdsNew;
 
+    @Column(name="constitution_state", columnDefinition = "VARCHAR(8) COMMENT '公司章程变更状态'")
+    private String constitutionState;
 
+    @Column(name="constitution_old", columnDefinition = "TEXT COMMENT '旧章程修改部分'")
+    private String constitutionOld;
+
+    @Column(name="constitution_new", columnDefinition = "TEXT COMMENT '新章程添加部分'")
+    private String constitutionNew;
+
+    
     @Column(name="business_license_files", columnDefinition = "VARCHAR(64) COMMENT '营业执照'")
     private String businessLicenseFiles;
 

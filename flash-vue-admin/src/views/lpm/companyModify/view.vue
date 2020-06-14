@@ -49,6 +49,12 @@
                   <td>{{ item.businessScopeNew }}</td>
                   <td>{{ item.modifyDate.replace("00:00:00","") }}</td>
                 </tr>
+                <tr v-if="item.constitutionState === 'true'">
+                  <td>公司章程变更</td>
+                  <td>{{ item.constitutionOld }}</td>
+                  <td>{{ item.constitutionNew }}</td>
+                  <td>{{ item.modifyDate.replace("00:00:00","") }}</td>
+                </tr>
                 <tr v-if="item.chairmanState === 'true'">
                   <td>董事长变更</td>
                   <td>{{ item.chairmanOld }}</td>
@@ -99,16 +105,6 @@
             </el-col>
           </el-row></el-card>
         </el-row>
-        <!-- <el-row>
-            <el-col :span="24">
-              <h4 v-if="item.enterpriseNameState === 'true'"><b>企业名称变更：</b>由【 <i>{{ item.enterpriseNameOld }}</i>】变更为 【<i>{{ item.enterpriseNameNew }}</i>】</h4>
-              <h4 v-if="item.registeredAddressState === 'true'"><b>注册地址变更：</b>由【 {{ item.registeredAddressOld }}】变更为 【{{ item.registeredAddressNew }}】</h4>
-              <h4 v-if="item.businessScopeState === 'true'"><b>经营范围变更：</b></h4>
-              <p v-if="item.businessScopeState === 'true'">原经营范围：{{ item.businessScopeOld }}</p>
-              <p v-if="item.businessScopeState === 'true'">新经营范围：{{ item.businessScopeNew }}</p>
-              <p>变更理由：{{ item.applyReason }}</p>
-            </el-col>
-          </el-row> -->
         <el-row>
           <el-col :span="24" />
           <el-col v-if="item.approvalFilesListCompanyModify && item.approvalFilesListCompanyModify.length>0" :span="24">

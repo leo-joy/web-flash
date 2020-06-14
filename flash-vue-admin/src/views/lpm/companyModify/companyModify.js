@@ -78,6 +78,9 @@ export default {
         businessScopeState: '',
         businessScopeOld: '',
         businessScopeNew: '',
+        constitutionState: '',
+        constitutionOld: '',
+        constitutionNew: '',
         legalRepresentativeState: '',
         legalRepresentativeOld: '',
         legalRepresentativeNew: '',
@@ -342,6 +345,9 @@ export default {
         businessScopeState: '',
         businessScopeOld: '',
         businessScopeNew: '',
+        constitutionState: '',
+        constitutionOld: '',
+        constitutionNew: '',
         legalRepresentativeState: '',
         legalRepresentativeOld: '',
         legalRepresentativeNew: '',
@@ -491,6 +497,9 @@ export default {
             businessScopeState: this.form.businessScopeState ? this.form.businessScopeState : 'false',
             businessScopeOld: this.form.businessScopeOld,
             businessScopeNew: this.form.businessScopeNew,
+            constitutionState: this.form.constitutionState ? this.form.constitutionState : 'false',
+            constitutionOld: this.form.constitutionOld,
+            constitutionNew: this.form.constitutionNew,
             legalRepresentativeState: this.form.legalRepresentativeState ? this.form.legalRepresentativeState : 'false',
             legalRepresentativeOld: this.form.legalRepresentativeOld,
             legalRepresentativeNew: this.form.legalRepresentativeNew,
@@ -636,6 +645,10 @@ export default {
 
         if (this.form.businessScopeState === 'true') {
           this.form.businessScopeState = true
+        }
+
+        if (this.form.constitutionState === 'true') {
+          this.form.constitutionState = true
         }
 
         if (this.form.legalRepresentativeState === 'true') {
