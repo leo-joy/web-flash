@@ -107,8 +107,11 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="remark", columnDefinition = "TEXT COMMENT '备注信息'")
     private String remark;
 
-    @Column(name="init_ca", columnDefinition = "TEXT COMMENT '是否与CA同步过'")
+    @Column(name="init_ca", columnDefinition = "VARCHAR(8) COMMENT '是否与CA同步过'")
     private String initCa;
+
+    @Column(name="init_invest", columnDefinition = "VARCHAR(8) COMMENT '是否同步过投资公司'")
+    private String initInvest;
 
     @Column(name="business_license", columnDefinition = "VARCHAR(64) COMMENT '营业执照'")
     private String businessLicense;

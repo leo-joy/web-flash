@@ -24,6 +24,11 @@
             size="small"
             @click.native="remove"
           >{{ $t('button.delete') }}</el-button>
+          <el-button
+            type="primary"
+            size="small"
+            @click.native="investCompanySyn"
+          >同步企查查</el-button>
         </el-col>
       </el-row>
     </div>

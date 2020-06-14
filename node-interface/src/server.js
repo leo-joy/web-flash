@@ -9,7 +9,8 @@ var cors = require('cors');
 //公共函数库
 const customLib = require('./utils/customLib');
 
-var interfaceOrgUserYJL = require('./routes/interfaceOrgUser-yjl');
+var interfaceOrgUserYJL = require('./routes/interfaceOrgUserYJL');
+var interfaceInvestCompanyListYJL = require('./routes/interfaceInvestCompanyListYJL');
 
 var fs = require('fs');
 
@@ -45,9 +46,10 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(cookieParser());
 
-//组织机构和用户管理
+// 组织机构和用户管理
 app.use('/interface/orgUser', interfaceOrgUserYJL);
-
+// 企查查获取投资企业接口
+app.use('/interface/qcc', interfaceInvestCompanyListYJL);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

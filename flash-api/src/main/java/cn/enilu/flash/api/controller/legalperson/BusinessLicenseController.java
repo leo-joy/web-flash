@@ -158,8 +158,16 @@ public class BusinessLicenseController {
 		page.addFilter("registrationStatus", SearchFilter.Operator.EQ,registrationStatus);
 		// 添加排序规则
 		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC,"type"));
-
 		page.setSort(sort);
+		
+		page = businessLicenseService.queryPage(page);
+		return Rets.success(page);
+	}
+
+	@RequestMapping(value = "/one",method = RequestMethod.GET)
+	public Object list(@RequestParam(required = false) String enterpriseName) {
+		Page<BusinessLicense> page = new PageFactory<BusinessLicense>().defaultPage();
+		page.addFilter("enterpriseName", SearchFilter.Operator.EQ,enterpriseName);
 		page = businessLicenseService.queryPage(page);
 		return Rets.success(page);
 	}

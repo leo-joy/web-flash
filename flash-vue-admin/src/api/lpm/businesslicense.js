@@ -9,6 +9,14 @@ export function getList(params) {
   })
 }
 
+export function getOne(params) {
+  return request({
+    url: '/lpm/businesslicense/one',
+    method: 'get',
+    params
+  })
+}
+
 // 修改后
 export function save(params) {
   return request({
