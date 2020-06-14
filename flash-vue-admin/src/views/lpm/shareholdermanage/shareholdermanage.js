@@ -11,7 +11,7 @@ export default {
   components: { advancedUser },
   data() {
     return {
-      activeName: 'second',
+      activeName: 'first',
       formVisible: false,
       formTitle: '添加营业执照',
       enterpriseType: '', // 企业类型
@@ -85,7 +85,18 @@ export default {
     fetchData() {
       this.listLoading = true
 
-      this.listQuery.registrationType = 3
+      if (this.activeName === 'first') {
+        this.listQuery.registrationType = 3
+      }
+      if (this.activeName === 'second') {
+        this.listQuery.registrationType = 2
+      }
+      if (this.activeName === 'four') {
+        this.listQuery.registrationType = 4
+      }
+      if (this.activeName === 'five') {
+        this.listQuery.registrationType = 5
+      }
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -93,18 +104,26 @@ export default {
       })
     },
     handleClick(tab, event) {
-      if (tab.name === 'first') {
-        this.listQuery.registrationType = '2'
-      }
-      if (tab.name === 'second') {
-        this.listQuery.registrationType = '3'
-      }
+      this.fetchData()
+      // this.listLoading = true
+      // if (this.activeName === 'first') {
+      //   this.listQuery.registrationType = 3
+      // }
+      // if (this.activeName === 'second') {
+      //   this.listQuery.registrationType = 2
+      // }
+      // if (this.activeName === 'four') {
+      //   this.listQuery.registrationType = 4
+      // }
+      // if (this.activeNamee === 'five') {
+      //   this.listQuery.registrationType = 5
+      // }
 
-      getList(this.listQuery).then(response => {
-        this.list = response.data.records
-        this.listLoading = false
-        this.total = response.data.total
-      })
+      // getList(this.listQuery).then(response => {
+      //   this.list = response.data.records
+      //   this.listLoading = false
+      //   this.total = response.data.total
+      // })
     },
     search() {
       this.listQuery.enterpriseName = this.keyword
@@ -167,11 +186,17 @@ export default {
         id: ''
       }
     },
-    addHK() {
+    add2() {
       this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 2 }})
     },
-    addOther() {
+    add3() {
       this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 3 }})
+    },
+    add4() {
+      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 4 }})
+    },
+    add5() {
+      this.$router.push({ path: '/lpm/businesslicenseEdit', query: { registrationType: 5 }})
     },
     add() {
       if (this.$route.meta.registrationType) {
