@@ -96,6 +96,7 @@ export default {
       supervisorState: '',
       timeout: null,
       // 高级管理人员添加
+      formAdvancedUserTitle: '添加高级管理人员',
       formAdvancedUserVisible: false,
       advancedUserForm: {
         id: '',

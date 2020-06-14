@@ -112,7 +112,7 @@ export default {
     },
     // 如果 `clientHeight` 发生改变，这个函数就会运行
     clientHeight() {
-      this.changeFixed(this.clientHeight)
+      // this.changeFixed(this.clientHeight)
     }
   },
   methods: {
