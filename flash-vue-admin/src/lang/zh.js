@@ -20,6 +20,7 @@ export default {
     loginLog: '登录日志',
     log: '业务日志',
     cfg: '参数管理',
+    interfaceManage: '接口管理',
     druid: '监控管理',
     swagger: '接口文档',
     messageMgr: '消息管理',
