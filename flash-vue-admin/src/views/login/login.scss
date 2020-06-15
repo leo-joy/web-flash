@@ -1,6 +1,6 @@
-$bg:#283443;
-$light_gray:#eee;
-$cursor: #fff;
+$bg:#efefef;
+$light_gray:rgb(120, 123, 124);
+$cursor: #000;
 
 @supports (-webkit-mask: none) and (not (cater-color: $cursor)) {
   .login-container .el-input input{
@@ -33,15 +33,24 @@ $cursor: #fff;
     }
   }
   .el-form-item {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+    border-bottom: 1px solid rgb(126, 134, 131);
+    background:transparent;
     color: #454545;
+    margin-left:95px;
+    margin-right:40px;
+  }
+  .submit-button {
+    margin-left:95px;
+    width:129px;height:45px;margin-bottom:30px;border:none;background-color:transparent;background-image: url(/img/login/icon_logButton_normal.png)
+  }
+  .submit-button:hover {
+    background-image: url(/img/login/icon_logButton_on.png)
   }
 }
+
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
-$light_gray:#eee;
+$light_gray:#0f6d68;
 
 .login-container {
   min-height: 100%;
@@ -51,8 +60,8 @@ $light_gray:#eee;
     position: relative;
     width: 520px;
     max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
+    padding: 200px 35px 0;
+    margin-left:90px;
     overflow: hidden;
   }
   .tips {
@@ -73,11 +82,26 @@ $light_gray:#eee;
     display: inline-block;
   }
   .title-container {
+    background-image: url(/img/login/icon_logo.png);
+    background-repeat: no-repeat;
     position: relative;
+    padding-left:80px;
+    min-height:80px;
+    margin-bottom:30px;
     .title {
-      font-size: 46px;
+      font-size: 38px;
       color: $light_gray;
       margin: 0px auto 40px auto;
+      text-align: center;
+      font-weight: bold;
+    }
+    .enTitle {
+      font-size: 14px;
+      color: $dark_gray;
+      position: absolute;
+      top: 50px;
+      left: 95px;
+      margin: 0px auto 20px auto;
       text-align: center;
       font-weight: bold;
     }
@@ -101,5 +125,29 @@ $light_gray:#eee;
     position: absolute;
     right: 0;
     bottom: 6px;
+  }
+  .img_wangge {
+    position: absolute;
+    top:0;
+    right: 0;
+    left:0;
+    bottom: 0;
+    background-image: url(/img/login/img_wangge.png);
+  }
+  .img_leftBuilding {
+    position: absolute;
+    left:0;
+    bottom: 0;
+    width:600px;
+    height:200px;
+    background-image: url(/img/login/img_leftBuilding.png);
+  }
+  .img_rightComputer {
+    position: absolute;
+    right:0;
+    bottom: 0;
+    width:670px;
+    height:600px;
+    background-image: url(/img/login/img_rightComputer.png);
   }
 }

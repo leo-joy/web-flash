@@ -1,5 +1,8 @@
 <template>
-  <div class="login-container" style=" background-image: url(/img/bg.jpg);">
+  <div class="login-container" style="background-color:#ffffff; background-image: url(/img/login/img_logoshuiyin.png);">
+    <div class="img_leftBuilding" />
+    <div class="img_rightComputer" />
+    <div class="img_wangge" />
     <el-form
       ref="loginForm"
       :model="loginForm"
@@ -10,6 +13,7 @@
     >
       <div class="title-container">
         <h3 class="title">{{ $t('login.title') }}</h3>
+        <h3 class="enTitle">{{ $t('login.enTitle') }}</h3>
         <!-- <lang-select class="set-language" /> -->
       </div>
 
@@ -43,23 +47,14 @@
         </span>
       </el-form-item>
 
+      <br>
+      <br>
       <el-button
         :loading="loading"
         type="primary"
-        style="width:100%;margin-bottom:30px;"
+        class="submit-button"
         @click.native.prevent="handleLogin"
       >{{ $t('login.logIn') }}</el-button>
-
-      <!-- <div style="position:relative">
-        <div class="tips">
-          <span>{{ $t('login.username') }} : admin</span>
-          <span>{{ $t('login.password') }} : admin</span>
-        </div>
-        <div class="tips">
-          <span style="margin-right:18px;">{{ $t('login.username') }} : developer</span>
-          <span>{{ $t('login.password') }} : developer</span>
-        </div>
-      </div> -->
     </el-form>
   </div>
 </template>

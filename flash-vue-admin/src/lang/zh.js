@@ -115,12 +115,13 @@ export default {
     size: '布局大小'
   },
   login: {
-    title: '雅居乐法人管理系统',
+    title: '雅居乐法人管理平台',
+    enTitle: 'AGILE LEGAL ENTITY MANAGEMENT PLATFORM',
     errorAccount: '请输入5到32位的数字和字母',
     errorPassword: '密码至少位5位',
     logIn: '登录',
-    username: '账号',
-    password: '密码'
+    username: '请输入账号',
+    password: '请输入密码'
   },
 
   button: {
