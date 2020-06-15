@@ -157,8 +157,8 @@
               width="80"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column label="投资同步状态" width="140">
-              <template slot-scope="scope">{{ scope.row.initInvest }}</template>
+            <el-table-column v-if="moduleType !== 'dashboard'" label="投资同步状态" width="140">
+              <template slot-scope="scope">{{ scope.row.initInvest*1 ===1?"已同步":'' }}</template>
             </el-table-column>
             <el-table-column v-if="moduleType !== 'dashboard'" label="操作" width="80">
               <template slot-scope="scope">
