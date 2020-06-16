@@ -583,7 +583,7 @@ export default {
       const investmentUrl = '/interface/qcc/api/investcompanylist?enterpriseName=' + enterpriseName
       // 创建实例时设置配置的默认值
       const instance = axios.create({
-        baseURL: 'http://localhost:3000', // node接口服务地址
+        baseURL: 'http://10.1.10.35:5008', // node接口服务地址
         withCredentials: false // 表示跨域请求时是否需要使用凭证
       })
       // 获取投资企业列表
