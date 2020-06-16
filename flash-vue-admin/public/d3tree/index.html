@@ -60,7 +60,6 @@
 		var id = getQueryVariable('id')*1 || 1
 		var rootWidth = getQueryVariable('width')*1 || 1366
 		var rootHeight = getQueryVariable('height')*1 || 768
-		initChartData('/dev-api', id, rootWidth, rootHeight)
 		function getQueryVariable(variable)
 		{
 			var query = window.location.search.substring(1);
@@ -71,7 +70,8 @@
 			}
 			return(false);
 		}
-		//initChartData('/prod-api', id)
+		initChartData('/prod-api', id, rootWidth, rootHeight)
+		//initChartData('/dev-api', id, rootWidth, rootHeight)
 		//initChartData('http://10.1.19.76:8092', id)
 		//initChartData('http://10.1.10.35:8092', id)
 
