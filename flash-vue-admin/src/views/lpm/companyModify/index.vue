@@ -626,36 +626,36 @@
               </el-col>
             </el-row>
           </el-collapse-item>
-          <el-collapse-item name="3" title="上传相关的申请变更文件[只能上传pdf格式文件，且不超过20MB]">
-
+          <el-collapse-item name="3" title="上传相关文件，注：只能上传pdf格式文件，且不超过20MB">
             <el-row>
               <el-col :span="12">
-                <el-form-item label="核准文件">
+                <el-form-item label="内部审批文件">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="approvalFilesList"
+                    :file-list="accessoryFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="approvalFilesRemove"
-                    :on-success="approvalFilesUploadSuccess"
+                    :on-remove="accessoryFilesRemove"
+                    :on-success="accessoryFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
                     <span slot="tip" class="el-upload__tip">&nbsp;</span>
                   </el-upload>
                 </el-form-item>
+
               </el-col>
               <el-col :span="12">
-                <el-form-item label="营业执照">
+                <el-form-item label="工商申请表">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="businessLicenseFilesList"
+                    :file-list="companyReferenceRegisterFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="businessLicenseFilesRemove"
-                    :on-success="businessLicenseFilesUploadSuccess"
+                    :on-remove="companyReferenceRegisterFilesRemove"
+                    :on-success="companyReferenceRegisterFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
@@ -666,7 +666,6 @@
 
             </el-row>
             <el-row>
-
               <el-col :span="12">
                 <el-form-item label="股东会决议">
                   <el-upload
@@ -738,17 +737,17 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row v-if="false">
+            <el-row>
               <el-col :span="12">
-                <el-form-item label="公司备案登记表">
+                <el-form-item label="住所使用证明">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="companyReferenceRegisterFilesList"
+                    :file-list="promiseFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="companyReferenceRegisterFilesRemove"
-                    :on-success="companyReferenceRegisterFilesUploadSuccess"
+                    :on-remove="promiseFilesRemove"
+                    :on-success="promiseFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
@@ -757,27 +756,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="12">
-                <el-form-item label="变更事项登记表">
-                  <el-upload
-                    class="upload-demo"
-                    :action="uploadUrl"
-                    :headers="uploadHeaders"
-                    :file-list="companyModifyRegisterFilesList"
-                    :before-upload="handleBeforeUpload"
-                    :on-remove="companyModifyRegisterFilesRemove"
-                    :on-success="companyModifyRegisterFilesUploadSuccess"
-                    :on-preview="hanglePreview"
-                  >
-                    <el-button size="small" type="primary">点击上传</el-button>
-                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
-                  </el-upload>
-                </el-form-item>
-              </el-col>
-            </el-row>
-
-            <el-row v-if="false">
-              <el-col :span="12">
-                <el-form-item label="委托书">
+                <el-form-item label="股权转让合同">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
@@ -794,16 +773,35 @@
                 </el-form-item>
               </el-col>
 
+            </el-row>
+            <el-row>
               <el-col :span="12">
-                <el-form-item label="承诺书">
+                <el-form-item label="核准文件">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="promiseFilesList"
+                    :file-list="approvalFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="promiseFilesRemove"
-                    :on-success="promiseFilesUploadSuccess"
+                    :on-remove="approvalFilesRemove"
+                    :on-success="approvalFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="营业执照">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="businessLicenseFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="businessLicenseFilesRemove"
+                    :on-success="businessLicenseFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
@@ -812,9 +810,63 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <el-row v-if="false">
-              <el-col :span="24">
-                <el-form-item label="指定代表或者共同委托代理人授权委托书">
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="印章备案文件">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="sealFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="sealFilesRemove"
+                    :on-success="sealFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="开户许可证">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="openAccountFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="openAccountFilesRemove"
+                    :on-success="openAccountFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+            </el-row>
+
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="机构信用代码证">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="orgCreditCodeFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="orgCreditCodeFilesRemove"
+                    :on-success="orgCreditCodeFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="外商投资批准文件（批复和批准证书）或备案文件">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
@@ -833,23 +885,113 @@
             </el-row>
             <el-row>
               <el-col :span="12">
-                <el-form-item label="会议纪要、合作协议等">
+                <el-form-item label="外商投资企业变更备案回执">
                   <el-upload
                     class="upload-demo"
                     :action="uploadUrl"
                     :headers="uploadHeaders"
-                    :file-list="accessoryFilesList"
+                    :file-list="companyModifyRegisterFilesList"
                     :before-upload="handleBeforeUpload"
-                    :on-remove="accessoryFilesRemove"
-                    :on-success="accessoryFilesUploadSuccess"
+                    :on-remove="companyModifyRegisterFilesRemove"
+                    :on-success="companyModifyRegisterFilesUploadSuccess"
                     :on-preview="hanglePreview"
                   >
                     <el-button size="small" type="primary">点击上传</el-button>
                     <span slot="tip" class="el-upload__tip">&nbsp;</span>
                   </el-upload>
                 </el-form-item>
-
               </el-col>
+              <el-col :span="12">
+                <el-form-item label="质权合同">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="stockPledgeFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="stockPledgeFilesRemove"
+                    :on-success="stockPledgeFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="清算报告">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="liquidationFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="liquidationFilesRemove"
+                    :on-success="liquidationFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="清算组成员备案通知书">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="liquidationPersonFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="liquidationPersonFilesRemove"
+                    :on-success="liquidationPersonFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="清税证明">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="tallageFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="tallageFilesRemove"
+                    :on-success="tallageFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="公告报纸样张">
+                  <el-upload
+                    class="upload-demo"
+                    :action="uploadUrl"
+                    :headers="uploadHeaders"
+                    :file-list="noticeFilesList"
+                    :before-upload="handleBeforeUpload"
+                    :on-remove="noticeFilesRemove"
+                    :on-success="noticeFilesUploadSuccess"
+                    :on-preview="hanglePreview"
+                  >
+                    <el-button size="small" type="primary">点击上传</el-button>
+                    <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                  </el-upload>
+                </el-form-item>
+              </el-col>
+            </el-row>
+            <el-row>
               <el-col :span="12">
                 <el-form-item label="其它文件">
                   <el-upload

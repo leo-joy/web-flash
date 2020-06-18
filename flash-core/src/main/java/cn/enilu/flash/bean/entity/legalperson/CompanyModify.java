@@ -204,42 +204,58 @@ public class CompanyModify extends BaseEntity {
     private String ownershipNew;
 
 
-    @Column(name="business_license_files", columnDefinition = "VARCHAR(64) COMMENT '营业执照'")
-    private String businessLicenseFiles;
 
-    @Column(name="approval_files", columnDefinition = "VARCHAR(64) COMMENT '核准文件'")
-    private String approvalFiles;
-
-    @Column(name="company_reference_register_files", columnDefinition = "VARCHAR(64) COMMENT '公司备案登记表'")
+    @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '1内部审批文件'")
+    private String accessoryFiles;
+    @Column(name="company_reference_register_files", columnDefinition = "VARCHAR(64) COMMENT '2工商申请表'")
     private String companyReferenceRegisterFiles;
-
-    @Column(name="company_modify_register_files", columnDefinition = "VARCHAR(64) COMMENT '变更事项登记表'")
-    private String companyModifyRegisterFiles;
-
-    @Column(name="company_articles_association_files",columnDefinition = "VARCHAR(64) COMMENT '公司章程'")
-    private String companyArticlesAssociationFiles;
-
-    @Column(name="shareholders_decide_files", columnDefinition = "VARCHAR(64) COMMENT '股东会决议'")
+    @Column(name="shareholders_decide_files", columnDefinition = "VARCHAR(64) COMMENT '3股东会决议'")
     private String shareholdersDecideFiles;
-
-    @Column(name="senior_management_files", columnDefinition = "VARCHAR(64) COMMENT '董事会决议'")
+    @Column(name="senior_management_files", columnDefinition = "VARCHAR(64) COMMENT '4董事会决议'")
     private String seniorManagementFiles;
-
-    @Column(name="promise_files", columnDefinition = "VARCHAR(64) COMMENT '承诺书'")
-    private String promiseFiles;
-
-    @Column(name="delegation_files", columnDefinition = "VARCHAR(64) COMMENT '委托书'")
-    private String delegationFiles;
-
-    @Column(name="authorization_files", columnDefinition = "VARCHAR(64) COMMENT '指定代表或者共同委托代理人授权委托书'")
-    private String authorizationFiles;
-
-    @Column(name="appoint_dismiss_files", columnDefinition = "VARCHAR(64) COMMENT '任职免职书'")
+    @Column(name="company_articles_association_files",columnDefinition = "VARCHAR(64) COMMENT '5公司章程'")
+    private String companyArticlesAssociationFiles;
+    @Column(name="appoint_dismiss_files", columnDefinition = "VARCHAR(64) COMMENT '6任职免职书'")
     private String appointDismissFiles;
-
-    @Column(name="other_files", columnDefinition = "VARCHAR(64) COMMENT '其它文件'")
+    @Column(name="promise_files", columnDefinition = "VARCHAR(64) COMMENT '7住所使用证明'")
+    private String promiseFiles;
+    @Column(name="delegation_files", columnDefinition = "VARCHAR(64) COMMENT '8股权转让合同'")
+    private String delegationFiles;
+    @Column(name="approval_files", columnDefinition = "VARCHAR(64) COMMENT '9核准文件'")
+    private String approvalFiles;
+    @Column(name="business_license_files", columnDefinition = "VARCHAR(64) COMMENT '10营业执照'")
+    private String businessLicenseFiles;
+    @Column(name="seal_files", columnDefinition = "VARCHAR(64) COMMENT '11印章备案文件'")
+    private String sealFiles;
+    @Column(name="open_account_files", columnDefinition = "VARCHAR(64) COMMENT '12开户许可证'")
+    private String openAccountFiles;
+    @Column(name="org_credit_code_files", columnDefinition = "VARCHAR(64) COMMENT '13机构信用代码证'")
+    private String orgCreditCodeFiles;
+    @Column(name="authorization_files", columnDefinition = "VARCHAR(64) COMMENT '14外商投资批准文件（批复和批准证书）或备案文件'")
+    private String authorizationFiles;
+    @Column(name="company_modify_register_files", columnDefinition = "VARCHAR(64) COMMENT '15外商投资企业变更备案回执'")
+    private String companyModifyRegisterFiles;
+    @Column(name="stock_pledge_files", columnDefinition = "VARCHAR(64) COMMENT '16质权合同'")
+    private String stockPledgeFiles;
+    @Column(name="liquidation_files", columnDefinition = "VARCHAR(64) COMMENT '17清算报告'")
+    private String liquidationFiles;
+    @Column(name="liquidation_person_files", columnDefinition = "VARCHAR(64) COMMENT '18清算组成员备案通知书'")
+    private String liquidationPersonFiles;
+    @Column(name="tallage_files", columnDefinition = "VARCHAR(64) COMMENT '19清税证明'")
+    private String tallageFiles;
+    @Column(name="notice_files", columnDefinition = "VARCHAR(64) COMMENT '20公告报纸样张'")
+    private String noticeFiles;
+    @Column(name="other_files", columnDefinition = "VARCHAR(128) COMMENT '21其它文件'")
     private String otherFiles;
 
-    @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '详情'")
-    private String accessoryFiles;
+
+
+
+
+
+
+
+
+
+
 }

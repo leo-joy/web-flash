@@ -115,18 +115,27 @@ export default {
         shareholderIdsOld: '',
         shareholderIdsNew: '',
 
-        businessLicenseFiles: '', // 营业执照
-        approvalFiles: '', // 核准文件
-        companyReferenceRegisterFiles: '', // 公司备案登记表
-        companyModifyRegisterFiles: '', // 变更事项登记表
-        companyArticlesAssociationFiles: '', // 公司章程
-        shareholdersDecideFiles: '', // 股东会决议
-        seniorManagementFiles: '', // 董事会决议
-        promiseFiles: '', // 承诺书
-        delegationFiles: '', // 委托书
-        authorizationFiles: '', // 指定代表或者共同委托代理人授权委托书
-        appointDismissFiles: '', // 任职免职书
-        otherFiles: '', // 其它文件
+        accessoryFiles: '', // 1内部审批文件
+        companyReferenceRegisterFiles: '', // 2工商申请表
+        shareholdersDecideFiles: '', // 3股东会决议
+        seniorManagementFiles: '', // 4董事会决议
+        companyArticlesAssociationFiles: '', // 5公司章程
+        appointDismissFiles: '', // 6任职免职书
+        promiseFiles: '', // 7住所使用证明
+        delegationFiles: '', // 8股权转让合同
+        approvalFiles: '', // 9核准文件
+        businessLicenseFiles: '', // 10营业执照
+        sealFiles: '', // 11印章备案文件
+        openAccountFiles: '', // 12开户许可证
+        orgCreditCodeFiles: '', // 13机构信用代码证
+        authorizationFiles: '', // 14外商投资批准文件（批复和批准证书）或备案文件
+        companyModifyRegisterFiles: '', // 15外商投资企业变更备案回执
+        stockPledgeFiles: '', // 16质权合同
+        liquidationFiles: '', // 17清算报告
+        liquidationPersonFiles: '', // 18清算组成员备案通知书
+        tallageFiles: '', // 19清税证明
+        noticeFiles: '', // 20公告报纸样张
+        otherFiles: '', // 21其它文件
         id: ''
       },
       rules: {
@@ -158,19 +167,27 @@ export default {
       list: null,
       listLoading: true,
       selRow: {},
-      accessoryFiles: [], // 会议纪要、合作协议等
-      businessLicenseFilesList: [], // 营业执照
-      approvalFilesList: [], // 核准文件
-      companyReferenceRegisterFilesList: [], // 公司备案登记表
-      companyModifyRegisterFilesList: [], // 变更事项登记表
-      companyArticlesAssociationFilesList: [], // 公司章程
-      shareholdersDecideFilesList: [], // 股东会决议
-      seniorManagementFilesList: [], // 董事会决议
-      promiseFilesList: [], // 承诺书
-      delegationFilesList: [], // 委托书
-      authorizationFilesList: [], // 指定代表或者共同委托代理人授权委托书
-      appointDismissFilesList: [], // 任职免职书
-      otherFilesList: [], // 其它文件
+      accessoryFilesList: [], // 1内部审批文件
+      companyReferenceRegisterFilesList: [], // 2工商申请表
+      shareholdersDecideFilesList: [], // 3股东会决议
+      seniorManagementFilesList: [], // 4董事会决议
+      companyArticlesAssociationFilesList: [], // 5公司章程
+      appointDismissFilesList: [], // 6任职免职书
+      promiseFilesList: [], // 7住所使用证明
+      delegationFilesList: [], // 8股权转让合同
+      approvalFilesList: [], // 9核准文件
+      businessLicenseFilesList: [], // 10营业执照
+      sealFilesList: [], // 11印章备案文件
+      openAccountFilesList: [], // 12开户许可证
+      orgCreditCodeFilesList: [], // 13机构信用代码证
+      authorizationFilesList: [], // 14外商投资批准文件（批复和批准证书）或备案文件
+      companyModifyRegisterFilesList: [], // 15外商投资企业变更备案回执
+      stockPledgeFilesList: [], // 16质权合同
+      liquidationFilesList: [], // 17清算报告
+      liquidationPersonFilesList: [], // 18清算组成员备案通知书
+      tallageFilesList: [], // 19清税证明
+      noticeFilesList: [], // 20公告报纸样张
+      otherFilesList: [], // 21其它文件
 
       /**
        * 股权变更 -----start------
@@ -386,34 +403,50 @@ export default {
         shareholderIdsOld: '',
         shareholderIdsNew: '',
 
-        accessoryFiles: '', // 会议纪要、合作协议等
-        businessLicenseFiles: '', // 营业执照
-        approvalFiles: '', // 核准文件
-        companyReferenceRegisterFiles: '', // 公司备案登记表
-        companyModifyRegisterFiles: '', // 变更事项登记表
-        companyArticlesAssociationFiles: '', // 公司章程
-        shareholdersDecideFiles: '', // 股东会决议
-        seniorManagementFiles: '', // 董事会决议
-        promiseFiles: '', // 承诺书
-        delegationFiles: '', // 委托书
-        authorizationFiles: '', // 指定代表或者共同委托代理人授权委托书
-        appointDismissFiles: '', // 任职免职书
-        otherFiles: '', // 其它文件
+        accessoryFiles: '', // 1内部审批文件
+        companyReferenceRegisterFiles: '', // 2工商申请表
+        shareholdersDecideFiles: '', // 3股东会决议
+        seniorManagementFiles: '', // 4董事会决议
+        companyArticlesAssociationFiles: '', // 5公司章程
+        appointDismissFiles: '', // 6任职免职书
+        promiseFiles: '', // 7住所使用证明
+        delegationFiles: '', // 8股权转让合同
+        approvalFiles: '', // 9核准文件
+        businessLicenseFiles: '', // 10营业执照
+        sealFiles: '', // 11印章备案文件
+        openAccountFiles: '', // 12开户许可证
+        orgCreditCodeFiles: '', // 13机构信用代码证
+        authorizationFiles: '', // 14外商投资批准文件（批复和批准证书）或备案文件
+        companyModifyRegisterFiles: '', // 15外商投资企业变更备案回执
+        stockPledgeFiles: '', // 16质权合同
+        liquidationFiles: '', // 17清算报告
+        liquidationPersonFiles: '', // 18清算组成员备案通知书
+        tallageFiles: '', // 19清税证明
+        noticeFiles: '', // 20公告报纸样张
+        otherFiles: '', // 21其它文件
         id: ''
       }
-      this.accessoryFiles = [] // 会议纪要、合作协议等
-      this.businessLicenseFilesList = [] // 营业执照
-      this.approvalFilesList = [] // 核准文件
-      this.companyReferenceRegisterFilesList = [] // 公司备案登记表
-      this.companyModifyRegisterFilesList = [] // 变更事项登记表
-      this.companyArticlesAssociationFilesList = [] // 公司章程
-      this.shareholdersDecideFilesList = [] // 股东会决议
-      this.seniorManagementFilesList = [] // 董事会决议
-      this.promiseFilesList = [] // 承诺书
-      this.delegationFilesList = [] // 委托书
-      this.authorizationFilesList = [] // 指定代表或者共同委托代理人授权委托书
-      this.appointDismissFilesList = [] // 任职免职书
-      this.otherFilesList = [] // 其它文件
+      this.accessoryFilesList = [] // 1内部审批文件
+      this.companyReferenceRegisterFilesList = [] // 2工商申请表
+      this.shareholdersDecideFilesList = [] // 3股东会决议
+      this.seniorManagementFilesList = [] // 4董事会决议
+      this.companyArticlesAssociationFilesList = [] // 5公司章程
+      this.appointDismissFilesList = [] // 6任职免职书
+      this.promiseFilesList = [] // 7住所使用证明
+      this.delegationFilesList = [] // 8股权转让合同
+      this.approvalFilesList = [] // 9核准文件
+      this.businessLicenseFilesList = [] // 10营业执照
+      this.sealFilesList = [] // 11印章备案文件
+      this.openAccountFilesList = [] // 12开户许可证
+      this.orgCreditCodeFilesList = [] // 13机构信用代码证
+      this.authorizationFilesList = [] // 14外商投资批准文件（批复和批准证书）或备案文件
+      this.companyModifyRegisterFilesList = [] // 15外商投资企业变更备案回执
+      this.stockPledgeFilesList = [] // 16质权合同
+      this.liquidationFilesList = [] // 17清算报告
+      this.liquidationPersonFilesList = [] // 18清算组成员备案通知书
+      this.tallageFilesList = [] // 19清税证明
+      this.noticeFilesList = [] // 20公告报纸样张
+      this.otherFilesList = [] // 21其它文件
     },
     initFormInfo() {
       // 申请申请人相关信息
@@ -540,19 +573,27 @@ export default {
             shareholderIdsOld: shareholderIdsOldArr.toString(),
             shareholderIdsNew: shareholderIdsNewArr.toString(),
 
-            accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
-            businessLicenseFiles: this.form.businessLicenseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 营业执照
-            approvalFiles: this.form.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''), // 核准文件
-            companyReferenceRegisterFiles: this.form.companyReferenceRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 公司备案登记表
-            companyModifyRegisterFiles: this.form.companyModifyRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 变更事项登记表
-            companyArticlesAssociationFiles: this.form.companyArticlesAssociationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 公司章程
-            shareholdersDecideFiles: this.form.shareholdersDecideFiles.replace(/(^\s*)|(\s*$)/g, ''), // 股东会决议
-            seniorManagementFiles: this.form.seniorManagementFiles.replace(/(^\s*)|(\s*$)/g, ''), // 董事会决议
-            promiseFiles: this.form.promiseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 承诺书
-            delegationFiles: this.form.delegationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 委托书
-            authorizationFiles: this.form.authorizationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 指定代表或者共同委托代理人授权委托书
-            appointDismissFiles: this.form.appointDismissFiles.replace(/(^\s*)|(\s*$)/g, ''), // 任职免职书
-            otherFiles: this.form.otherFiles.replace(/(^\s*)|(\s*$)/g, ''), // 其它文件
+            accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''), // 1内部审批文件
+            companyReferenceRegisterFiles: this.form.companyReferenceRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 2工商申请表
+            shareholdersDecideFiles: this.form.shareholdersDecideFiles.replace(/(^\s*)|(\s*$)/g, ''), // 3股东会决议
+            seniorManagementFiles: this.form.seniorManagementFiles.replace(/(^\s*)|(\s*$)/g, ''), // 4董事会决议
+            companyArticlesAssociationFiles: this.form.companyArticlesAssociationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 5公司章程
+            appointDismissFiles: this.form.appointDismissFiles.replace(/(^\s*)|(\s*$)/g, ''), // 6任职免职书
+            promiseFiles: this.form.promiseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 7住所使用证明
+            delegationFiles: this.form.delegationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 8股权转让合同
+            approvalFiles: this.form.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''), // 9核准文件
+            businessLicenseFiles: this.form.businessLicenseFiles.replace(/(^\s*)|(\s*$)/g, ''), // 10营业执照
+            sealFiles: this.form.sealFiles.replace(/(^\s*)|(\s*$)/g, ''), // 11印章备案文件
+            openAccountFiles: this.form.openAccountFiles.replace(/(^\s*)|(\s*$)/g, ''), // 12开户许可证
+            orgCreditCodeFiles: this.form.orgCreditCodeFiles.replace(/(^\s*)|(\s*$)/g, ''), // 13机构信用代码证
+            authorizationFiles: this.form.authorizationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 14外商投资批准文件（批复和批准证书）或备案文件
+            companyModifyRegisterFiles: this.form.companyModifyRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 15外商投资企业变更备案回执
+            stockPledgeFiles: this.form.stockPledgeFiles.replace(/(^\s*)|(\s*$)/g, ''), // 16质权合同
+            liquidationFiles: this.form.liquidationFiles.replace(/(^\s*)|(\s*$)/g, ''), // 17清算报告
+            liquidationPersonFiles: this.form.liquidationPersonFiles.replace(/(^\s*)|(\s*$)/g, ''), // 18清算组成员备案通知书
+            tallageFiles: this.form.tallageFiles.replace(/(^\s*)|(\s*$)/g, ''), // 19清税证明
+            noticeFiles: this.form.noticeFiles.replace(/(^\s*)|(\s*$)/g, ''), // 20公告报纸样张
+            otherFiles: this.form.otherFiles.replace(/(^\s*)|(\s*$)/g, ''), // 21其它文件
 
             id: this.form.id
           }).then(response => {
@@ -626,19 +667,27 @@ export default {
         this.formTitle = '编辑企业变更'
         this.formVisible = true
         this.businesslicenseData = this.companyList[0]
-        this.accessoryFilesList = [] // 会议纪要、合作协议等
-        this.businessLicenseFilesList = [] // 营业执照
-        this.approvalFilesList = [] // 核准文件
-        this.companyReferenceRegisterFilesList = [] // 公司备案登记表
-        this.companyModifyRegisterFilesList = [] // 变更事项登记表
-        this.companyArticlesAssociationFilesList = [] // 公司章程
-        this.shareholdersDecideFilesList = [] // 股东会决议
-        this.seniorManagementFilesList = [] // 董事会决议
-        this.promiseFilesList = [] // 承诺书
-        this.delegationFilesList = [] // 委托书
-        this.authorizationFilesList = [] // 指定代表或者共同委托代理人授权委托书
-        this.appointDismissFilesList = [] // 任职免职书
-        this.otherFilesList = [] // 其它文件
+        this.accessoryFilesList = [] // 1内部审批文件
+        this.companyReferenceRegisterFilesList = [] // 2工商申请表
+        this.shareholdersDecideFilesList = [] // 3股东会决议
+        this.seniorManagementFilesList = [] // 4董事会决议
+        this.companyArticlesAssociationFilesList = [] // 5公司章程
+        this.appointDismissFilesList = [] // 6任职免职书
+        this.promiseFilesList = [] // 7住所使用证明
+        this.delegationFilesList = [] // 8股权转让合同
+        this.approvalFilesList = [] // 9核准文件
+        this.businessLicenseFilesList = [] // 10营业执照
+        this.sealFilesList = [] // 11印章备案文件
+        this.openAccountFilesList = [] // 12开户许可证
+        this.orgCreditCodeFilesList = [] // 13机构信用代码证
+        this.authorizationFilesList = [] // 14外商投资批准文件（批复和批准证书）或备案文件
+        this.companyModifyRegisterFilesList = [] // 15外商投资企业变更备案回执
+        this.stockPledgeFilesList = [] // 16质权合同
+        this.liquidationFilesList = [] // 17清算报告
+        this.liquidationPersonFilesList = [] // 18清算组成员备案通知书
+        this.tallageFilesList = [] // 19清税证明
+        this.noticeFilesList = [] // 20公告报纸样张
+        this.otherFilesList = [] // 21其它文件
 
         if (this.form.enterpriseNameState === 'true') {
           this.form.enterpriseNameState = true
@@ -704,12 +753,28 @@ export default {
           this.form.shareholderModifyState = true
         }
 
-        var accessoryArr = ['accessoryFiles', 'businessLicenseFiles', 'approvalFiles',
-          'companyReferenceRegisterFiles', 'companyModifyRegisterFiles',
-          'companyArticlesAssociationFiles', 'shareholdersDecideFiles',
-          'seniorManagementFiles', 'promiseFiles',
-          'delegationFiles', 'authorizationFiles',
-          'appointDismissFiles', 'otherFiles']
+        var accessoryArr = [
+          'accessoryFiles', // 1内部审批文件
+          'companyReferenceRegisterFiles', // 2工商申请表
+          'shareholdersDecideFiles', // 3股东会决议
+          'seniorManagementFiles', // 4董事会决议
+          'companyArticlesAssociationFiles', // 5公司章程
+          'appointDismissFiles', // 6任职免职书
+          'promiseFiles', // 7住所使用证明
+          'delegationFiles', // 8股权转让合同
+          'approvalFiles', // 9核准文件
+          'businessLicenseFiles', // 10营业执照
+          'sealFiles', // 11印章备案文件
+          'openAccountFiles', // 12开户许可证
+          'orgCreditCodeFiles', // 13机构信用代码证
+          'authorizationFiles', // 14外商投资批准文件（批复和批准证书）或备案文件
+          'companyModifyRegisterFiles', // 15外商投资企业变更备案回执
+          'stockPledgeFiles', // 16质权合同
+          'liquidationFiles', // 17清算报告
+          'liquidationPersonFiles', // 18清算组成员备案通知书
+          'tallageFiles', // 19清税证明
+          'noticeFiles', // 20公告报纸样张
+          'otherFiles'] // 21其它文件
         for (let j = 0; j < accessoryArr.length; j++) {
           if (this.selRow[accessoryArr[j]]) {
             const filesListQuery = {
@@ -922,79 +987,147 @@ export default {
     /**
      * 附件删除和上传成功函数
      */
-    accessoryFilesRemove(file) { // 会议纪要、合作协议等
+    accessoryFilesRemove(file) { // 1内部审批文件
       this.handleRemoveFile(file, 'accessoryFiles')
     },
     accessoryFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'accessoryFiles')
     },
-    businessLicenseFilesRemove(file) { // 营业执照
-      this.handleRemoveFile(file, 'businessLicenseFiles')
-    },
-    businessLicenseFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'businessLicenseFiles')
-    },
-    approvalFilesRemove(file) { // 核准文件
-      this.handleRemoveFile(file, 'approvalFiles')
-    },
-    approvalFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'approvalFiles')
-    },
-    companyReferenceRegisterFilesRemove(file) { // 公司备案登记表
+
+    companyReferenceRegisterFilesRemove(file) { // 2工商申请表
       this.handleRemoveFile(file, 'companyReferenceRegisterFiles')
     },
     companyReferenceRegisterFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'companyReferenceRegisterFiles')
     },
-    companyModifyRegisterFilesRemove(file) { // 变更事项登记表
-      this.handleRemoveFile(file, 'companyModifyRegisterFiles')
-    },
-    companyModifyRegisterFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'companyModifyRegisterFiles')
-    },
-    companyArticlesAssociationFilesRemove(file) { // 公司章程
-      this.handleRemoveFile(file, 'companyArticlesAssociationFiles')
-    },
-    companyArticlesAssociationFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'companyArticlesAssociationFiles')
-    },
-    shareholdersDecideFilesRemove(file) { // 股东会决议
+
+    shareholdersDecideFilesRemove(file) { // 3股东会决议
       this.handleRemoveFile(file, 'shareholdersDecideFiles')
     },
     shareholdersDecideFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'shareholdersDecideFiles')
     },
-    seniorManagementFilesRemove(file) { // 董事会决议
+
+    seniorManagementFilesRemove(file) { // 4董事会决议
       this.handleRemoveFile(file, 'seniorManagementFiles')
     },
     seniorManagementFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'seniorManagementFiles')
     },
-    promiseFilesRemove(file) { // 承诺书
-      this.handleRemoveFile(file, 'promiseFiles')
+
+    companyArticlesAssociationFilesRemove(file) { // 5公司章程
+      this.handleRemoveFile(file, 'companyArticlesAssociationFiles')
     },
-    promiseFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'promiseFiles')
+    companyArticlesAssociationFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'companyArticlesAssociationFiles')
     },
-    delegationFilesRemove(file) { // 委托书
-      this.handleRemoveFile(file, 'delegationFiles')
-    },
-    delegationFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'delegationFiles')
-    },
-    authorizationFilesRemove(file) { // 指定代表或者共同委托代理人授权委托书
-      this.handleRemoveFile(file, 'authorizationFiles')
-    },
-    authorizationFilesUploadSuccess(response) {
-      this.handleUploadSuccess(response, 'authorizationFiles')
-    },
-    appointDismissFilesRemove(file) { // 任职免职书
+
+    appointDismissFilesRemove(file) { // 6任职免职书
       this.handleRemoveFile(file, 'appointDismissFiles')
     },
     appointDismissFilesUploadSuccess(response) {
       this.handleUploadSuccess(response, 'appointDismissFiles')
     },
-    otherFilesRemove(file) { // 其它文件
+
+    promiseFilesRemove(file) { // 7住所使用证明
+      this.handleRemoveFile(file, 'promiseFiles')
+    },
+    promiseFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'promiseFiles')
+    },
+
+    delegationFilesRemove(file) { // 8股权转让合同
+      this.handleRemoveFile(file, 'delegationFiles')
+    },
+    delegationFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'delegationFiles')
+    },
+
+    approvalFilesRemove(file) { // 9核准文件
+      this.handleRemoveFile(file, 'approvalFiles')
+    },
+    approvalFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'approvalFiles')
+    },
+
+    businessLicenseFilesRemove(file) { // 10营业执照
+      this.handleRemoveFile(file, 'businessLicenseFiles')
+    },
+    businessLicenseFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'businessLicenseFiles')
+    },
+
+    sealFilesRemove(file) { // 11印章备案文件
+      this.handleRemoveFile(file, 'sealFiles')
+    },
+    sealFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'sealFiles')
+    },
+
+    openAccountFilesRemove(file) { // 12开户许可证
+      this.handleRemoveFile(file, 'openAccountFiles')
+    },
+    openAccountFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'openAccountFiles')
+    },
+
+    orgCreditCodeFilesRemove(file) { // 13机构信用代码证
+      this.handleRemoveFile(file, 'orgCreditCodeFiles')
+    },
+    orgCreditCodeFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'orgCreditCodeFiles')
+    },
+
+    authorizationFilesRemove(file) { // 14外商投资批准文件（批复和批准证书）或备案文件
+      this.handleRemoveFile(file, 'authorizationFiles')
+    },
+    authorizationFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'authorizationFiles')
+    },
+
+    companyModifyRegisterFilesRemove(file) { // 15外商投资企业变更备案回执
+      this.handleRemoveFile(file, 'companyModifyRegisterFiles')
+    },
+    companyModifyRegisterFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'companyModifyRegisterFiles')
+    },
+
+    stockPledgeFilesRemove(file) { // 16质权合同
+      this.handleRemoveFile(file, 'stockPledgeFiles')
+    },
+    stockPledgeFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'stockPledgeFiles')
+    },
+
+    liquidationFilesRemove(file) { // 17清算报告
+      this.handleRemoveFile(file, 'liquidationFiles')
+    },
+    liquidationFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'liquidationFiles')
+    },
+
+    liquidationPersonFilesRemove(file) { // 18清算组成员备案通知书
+      this.handleRemoveFile(file, 'liquidationPersonFiles')
+    },
+    liquidationPersonFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'liquidationPersonFiles')
+    },
+
+    tallageFilesRemove(file) { // 19清税证明
+      this.handleRemoveFile(file, 'tallageFiles')
+    },
+    tallageFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'tallageFiles')
+    },
+
+    noticeFilesRemove(file) { // 20公告报纸样张
+      this.handleRemoveFile(file, 'noticeFiles')
+    },
+    noticeFilesUploadSuccess(response) {
+      this.handleUploadSuccess(response, 'noticeFiles')
+    },
+
+    otherFilesRemove(file) { // 21其它文件
       this.handleRemoveFile(file, 'otherFiles')
     },
     otherFilesUploadSuccess(response) {

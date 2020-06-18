@@ -1,6 +1,6 @@
 import { getListIds } from '@/api/cms/fileInfo'
 import { getList as companyModify } from '@/api/lpm/companyModify'
-import FilesListComponent from '@/components/FilesList/index.vue'
+import FilesListComponent from '@/components/FilesList/minFilesList.vue'
 import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
 
 // 权限判断指令
@@ -13,20 +13,31 @@ export default {
       id: '',
       /* 企业变更信息模块 */
       companyModifyData: [], // 企业变更信息相关数据
+      fileDialogVisible: false, // 文件列表弹出框
+      currentCompanyModify: {}, // 当前变更
 
-      businessLicenseFilesListCompanyModify: [], // 营业执照
-      approvalFilesListCompanyModify: [], // 核准文件
-      companyReferenceRegisterFilesListCompanyModify: [], // 公司备案登记表
-      companyModifyRegisterFilesListCompanyModify: [], // 变更事项登记表
-      companyArticlesAssociationFilesListCompanyModify: [], // 公司章程
-      shareholdersDecideFilesListCompanyModify: [], // 股东会决议
-      seniorManagementFilesListCompanyModify: [], // 董事会决议
-      promiseFilesListCompanyModify: [], // 承诺书
-      delegationFilesListCompanyModify: [], // 委托书
-      authorizationFilesListCompanyModify: [], // 指定代表或者共同委托代理人授权委托书
-      appointDismissFilesListCompanyModify: [], // 任职免职书
-      otherFilesListCompanyModify: [], // 其它文件
-      accessoryFilesListCompanyModify: [],
+      accessoryFilesListCompanyModify: [], // 1内部审批文件
+      companyReferenceRegisterFilesListCompanyModify: [], // 2工商申请表
+      shareholdersDecideFilesListCompanyModify: [], // 3股东会决议
+      seniorManagementFilesListCompanyModify: [], // 4董事会决议
+      companyArticlesAssociationFilesListCompanyModify: [], // 5公司章程
+      appointDismissFilesListCompanyModify: [], // 6任职免职书
+      promiseFilesListCompanyModify: [], // 7住所使用证明
+      delegationFilesListCompanyModify: [], // 8股权转让合同
+      approvalFilesListCompanyModify: [], // 9核准文件
+      businessLicenseFilesListCompanyModify: [], // 10营业执照
+      sealFilesListCompanyModify: [], // 11印章备案文件
+      openAccountFilesListCompanyModify: [], // 12开户许可证
+      orgCreditCodeFilesListCompanyModify: [], // 13机构信用代码证
+      authorizationFilesListCompanyModify: [], // 14外商投资批准文件（批复和批准证书）或备案文件
+      companyModifyRegisterFilesListCompanyModify: [], // 15外商投资企业变更备案回执
+      stockPledgeFilesListCompanyModify: [], // 16质权合同
+      liquidationFilesListCompanyModify: [], // 17清算报告
+      liquidationPersonFilesListCompanyModify: [], // 18清算组成员备案通知书
+      tallageFilesListCompanyModify: [], // 19清税证明
+      noticeFilesListCompanyModify: [], // 20公告报纸样张
+      otherFilesListCompanyModify: [], // 21其它文件
+      
       listQuery: {
         page: 1,
         limit: 20,
@@ -87,12 +98,29 @@ export default {
 
       // 企业变更数据
       companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
-        var accessoryArr = ['accessoryFiles', 'businessLicenseFiles', 'approvalFiles',
-          'companyReferenceRegisterFiles', 'companyModifyRegisterFiles',
-          'companyArticlesAssociationFiles', 'shareholdersDecideFiles',
-          'seniorManagementFiles', 'promiseFiles',
-          'delegationFiles', 'authorizationFiles',
-          'appointDismissFiles', 'otherFiles']
+        var accessoryArr = [
+          'accessoryFiles', // 1内部审批文件
+          'companyReferenceRegisterFiles', // 2工商申请表
+          'shareholdersDecideFiles', // 3股东会决议
+          'seniorManagementFiles', // 4董事会决议
+          'companyArticlesAssociationFiles', // 5公司章程
+          'appointDismissFiles', // 6任职免职书
+          'promiseFiles', // 7住所使用证明
+          'delegationFiles', // 8股权转让合同
+          'approvalFiles', // 9核准文件
+          'businessLicenseFiles', // 10营业执照
+          'sealFiles', // 11印章备案文件
+          'openAccountFiles', // 12开户许可证
+          'orgCreditCodeFiles', // 13机构信用代码证
+          'authorizationFiles', // 14外商投资批准文件（批复和批准证书）或备案文件
+          'companyModifyRegisterFiles', // 15外商投资企业变更备案回执
+          'stockPledgeFiles', // 16质权合同
+          'liquidationFiles', // 17清算报告
+          'liquidationPersonFiles', // 18清算组成员备案通知书
+          'tallageFiles', // 19清税证明
+          'noticeFiles', // 20公告报纸样张
+          'otherFiles'] // 21其它文件
+
         var shareholderArr = ['shareholderOld', 'shareholderNew']
         this.getFilesList('CompanyModify', accessoryArr, response.data, shareholderArr)
       })
@@ -206,6 +234,12 @@ export default {
         }
       }
       // }
+    },
+
+    // 弹出文件列表
+    openFilesDialog(num) {
+      this.fileDialogVisible = true
+      this.currentCompanyModify = this.companyModifyData[num]
     }
   }
 }
