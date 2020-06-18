@@ -51,6 +51,13 @@ public class UserFactory {
             user.setIdentityCardHk(userDto.getIdentityCardHk());
             user.setPassportNo(userDto.getPassportNo());
             user.setPassportNational(userDto.getPassportNational());
+
+            user.setJobStnd(userDto.getJobStnd());
+            user.setJobName(userDto.getJobName());
+            user.setPostStat(userDto.getPostStat());
+            user.setSexName(userDto.getSexName());
+            user.setPkCorp(userDto.getPkCorp());
+            user.setPkDeptdoc(userDto.getPkDeptdoc());
             
             if(userDto.getStatus()!=null){
                 user.setStatus(userDto.getStatus());

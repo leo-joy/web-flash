@@ -36,7 +36,7 @@ public class User  extends BaseEntity {
     private Integer sex;
     @Column(columnDefinition = "VARCHAR(64) COMMENT 'email'")
     private String email;
-    @Column(columnDefinition = "VARCHAR(16) COMMENT '手机号'")
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '手机号'")
     private String phone;
     @Column(columnDefinition = "VARCHAR(128) COMMENT '角色id列表，以逗号分隔'")
     private String roleid;
@@ -86,4 +86,32 @@ public class User  extends BaseEntity {
     private String passportNo;
     @Column(name="passport_national", columnDefinition = "VARCHAR(300) COMMENT '护照签发国家'")
     private String passportNational;
+
+    // HR系统 接口返回数据
+    /*
+    * {   jobstnd: '文员/司机等',
+          poststat: '在职',
+          sex: '男',
+          pk_corp: '00016A100000000RMQ7F',
+          jobname: '董事司机',
+          psnname: '曾慶峯',
+          pk_psnbasdoc: '00016A1000000000M1EH',
+          email: 'fung.tsang@agile.com.cn',
+          pk_deptdoc: '10016A1000000000UZU4',
+          psncode: 'A026493',
+          mobile: '61288211' }
+    **/
+
+    @Column(name="job_stnd", columnDefinition = "VARCHAR(128) COMMENT '职位类型'")
+    private String jobStnd;
+    @Column(name="job_name", columnDefinition = "VARCHAR(64) COMMENT '职位'")
+    private String jobName;
+    @Column(name="post_stat", columnDefinition = "VARCHAR(8) COMMENT '在职状态'")
+    private String postStat;
+    @Column(name="sex_name", columnDefinition = "VARCHAR(8) COMMENT '中文性别'")
+    private String sexName;
+    @Column(name="pk_corp", columnDefinition = "VARCHAR(128) COMMENT '公司编号'")
+    private String pkCorp;
+    @Column(name="pk_deptdoc", columnDefinition = "VARCHAR(128) COMMENT '部门编号'")
+    private String pkDeptdoc;
 }

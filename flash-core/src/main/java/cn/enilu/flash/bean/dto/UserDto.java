@@ -58,5 +58,12 @@ public class UserDto{
 	private String passportNo;
 	private String passportNational;
 
+	private String jobStnd;
+	private String jobName;
+	private String postStat;
+	private String sexName;
+	private String pkCorp;
+	private String pkDeptdoc;
+
 
 }
