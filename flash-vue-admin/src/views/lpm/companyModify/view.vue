@@ -9,7 +9,7 @@
             </el-col>
 
             <el-col :span="3">
-              <el-button type="text" @click="openFilesDialog(item.id)">查看变更附件</el-button>
+              <el-button type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
             </el-col>
             <el-col :span="24">
               <div v-if="item.enterpriseNameState+'' === 'true'">

@@ -5,7 +5,7 @@
         <el-button type="text" @click.native="viewPdf(file.id,file.name)">{{ file.name }}</el-button>
       </el-col>
     </el-row>
-    <el-dialog :title="pdfTitle" :visible.sync="pdfVisible" width="80%">
+    <el-dialog :visible.sync="pdfVisible" width="80%">
       <template>
         <PDFView :src="src" />
       </template>
@@ -21,9 +21,7 @@ import permission from '@/directive/permission/index.js'
 export default {
   directives: { permission },
   components: { PDFView },
-
   props: {
-    fileTitle: String,
     filesList: Array
   },
   data() {
@@ -37,8 +35,6 @@ export default {
   },
 
   methods: {
-    init() {},
-
     handleCurrentChange(currentRow, oldCurrentRow) {
       this.selRow = currentRow
     },

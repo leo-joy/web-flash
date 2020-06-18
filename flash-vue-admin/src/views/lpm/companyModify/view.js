@@ -237,9 +237,10 @@ export default {
     },
 
     // 弹出文件列表
-    openFilesDialog(num) {
+    openFilesDialog(openFilesDialog) {
       this.fileDialogVisible = true
-      this.currentCompanyModify = this.companyModifyData[num]
+      this.currentCompanyModify = openFilesDialog
+      console.log(this.currentCompanyModify)
     }
   }
 }
