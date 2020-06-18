@@ -11,7 +11,8 @@ export default {
     contacts: '邀约管理',
     channel: '栏目管理',
     menu: '菜单管理',
-    dept: '部门管理',
+    org: '部门管理',
+    dept: '集团架构管理',
     mgr: '用户管理',
     role: '角色管理',
     task: '任务管理',
@@ -90,6 +91,7 @@ export default {
     reportStatistical: '报表统计分析',
     // 子菜单
     equityAnalysis: '股权架构图',
+    equityManage: '股权管理',
     reportOutput: '报表导出'
 
   },
