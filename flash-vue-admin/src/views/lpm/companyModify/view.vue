@@ -133,7 +133,7 @@
       width="60%"
       :close-on-press-escape="false"
     >
-      <table class="dp-table" border="1">
+      <table class="dp-table" border="0">
         <tr>
           <th width="7%">序号</th>
           <th width="25%">文件类型</th>
@@ -419,19 +419,20 @@
 </template>
 <style lang="scss">
 .dp-table {
-    width:100%;
-  border:1px solid #ccc;
+  width:100%;
+  border-bottom:1px solid #ebeef5;
   border-collapse:collapse;
 }
 
 .dp-table th, .dp-table td {
+    border-top:1px solid #ebeef5;
     padding: 10px;
 }
 
 .dp-table th{
     margin:5px;
     text-align: center;
-    background-color: #efefef;
+    background-color: #f9f9f9;
 }
 .dp-table td b{
     margin: 10px 5px;
