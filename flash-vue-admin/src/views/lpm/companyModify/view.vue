@@ -13,21 +13,21 @@
             </el-col>
             <el-col :span="24">
               <div v-if="item.enterpriseNameState+'' === 'true'" class="modifyList">
-                <span><b>企业名称：</b></span>
+                <span><b>名称变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.enterpriseNameOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.enterpriseNameNew }}</b></span>
               </div>
               <div v-if="item.legalRepresentativeState+'' === 'true'" class="modifyList">
-                <span><b>企业法人：</b></span>
+                <span><b>法人变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.legalRepresentativeOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.legalRepresentativeNew }}</b></span>
               </div>
               <div v-if="item.registeredAddressState+'' === 'true'" class="modifyList">
-                <span><b>注册地址：</b></span>
+                <span><b>地址变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.registeredAddressOld }}</b></span>
                 <span>变更为</span>
@@ -41,49 +41,49 @@
                 <span><b style="color:green">{{ item.ownershipNew }}</b></span>
               </div>
               <div v-if="item.operatingPeriodEndState+'' === 'true'" class="modifyList">
-                <span><b>经营期限：</b></span>
+                <span><b>经营期限变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.operatingPeriodEndOld.replace("00:00:00","") }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.operatingPeriodEndNew?item.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
               </div>
               <div v-if="item.businessScopeState+'' === 'true'" class="modifyList">
-                <span><b>经营范围：</b></span>
+                <span><b>经营范围变更：</b></span>
                 <span>原</span>
                 <span>{{ item.businessScopeOld }}</span>
                 <span>变更为</span>
                 <span><b>{{ item.businessScopeNew }}</b></span>
               </div>
               <div v-if="item.constitutionState+'' === 'true'" class="modifyList">
-                <span><b>章程：</b></span>
+                <span><b>章程变更：</b></span>
                 <span>原</span>
                 <span>{{ item.constitutionOld }}</span>
                 <span>变更为</span>
                 <span><b>{{ item.constitutionNew }}</b></span>
               </div>
               <div v-if="item.chairmanState+'' === 'true'" class="modifyList">
-                <span><b>董事长：</b></span>
+                <span><b>董事长变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.chairmanOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.chairmanNew }}</b></span>
               </div>
               <div v-if="item.generalManagerState+'' === 'true'" class="modifyList">
-                <span><b>经理：</b></span>
+                <span><b>经理变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.generalManagerOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.generalManagerNew }}</b></span>
               </div>
               <div v-if="item.directorState+'' === 'true'" class="modifyList">
-                <span><b>董事：</b></span>
+                <span><b>董事变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.directorOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.directorNew }}</b></span>
               </div>
               <div v-if="item.supervisorState+'' === 'true'" class="modifyList">
-                <span><b>监事：</b></span>
+                <span><b>监事变更：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.supervisorOld }}</b></span>
                 <span>变更为</span>
@@ -113,8 +113,7 @@
                 </tr>
               </table>
             </el-col>
-          </el-row></el-card>
-        </el-row>
+          </el-row>
         </el-card>
       </el-timeline-item>
       <el-timeline-item v-if="companyModifyData.length === 0">
@@ -136,8 +135,8 @@
       <table class="dp-table" border="0">
         <tr>
           <th width="7%">序号</th>
-          <th width="25%">文件类型</th>
-          <th width="68%">文件</th>
+          <th width="27%">文件类型</th>
+          <th width="65%">文件</th>
         </tr>
         <tr>
           <td>1</td><td>内部审批文件</td>
@@ -414,6 +413,8 @@
         </tr>
 
       </table>
+      <br>
+      <div><b>*附件备注：</b>{{ currentCompanyModify.remark? currentCompanyModify.remark:'没有备注信息'}}</div>
     </el-dialog>
   </div>
 </template>

@@ -248,14 +248,7 @@ public class CompanyModify extends BaseEntity {
     @Column(name="other_files", columnDefinition = "VARCHAR(128) COMMENT '21其它文件'")
     private String otherFiles;
 
-
-
-
-
-
-
-
-
-
+    @Column(name="remark", columnDefinition = "TEXT COMMENT '原文备注'")
+    private String remark;
 
 }
