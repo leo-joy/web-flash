@@ -4,8 +4,8 @@
       <button @click="changePdfPage(0)">上一页</button>
       {{ currentPage }} / {{ pageCount }}
       <button @click="changePdfPage(1)">下一页</button>
-      <button @click="rotate = rotate-90">&#x27F3;</button>
-      <button @click="rotate = rotate+90">&#x27F2;</button>
+      <button @click="rotateL()">&#x27F3;</button>
+      <button @click="rotateR()">&#x27F2;</button>
       <div
         v-if="loadedRatio > 0 && loadedRatio < 1"
         style="background-color: green; color: white; text-align: center"
@@ -30,16 +30,16 @@
       @link-clicked="currentPage = $event"
     />
     <div class="arrow">
-      <!-- <button @click="changePdfPage(0)">上一页</button>
+      <button @click="changePdfPage(0)">上一页</button>
       {{ currentPage }} / {{ pageCount }}
       <button @click="changePdfPage(1)">下一页</button>
-      <button @click="rotate += 90">&#x27F3;</button>
-      <button @click="rotate -= 90">&#x27F2;</button>
+      <button @click="rotateL()">&#x27F3;</button>
+      <button @click="rotateR()">&#x27F2;</button>
       <div
         v-if="loadedRatio > 0 && loadedRatio < 1"
         style="background-color: green; color: white; text-align: center"
         :style="{ width: loadedRatio * 100 + '%' }"
-      >{{ Math.floor(loadedRatio * 100) }}%</div> -->
+      >{{ Math.floor(loadedRatio * 100) }}%</div>
       <!-- <button @click="$refs.pdf.print()">print</button> -->
 
     </div>
@@ -85,6 +85,12 @@ export default {
     },
     password(updatePassword, reason) {
       updatePassword(prompt('password is "test"'))
+    },
+    rotateL() {
+      this.rotate = this.rotate + 90
+    },
+    rotateR() {
+      this.rotate = this.rotate - 90
     },
     error(err) {
       if (err && err.message === 'Invalid PDF structure') {

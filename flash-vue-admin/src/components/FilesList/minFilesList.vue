@@ -5,7 +5,7 @@
         <el-button type="text" @click.native="viewPdf(file.id,file.name)">{{ file.name }}</el-button>
       </el-col>
     </el-row>
-    <el-dialog :visible.sync="pdfVisible" width="80%">
+    <el-dialog :visible.sync="pdfVisible" :append-to-body="true" width="70%">
       <template>
         <PDFView :src="src" />
       </template>

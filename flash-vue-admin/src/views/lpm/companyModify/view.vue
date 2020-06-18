@@ -12,77 +12,77 @@
               <el-button type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
             </el-col>
             <el-col :span="24">
-              <div v-if="item.enterpriseNameState+'' === 'true'">
+              <div v-if="item.enterpriseNameState+'' === 'true'" class="modifyList">
                 <span><b>企业名称：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.enterpriseNameOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.enterpriseNameNew }}</b></span>
               </div>
-              <div v-if="item.legalRepresentativeState+'' === 'true'">
+              <div v-if="item.legalRepresentativeState+'' === 'true'" class="modifyList">
                 <span><b>企业法人：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.legalRepresentativeOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.legalRepresentativeNew }}</b></span>
               </div>
-              <div v-if="item.registeredAddressState+'' === 'true'">
+              <div v-if="item.registeredAddressState+'' === 'true'" class="modifyList">
                 <span><b>注册地址：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.registeredAddressOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.registeredAddressNew }}</b></span>
               </div>
-              <div v-if="item.ownershipState+'' === 'true'">
+              <div v-if="item.ownershipState+'' === 'true'" class="modifyList">
                 <span><b>改制：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.ownershipOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.ownershipNew }}</b></span>
               </div>
-              <div v-if="item.operatingPeriodEndState+'' === 'true'">
+              <div v-if="item.operatingPeriodEndState+'' === 'true'" class="modifyList">
                 <span><b>经营期限：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.operatingPeriodEndOld.replace("00:00:00","") }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.operatingPeriodEndNew?item.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
               </div>
-              <div v-if="item.businessScopeState+'' === 'true'">
+              <div v-if="item.businessScopeState+'' === 'true'" class="modifyList">
                 <span><b>经营范围：</b></span>
                 <span>原</span>
                 <span>{{ item.businessScopeOld }}</span>
                 <span>变更为</span>
                 <span><b>{{ item.businessScopeNew }}</b></span>
               </div>
-              <div v-if="item.constitutionState+'' === 'true'">
+              <div v-if="item.constitutionState+'' === 'true'" class="modifyList">
                 <span><b>章程：</b></span>
                 <span>原</span>
                 <span>{{ item.constitutionOld }}</span>
                 <span>变更为</span>
                 <span><b>{{ item.constitutionNew }}</b></span>
               </div>
-              <div v-if="item.chairmanState+'' === 'true'">
+              <div v-if="item.chairmanState+'' === 'true'" class="modifyList">
                 <span><b>董事长：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.chairmanOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.chairmanNew }}</b></span>
               </div>
-              <div v-if="item.generalManagerState+'' === 'true'">
+              <div v-if="item.generalManagerState+'' === 'true'" class="modifyList">
                 <span><b>经理：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.generalManagerOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.generalManagerNew }}</b></span>
               </div>
-              <div v-if="item.directorState+'' === 'true'">
+              <div v-if="item.directorState+'' === 'true'" class="modifyList">
                 <span><b>董事：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.directorOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.directorNew }}</b></span>
               </div>
-              <div v-if="item.supervisorState+'' === 'true'">
+              <div v-if="item.supervisorState+'' === 'true'" class="modifyList">
                 <span><b>监事：</b></span>
                 <span>原</span>
                 <span><b style="color:red">{{ item.supervisorOld }}</b></span>
@@ -131,7 +131,6 @@
       title="附件列表"
       :visible.sync="fileDialogVisible"
       width="60%"
-      :close-on-click-modal="false"
       :close-on-press-escape="false"
     >
       <table class="dp-table" border="1">
@@ -454,6 +453,9 @@
 .botmBtnContainer {
   text-align: center;
   padding: 20px;
+}
+.modifyList {
+  padding:5px
 }
 </style>
 <script src="./view.js"></script>
