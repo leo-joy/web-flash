@@ -52,8 +52,11 @@
               <el-tab-pane label="税务信息"><tallage /></el-tab-pane>
             </el-tabs>
           </el-tab-pane>
-          <el-tab-pane label="变更记录" name="second">
+          <el-tab-pane label="公司文件" name="second">
             <companymodify />
+          </el-tab-pane>
+          <el-tab-pane label="产权文件" name="third">
+            <div>开发中。。。</div>
           </el-tab-pane>
         </el-tabs>
       </el-col>

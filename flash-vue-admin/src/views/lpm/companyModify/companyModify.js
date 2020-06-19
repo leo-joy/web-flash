@@ -50,7 +50,7 @@ export default {
       supervisorValue: '',
       listUserQuery: {
         page: 1,
-        limit: 20000,
+        limit: 50000,
         account: undefined,
         name: undefined
       },

@@ -14,8 +14,21 @@ export default {
       /* 企业变更信息模块 */
       companyModifyData: [], // 企业变更信息相关数据
       fileDialogVisible: false, // 文件列表弹出框
-      currentCompanyModify: {}, // 当前变更
-
+      currentCompanyModify: {}, // 当前变更对象
+      // companyModifyType: {
+      //   enterpriseNameState: true,
+      //   registeredAddressState: true,
+      //   ownershipState: true,
+      //   businessScopeState: true,
+      //   constitutionState: true,
+      //   operatingPeriodEndState: true,
+      //   legalRepresentativeState: true,
+      //   chairmanState: true,
+      //   directorState: true,
+      //   supervisorState: true,
+      //   generalManagerState: true,
+      //   shareholderModifyState: true
+      // },
       accessoryFilesListCompanyModify: [], // 1内部审批文件
       companyReferenceRegisterFilesListCompanyModify: [], // 2工商申请表
       shareholdersDecideFilesListCompanyModify: [], // 3股东会决议
@@ -37,7 +50,7 @@ export default {
       tallageFilesListCompanyModify: [], // 19清税证明
       noticeFilesListCompanyModify: [], // 20公告报纸样张
       otherFilesListCompanyModify: [], // 21其它文件
-      
+
       listQuery: {
         page: 1,
         limit: 20,

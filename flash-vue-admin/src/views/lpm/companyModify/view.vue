@@ -1,6 +1,25 @@
 <template>
   <div class="block">
+
     <el-timeline>
+      <!-- <el-row>
+        <el-col :span="24">
+          <el-form-item label="变更类型">
+            <el-checkbox v-model="companyModifyType.enterpriseNameState" label="企业名称" />
+            <el-checkbox v-model="companyModifyType.registeredAddressState" label="注册地址" />
+            <el-checkbox v-model="companyModifyType.ownershipState" label="改制" />
+            <el-checkbox v-model="companyModifyType.businessScopeState" label="经营范围" />
+            <el-checkbox v-model="companyModifyType.constitutionState" label="章程" />
+            <el-checkbox v-model="companyModifyType.operatingPeriodEndState" label="经营期限" />
+            <el-checkbox v-model="companyModifyType.legalRepresentativeState" label="法定代表人" />
+            <el-checkbox v-model="companyModifyType.chairmanState" label="董事长备案" />
+            <el-checkbox v-model="companyModifyType.directorState" label="董事备案" />
+            <el-checkbox v-model="companyModifyType.supervisorState" label="监事备案" />
+            <el-checkbox v-model="companyModifyType.generalManagerState" label="经理备案" />
+            <el-checkbox v-model="companyModifyType.shareholderModifyState" label="股东变更" />
+          </el-form-item>
+        </el-col>
+      </el-row> -->
       <el-timeline-item v-for="item in companyModifyData" :key="item.id" type="primary" color="#0f6d68" :timestamp="item.modifyDate.replace('00:00:00','')" placement="top">
         <el-card>
           <el-row>
@@ -97,7 +116,7 @@
                       <el-col v-for="sonItemOld in item.shareholderOldList" :key="sonItemOld.id" :span="24">
                         <h4>股东：{{ sonItemOld.shareholder }}</h4>
                         <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
-                        <div><hr></hr></div>
+                        <div><hr></div>
                       </el-col>
                     </el-row>
                   </td>
@@ -106,7 +125,7 @@
                       <el-col v-for="sonItemNew in item.shareholderNewList" :key="sonItemNew.id" :span="24">
                         <h4>股东：{{ sonItemNew.shareholder }}</h4>
                         <h5>认缴出资额：{{ sonItemNew.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemNew.proportion }}%</h5>
-                        <div><hr></hr></div>
+                        <div><hr></div>
                       </el-col>
                     </el-row>
                   </td>
@@ -414,7 +433,7 @@
 
       </table>
       <br>
-      <div><b>*附件备注：</b>{{ currentCompanyModify.remark? currentCompanyModify.remark:'没有备注信息'}}</div>
+      <div><b>*附件备注：</b>{{ currentCompanyModify.remark? currentCompanyModify.remark:'没有备注信息' }}</div>
     </el-dialog>
   </div>
 </template>
