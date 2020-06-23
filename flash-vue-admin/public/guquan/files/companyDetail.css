@@ -1,0 +1,144 @@
+.company-detail {
+	background: rgb(255, 255, 255); padding: 10px 20px; left: 20px; top: 120px; width: 300px; display: none; position: absolute; box-shadow: 0px 0px 10px rgba(0,0,0,0.5); -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5); -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+}
+.mao-divider {
+	border: 1px solid rgb(0, 147, 231); border-image: none; top: 2px; height: 14px; display: inline-block; position: relative;
+}
+.mao-company-name {
+	color: rgb(18, 139, 237); font-size: 16px;
+}
+.mao-company-name:hover {
+	color: rgb(0, 122, 221); font-size: 16px;
+}
+.mao-oper a {
+	color: rgb(18, 139, 237);
+}
+.mao-oper a:hover {
+	color: rgb(0, 122, 221);
+}
+.mao-company-status {
+	background: rgb(76, 160, 255); padding: 5px 8px; border-radius: 2px; text-align: center; color: rgb(255, 255, 255); line-height: 1; font-size: 12px; font-weight: bold; vertical-align: baseline; float: right; display: inline; white-space: nowrap;
+}
+.mao-light-grey {
+	color: rgb(153, 153, 153);
+}
+.mao-grey {
+	color: rgb(51, 51, 51);
+}
+.mao-tupu-link {
+	background: rgb(18, 139, 237); width: 100%; color: rgb(255, 255, 255);
+}
+.mao-tupu-link:hover {
+	background: rgb(28, 134, 225); width: 100%; color: rgb(255, 255, 255);
+}
+.mao-tupu-link:focus {
+	background: rgb(28, 134, 225); width: 100%; color: rgb(255, 255, 255);
+}
+.mao-tupu-link:active {
+	background: rgb(28, 134, 225); width: 100%; color: rgb(255, 255, 255);
+}
+.mao-tab-content {
+	height: 220px; font-size: 12px; margin-top: 3px;
+}
+.mao-list {
+	margin-top: 5px; margin-bottom: 0px;
+}
+.mao-list li {
+	padding: 5px 8px; border-bottom-color: rgb(221, 221, 221); border-bottom-width: 1px; border-bottom-style: solid; display: block; position: relative;
+}
+.mao-list .badge {
+	font-weight: normal; margin-left: 5px; float: right; background-color: rgb(255, 255, 255);
+}
+.mao-table {
+	font-size: 12px;
+}
+.mao-table thead {
+	background: rgb(240, 247, 253); color: rgb(153, 153, 153);
+}
+.mao-table > thead > tr > th {
+	border-bottom-width: 1px;
+}
+.mao-table tbody {
+	color: rgb(102, 102, 102);
+}
+.mao-table-pane {
+	height: 300px; overflow: auto;
+}
+.mao-noresult {
+	text-align: center; padding-top: 60px;
+}
+.mao-noresult p {
+	text-align: center;
+}
+.mao-noresult p img {
+	width: 80px;
+}
+.mao-table a {
+	color: rgb(51, 51, 51);
+}
+.mao-table a:hover {
+	color: rgb(18, 139, 237);
+}
+.mao-toolbar {
+	background: rgb(255, 255, 255); width: 50px; right: 30px; bottom: 50px; color: rgb(94, 137, 215); font-size: 18px; position: absolute; z-index: 20;
+}
+.mao-toolbar ul {
+	margin: 0px; padding: 0px; border: 1px solid rgb(94, 137, 215); border-image: none; width: 50px; box-sizing: border-box; box-shadow: 0px 0px 10px rgba(94,137,215,0.5); -webkit-box-shadow: 0 0 10px rgba(94, 137, 215, .5); -moz-box-shadow: 0 0 10px rgba(94, 137, 215, .5);
+}
+.mao-toolbar ul:nth-child(1) {
+	margin-bottom: 8px;
+}
+.mao-toolbar ul > li {
+	width: 50px; height: 50px; text-align: center; line-height: 50px; box-sizing: border-box;
+}
+.mao-toolbar ul > li:not(:first-child) {
+	border-top-color: rgb(94, 137, 215); border-top-width: 1px; border-top-style: solid;
+}
+.mao-toolbar ul > li:hover {
+	background: rgb(94, 137, 215); color: rgb(255, 255, 255);
+}
+.mao-head {
+	top: 56px; width: 100%; position: absolute; z-index: 10;
+}
+.whitebg.mao-head {
+	background: rgba(255, 255, 255, 0.9);
+}
+.mao-head .mao-title {
+	color: rgb(51, 51, 51); font-size: 14px; margin-top: 10px; margin-left: -10px; float: left;
+}
+.mao-head .mao-nav {
+	color: rgb(102, 102, 102); font-size: 16px; margin-top: 15px; margin-left: 10px; float: left;
+}
+.mao-nav li {
+	margin-left: 20px; display: inline;
+}
+.mao-nav a {
+	padding: 8px 0px; line-height: 1.8;
+}
+.mao-nav a:hover {
+	color: rgb(18, 139, 237);
+}
+.mao-nav .active > a {
+	color: rgb(18, 139, 237); border-bottom-color: rgb(18, 139, 237); border-bottom-width: 2px; border-bottom-style: solid;
+}
+.mao-main {
+	width: 100%; height: 100%;
+}
+.mao-main svg {
+	width: 100%; height: 100%;
+}
+.mao-loading {
+	width: 100%; height: 100%; display: none; position: fixed; z-index: 20;
+}
+.mao-loading img {
+	left: 50%; top: 50%; width: 80px; margin-top: -110px; margin-left: -40px; position: absolute;
+}
+.mao-nodata {
+	text-align: center; margin-top: 300px; display: none;
+}
+.mao-nodata img {
+	width: 100px;
+}
+.mao-screen-area {
+	width: 100%; height: 100%; position: relative;
+}

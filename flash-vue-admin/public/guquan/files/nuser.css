@@ -1,0 +1,636 @@
+.nuser-left {
+	padding-left: 15px; float: left;
+}
+.nuser-left .navi-wrap {
+	background: rgb(255, 255, 255); border: 1px solid rgb(238, 238, 238); border-image: none; position: relative; -ms-overflow-x: hidden; -ms-overflow-y: hidden; -webkit-overflow-scrolling: touch;
+}
+.nuser-left .navi-wrap {
+	width: 200px;
+}
+.nuser-left .navi ul a {
+	color: rgb(51, 51, 51);
+}
+.nuser-left .navi ul ul a {
+	color: rgb(102, 102, 102);
+}
+.nuser-left .navi ul.nav li a > i {
+	margin: -10px -5px -5px -15px;
+}
+.nuser-left .navi ul.nav li li a {
+	padding-left: 38px;
+}
+.nuser-left .nav-sub.nav > li.active > a {
+	color: rgb(18, 139, 237); border-right-color: rgb(18, 139, 237); border-right-width: 2px; border-right-style: solid; background-color: rgb(243, 249, 253);
+}
+.nuser-left .nav > li.current > a {
+	color: rgb(18, 139, 237); background-color: rgb(240, 243, 244);
+}
+.nuser-left .navi ul.nav li a {
+	padding: 8px 10px 7px 20px; transition:background-color 0.2s ease-in-out; text-transform: none; font-weight: normal; display: block; position: relative; -webkit-transition: background-color 0.2s ease-in-out 0s;
+}
+.nuser-left .nav > li > a:hover {
+	color: rgb(18, 139, 237); background-color: rgb(243, 249, 253);
+}
+.nuser-left .nav > li > a:focus {
+	background: rgb(255, 255, 255);
+}
+.nuser-left .nav-sub.nav > li .stats {
+	font-size: 12px;
+}
+.nuser-left .nav-sub.nav > li .trend {
+	left: 1px; top: -2px; position: relative;
+}
+.nuser-left .navi ul.nav li .det {
+	padding: 0px 10px 10px 38px; color: rgb(153, 153, 153);
+}
+.nuser-left .navi ul.nav li .det > .text-primary {
+	cursor: pointer;
+}
+.nuser-left .navi ul.nav li .det .tooltip {
+	margin-left: 50px;
+}
+.nuser-left .navi .top-text {
+	text-align: center; color: rgb(51, 51, 51); padding-bottom: 15px; font-size: 14px; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.nuser-left .navi .top-text .m_question {
+	top: 3px;
+}
+.nuser-left .navi .top-text .m_question + .tooltip {
+	right: 10px;
+}
+.nuser-left .navi .top-text .btn {
+	margin: 10px auto auto; width: 90px; display: block;
+}
+.navi .top_header {
+	padding: 15px 8px 15px 15px; border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.nuser-content {
+	width: 1020px; padding-left: 15px; float: left; min-height: 500px;
+}
+.nuser-head {
+	background: rgb(255, 255, 255);
+}
+.nuser-head .bview {
+	padding: 15px; border-right-color: rgb(238, 238, 238); border-right-width: 1px; border-right-style: solid; float: left;
+}
+.set-faceimg {
+	width: 80px; height: 80px; vertical-align: middle; display: table-cell; position: relative; cursor: pointer;
+}
+.set-faceimg > img {
+	border-radius: 10px; width: 80px; max-height: 80px; object-fit: contain;
+}
+.set-faceimg > span {
+	background: rgba(0, 0, 0, 0.5); padding: 8px; border-radius: 6px; transition:opacity 0.3s; left: 0px; top: 0px; text-align: center; right: 0px; bottom: 0px; color: rgb(255, 255, 255); line-height: 34px; font-size: 22px; display: block; position: absolute; opacity: 0;
+}
+.set-faceimg:hover > span {
+	opacity: 0.95;
+}
+.nuser-head .bd {
+	width: 175px; padding-left: 15px; vertical-align: middle; display: table-cell;
+}
+.set-nickname {
+	width: 150px; color: rgb(51, 51, 51); overflow: hidden; font-size: 18px; white-space: nowrap; -ms-word-break: keep-all; -ms-text-overflow: ellipsis;
+}
+.set-nickname [data-trigger] {
+	cursor: pointer;
+}
+.pform .set-nickname {
+	width: 300px; line-height: 30px; font-size: 14px;
+}
+.set-nickname > .edit {
+	left: 5px; color: rgb(18, 139, 237); font-size: 14px; position: relative;
+}
+.nuser-head .vtag {
+	color: rgb(18, 139, 237); font-size: 14px;
+}
+.nuser-head .vtag .bvip-btn {
+	background: rgb(231, 244, 255); padding: 2px 10px; color: rgb(18, 139, 237); font-size: 12px; margin-top: 15px; display: block;
+}
+.nuser-head .time {
+	color: rgb(153, 153, 153); line-height: 16px; font-size: 14px;
+}
+.nuser-head .gview {
+	width: 714px; height: 100%; float: left;
+}
+.nuser-head .gview .item {
+	padding: 20px 10px; width: 180px; text-align: center; display: table-cell; position: relative;
+}
+.nuser-head .gview :not(:last-child).item::after {
+	background: rgb(238, 238, 238); top: 30px; width: 1px; height: 50px; right: 0px; position: absolute; content: " ";
+}
+.nuser-head .gview .num {
+	color: rgb(51, 51, 51); font-size: 22px; margin-top: 5px;
+}
+.nuser-head .gview .title a {
+	color: rgb(18, 139, 237); font-size: 16px;
+}
+.nuser-center {
+	width: 700px; margin-right: 15px; float: left;
+}
+.nuser-right {
+	width: 290px; float: left;
+}
+.npanel-heading {
+	background: rgb(252, 252, 252); color: rgb(51, 51, 51); border-bottom-color: currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.npanel-heading .watermark {
+	width: 92px; height: 26px; margin-top: 5px; margin-left: 20px; float: right; background-image: url("/material/theme/chacha/cms/v2/images/watermark.png?t=1");
+}
+.npanel-heading h4 {
+	line-height: 50px; font-weight: normal; margin-top: 0px; margin-bottom: 0px; margin-left: 15px; display: inline-block;
+}
+.npanel-heading .h4 {
+	line-height: 50px; font-weight: normal; margin-top: 0px; margin-bottom: 0px; margin-left: 15px; display: inline-block;
+}
+.npanel-heading .pull-right {
+	line-height: 48px; margin-right: 15px;
+}
+.npanel-heading .tdrop {
+	margin-left: 5px; float: left;
+}
+.npanel-heading .tdrop .btn {
+	color: rgb(51, 51, 51);
+}
+.npanel-heading .tdrop .btn:hover {
+	background: rgb(254, 254, 254);
+}
+.npanel-heading .tdrop .dropdown-menu {
+	margin-top: -7px;
+}
+.b-b.npanel-heading {
+	border-bottom-color: rgb(238, 238, 238); border-bottom-width: 1px; border-bottom-style: solid;
+}
+.npanel-heading .btn {
+	color: rgb(102, 102, 102); line-height: 18px; font-size: 12px; margin-left: 5px; position: relative; min-width: 70px; box-shadow: none;
+}
+.npanel-heading .btn:active {
+	outline: 0px; box-shadow: none;
+}
+.npanel-heading .btn-none {
+	padding: 6px 12px; line-height: 18px; font-size: 14px; margin-left: 5px; display: inline-block; position: relative;
+}
+.npanel-heading .form {
+	margin-top: 9px; margin-right: 10px; float: left;
+}
+.npanel-heading .form-group {
+	margin-bottom: 0px; position: relative;
+}
+.npanel-heading input.form-control {
+	width: 220px; height: 32px; padding-right: 32px; font-size: 14px;
+}
+.npanel-heading .icon-search {
+	border: 0px solid rgb(255, 255, 255) !important; border-image: none !important; top: -2px; width: 38px; height: 38px; right: 0px; font-size: 16px; position: absolute; background-color: transparent;
+}
+.npanel-heading .tab {
+	padding: 0px;
+}
+.npanel-heading .tab-item {
+	margin: 0px 15px; color: rgb(102, 102, 102); line-height: 48px; padding-right: 0px; padding-left: 0px; font-size: 16px; float: left; position: relative; cursor: pointer;
+}
+.npanel-heading .active.tab-item {
+	color: rgb(18, 139, 237); border-bottom-color: rgb(18, 139, 237); border-bottom-width: 2px; border-bottom-style: solid;
+}
+.npanel-heading .disabled.tab-item {
+	color: rgb(153, 153, 153); cursor: not-allowed;
+}
+.npanel-heading .tab-item .new {
+	background: rgb(253, 72, 94); border-radius: 50%; top: 10px; width: 6px; height: 6px; right: -8px; position: absolute;
+}
+.npanel-heading .tab-item .icon-new2 {
+	top: 4px; right: -25px;
+}
+.npanel-heading .tab-item .icon-new3 {
+	top: 4px; right: -25px;
+}
+.npanel-heading .tab-item .vip.ntag {
+	top: 14px; right: -75px; position: absolute;
+}
+.npanel-heading .m_question {
+	margin-top: 6px;
+}
+.npanel-heading .right-tooltip + .tooltip {
+	left: auto !important; width: 480px; right: 15px;
+}
+.npanel-heading .i-switch {
+	top: 5px; position: relative;
+}
+.npanel-heading .i-switch::before {
+	content: " ";
+}
+.npanel-heading .tooltip {
+	max-width: 700px;
+}
+.npanel {
+	background: rgb(255, 255, 255); border-radius: 0px; border: 1px solid rgb(238, 238, 238); border-image: none; margin-bottom: 15px; box-shadow: none;
+}
+.n-b.npanel {
+	margin-bottom: 0px; border-bottom-color: currentColor; border-bottom-width: medium; border-bottom-style: none;
+}
+.npanel::before {
+	display: table; content: " ";
+}
+.npanel-body::before {
+	display: table; content: " ";
+}
+.npanel::after {
+	clear: both; display: table; content: " ";
+}
+.npanel-body::after {
+	clear: both; display: table; content: " ";
+}
+.npanel-body {
+	padding: 20px 15px;
+}
+.npanel .link {
+	color: rgb(153, 153, 153);
+}
+.npanel .link:hover {
+	color: rgb(18, 139, 237);
+}
+.npanel .img-logo {
+	border-radius: 12px; border: 1px solid rgb(238, 238, 238); border-image: none; width: 100px; height: 100px; vertical-align: middle; display: table-cell;
+}
+.npanel .img-logo > img {
+	border-radius: 12px; width: 100%; vertical-align: middle; max-height: 100px;
+}
+.npanel .title-name {
+	color: rgb(0, 0, 0); font-size: 22px;
+}
+.npanel .pdesc {
+	font-size: 16px;
+}
+.npanel .pdesc .col-pre {
+	width: 100px; float: left;
+}
+.npanel .pdesc .col-after {
+	color: rgb(153, 153, 153); font-size: 14px; float: left;
+}
+.npanel .pdesc .col-after a {
+	color: rgb(18, 139, 237);
+}
+.npanel .pdesc .pcard-box {
+	width: 200px;
+}
+.npanel .pdesc .pcard-img .bimg {
+	width: 180px; height: 90px;
+}
+.npanel .pdesc .relattag-item {
+	background: rgb(234, 242, 255); padding: 2px 6px; border-radius: 2px; text-align: center; color: rgb(18, 139, 237); font-size: 12px; margin-top: 4px; margin-right: 8px; margin-bottom: 4px; display: inline-block; min-width: 42px;
+}
+.npanel .text-table {
+	width: 100%; font-size: 14px;
+}
+.npanel .text-table td {
+	padding: 5px 0px; color: rgb(51, 51, 51);
+}
+.npanel .text-table .v {
+	color: rgb(102, 102, 102);
+}
+.npanel .vtag-text {
+	padding-left: 26px; position: relative;
+}
+.npanel .vtag-text .icon-vip-level {
+	left: 0px; top: -5px;
+}
+.scompany-list {
+	display: none; z-index: 999;
+}
+.scompany-list label {
+	line-height: 22px; font-size: 14px; margin-bottom: 0px; display: block;
+}
+.scompany-list label em {
+	color: rgb(253, 72, 94);
+}
+.scompany-list label > input {
+	margin-right: 5px;
+}
+.npanel :last-child.pills {
+	margin-bottom: 5px;
+}
+.company-right.npanel {
+	text-align: left !important;
+}
+.company-right.npanel .logo {
+	display: table-cell; position: relative;
+}
+.company-right.npanel .logo > img {
+	border-radius: 6px; width: 54px; height: 54px; object-fit: contain;
+}
+.company-right.npanel .logo > span {
+	border-radius: 6px; width: 54px; height: 54px;
+}
+.company-right.npanel .logo > span::before {
+	color: rgb(255, 255, 255) !important;
+}
+.company-right.npanel .info {
+	padding-left: 15px; vertical-align: middle; display: table-cell;
+}
+.company-right.npanel .title {
+	width: 186px; overflow: hidden; font-size: 16px; display: block; white-space: nowrap; -ms-text-overflow: ellipsis;
+}
+.company-right.npanel .products {
+	margin-top: 25px;
+}
+.company-right.npanel .products .item {
+	width: 78px; text-align: center; float: left;
+}
+.company-right.npanel .products .item img {
+	border: 1px solid rgb(238, 238, 238); border-image: none; width: 78px; height: 60px; object-fit: cover;
+}
+.company-right.npanel .products :not(:last-child).item {
+	margin-right: 8px;
+}
+.company-right.npanel .products .item p {
+	color: rgb(51, 51, 51); overflow: hidden; font-size: 12px; white-space: nowrap; -ms-text-overflow: ellipsis;
+}
+.company-right.npanel .list-group {
+	margin-bottom: 0px;
+}
+.company-right.npanel .list-group-item {
+	padding-top: 15px; padding-bottom: 15px; border-top-color: currentColor; border-right-color: currentColor; border-left-color: currentColor; border-top-width: medium; border-right-width: medium; border-left-width: medium; border-top-style: none; border-right-style: none; border-left-style: none;
+}
+.company-right.npanel a:hover {
+	color: rgb(18, 139, 237);
+}
+.company-right.npanel .more {
+	padding: 10px; text-align: center; font-size: 16px; display: block;
+}
+.npanel .ncard {
+	border: 1px solid rgb(226, 236, 245); border-image: none; width: 475px; float: left;
+}
+.npanel .ncard-head {
+	background: rgb(242, 249, 252); height: 50px; color: rgb(51, 51, 51); line-height: 50px; padding-left: 15px; font-size: 12px;
+}
+.coupon-card {
+	background: url("/material/theme/chacha/cms/pro/img/coupon_bg.png") 0% 0% / 504px 184px; width: 504px; height: 184px;
+}
+.abled.coupon-card {
+	background-image: url("/material/theme/chacha/cms/pro/img/coupon_bg_abled.png");
+}
+.coupon-content {
+	height: 136px; position: relative;
+}
+.coupon-content .col-ft {
+	width: 158px; text-align: center; float: left;
+}
+.coupon-content .img {
+	line-height: 136px;
+}
+.coupon-content .img > img {
+	width: 82px;
+}
+.coupon-content .value {
+	line-height: 136px; font-size: 70px;
+}
+.coupon-content .value > span {
+	line-height: 30px; font-size: 20px; margin-right: 3px;
+}
+.coupon-content .col-bd {
+	padding: 20px 0px 20px 20px; width: 320px; float: left;
+}
+.coupon-content .btn {
+	top: 20px; right: 20px; position: absolute;
+}
+.coupon-content .title {
+	width: 200px; height: 62px; color: rgb(51, 51, 51); line-height: 1.2; font-size: 22px; margin-top: 5px; margin-bottom: 5px; vertical-align: middle; display: table-cell;
+}
+.coupon-content .sub-title {
+	color: rgb(153, 153, 153); font-size: 16px;
+}
+.coupon-footer {
+	padding: 15px 20px;
+}
+.coupon-footer .des {
+	color: rgb(153, 153, 153); font-size: 16px;
+}
+.i-switch {
+	margin: 0px; border-radius: 30px; width: 35px; height: 20px; display: inline-block; position: relative; cursor: pointer; background-color: rgb(18, 140, 236);
+}
+.i-switch input {
+	position: absolute; opacity: 0;
+}
+.i-switch input:checked + i::before {
+	border-width: 0px; border-radius: 5px; left: 50%; top: 50%; right: 5px; bottom: 50%;
+}
+.i-switch input:checked + i::after {
+	margin-left: 16px;
+}
+.i-switch i::before {
+	border-radius: 30px; border: 1px solid rgb(240, 240, 240); transition:0.2s; border-image: none; left: -1px; top: -1px; right: -1px; bottom: -1px; position: absolute; content: ""; background-color: rgb(255, 255, 255); -webkit-transition: all 0.2s;
+}
+.i-switch i::after {
+	border-radius: 50%; transition:margin-left 0.3s; top: 1px; width: 18px; bottom: 1px; position: absolute; content: ""; box-shadow: 1px 1px 3px rgba(0,0,0,0.25); background-color: rgb(255, 255, 255); -webkit-transition: margin-left 0.3s; -webkit-box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.25);
+}
+.i-switch-md {
+	width: 40px; height: 24px;
+}
+.i-switch-md input:checked + i::after {
+	margin-left: 17px;
+}
+.i-switch-md i::after {
+	width: 22px;
+}
+.i-switch-lg {
+	width: 50px; height: 30px;
+}
+.i-switch-lg input:checked + i::after {
+	margin-left: 21px;
+}
+.i-switch-lg i::after {
+	width: 28px;
+}
+.i-checks {
+	padding-left: 20px; cursor: pointer;
+}
+.i-checks input {
+	margin-left: -20px; position: absolute; opacity: 0;
+}
+.i-checks input:checked + i {
+	border-color: rgb(35, 183, 229);
+}
+.i-checks input:checked + i::before {
+	left: 4px; top: 4px; width: 10px; height: 10px; background-color: rgb(35, 183, 229);
+}
+.i-checks input:checked + span .active {
+	display: inherit;
+}
+.i-checks input[type='radio'] + i {
+	border-radius: 50%;
+}
+.i-checks input[type='radio'] + i::before {
+	border-radius: 50%;
+}
+.i-checks input[disabled] + i {
+	border-color: rgb(222, 229, 231);
+}
+fieldset[disabled] .i-checks input + i {
+	border-color: rgb(222, 229, 231);
+}
+.i-checks input[disabled] + i::before {
+	background-color: rgb(222, 229, 231);
+}
+fieldset[disabled] .i-checks input + i::before {
+	background-color: rgb(222, 229, 231);
+}
+.i-checks > i {
+	border: 1px solid rgb(207, 218, 221); border-image: none; width: 20px; height: 20px; line-height: 1; margin-top: -2px; margin-right: 4px; margin-left: -20px; vertical-align: middle; display: inline-block; position: relative; background-color: rgb(255, 255, 255);
+}
+.i-checks > i::before {
+	transition:0.2s; left: 50%; top: 50%; width: 0px; height: 0px; position: absolute; content: ""; background-color: transparent; -webkit-transition: all 0.2s;
+}
+.i-checks > span {
+	margin-left: -20px;
+}
+.i-checks > span .active {
+	display: none;
+}
+.i-checks-sm input:checked + i::before {
+	left: 3px; top: 3px; width: 8px; height: 8px;
+}
+.i-checks-sm > i {
+	width: 16px; height: 16px; margin-right: 6px; margin-left: -18px;
+}
+.i-checks-lg input:checked + i::before {
+	left: 8px; top: 8px; width: 12px; height: 12px;
+}
+.i-checks-lg > i {
+	width: 30px; height: 30px;
+}
+.pob {
+	margin-bottom: 5px;
+}
+.pob > div {
+	line-height: 34px;
+}
+.pob img {
+	border-radius: 4px; width: 34px; margin-right: 10px;
+}
+.pob h4 {
+	font-size: 16px; font-weight: normal;
+}
+.prow {
+	margin-right: -7px; margin-left: -7px;
+}
+.prow > div {
+	padding-right: 7px; padding-left: 7px;
+}
+.pwidget-panel {
+	background: rgb(255, 255, 255); padding: 20px; border-radius: 2px; border: 1px solid rgb(238, 238, 238); border-image: none; margin-bottom: 16px; position: relative;
+}
+.pwidget-panel h2 {
+	color: rgb(51, 51, 51); margin-top: 10px;
+}
+.pwidget-panel i {
+	top: 20px; right: 20px; color: rgb(204, 204, 204); line-height: 60px; font-size: 48px; position: absolute;
+}
+.pwidget-panel img {
+	top: 20px; width: 50px; right: 20px; position: absolute;
+}
+.pwidget-panel div {
+	color: rgb(51, 51, 51); font-size: 16px;
+}
+.tags-wrap {
+	padding: 6px 12px; height: auto !important; min-height: 40px;
+}
+.tags-wrap .placeholder {
+	color: rgb(153, 153, 153); line-height: 26px;
+}
+.tags-wrap .item {
+	background: rgb(234, 242, 255); padding: 2px 6px; color: rgb(18, 139, 237); font-size: 12px; margin-top: 2px; margin-right: 12px; margin-bottom: 2px; display: inline-block; position: relative;
+}
+.tags-wrap .item .close {
+	top: -5px; width: 12px; height: 12px; right: -5px; display: block; position: absolute; opacity: 1; background-image: url("/material/theme/chacha/cms/pro/img/icon_delete_xs.png"); background-size: 12px 12px;
+}
+.pa {
+	left: -8px; top: 3px; width: 18px; height: 18px; line-height: 40px; float: left; display: inline-block; position: relative; background-image: url("/material/theme/chacha/cms/pro/img/pa_icon.png"); background-size: 54px 36px;
+}
+.pa-info.pa {
+	background-position: 0px 0px;
+}
+.pa-report.pa {
+	background-position: 18px 0px;
+}
+.pa-radar.pa {
+	background-position: 36px 0px;
+}
+.pa-syr.pa {
+	background-position: 0px -18px;
+}
+.pa-user.pa {
+	background-position: 18px -18px;
+}
+.pa-qiye.pa {
+	background-position: 36px -18px;
+}
+.dot {
+	background: rgb(255, 255, 255); border-radius: 50%; top: -2px; width: 6px; height: 6px; margin-right: 3px; display: inline-block; position: relative;
+}
+.text-danger.dot {
+	background: rgb(253, 72, 94);
+}
+.text-success.dot {
+	background: rgb(82, 196, 27);
+}
+.text-gray.dot {
+	background: rgb(214, 214, 214);
+}
+.picon {
+	top: 5px; width: 18px; height: 18px; margin-top: -5px; margin-left: -2px; display: inline-block; position: relative; background-image: url("/material/theme/chacha/cms/v2/images/picon2.png"); background-size: 36px 90px;
+}
+.picon-invoice {
+	background-position: -18px -54px;
+}
+.picon-export {
+	background-position: -18px -18px;
+}
+.picon-alarm {
+	background-position: 0px -36px;
+}
+.picon-import {
+	background-position: 0px -54px;
+}
+.picon-plus {
+	background-position: -18px -36px;
+}
+.picon-close {
+	background-position: 0px -18px;
+}
+.picon-setting {
+	background-position: -18px 0px;
+}
+.picon-refresh {
+	background-position: 0px 0px;
+}
+.picon-ling {
+	background-position: 0px -36px;
+}
+.picon-add {
+	background-position: -18px -36px;
+}
+.picon-online {
+	background-position: 0px -72px;
+}
+.eicon {
+	top: 8px; width: 24px; height: 24px; margin-top: -5px; margin-left: -2px; display: inline-block; position: relative; background-image: url("/material/theme/chacha/cms/v2/images/eicon.png"); background-size: 48px 72px;
+}
+.eicon-setting {
+	background-position: 0px 0px;
+}
+.eicon-drag {
+	background-position: 0px -48px;
+}
+.eicon-delete {
+	background-position: 0px -24px;
+}
+.eicon-setting:hover {
+	background-position: -24px 0px;
+}
+.eicon-drag:hover {
+	background-position: -24px -48px;
+}
+.eicon-delete:hover {
+	background-position: -24px -24px;
+}
+.bword {
+	-ms-word-break: break-all;
+}
