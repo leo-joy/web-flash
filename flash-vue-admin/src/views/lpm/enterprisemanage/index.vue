@@ -36,7 +36,6 @@
       <el-tab-pane label="行政许可信息"><administrativelicense @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="行政处罚信息"><administrativepunish @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="证照废弃声明"><certificatecancel @viewfile="viewfile" /></el-tab-pane>
-      <el-tab-pane label="证照废弃声明"><certificatecancel @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="清算信息"><liquidation @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="分公司信息"><branchcompany /></el-tab-pane>
       <el-tab-pane label="投资企业"><investcompany /></el-tab-pane>
