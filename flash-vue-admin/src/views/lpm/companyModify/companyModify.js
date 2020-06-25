@@ -73,6 +73,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        registeredCapitalState: '',
+        registeredCapitalOld: '',
+        registeredCapitalNew: '',
         ownershipState: '',
         ownershipOld: '',
         ownershipNew: '',
@@ -157,6 +160,12 @@ export default {
         ],
         shareholder: [
           { required: true, message: '请选中股东名称', trigger: 'blur' }
+        ],
+        registeredCapitalOld: [
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+        ],
+        registeredCapitalNew: [
+          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
         ]
       },
       listQuery: {
@@ -361,6 +370,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        registeredCapitalState: '',
+        registeredCapitalOld: '',
+        registeredCapitalNew: '',
         ownershipState: '',
         ownershipOld: '',
         ownershipNew: '',
@@ -463,6 +475,7 @@ export default {
       this.form.enterpriseId = this.companyList[0].id
       this.form.enterpriseNameOld = this.companyList[0].enterpriseName
       this.form.registeredAddressOld = this.companyList[0].registeredAddress
+      this.form.registeredCapitalOld = this.companyList[0].registeredCapital
       this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
       this.form.businessScopeOld = this.companyList[0].businessScope
       this.form.legalRepresentativeOld = this.companyList[0].legalRepresentative
@@ -533,6 +546,9 @@ export default {
             registeredAddressState: this.form.registeredAddressState ? this.form.registeredAddressState : 'false',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
+            registeredCapitalState: this.form.registeredCapitalState ? this.form.registeredCapitalState : 'false',
+            registeredCapitalOld: this.form.registeredCapitalOld,
+            registeredCapitalNew: this.form.registeredCapitalNew,
             ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
             ownershipOld: this.form.ownershipOld,
             ownershipNew: this.form.ownershipNew,
@@ -698,6 +714,10 @@ export default {
 
         if (this.form.registeredAddressState === 'true') {
           this.form.registeredAddressState = true
+        }
+
+        if (this.form.registeredCapitalState === 'true') {
+          this.form.registeredCapitalState = true
         }
 
         if (this.form.ownershipState === 'true') {

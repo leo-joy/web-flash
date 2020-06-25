@@ -79,6 +79,15 @@ public class CompanyModify extends BaseEntity {
     @Column(name="registered_address_new", columnDefinition = "VARCHAR(128) COMMENT '新注册地址'")
     private String registeredAddressNew;
 
+    @Column(name="registered_capital_state", columnDefinition = "VARCHAR(16) COMMENT '注册资本状态'")
+    private String registeredCapitalState;
+
+    @Column(name="registered_capital_old", columnDefinition = "FLOAT COMMENT '旧注册资本'")
+    private String registeredCapitalOld;
+
+    @Column(name="registered_capital_new", columnDefinition = "FLOAT COMMENT '新注册资本'")
+    private String registeredCapitalNew;
+
 
     @Column(name="business_scope_state", columnDefinition = "VARCHAR(16) COMMENT '经营范围变更状态'")
     private String businessScopeState;

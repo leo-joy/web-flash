@@ -7,6 +7,7 @@
           <el-form-item label="变更类型">
             <el-checkbox v-model="companyModifyType.enterpriseNameState" label="企业名称" />
             <el-checkbox v-model="companyModifyType.registeredAddressState" label="注册地址" />
+            <el-checkbox v-model="companyModifyType.registeredCapitalState" label="注册地址" />
             <el-checkbox v-model="companyModifyType.ownershipState" label="改制" />
             <el-checkbox v-model="companyModifyType.businessScopeState" label="经营范围" />
             <el-checkbox v-model="companyModifyType.constitutionState" label="章程" />
@@ -51,6 +52,13 @@
                 <span><b style="color:red">{{ item.registeredAddressOld }}</b></span>
                 <span>变更为</span>
                 <span><b style="color:green">{{ item.registeredAddressNew }}</b></span>
+              </div>
+              <div v-if="item.registeredCapitalState+'' === 'true'" class="modifyList">
+                <span><b>注册资本变更：</b></span>
+                <span>原</span>
+                <span><b style="color:red">{{ item.registeredCapitalOld }}</b></span>
+                <span>变更为</span>
+                <span><b style="color:green">{{ item.registeredCapitalNew }}</b></span>
               </div>
               <div v-if="item.ownershipState+'' === 'true'" class="modifyList">
                 <span><b>改制：</b></span>

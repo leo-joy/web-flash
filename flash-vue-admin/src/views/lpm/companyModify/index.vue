@@ -32,77 +32,84 @@
         <template slot-scope="scope">
           <div v-if="scope.row.enterpriseNameState+'' === 'true'">
             <span><b>企业名称：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.enterpriseNameOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.enterpriseNameNew }}</b></span>
           </div>
           <div v-if="scope.row.legalRepresentativeState+'' === 'true'">
             <span><b>企业法人：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.legalRepresentativeOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.legalRepresentativeNew }}</b></span>
           </div>
           <div v-if="scope.row.registeredAddressState+'' === 'true'">
             <span><b>注册地址：</b></span>
-            <span>原</span>
-            <span><b style="color:red">{{ scope.row.registeredAddressOld }}</b></span>
+            <span>由</span>
+            <span><b style="color:red">{{ scope.row.registeredAddressOld }}万元</b></span>
             <span>变更为</span>
-            <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
+            <span><b style="color:green">{{ scope.row.registeredAddressNew }}万元</b></span>
+          </div>
+          <div v-if="scope.row.registeredCapitalState+'' === 'true'">
+            <span><b>注册资本：</b></span>
+            <span>由</span>
+            <span><b style="color:red">{{ scope.row.registeredCapitalOld }}万元</b></span>
+            <span>变更为</span>
+            <span><b style="color:green">{{ scope.row.registeredCapitalNew }}万元</b></span>
           </div>
           <div v-if="scope.row.ownershipState+'' === 'true'">
             <span><b>改制：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.ownershipOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.ownershipNew }}</b></span>
           </div>
           <div v-if="scope.row.operatingPeriodEndState+'' === 'true'">
             <span><b>经营期限：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.operatingPeriodEndOld.replace("00:00:00","") }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
           </div>
           <div v-if="scope.row.businessScopeState+'' === 'true'">
             <span><b>经营范围：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span>{{ scope.row.businessScopeOld }}</span>
             <span>变更为</span>
             <span><b>{{ scope.row.businessScopeNew }}</b></span>
           </div>
           <div v-if="scope.row.constitutionState+'' === 'true'">
             <span><b>章程：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span>{{ scope.row.constitutionOld }}</span>
             <span>变更为</span>
             <span><b>{{ scope.row.constitutionNew }}</b></span>
           </div>
           <div v-if="scope.row.chairmanState+'' === 'true'">
             <span><b>董事长：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.chairmanOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.chairmanNew }}</b></span>
           </div>
           <div v-if="scope.row.generalManagerState+'' === 'true'">
             <span><b>经理：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.generalManagerOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.generalManagerNew }}</b></span>
           </div>
           <div v-if="scope.row.directorState+'' === 'true'">
             <span><b>董事：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.directorOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.directorNew }}</b></span>
           </div>
           <div v-if="scope.row.supervisorState+'' === 'true'">
             <span><b>监事：</b></span>
-            <span>原</span>
+            <span>由</span>
             <span><b style="color:red">{{ scope.row.supervisorOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
@@ -114,6 +121,7 @@
             v-if="scope.row.enterpriseNameState+'' === 'false'
               && scope.row.legalRepresentativeState+'' === 'false'
               && scope.row.registeredAddressState+'' === 'false'
+              && scope.row.registeredCapitalState+'' === 'false'
               && scope.row.ownershipState+'' === 'false'
               && scope.row.operatingPeriodEndState+'' === 'false'
               && scope.row.businessScopeState+'' === 'false'
@@ -199,6 +207,7 @@
                 <el-form-item label="变更类型">
                   <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
                   <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
+                  <el-checkbox v-model="form.registeredCapitalState" label="注册资本" />
                   <el-checkbox v-model="form.ownershipState" label="改制" />
                   <el-checkbox v-model="form.businessScopeState" label="经营范围" />
                   <el-checkbox v-model="form.constitutionState" label="章程" />
@@ -273,6 +282,26 @@
                   <el-form-item label="新注册地址">
                     <el-input v-model="form.registeredAddressNew" minlength="1" />
                   </el-form-item>
+                </el-card>
+                <br>
+              </el-col>
+              <el-col v-if="form.registeredCapitalState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>注册资本</span>
+                  </div>
+                  <el-row>
+                    <el-col :span="12">
+                      <el-form-item label="原资本（万元）" prop="registeredCapitalOld">
+                        <el-input v-model.number="form.registeredCapitalOld" minlength="1" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="新资本（万元）" prop="registeredCapitalNew">
+                        <el-input v-model.number="form.registeredCapitalNew" minlength="1" />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
                 </el-card>
                 <br>
               </el-col>
