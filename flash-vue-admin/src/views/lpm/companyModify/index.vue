@@ -292,12 +292,12 @@
                   </div>
                   <el-row>
                     <el-col :span="12">
-                      <el-form-item label="原资本（万元）" prop="registeredCapitalOld">
+                      <el-form-item label="原资本(万元)" prop="registeredCapitalOld">
                         <el-input v-model.number="form.registeredCapitalOld" minlength="1" />
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
-                      <el-form-item label="新资本（万元）" prop="registeredCapitalNew">
+                      <el-form-item label="新资本(万元)" prop="registeredCapitalNew">
                         <el-input v-model.number="form.registeredCapitalNew" minlength="1" />
                       </el-form-item>
                     </el-col>
