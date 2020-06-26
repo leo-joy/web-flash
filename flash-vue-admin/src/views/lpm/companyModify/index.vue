@@ -677,6 +677,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.accessoryFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.accessoryRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
 
               </el-col>
@@ -699,6 +709,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.companyReferenceRegisterFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.companyReferenceRegisterRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -725,6 +745,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.shareholdersDecideFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.shareholdersDecideRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -746,6 +776,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.seniorManagementFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.seniorManagementRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -771,6 +811,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.companyArticlesAssociationFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.companyArticlesAssociationFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -792,6 +842,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.appointDismissFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.appointDismissFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -817,6 +877,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.promiseFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.promiseFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -838,6 +908,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.delegationFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.delegationFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -864,6 +944,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.approvalFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.approvalFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -885,6 +975,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.businessLicenseFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.businessLicenseFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -910,6 +1010,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.sealFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.sealFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -931,6 +1041,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.openAccountFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.openAccountFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -957,6 +1077,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.orgCreditCodeFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.orgCreditCodeFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -978,6 +1108,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.authorizationFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.authorizationFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -1003,6 +1143,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.companyModifyRegisterFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.companyModifyRegisterFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -1024,6 +1174,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.stockPledgeFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.stockPledgeFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -1049,6 +1209,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.liquidationFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.liquidationFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -1070,6 +1240,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.liquidationPersonFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.liquidationPersonFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -1095,6 +1275,16 @@
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
+                  <el-form-item v-if="form.tallageFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.tallageFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
                 </el-card>
               </el-col>
               <el-col :span="12">
@@ -1116,6 +1306,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.noticeFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.noticeFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -1139,6 +1339,16 @@
                       <el-button size="small" type="primary">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
+                  </el-form-item>
+                  <el-form-item v-if="form.otherFiles === ''" label="无附件原因" class="no-file-form-item">
+                    <el-select v-model="form.otherFilesRemark" placeholder="请选择">
+                      <el-option
+                        v-for="item in noAccessoryCauseList"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
                   </el-form-item>
                 </el-card>
               </el-col>
@@ -1422,6 +1632,10 @@
   }
   .file-form-item {
     margin-left:-110px;
+  }
+  .no-file-form-item {
+    float:right;
+    margin-top:-55px;
   }
 
     .dp-row {

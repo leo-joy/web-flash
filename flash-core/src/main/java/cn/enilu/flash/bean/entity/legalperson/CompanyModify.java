@@ -257,6 +257,49 @@ public class CompanyModify extends BaseEntity {
     @Column(name="other_files", columnDefinition = "VARCHAR(128) COMMENT '21其它文件'")
     private String otherFiles;
 
+    @Column(name="accessory_remark", columnDefinition = "VARCHAR(8) COMMENT '1内部审批文件-备注'")
+    private String accessoryRemark;
+    @Column(name="company_reference_register_remark", columnDefinition = "VARCHAR(8) COMMENT '2工商申请表-备注'")
+    private String companyReferenceRegisterRemark;
+    @Column(name="shareholders_decide_remark", columnDefinition = "VARCHAR(8) COMMENT '3股东会决议-备注'")
+    private String shareholdersDecideRemark;
+    @Column(name="senior_management_remark", columnDefinition = "VARCHAR(8) COMMENT '4董事会决议-备注'")
+    private String seniorManagementRemark;
+    @Column(name="company_articles_association_remark",columnDefinition = "VARCHAR(8) COMMENT '5公司章程-备注'")
+    private String companyArticlesAssociationRemark;
+    @Column(name="appoint_dismiss_remark", columnDefinition = "VARCHAR(8) COMMENT '6任职免职书-备注'")
+    private String appointDismissRemark;
+    @Column(name="promise_remark", columnDefinition = "VARCHAR(8) COMMENT '7住所使用证明-备注'")
+    private String promiseRemark;
+    @Column(name="delegation_remark", columnDefinition = "VARCHAR(8) COMMENT '8股权转让合同-备注'")
+    private String delegationRemark;
+    @Column(name="approval_remark", columnDefinition = "VARCHAR(8) COMMENT '9核准文件-备注'")
+    private String approvalRemark;
+    @Column(name="business_license_remark", columnDefinition = "VARCHAR(8) COMMENT '10营业执照-备注'")
+    private String businessLicenseRemark;
+    @Column(name="seal_remark", columnDefinition = "VARCHAR(8) COMMENT '11印章备案文件-备注'")
+    private String sealRemark;
+    @Column(name="open_account_remark", columnDefinition = "VARCHAR(8) COMMENT '12开户许可证-备注'")
+    private String openAccountRemark;
+    @Column(name="org_credit_code_remark", columnDefinition = "VARCHAR(8) COMMENT '13机构信用代码证-备注'")
+    private String orgCreditCodeRemark;
+    @Column(name="authorization_remark", columnDefinition = "VARCHAR(8) COMMENT '14外商投资批准文件（批复和批准证书）或备案文件-备注'")
+    private String authorizationRemark;
+    @Column(name="company_modify_register_remark", columnDefinition = "VARCHAR(8) COMMENT '15外商投资企业变更备案回执-备注'")
+    private String companyModifyRegisterRemark;
+    @Column(name="stock_pledge_remark", columnDefinition = "VARCHAR(8) COMMENT '16质权合同-备注'")
+    private String stockPledgeRemark;
+    @Column(name="liquidation_remark", columnDefinition = "VARCHAR(8) COMMENT '17清算报告-备注'")
+    private String liquidationRemark;
+    @Column(name="liquidation_person_remark", columnDefinition = "VARCHAR(8) COMMENT '18清算组成员备案通知书-备注'")
+    private String liquidationPersonRemark;
+    @Column(name="tallage_remark", columnDefinition = "VARCHAR(8) COMMENT '19清税证明-备注'")
+    private String tallageRemark;
+    @Column(name="notice_remark", columnDefinition = "VARCHAR(8) COMMENT '20公告报纸样张-备注'")
+    private String noticeRemark;
+    @Column(name="other_remark", columnDefinition = "VARCHAR(8) COMMENT '21其它文件-备注'")
+    private String otherRemark;
+
     @Column(name="remark", columnDefinition = "TEXT COMMENT '原文备注'")
     private String remark;
 

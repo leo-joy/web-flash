@@ -30,6 +30,7 @@ export default {
       enterpriseNameLabel: '***公司',
       mainmemberData: {}, // 主要人员相关数据
       companyList: [],
+      noAccessoryCauseList: [], // 无附件原因，从数据字典中获取
       companyTree: {
         show: false,
         defaultProps: {
@@ -74,8 +75,8 @@ export default {
         registeredAddressOld: '',
         registeredAddressNew: '',
         registeredCapitalState: '',
-        registeredCapitalOld: '',
-        registeredCapitalNew: '',
+        registeredCapitalOld: 0,
+        registeredCapitalNew: 0,
         ownershipState: '',
         ownershipOld: '',
         ownershipNew: '',
@@ -285,7 +286,6 @@ export default {
     }
   },
   computed: {
-
     // 表单验证
     // rules() {
     //   return {
@@ -308,6 +308,9 @@ export default {
       getUserList(this.listUserQuery).then(response => {
         this.restaurants = response.data.records
         // this.add()
+      })
+      dictList({ name: '无附件原因【企业变更】' }).then(response => {
+        this.noAccessoryCauseList = getDictList(response.data[0].detail)
       })
     },
     fetchData() {
@@ -371,8 +374,8 @@ export default {
         registeredAddressOld: '',
         registeredAddressNew: '',
         registeredCapitalState: '',
-        registeredCapitalOld: '',
-        registeredCapitalNew: '',
+        registeredCapitalOld: 0,
+        registeredCapitalNew: 0,
         ownershipState: '',
         ownershipOld: '',
         ownershipNew: '',
@@ -475,7 +478,7 @@ export default {
       this.form.enterpriseId = this.companyList[0].id
       this.form.enterpriseNameOld = this.companyList[0].enterpriseName
       this.form.registeredAddressOld = this.companyList[0].registeredAddress
-      this.form.registeredCapitalOld = this.companyList[0].registeredCapital
+      this.form.registeredCapitalOld = this.companyList[0].registeredCapital * 1
       this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
       this.form.businessScopeOld = this.companyList[0].businessScope
       this.form.legalRepresentativeOld = this.companyList[0].legalRepresentative
@@ -547,8 +550,8 @@ export default {
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
             registeredCapitalState: this.form.registeredCapitalState ? this.form.registeredCapitalState : 'false',
-            registeredCapitalOld: this.form.registeredCapitalOld,
-            registeredCapitalNew: this.form.registeredCapitalNew,
+            registeredCapitalOld: parseFloat(this.form.registeredCapitalOld).toFixed(1) || 0,
+            registeredCapitalNew: parseFloat(this.form.registeredCapitalNew).toFixed(1) || 0,
             ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
             ownershipOld: this.form.ownershipOld,
             ownershipNew: this.form.ownershipNew,
@@ -718,6 +721,8 @@ export default {
 
         if (this.form.registeredCapitalState === 'true') {
           this.form.registeredCapitalState = true
+          this.form.registeredCapitalOld = this.form.registeredCapitalOld ? this.form.registeredCapitalOld * 1 : 0
+          this.form.registeredCapitalNew = this.form.registeredCapitalNew ? this.form.registeredCapitalNew * 1 : 0
         }
 
         if (this.form.ownershipState === 'true') {
