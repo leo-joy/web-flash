@@ -2,6 +2,9 @@ import { getListIds } from '@/api/cms/fileInfo'
 import { getList as companyModify } from '@/api/lpm/companyModify'
 import FilesListComponent from '@/components/FilesList/minFilesList.vue'
 import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
+import { getList as dictList } from '@/api/system/dict'
+import { getDictList } from '@/utils/common'
+import { showDictLabel, getDictNum } from '@/utils/common'
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
@@ -15,6 +18,7 @@ export default {
       companyModifyData: [], // 企业变更信息相关数据
       fileDialogVisible: false, // 文件列表弹出框
       currentCompanyModify: {}, // 当前变更对象
+      noAccessoryCause: '', // 无附件原因
       // companyModifyType: {
       //   enterpriseNameState: true,
       //   registeredAddressState: true,
@@ -108,6 +112,9 @@ export default {
     init() {
       // 获取企业的id
       const id = this.$route.query.id
+      dictList({ name: '无附件原因【企业变更】' }).then(response => {
+        this.noAccessoryCause = response.data[0].detail
+      })
 
       // 企业变更数据
       companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
@@ -137,6 +144,15 @@ export default {
         var shareholderArr = ['shareholderOld', 'shareholderNew']
         this.getFilesList('CompanyModify', accessoryArr, response.data, shareholderArr)
       })
+    },
+
+    // 格式化 无附件原因
+    formatterNoAccessoryCause(num) {
+      if (num) {
+        return '备注：'+showDictLabel(this.noAccessoryCause.toString(), num)
+      } else {
+        return '' // '没有无附件备注原因'
+      }
     },
 
     fetchCapitalModifyOldData(tempRecord) {

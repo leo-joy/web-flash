@@ -141,6 +141,27 @@ export default {
         tallageFiles: '', // 19清税证明
         noticeFiles: '', // 20公告报纸样张
         otherFiles: '', // 21其它文件
+        accessoryRemark: '', // 1内部审批文件-无附件备注
+        companyReferenceRegisterRemark: '', // 2工商申请表-无附件备注
+        shareholdersDecideRemark: '', // 3股东会决议-无附件备注
+        seniorManagementRemark: '', // 4董事会决议-无附件备注
+        companyArticlesAssociationRemark: '', // 5公司章程-无附件备注
+        appointDismissRemark: '', // 6任职免职书-无附件备注
+        promiseRemark: '', // 7住所使用证明-无附件备注
+        delegationRemark: '', // 8股权转让合同-无附件备注
+        approvalRemark: '', // 9核准文件-无附件备注
+        businessLicenseRemark: '', // 10营业执照-无附件备注
+        sealRemark: '', // 11印章备案文件-无附件备注
+        openAccountRemark: '', // 12开户许可证-无附件备注
+        orgCreditCodeRemark: '', // 13机构信用代码证-无附件备注
+        authorizationRemark: '', // 14外商投资批准文件（批复和批准证书）或备案文件-无附件备注
+        companyModifyRegisterRemark: '', // 15外商投资企业变更备案回执-无附件备注
+        stockPledgeRemark: '', // 16质权合同-无附件备注
+        liquidationRemark: '', // 17清算报告-无附件备注
+        liquidationPersonRemark: '', // 18清算组成员备案通知书-无附件备注
+        tallageRemark: '', // 19清税证明-无附件备注
+        noticeRemark: '', // 20公告报纸样张-无附件备注
+        otherRemark: '', // 21其它文件-无附件备注
         id: ''
       },
       rules: {
@@ -441,6 +462,27 @@ export default {
         tallageFiles: '', // 19清税证明
         noticeFiles: '', // 20公告报纸样张
         otherFiles: '', // 21其它文件
+        accessoryRemark: '', // 1内部审批文件-无附件备注
+        companyReferenceRegisterRemark: '', // 2工商申请表-无附件备注
+        shareholdersDecideRemark: '', // 3股东会决议-无附件备注
+        seniorManagementRemark: '', // 4董事会决议-无附件备注
+        companyArticlesAssociationRemark: '', // 5公司章程-无附件备注
+        appointDismissRemark: '', // 6任职免职书-无附件备注
+        promiseRemark: '', // 7住所使用证明-无附件备注
+        delegationRemark: '', // 8股权转让合同-无附件备注
+        approvalRemark: '', // 9核准文件-无附件备注
+        businessLicenseRemark: '', // 10营业执照-无附件备注
+        sealRemark: '', // 11印章备案文件-无附件备注
+        openAccountRemark: '', // 12开户许可证-无附件备注
+        orgCreditCodeRemark: '', // 13机构信用代码证-无附件备注
+        authorizationRemark: '', // 14外商投资批准文件（批复和批准证书）或备案文件-无附件备注
+        companyModifyRegisterRemark: '', // 15外商投资企业变更备案回执-无附件备注
+        stockPledgeRemark: '', // 16质权合同-无附件备注
+        liquidationRemark: '', // 17清算报告-无附件备注
+        liquidationPersonRemark: '', // 18清算组成员备案通知书-无附件备注
+        tallageRemark: '', // 19清税证明-无附件备注
+        noticeRemark: '', // 20公告报纸样张-无附件备注
+        otherRemark: '', // 21其它文件-无附件备注
         id: ''
       }
       this.accessoryFilesList = [] // 1内部审批文件
@@ -550,8 +592,8 @@ export default {
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
             registeredCapitalState: this.form.registeredCapitalState ? this.form.registeredCapitalState : 'false',
-            registeredCapitalOld: parseFloat(this.form.registeredCapitalOld).toFixed(1) || 0,
-            registeredCapitalNew: parseFloat(this.form.registeredCapitalNew).toFixed(1) || 0,
+            registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(1) : 0,
+            registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(1) : 0,
             ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
             ownershipOld: this.form.ownershipOld,
             ownershipNew: this.form.ownershipNew,
@@ -616,6 +658,28 @@ export default {
             tallageFiles: this.form.tallageFiles.replace(/(^\s*)|(\s*$)/g, ''), // 19清税证明
             noticeFiles: this.form.noticeFiles.replace(/(^\s*)|(\s*$)/g, ''), // 20公告报纸样张
             otherFiles: this.form.otherFiles.replace(/(^\s*)|(\s*$)/g, ''), // 21其它文件
+
+            accessoryRemark: this.form.accessoryRemark, // 1内部审批文件-无附件备注
+            companyReferenceRegisterRemark: this.form.companyReferenceRegisterRemark, // 2工商申请表-无附件备注
+            shareholdersDecideRemark: this.form.shareholdersDecideRemark, // 3股东会决议-无附件备注
+            seniorManagementRemark: this.form.seniorManagementRemark, // 4董事会决议-无附件备注
+            companyArticlesAssociationRemark: this.form.companyArticlesAssociationRemark, // 5公司章程-无附件备注
+            appointDismissRemark: this.form.appointDismissRemark, // 6任职免职书-无附件备注
+            promiseRemark: this.form.promiseRemark, // 7住所使用证明-无附件备注
+            delegationRemark: this.form.delegationRemark, // 8股权转让合同-无附件备注
+            approvalRemark: this.form.approvalRemark, // 9核准文件-无附件备注
+            businessLicenseRemark: this.form.businessLicenseRemark, // 10营业执照-无附件备注
+            sealRemark: this.form.sealRemark, // 11印章备案文件-无附件备注
+            openAccountRemark: this.form.openAccountRemark, // 12开户许可证-无附件备注
+            orgCreditCodeRemark: this.form.orgCreditCodeRemark, // 13机构信用代码证-无附件备注
+            authorizationRemark: this.form.authorizationRemark, // 14外商投资批准文件（批复和批准证书）或备案文件-无附件备注
+            companyModifyRegisterRemark: this.form.companyModifyRegisterRemark, // 15外商投资企业变更备案回执-无附件备注
+            stockPledgeRemark: this.form.stockPledgeRemark, // 16质权合同-无附件备注
+            liquidationRemark: this.form.liquidationRemark, // 17清算报告-无附件备注
+            liquidationPersonRemark: this.form.liquidationPersonRemark, // 18清算组成员备案通知书-无附件备注
+            tallageRemark: this.form.tallageRemark, // 19清税证明-无附件备注
+            noticeRemark: this.form.noticeRemark, // 20公告报纸样张-无附件备注
+            otherRemark: this.form.otherRemark, // 21其它文件-无附件备注
 
             id: this.form.id
           }).then(response => {

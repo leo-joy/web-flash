@@ -173,7 +173,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.accessoryFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.accessoryFilesListCompanyModify || currentCompanyModify.accessoryFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.accessoryRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -186,7 +186,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.companyReferenceRegisterFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.companyReferenceRegisterFilesListCompanyModify || currentCompanyModify.companyReferenceRegisterFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.companyReferenceRegisterRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -199,7 +199,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.shareholdersDecideFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.shareholdersDecideFilesListCompanyModify || currentCompanyModify.shareholdersDecideFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.shareholdersDecideRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -212,7 +212,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.seniorManagementFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.seniorManagementFilesListCompanyModify || currentCompanyModify.seniorManagementFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.seniorManagementRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -225,7 +225,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.companyArticlesAssociationFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.companyArticlesAssociationFilesListCompanyModify || currentCompanyModify.companyArticlesAssociationFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.companyArticlesAssociationRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -238,7 +238,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.appointDismissFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.appointDismissFilesListCompanyModify || currentCompanyModify.appointDismissFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.appointDismissRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -251,7 +251,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.promiseFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.promiseFilesListCompanyModify || currentCompanyModify.promiseFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.promiseRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -264,7 +264,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.delegationFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.delegationFilesListCompanyModify || currentCompanyModify.delegationFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.delegationRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -277,7 +277,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.approvalFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.approvalFilesListCompanyModify || currentCompanyModify.approvalFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.approvalRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -290,7 +290,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.businessLicenseFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.businessLicenseFilesListCompanyModify || currentCompanyModify.businessLicenseFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.businessLicenseRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -303,7 +303,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.sealFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.sealFilesListCompanyModify || currentCompanyModify.sealFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.sealRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -316,7 +316,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.openAccountFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.openAccountFilesListCompanyModify || currentCompanyModify.openAccountFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.openAccountRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -329,7 +329,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.orgCreditCodeFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.orgCreditCodeFilesListCompanyModify || currentCompanyModify.orgCreditCodeFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.orgCreditCodeRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -342,7 +342,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.authorizationFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.authorizationFilesListCompanyModify || currentCompanyModify.authorizationFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.authorizationRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -355,7 +355,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.companyModifyRegisterFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.companyModifyRegisterFilesListCompanyModify || currentCompanyModify.companyModifyRegisterFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.companyModifyRegisterRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -368,7 +368,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.stockPledgeFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.stockPledgeFilesListCompanyModify || currentCompanyModify.stockPledgeFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.stockPledgeRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -381,7 +381,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.liquidationFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.liquidationFilesListCompanyModify || currentCompanyModify.liquidationFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.liquidationRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -394,7 +394,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.liquidationPersonFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.liquidationPersonFilesListCompanyModify || currentCompanyModify.liquidationPersonFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.liquidationPersonRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -407,7 +407,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.tallageFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.tallageFilesListCompanyModify || currentCompanyModify.tallageFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.tallageRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -420,7 +420,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.noticeFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.noticeFilesListCompanyModify || currentCompanyModify.noticeFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.noticeRemark) }}
               </el-col>
             </el-row>
           </td>
@@ -433,7 +433,7 @@
                 <FilesListComponent :files-list="currentCompanyModify.otherFilesListCompanyModify" />
               </el-col>
               <el-col v-if="!currentCompanyModify.otherFilesListCompanyModify || currentCompanyModify.otherFilesListCompanyModify.length==0" :span="24">
-                无
+                {{ formatterNoAccessoryCause(currentCompanyModify.otherRemark) }}
               </el-col>
             </el-row>
           </td>
