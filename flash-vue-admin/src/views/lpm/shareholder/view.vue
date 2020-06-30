@@ -35,7 +35,7 @@
     </el-row>
     <el-row>
       <el-col>
-        <div style="height:500px;width:100%;">
+        <div style="height:510px;width:100%;">
           <iframe
             :src="src"
             width="100%"

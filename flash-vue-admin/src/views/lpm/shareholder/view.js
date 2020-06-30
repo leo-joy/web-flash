@@ -57,8 +57,8 @@ export default {
     init() {
       // 获取企业的id
       const id = this.$route.query.id
-
-      this.src = '/d3tree/index.html?width=900&height=500&id=' + id + '#' + id
+      //this.src = '/d3tree/index.html?width=900&height=500&id=' + id + '#' + id
+      this.src = '/guquan/index.html?width=900&height=500&id=' + id + '#' + id
 
       // 请求股东信息数据
       capital({ enterpriseCode: id, page: 1, limit: 20 }).then(response => {

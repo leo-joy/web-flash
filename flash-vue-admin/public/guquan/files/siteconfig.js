@@ -1,5 +1,5 @@
 var Duohuo ={};
-INDEX_URL=""; 
+INDEX_URL="/dev-api"; 
 INDEX_URL_A=""; 
 INDEX_ROOT="";
 CMS_STYLE_ROOT="/material/theme/chacha/cms";

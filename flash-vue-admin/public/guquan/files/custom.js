@@ -2111,6 +2111,8 @@ function launchFullScreen(element) {
         element.msRequestFullscreen();
     }
 }
+
+// 退出全屏
 function exitFullScreen(){
     if(document.exitFullscreen){
         document.exitFullscreen();

@@ -101,7 +101,8 @@ export default {
 
   data() {
     return {
-      src: '/d3tree/index.html?id=906',
+      //src: '/d3tree/index.html?id=906',
+      src: '/guquan/index.html?id=906&KeyNo=906',
       searchType: 'enterpriseName',
       keyword: '',
       options: [{
@@ -202,7 +203,8 @@ export default {
       this.selRow = currentRow
     },
     viewArchitecture(id) {
-      this.src = '/d3tree/index.html?width=1366&height=768&id=' + id
+      //this.src = '/d3tree/index.html?width=1366&height=768&id=' + id
+      this.src = '/guquan/index.html?width=1366&height=768&id=' + id+'&KeyNo='+ id
       this.dialog = false
     }
   }

@@ -60,7 +60,7 @@
 
     <SCRIPT src="./files/custom.js"></SCRIPT>
 
-    <SCRIPT src="./files/zhuge.js" type="text/javascript"></SCRIPT>
+    <!-- <SCRIPT src="./files/zhuge.js" type="text/javascript"></SCRIPT> -->
 
     <SCRIPT type="text/javascript">
         var zhugeIdentify = {
@@ -123,7 +123,7 @@
             <UL class="navi-nav pull-right ">
                 <LI class="dropdown appli-drop"><A class="dropdown-toggle" onclick="zhugeTrack('顶栏按钮点击',{'应用名称':'应用'});"
                         onmouseenter="getApplicationList();"
-                        href="https://www.qcc.com/company_guquan?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#"
+                        href="https://www.qcc.com/company_guquan?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#"
                         data-toggle="dropdown"><SPAN class="icon-appli" style="display: none;"></SPAN>
                         <I class="nav-icon-hot"></I>应用 <I class="caret"></I> </A>
                     <SECTION class="dropdown-menu app-box applicationList"></SECTION>
@@ -253,23 +253,23 @@
             </UL>
             <UL class="mao-nav" id="navTab">
                 <LI><A onclick="zhugeTrack('图谱页面-企业图谱')"
-                        href="https://www.qcc.com/company_newgraph?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">企业图谱</A>
+                        href="https://www.qcc.com/company_newgraph?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">企业图谱</A>
                 </LI>
 
                 <LI><A onclick="zhugeTrack('图谱页面-企业受益股东')"
-                        href="https://www.qcc.com/company_beneficiary?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">企业受益股东</A>
+                        href="https://www.qcc.com/company_beneficiary?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">企业受益股东</A>
                 </LI>
 
                 <LI><A onclick="zhugeTrack('图谱页面-关联方认定图')"
-                        href="https://www.qcc.com/company_glfgraph?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">关联方认定图</A>
+                        href="https://www.qcc.com/company_glfgraph?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">关联方认定图</A>
                 </LI>
 
                 <LI><A onclick="zhugeTrack('图谱页面-关系图谱')"
-                        href="https://www.qcc.com/company_muhou3?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">关系图谱</A>
+                        href="https://www.qcc.com/company_muhou3?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">关系图谱</A>
                 </LI>
 
                 <LI class="active"><A onclick="zhugeTrack('图谱页面-股权穿透图')"
-                        href="https://www.qcc.com/company_guquan?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">股权穿透图</A>
+                        href="https://www.qcc.com/company_guquan?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=雅居乐地产置业有限公司">股权穿透图</A>
                 </LI>
 
                 <LI><A onclick="showVipModal('疑似实际控制人','成为VIP会员即可查看疑似实际控制人  总股权比例等信息','');">疑似实际控制人</A>
@@ -290,9 +290,9 @@
         </DIV>
     </DIV>
     <SCRIPT type="text/javascript">
-        function showReportModal(keyno, name, goodsid) {
+        function showReportModal(branchCompanyCode, name, goodsid) {
             var paramData = {
-                keyno: keyno,
+                branchCompanyCode: branchCompanyCode,
                 name: decodeURI(name),
                 goodsid: goodsid,
                 isNew: 1
@@ -321,18 +321,18 @@
         </DIV>
     </DIV>
     <DIV class="mao-screen-area" id="screenArea">
-        <DIV class="mao-main" id="main" style="width: 100%; height: 100%;"></DIV>
+        <DIV class="mao-main" id="main"></DIV>
         <DIV class="tupu-toolbar">
             <UL>
-                <LI onclick="editRect(this);"><SPAN class="sel"></SPAN>编辑</LI>
+                <LI id="changeScreen" onclick="changeScreen(this);"><SPAN class="screen"></SPAN>全屏</LI>
                 <LI onclick="maoScale(1);"><SPAN class="big"></SPAN>放大</LI>
                 <LI onclick="maoScale(2);"><SPAN class="small"></SPAN>缩小</LI>
                 <LI onclick="maoRefresh();"><SPAN class="refresh"></SPAN>刷新</LI>
-                <LI id="changeScreen" onclick="changeScreen(this);"><SPAN class="screen"></SPAN>全屏</LI>
                 <LI onclick="saveImg();zhugeTrack('图谱-保存',{'图谱类型':'股权穿透图'});"><SPAN class="save"></SPAN>保存</LI>
+                <LI onclick="editRect(this);"><SPAN class="sel"></SPAN>编辑</LI>
             </UL>
         </DIV>
-        <DIV class="water-mark">股权穿透图由雅居乐基于公开信息利用大数据分析引擎独家生成。</DIV>
+        <DIV class="water-mark">股权穿透图由雅居乐集团基于公司信息利用大数据分析引擎独家生成</DIV>
         <DIV style="display:none" class="company-detail tp-detail" id="company-detail">
             <DIV class="e_close-bar"><SPAN class="ea_title">公司信息</SPAN> <SPAN class="ea_close"
                     onclick="popclose(this)">×</SPAN> </DIV>
@@ -353,13 +353,13 @@
                 <DIV class="m-t mao-content m-b-lg">
                     <UL class="nav nav-tabs mao-tabs">
                         <LI class="active"><A role="tab" aria-controls="gudong"
-                                href="https://www.qcc.com/company_guquan?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#gudong"
+                                href="https://www.qcc.com/company_guquan?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#gudong"
                                 data-toggle="tab">股东</A></LI>
                         <LI><A role="tab" aria-controls="touzi"
-                                href="https://www.qcc.com/company_guquan?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#touzi"
+                                href="https://www.qcc.com/company_guquan?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#touzi"
                                 data-toggle="tab">对外投资</A></LI>
                         <LI><A role="tab" aria-controls="member"
-                                href="https://www.qcc.com/company_guquan?keyNo=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#member"
+                                href="https://www.qcc.com/company_guquan?branchCompanyCode=e2bec6259ce8247abc479434d99233b2&amp;name=%E9%9B%85%E5%B1%85%E4%B9%90%E5%9C%B0%E4%BA%A7%E7%BD%AE%E4%B8%9A%E6%9C%89%E9%99%90%E5%85%AC%E5%8F%B8#member"
                                 data-toggle="tab">主要成员</A></LI>
                     </UL>
                     <DIV class="tab-content mao-tab-content">
@@ -400,32 +400,33 @@
     <SCRIPT type="text/javascript">
 
         var myChart;
-        var showKeyNo;
+        var showbranchCompanyCode;
         var Text = require('zrender/shape/Text');
         var ImageShape = require('zrender/shape/Image');
         var Rectangle = require('zrender/shape/Rectangle');
         var treeId = 1;
-        var _currentKeyNo;
+        var _currentbranchCompanyCode;
         var canEditRect = false;
         var mbtnW = 18;
 
         $(document).ready(function () {
             resizeScreen();
+            var enterpriseCode = getQueryVariable('id')*1 || 1
             myChart = echarts.init(document.getElementById('main'));
-
             //new window.zoomutil({dom: $('#mainGuquan')[0], chart:myChart}); // add zoomutil feature
-            getData();
-
-
-
+            //getRootData(enterpriseCode);
+            getInvestData(enterpriseCode);
+            getCapitalData(enterpriseCode);
+            //getData();
         });
 
         window.onresize = function () {
             resizeScreen();
         }
-        var rootData;
-        var gudongData;
-        var touziData;
+        var rootData;  // 根节点数据
+        var gudongData={}; // 股东信息数据
+        var touziData={}; // 投资公司信息数据
+
         function getData() {
             $('#load_data').show();
             //var url = INDEX_URL+"/cms_guquanmap3";
@@ -434,12 +435,11 @@
                 url: url,
                 type: 'GET',
                 data: {
-                    keyNo: getQueryString("keyNo"),
+                    branchCompanyCode: getQueryString("branchCompanyCode"),
                 },
                 dataType: 'JSON',
                 success: function (data) {
                     $('#load_data').hide();
-                    console.log(data);
                     if (data && data.status === 200) {
                         $('#no_data').hide();
                         rootData = data;
@@ -450,15 +450,34 @@
                         transTree(touziData, 2);
                         initTree(touziData);
                         drawGuquan();
+                        setTimeout(function () {maoScale(2)}, 500);
+                    } else {
+                        $('#no_data').show();
+                        $('#screenArea').hide();
                         if (window.iframe) {
-                            setTimeout(function () {
-                                if (touziData || gudongData.children.length > 4) {
-                                    maoScale(2);
-                                }
-                                $('.guquan-liframe').hide();
-                                $(window.parent.document).find('#guquanIframeTool').show();
-                            }, 500);
+                            $('.guquan-liframe').hide();
+                            $('.guquan-lnodata').show();
                         }
+                    }
+                }
+            });
+        }
+
+        // 获取根节点的相关信息
+        function getRootData(enterpriseCode) {
+            $('#load_data').show();
+            var url = INDEX_URL+'/lpm/businesslicense/list?page=1&limit=1&id=' + enterpriseCode;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (data) {
+                    $('#load_data').hide();
+                    if (data && data.success === 20000) {
+                        $('#no_data').hide();
+                        rootData = data.records[0]
+                        console.log(rootData)
+
                     } else {
                         $('#no_data').show();
                         $('#screenArea').hide();
@@ -472,263 +491,139 @@
         }
 
 
-        function changeScreen(dom) {
-            if (!isFullScreen()) {
-                $(dom).html('<span class="screened"></span>退出');
-                launchFullScreen($('#screenArea')[0]);
-            } else {
-                $(dom).html('<span class="screen"></span>全屏');
-                exitFullScreen();
-            }
-        }
-
-        //切换全屏
-        setFullScreenListener(function () {
-            setTimeout(function () {
-                myChart.resize();
-                initZrender();
-            }, 300);
-        })//
-
-
-        function maoRefresh() {
-
-            refresh();
-        }
-
-        function refresh() {
-
-            var ecConfig = require('echarts/config');
-            myChart._messageCenter.dispatch(ecConfig.EVENT.RESTORE, null, null, myChart);
-        }
-
-        function saveImg() {
-            if (isFullScreen()) {
-                $('#changeScreen').html('<span class="screen"></span>全屏');
-                exitFullScreen();
-                setTimeout(function () {
-                    jietu();
-                }, 1000);
-
-            } else {
-                jietu();
-            }
-            function jietu() {
-                var jietuMask = document.createElement("div");
-                $(jietuMask).attr('style', 'position: fixed; background: #fff; z-index: 1000; top: 0px; bottom: 0px; left: 0px; right: 0px;');
-                document.body.appendChild(jietuMask);
-
-                var width = 1440;
-                var height = 900;
-
-                var minX = 0;
-                var maxX = 0;
-                var minY = 300;
-                var maxY = 0;
-                var moveDown = 0;
-                var moveRight = 0;
-
-                var shapeList = myChart.getZrender().storage.getShapeList();
-                for (var i = 0; i < shapeList.length; i++) {
-                    if (shapeList[i].style && shapeList[i].style.iconType == 'rectangle') {
-                        if (shapeList[i].style.x > maxX) {
-                            maxX = shapeList[i].style.x;
+        // 获取股东的相关信息
+        function getCapitalData(enterpriseCode) {
+            $('#load_data').show();
+            var url = INDEX_URL+'/lpm/capital/tree?page=1&limit=1000&enterpriseCode=' + enterpriseCode;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data)
+                    $('#load_data').hide();
+                    if (data && data.success) {
+                        $('#no_data').hide();
+                        console.log(data)
+                        if(data.data[0].enterpriseName) {
+                            gudongData['branchCompanyName']= data.data[0].enterpriseName
+                        } else {
+                            gudongData['branchCompanyName']= '公司'
                         }
-                        if (shapeList[i].style.x < minX) {
-                            minX = shapeList[i].style.x;
-                        }
-                        if (shapeList[i].style.y > maxY) {
-                            maxY = shapeList[i].style.y;
-                        }
-                        if (shapeList[i].style.y < minY) {
-                            minY = shapeList[i].style.y;
-                        }
-                    }
-                }
+                        
+                        gudongData['children']= data.data
+                        console.log('股东数据----',gudongData)
+                        transTree(gudongData, 1);
+                        initTree(gudongData);
+                        drawGuquan();
+                        setTimeout(function () {
+                            
+                            maoScale(2)
+                        }, 500);
+                        
 
-                if ((maxX - minX + 300) > width) {
-                    width = maxX - minX + 300;
-                    moveRight = -(maxX + minX - myChart.getZrender().getWidth() + 146) / 2;
-
-                }
-                if ((maxY - minY + 300) > 900) {
-                    height = maxY - minY + 300;
-                }
-
-                moveDown = -(maxY + minY - myChart.getZrender().getHeight()) / 2 - 85;
-
-                var layer = myChart.getZrender().painter._layers[1];
-                var bS = layer.scale.concat();
-                var bP = layer.position.concat();
-
-                layer.scale = [1, 1, 0, 0];
-                layer.position = [0, 0];
-
-                var bW = myChart.getZrender().getWidth();
-                var bH = myChart.getZrender().getHeight();
-
-                $('#main').width(width);
-                $('#main').height(height);
-
-                var zdW = myChart.getZrender().getWidth();
-                var zdH = myChart.getZrender().getHeight();
-
-
-
-
-
-                myChart.resize();
-
-                myChart.getZrender().painter.refresh();
-
-                initZrender(true);
-
-                layer.position[0] = moveRight;
-                layer.position[1] = moveDown;
-
-                var shape1 = new Rectangle({
-                    style: {
-                        x: -1000 - moveRight,
-                        y: -1000 - moveDown,
-                        width: width + 1000,
-                        height: height + 1000,
-                        color: '#fff'
-                    }
-                });
-                shape1.zlevel = 1;
-                shape1.z = -2;
-                shape1.ndelete = true;
-                myChart.getZrender().addShape(shape1);
-
-
-                for (var i = 0; i < width + 100; i += 360) {
-                    for (var j = 0; j < height + 100; j += 280) {
-                        var shapeSy = new ImageShape({
-                            style: {
-                                image: './images/shuiying6.png',
-                                x: i - moveRight,
-                                y: j - moveDown,
-                                width: 360,
-                                height: 280
-
-                            }
-                        });
-                        shapeSy.zlevel = 1;
-                        shapeSy.z = -1;
-                        shapeSy.ndelete = true;
-                        myChart.getZrender().addShape(shapeSy);
-                    }
-                }
-
-                var shape3 = new Text({
-                    style: {
-                        x: width / 2 - 165 - moveRight,
-                        y: height - 30 - moveDown,
-                        text: '股权穿透图由雅居乐基于公开信息利用大数据分析引擎独家生成。',
-                        strokeColor: '#999',
-                        color: '#999',
-                        textFont: 'normal 12px 微软雅黑',
-                        lineWidth: 0,
-                    }
-                });
-                shape3.zlevel = 1;
-                shape3.z = -1;
-                shape3.ndelete = true;
-                myChart.getZrender().addShape(shape3);
-
-                setTimeout(function () {
-                    var canvas = $('#main canvas')[1];
-
-                    var isIE11 = (!!window.ActiveXObject || "ActiveXObject" in window);
-                    if (isIE11) {
-                        downloadimg(canvas);
                     } else {
-                        download(canvas, 'jpg');
+                        $('#no_data').show();
+                        $('#screenArea').hide();
+                        if (window.iframe) {
+                            $('.guquan-liframe').hide();
+                            $('.guquan-lnodata').show();
+                        }
                     }
-
-                    $('#main').width('100%');
-                    $('#main').height(bH);
-                    myChart.resize();
-                    layer.scale = bS;
-                    layer.position = bP;
-                    myChart.getZrender().render();
-                    initZrender();
-                    $(jietuMask).css('display', 'none');
-                }, 300);
-            }
+                }
+            });
         }
 
-        function maoScale(type) {
-            var centerX = myChart.getZrender().getWidth() / 2;
-            var centerY = myChart.getZrender().getHeight() / 2;
-            var layer = myChart.getZrender().painter._layers[1];
-            var x = layer.scale[0] * centerX + layer.position[0];
-            var y = layer.scale[1] * centerY + layer.position[1];
-            var scale = layer.scale[0];
-            if (type == 1) {
-                scale += 0.3;
-            } else if (type == 2) {
-                scale -= 0.3;
-            }
-            if (scale >= 0.3 && scale <= 2) {
-                layer.scale[0] = scale;
-                layer.scale[1] = scale;
-                myChart.getZrender().render();
-                layer.position[0] = x - layer.scale[0] * centerX
-                layer.position[1] = y - layer.scale[1] * centerY
-                myChart.getZrender().render();
-            }
+        // 获取投资公司的相关信息
+        function getInvestData(enterpriseCode) {
+            $('#load_data').show();
+            //var url = INDEX_URL+'/lpm/invest/company/tree';
+            var url = INDEX_URL+'/lpm/invest/company/tree?page=1&limit=1000&enterpriseCode=' + enterpriseCode;
+            $.ajax({
+                url: url,
+                type: 'GET',
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data)
+                    $('#load_data').hide();
+                    if (data && data.success) {
+                        $('#no_data').hide();
+                        console.log(data)
+                        if(data.data[0].enterpriseName) {
+                            touziData['branchCompanyName']= data.data[0].enterpriseName
+                        } else {
+                            touziData['branchCompanyName']= '公司'
+                        }
+                        touziData['children']= data.data
+                        console.log(touziData)
+                        transTree(touziData, 2);
+                        initTree(touziData);
+                        drawGuquan();
+                        setTimeout(function () {
+                            
+                            maoScale(2)
+                        }, 500);
+                        
+
+                    } else {
+                        $('#no_data').show();
+                        $('#screenArea').hide();
+                        if (window.iframe) {
+                            $('.guquan-liframe').hide();
+                            $('.guquan-lnodata').show();
+                        }
+                    }
+                }
+            });
         }
 
-        function editRect(dom) {
-            if (canEditRect) {
-                $(dom).removeClass('active');
-                canEditRect = false;
-            } else {
-                $(dom).addClass('active');
-                canEditRect = true;
-            }
-            initZrender();
-        }
+        
 
-
-
+        // 将获取到的数据，拼装城tree组件需要的数据
+        // data 为数据
+        // type 为类型，1 是股东，绘制在上方， 2是投资公司，绘制在下方
         function transTree(data, type) {
             if (!data) return;
-            data.children = data.DetailList;
-            data.DetailList = undefined;
+            console.log(data)
+            if(data.children && data.children.length>0) {
+                data.children = data.children;
+            }
+            
             data.treeId = treeId;
             if (type == 2) {
                 data.isTouzi = true;
             }
+            // 设置显示字体大小
             var fontSize = 12;
+
+            // 根据公司状态，显示当前股权架构图中公司的状态，在企业名称前面展示
             if (data.ShortStatus == '注销' || data.ShortStatus == '吊销') {
-                data.Name = '【' + data.ShortStatus + '】' + data.Name;
+                data.branchCompanyName = '【' + data.ShortStatus + '】' + data.branchCompanyName;
             }
 
-
-            if (isChinese(data.Name)) {
-                if (data.Name.length > 20) {
-                    data.name = data.Name.substr(0, 19) + '…';
+            // 根据公司的是名称，进行企业文字的截取，分两种情况，企业名为中文和英文
+            if (isChinese(data.branchCompanyName)) {
+                if (data.branchCompanyName.length > 20) {
+                    data.name = data.branchCompanyName.substr(0, 19) + '…';
                     data.ltext = true;
                 } else {
-                    data.name = data.Name;
+                    data.name = data.branchCompanyName;
                 }
                 data.name = data.name.replace(/(.{10})(?=.)/g, '$1\n');
             } else {
-                if (data.Name.length > 36) {
-                    data.name = data.Name.substr(0, 35) + '…';
+                if (data.branchCompanyName.length > 36) {
+                    data.name = data.branchCompanyName.substr(0, 35) + '…';
                     data.ltext = true;
                 } else {
-                    data.name = data.Name;
+                    data.name = data.branchCompanyName;
                 }
                 data.name = data.name.replace(/(.{18})(?=.)/g, '$1\n');
-            }
-
+            }            
+            // 根据组织机构层级进行企业名称截取操作
             if (data.Org == 2) {
                 if (!isEnglish(data.Name)) {
-                    if (data.Name.length > 8) {
-                        data.name = data.Name.substr(0, 7) + '…';
+                    if (data.branchCompanyName.length > 8) {
+                        data.name = data.branchCompanyName.substr(0, 7) + '…';
                     } else {
                         data.name = data.Name;
                     }
@@ -736,30 +631,33 @@
                     var tempName = getChinese(data.Name);
                     if (tempName && tempName.length > 2 && tempName.length < 7) {
                         data.name = tempName;
-                    } else if (data.Name.length > 18) {
-                        data.name = data.Name.substr(0, 17) + '…';
+                    } else if (data.branchCompanyName.length > 18) {
+                        data.name = data.branchCompanyName.substr(0, 17) + '…';
                     } else {
                         data.name = data.Name;
                     }
                 }
             }
 
-            if (data.StockRightNum) {
-                data.subtext = '持股数：' + data.StockRightNum + '';
-            } else if (data.ShouldCapi) {
-
-                data.subtext = '认缴金额：' + data.ShouldCapi;
+            // 绘制认缴金额
+            if (type == 1 && data.subscribedCapitalContribution) {
+                data.subtext = '认缴金额：' + data.subscribedCapitalContribution +'万元';
             }
-            // if (data.KeyNo) {
-            //     if(data.Tags){
-            //         for(var i=0; i<data.Tags.length; i++){
-            //             if(data.Tags[i].Type==402){
-            //                 data.tag = data.Tags[i].Name;
-            //             }
-            //         }
-            //     }
-            // }
+            if (type == 2 && data.registeredCapital) {
+                data.subtext = '认缴金额：' + data.registeredCapital +'万元';
+            }
 
+            // 绘制tree的tag,在节点底部区域绘制
+            if (data.branchCompanyCode) {
+                if(data.Tags){
+                    for(var i=0; i<data.Tags.length; i++){
+                        if(data.Tags[i].Type==402){
+                            data.tag = data.Tags[i].Name;
+                        }
+                    }
+                }
+            }
+            // 绘制tree的tag,在节点底部区域绘制
             if (data.Tags && data.Tags.length > 0) {
                 $.each(data.Tags, function (index, vo) {
                     if (vo.Type == 2) {
@@ -783,17 +681,18 @@
             }
 
             data.editable = true;
-            data.symbol = 'rectangle';
-            data.symbolSize = [146, 62];
-            if (data.tag) {
-                data.symbolSize = [146, 82];
+            data.symbol = 'rectangle'; //企业节点的样式为长方形
+            data.symbolSize = [146, 62]; // 企业节点长度和高度
+            if (data.tag) { // 如果带tag,高度增加
+                data.symbolSize = [146, 82]; 
             }
-            data.labelClick = true;
+            data.labelClick = true; //节点是否可点击
+            // 节点的样式设置
             data.itemStyle = {
                 normal: {
                     color: "#fff",
                     borderWidth: "0.5",
-                    borderColor: "#128bed",
+                    borderColor: "#0b6666", //"#0b6666",
                     label: {
                         show: true,
                         position: "inside",
@@ -812,6 +711,7 @@
                 }
             };
 
+            // 根据组织机构类型，进行样式重写
             if (data.Org == 2) {
                 data.symbol = 'rectangle';
                 data.clickable = true;
@@ -845,7 +745,8 @@
             }
 
             var children = data.children;
-            if (children) {
+            if (children && children.length>0) {
+                console.log('children---', children)
                 for (var i = 0; i < children.length; i++) {
                     transTree(children[i], type);
                     children[i] = addTampArrow(children[i], fontSize);
@@ -853,48 +754,56 @@
             }
 
             if (type == 1) {
-                if (rootData.kzr) {
-                    if (data.KeyNo) {
-                        if (data.KeyNo == rootData.kzr.ControllerData.KeyNo) {
-                            data.kzr = true;
-                        }
-                    } else {
-                        if (data.Name == rootData.kzr.ControllerData.Name) {
-                            data.kzr = true;
-                        }
-                    }
-                }
-                if (rootData.syr) {
-                    $.each(rootData.syr.Names, function (index, vo) {
-                        if (data.KeyNo) {
-                            if (data.KeyNo == vo.KeyNo) {
-                                data.syr = vo.PercentTotal;
-                            }
-                        } else {
-                            if (data.Name == vo.Name) {
-                                data.syr = vo.PercentTotal;
-                            }
-                        }
-                    })
-                }
+                // 绘制股东的相关信息
+                //data.kzr = true;
+                // if (rootData.kzr) {
+                //     if (data.branchCompanyCode) {
+                //         if (data.branchCompanyCode == rootData.kzr.ControllerData.branchCompanyCode) {
+                //             data.kzr = true;
+                //         }
+                //     } else {
+                //         if (data.Name == rootData.kzr.ControllerData.Name) {
+                //             data.kzr = true;
+                //         }
+                //     }
+                // }
+
+                // 绘制股东的持股比例
+                //data.syr = data.legalRepresentative;
+                // if (rootData.syr) {
+                //     $.each(rootData.syr.Names, function (index, vo) {
+                //         if (data.branchCompanyCode) {
+                //             if (data.branchCompanyCode == vo.branchCompanyCode) {
+                //                 data.syr = vo.PercentTotal;
+                //             }
+                //         } else {
+                //             if (data.Name == vo.Name) {
+                //                 data.syr = vo.PercentTotal;
+                //             }
+                //         }
+                //     })
+                // }
             } else if (type == 2) {
-                if (rootData.kg) {
-                    $.each(rootData.kg.Names, function (index, vo) {
-                        if (type == 2 && data.KeyNo && data.KeyNo == vo.KeyNo) {
-                            data.kg = true;
-                        }
-                    })
-                }
+                // 设置投资公司的控股状态
+                // if (rootData.kg) {
+                //     $.each(rootData.kg.Names, function (index, vo) {
+                //         if (type == 2 && data.branchCompanyCode && data.branchCompanyCode == vo.branchCompanyCode) {
+                //             data.kg = true;
+                //         }
+                //     })
+                // }
             }
             treeId++;
 
         }
 
+        // 绘制子节点连接线
         function addTampArrow(cnode, fontSize) {
             var tamp = cnode;
-            var Ratio = (!cnode.Percent || cnode.Percent == '0%') ? '' : cnode.Percent;
+            console.log('cnode:',cnode)
+            var Ratio = (!cnode.proportion || cnode.proportion == '0%') ? '' : cnode.proportion;
             if (Ratio) {
-                Ratio = (parseFloat(cnode.Percent.substr(0, cnode.Percent.length - 1)).toFixed(4)) * 10000 / 10000 + '%';
+                Ratio = (parseFloat(cnode.proportion).toFixed(4)) * 10000 / 10000 + '%';
                 tamp.ratio = Ratio;
             }
             var labelShow = (Ratio != '0%');
@@ -909,7 +818,7 @@
                 hoverable: false,
                 itemStyle: {
                     normal: {
-                        color: "#128bed",
+                        color: "#0b6666",
                         borderWidth: 0,
                         label: {
                             show: labelShow,
@@ -922,7 +831,7 @@
                         }
                     },
                     emphasis: {
-                        color: "#128bed",
+                        color: "#0b6666",
                         borderWidth: 0,
                         label: {
                             show: labelShow,
@@ -940,9 +849,10 @@
             return cnode;
         }
 
+        // 创建股权图的根节点
         function initTree(data) {
             if (!data) return;
-            data.name = data.Name;
+            data.name = data.branchCompanyName;
             data.editable = false;
             data.labelClick = false;
             data.clickable = false;
@@ -951,9 +861,9 @@
             data.symbol = 'rectangle';
             data.itemStyle = {
                 normal: {
-                    color: "#128bed",
+                    color: "#0b6666",
                     borderWidth: "1",
-                    borderColor: "#128bed",
+                    borderColor: "#0b6666",
                     label: {
                         show: !0,
                         position: "inside",
@@ -968,25 +878,24 @@
                 emphasis: {
                     color: "rgba(255,255,255,0)",
                     borderWidth: "1",
-                    borderColor: "#128bed00",
+                    borderColor: "#0b666600",
                 }
             };
             getNode(gudongData);
             getNode(touziData);
             function getNode(data) {
                 if (!data) return;
-                if (data.children) {
+                if (data.children && data.children.length > 0) {
                     for (var i = 0; i < data.children.length; i++) {
                         getNode(data.children[i]);
                     }
                 }
-                if (data.children && data.children.length > 0 && data.KeyNo && data.KeyNo != getQueryString("keyNo")) {
+                if (data.children && data.children.length > 0 && data.branchCompanyCode && data.branchCompanyCode != getQueryString("branchCompanyCode")) {
                     data._children = data.children;
                     data.children = null;
                     data.extend = 1;
-                    //data.symbol = 'rectangle';
+                    data.symbol = 'rectangle';
                 }
-
             }
 
         }
@@ -1053,8 +962,9 @@
                 })
             }
             if (gudongData && !touziData) {
-                option.series[0].rootLocation.y = '65%';
+                option.series[0].rootLocation.y = '165%';
             }
+            console.log('option---',option)
             myChart.setOption(option);
             initZrender();
             animatieChart(myChart);
@@ -1075,33 +985,33 @@
 
             myChart.on('click', function (e) {
                 if (isDrag) return;
-                if ((e.data.Org == 0 || e.data.Org == 4 || e.data.Org == 7 || e.data.Org == 8 || e.data.Org == 9) && e.data.KeyNo && e.data.KeyNo != showKeyNo) {
-                    if (e.data.KeyNo[0] == 'p') {
+                if ((e.data.Org == 0 || e.data.Org == 4 || e.data.Org == 7 || e.data.Org == 8 || e.data.Org == 9) && e.data.branchCompanyCode && e.data.branchCompanyCode != showbranchCompanyCode) {
+                    if (e.data.branchCompanyCode[0] == 'p') {
                         if (window.iframe) {
-                            window.open('/pl/' + e.data.KeyNo + '.html');
+                            window.open('/pl/' + e.data.branchCompanyCode + '.html');
                         } else {
-                            showKeyNo = e.data.KeyNo;
-                            // showDetail2(showKeyNo, 'company_muhou4', 'person');
+                            showbranchCompanyCode = e.data.branchCompanyCode;
+                            // showDetail2(showbranchCompanyCode, 'company_muhou4', 'person');
                         }
                     } else {
                         if (window.iframe) {
-                            window.open('/firm/' + e.data.KeyNo + '.html');
+                            window.open('/firm/' + e.data.branchCompanyCode + '.html');
                         } else {
-                            showKeyNo = e.data.KeyNo;
-                            showDetail(showKeyNo, 'company_guquan');
+                            showbranchCompanyCode = e.data.branchCompanyCode;
+                            showDetail(showbranchCompanyCode, 'company_guquan');
                         }
                     }
                 }
                 if (e.data.Org == 2) {
-                    if (e.data.KeyNo && e.data.KeyNo.length == 32) {
+                    if (e.data.branchCompanyCode && e.data.branchCompanyCode.length == 32) {
                         if (window.iframe) {
-                            window.open('/pl/' + e.data.KeyNo + '.html');
+                            window.open('/pl/' + e.data.branchCompanyCode + '.html');
                         } else {
-                            showKeyNo = e.data.KeyNo;
-                            // showDetail2(showKeyNo, 'company_muhou4', 'person');
+                            showbranchCompanyCode = e.data.branchCompanyCode;
+                            // showDetail2(showbranchCompanyCode, 'company_muhou4', 'person');
                         }
                     } else {
-                        window.open('/people?name=' + encodeURI(e.data.Name) + '&keyno=' + e.data.ParentKeyNo);
+                        window.open('/people?name=' + encodeURI(e.data.Name) + '&branchCompanyCode=' + e.data.ParentbranchCompanyCode);
                     }
                 }
             });
@@ -1110,16 +1020,16 @@
             myChart.getZrender().on('click', function (e) {
                 if (isDrag) return;
                 if (e.target && e.target.clickcom) {
-                    troggleTree(e.target.keyNo, e.target.treeId);
+                    troggleTree(e.target.branchCompanyCode, e.target.treeId);
                 }
                 if (e.target && e.target.editcom) {
-                    editTree(e.target.keyNo, e.target.treeId);
+                    editTree(e.target.branchCompanyCode, e.target.treeId);
                 }
             });
 
             var hoverName = ''
             // myChart.on('hover', function(e){
-            //     if(e.data.Name&&e.data.Name.length>10&&e.data.Name!=hoverName){
+            //     if(e.data.Name&&e.data.branchCompanyName.length>10&&e.data.Name!=hoverName){
             //         hoverName = e.data.Name;
             //         $('#hoverName').text(e.data.Name);
             //         $('#hoverName').css('left',e.event.screenX-10);
@@ -1137,12 +1047,12 @@
                 getNode(touziData);
                 function getNode(data) {
                     if (!data) return;
-                    if (data.children) {
+                    if (data.children && data.children.length > 0) {
                         for (var i = 0; i < data.children.length; i++) {
                             getNode(data.children[i]);
                         }
                     }
-                    if (data.children && data.children.length > 0 && data.KeyNo && data.KeyNo != getQueryString("keyNo")) {
+                    if (data.children && data.children.length > 0 && data.branchCompanyCode && data.branchCompanyCode != getQueryString("branchCompanyCode")) {
                         data._children = data.children;
                         data.children = null;
                         data.extend = 1;
@@ -1185,7 +1095,7 @@
                 //           strokeColor:'rgba(0,0,0,0)',
                 //         }    
                 //     });
-                //     shape.keyNo = shapeList[i]._echartsData._data.KeyNo;
+                //     shape.branchCompanyCode = shapeList[i]._echartsData._data.branchCompanyCode;
                 //     shape.zlevel = 1;
                 //     shape.z = 4;
                 //     shape.clickable = true;
@@ -1193,7 +1103,7 @@
                 // }
                 if (shapeList[i]._echartsData && shapeList[i]._echartsData._data.subtext) {
                     shapeList[i].style.text = shapeList[i].style.text + '\n';
-                    var shapeY = shapeList[i].rotation[2] + 12;
+                    var shapeY = shapeList[i].rotation[2] + 16;
                     if (shapeList[i]._echartsData._data.name.length > 10) {
                         shapeY = shapeList[i].rotation[2] + 16;
                     }
@@ -1228,7 +1138,11 @@
                     shape.ndelete = true;
                     shape.hoverable = false;
                     myChart.getZrender().addShape(shape);
+
+                    
+                    
                 }
+                console.log('shapeList[i]._echartsData----',shapeList[i]._echartsData)
                 if (shapeList[i]._echartsData && shapeList[i]._echartsData._data.extend && !jietu) {
                     var iconImg = '';
                     var isIE11 = (!!window.ActiveXObject || "ActiveXObject" in window);
@@ -1262,7 +1176,7 @@
 
                         }
                     });
-                    shape.keyNo = shapeList[i]._echartsData._data.KeyNo;
+                    shape.branchCompanyCode = shapeList[i]._echartsData._data.branchCompanyCode;
                     shape.treeId = shapeList[i]._echartsData._data.treeId;
                     shape.zlevel = 1;
                     shape.z = 4;
@@ -1270,6 +1184,29 @@
                     shape.clickcom = true;
                     shape.hoverable = true;
                     shape.clickable = true;
+                    if(shapeList[i]._echartsData._data._children) {
+                        var shapeNum = new Text({
+                            style: {
+                                x: shapeList[i].rotation[1]+25,
+                                y: shapeY+12,
+                                text: '【'+shapeList[i]._echartsData._data._children.length+'】',
+                                color: '#0b6666',
+                                textFont: 'normal 12px 微软雅黑',
+                                textAlign: 'center',
+                                lineWidth: 0,
+                            },
+                            highlightStyle: {
+                                lineWidth: 0,
+                                color: '#0b6666',
+                                strokeColor: 'rgba(255,255,255,0)',
+                            }
+                        });
+                        shapeNum.zlevel = 1;
+                        shapeNum.z = 5;
+                        shapeNum.ndelete = true;
+                        shapeNum.hoverable = false;
+                        myChart.getZrender().addShape(shapeNum);
+                    }
                     myChart.getZrender().addShape(shape);
                 }
                 if (shapeList[i]._echartsData && shapeList[i]._echartsData._data.editable && canEditRect && !jietu) {
@@ -1298,7 +1235,7 @@
                     });
                     shape.zlevel = 1;
                     shape.z = 20;
-                    shape.keyNo = shapeList[i]._echartsData._data.KeyNo;
+                    shape.branchCompanyCode = shapeList[i]._echartsData._data.branchCompanyCode;
                     shape.treeId = shapeList[i]._echartsData._data.treeId;
                     shape.ndelete = true;
                     shape.editcom = true;
@@ -1325,7 +1262,7 @@
                             x: shapeList[i].rotation[1],
                             y: shapeList[i].rotation[2] - shapeList[i].style.height / 2 - 18,
                             textFont: 'normal 11px 微软雅黑',
-                            text: '实际控制人\n' + '最终受益人：' + shapeList[i]._echartsData._data.syr,
+                            text: '投资股东\n' + '法定代表人：' + shapeList[i]._echartsData._data.syr,
                             textAlign: 'center',
                             color: '#fff',
                             lineWidth: 0,
@@ -1450,7 +1387,7 @@
                             height: 18,
                             textPosition: 'inside',
                             textAlign: 'center',
-                            textColor: '#128bed',
+                            textColor: '#0b6666',
                             textBorderRadius: 6,
                             color: '#E7F4FF'
                         },
@@ -1472,7 +1409,7 @@
                     var shapeTextColor = '#F5A623';
                     if (shapeList[i]._echartsData._data.list) {
                         shapeColor = '#DDF0FF';
-                        shapeTextColor = '#128bed';
+                        shapeTextColor = '#0b6666';
                     }
 
                     var shape = new Rectangle({
@@ -1538,14 +1475,14 @@
         }
 
 
-        function editTree(KeyNo, tid) {
+        function editTree(branchCompanyCode, tid) {
             getNode(gudongData);
             getNode(touziData);
             var dnode;
             var dIndex;
             function getNode(data) {
                 if (!data) return;
-                if (data.children) {
+                if (data.children && data.children.length > 0) {
                     for (var i = 0; i < data.children.length; i++) {
                         var cnode = data.children[i].children[0];
                         if (cnode.treeId == tid) {
@@ -1567,16 +1504,16 @@
             initZrender();
         }
 
-        function troggleTree(KeyNo, tid) {
-            // if(KeyNo==getQueryString("keyNo")){
+        function troggleTree(branchCompanyCode, tid) {
+            // if(branchCompanyCode==getQueryString("branchCompanyCode")){
             //     return;
             // }
             getNode(gudongData);
             getNode(touziData);
             function getNode(data) {
                 if (!data) return;
-                if (data.KeyNo && data.KeyNo == KeyNo && data.treeId == tid) {
-                    if (data.children) {
+                if (data.branchCompanyCode && data.branchCompanyCode == branchCompanyCode && data.treeId == tid) {
+                    if (data.children && data.children.length > 0) {
                         data._children = data.children;
                         data.children = null;
                         data.extend = 1;
@@ -1585,13 +1522,13 @@
                         data.children = data._children;
                         data._children = null;
                         data.extend = 2;
-                        ajaxtouzidata(data, KeyNo);
-                        ajaxgudongdata(data, KeyNo);
+                        ajaxtouzidata(data, branchCompanyCode);
+                        ajaxgudongdata(data, branchCompanyCode);
                         //data.symbol = 'circleMinus';
                     }
                     return;
                 }
-                if (data.children) {
+                if (data.children && data.children.length > 0) {
                     for (var i = 0; i < data.children.length; i++) {
                         getNode(data.children[i]);
                     }
@@ -1602,9 +1539,237 @@
             initZrender();
         }
 
+        // 穿透图，全屏和非全屏按钮样式切换和功能触发
+        function changeScreen(dom) {
+            if (!isFullScreen()) {
+                $(dom).html('<span class="screened"></span>退出');
+                $('#screenArea').width('');
+                $('#main').width('');
+                $('#screenArea').height('');
+                $('#main').height('');
+                launchFullScreen($('#screenArea')[0]);
+            } else {
+                $(dom).html('<span class="screen"></span>全屏');
+                exitFullScreen();
+            }
+        }
+ 
+        // 切换全屏
+        setFullScreenListener(function () {
+            setTimeout(function () {
+                myChart.resize();
+                initZrender();
+            }, 300);
+        })//
 
 
-        function ajaxtouzidata(node, KeyNo) {
+        // 刷新股权穿透图
+        function maoRefresh() {
+            refresh();
+        }
+
+        // 刷新股权穿透图
+        function refresh() {
+            var ecConfig = require('echarts/config');
+            myChart._messageCenter.dispatch(ecConfig.EVENT.RESTORE, null, null, myChart);
+        }
+
+        // 保存股权穿透图
+        function saveImg() {
+            if (isFullScreen()) {
+                $('#changeScreen').html('<span class="screen"></span>全屏');
+                exitFullScreen();
+                setTimeout(function () {
+                    jietu();
+                }, 1000);
+
+            } else {
+                jietu();
+            }
+            // 截屏功能
+            function jietu() {
+                var jietuMask = document.createElement("div");
+                $(jietuMask).attr('style', 'position: fixed; background: #fff; z-index: 1000; top: 0px; bottom: 0px; left: 0px; right: 0px;');
+                document.body.appendChild(jietuMask);
+
+                var width = 1440;
+                var height = 900;
+
+                var minX = 0;
+                var maxX = 0;
+                var minY = 300;
+                var maxY = 0;
+                var moveDown = 0;
+                var moveRight = 0;
+
+                var shapeList = myChart.getZrender().storage.getShapeList();
+                for (var i = 0; i < shapeList.length; i++) {
+                    if (shapeList[i].style && shapeList[i].style.iconType == 'rectangle') {
+                        if (shapeList[i].style.x > maxX) {
+                            maxX = shapeList[i].style.x;
+                        }
+                        if (shapeList[i].style.x < minX) {
+                            minX = shapeList[i].style.x;
+                        }
+                        if (shapeList[i].style.y > maxY) {
+                            maxY = shapeList[i].style.y;
+                        }
+                        if (shapeList[i].style.y < minY) {
+                            minY = shapeList[i].style.y;
+                        }
+                    }
+                }
+
+                if ((maxX - minX + 300) > width) {
+                    width = maxX - minX + 300;
+                    moveRight = -(maxX + minX - myChart.getZrender().getWidth() + 146) / 2;
+
+                }
+                if ((maxY - minY + 300) > 900) {
+                    height = maxY - minY + 300;
+                }
+
+                moveDown = -(maxY + minY - myChart.getZrender().getHeight()) / 2 - 85;
+
+                var layer = myChart.getZrender().painter._layers[1];
+                var bS = layer.scale.concat();
+                var bP = layer.position.concat();
+
+                layer.scale = [1, 1, 0, 0];
+                layer.position = [0, 0];
+
+                var bW = myChart.getZrender().getWidth();
+                var bH = myChart.getZrender().getHeight();
+
+                $('#main').width(width);
+                $('#main').height(height);
+
+                var zdW = myChart.getZrender().getWidth();
+                var zdH = myChart.getZrender().getHeight();
+
+
+
+
+
+                myChart.resize();
+
+                myChart.getZrender().painter.refresh();
+
+                initZrender(true);
+
+                layer.position[0] = moveRight;
+                layer.position[1] = moveDown;
+
+                var shape1 = new Rectangle({
+                    style: {
+                        x: -1000 - moveRight,
+                        y: -1000 - moveDown,
+                        width: width + 1000,
+                        height: height + 1000,
+                        color: '#fff'
+                    }
+                });
+                shape1.zlevel = 1;
+                shape1.z = -2;
+                shape1.ndelete = true;
+                myChart.getZrender().addShape(shape1);
+
+
+                for (var i = 0; i < width + 100; i += 360) {
+                    for (var j = 0; j < height + 100; j += 280) {
+                        var shapeSy = new ImageShape({
+                            style: {
+                                image: './images/shuiying6.png',
+                                x: i - moveRight,
+                                y: j - moveDown,
+                                width: 360,
+                                height: 280
+
+                            }
+                        });
+                        shapeSy.zlevel = 1;
+                        shapeSy.z = -1;
+                        shapeSy.ndelete = true;
+                        myChart.getZrender().addShape(shapeSy);
+                    }
+                }
+
+                var shape3 = new Text({
+                    style: {
+                        x: width / 2 - 165 - moveRight,
+                        y: height - 30 - moveDown,
+                        text: '股权穿透图由雅居乐集团基于公司信息利用大数据分析引擎独家生成',
+                        strokeColor: '#999',
+                        color: '#999',
+                        textFont: 'normal 12px 微软雅黑',
+                        lineWidth: 0,
+                    }
+                });
+                shape3.zlevel = 1;
+                shape3.z = -1;
+                shape3.ndelete = true;
+                myChart.getZrender().addShape(shape3);
+
+                setTimeout(function () {
+                    var canvas = $('#main canvas')[1];
+
+                    var isIE11 = (!!window.ActiveXObject || "ActiveXObject" in window);
+                    if (isIE11) {
+                        downloadimg(canvas);
+                    } else {
+                        download(canvas, 'jpg');
+                    }
+
+                    $('#main').width('100%');
+                    $('#main').height(bH);
+                    myChart.resize();
+                    layer.scale = bS;
+                    layer.position = bP;
+                    myChart.getZrender().render();
+                    initZrender();
+                    $(jietuMask).css('display', 'none');
+                }, 300);
+            }
+        }
+
+        // 股权穿透图放大和缩小功能
+        function maoScale(type) {
+            var centerX = myChart.getZrender().getWidth() / 2;
+            var centerY = myChart.getZrender().getHeight() / 2;
+            var layer = myChart.getZrender().painter._layers[1];
+            var x = layer.scale[0] * centerX + layer.position[0];
+            var y = layer.scale[1] * centerY + layer.position[1];
+            var scale = layer.scale[0];
+            if (type == 1) {
+                scale += 0.3;
+            } else if (type == 2) {
+                scale -= 0.3;
+            }
+            if (scale >= 0.3 && scale <= 2) {
+                layer.scale[0] = scale;
+                layer.scale[1] = scale;
+                myChart.getZrender().render();
+                layer.position[0] = x - layer.scale[0] * centerX
+                layer.position[1] = y - layer.scale[1] * centerY
+                myChart.getZrender().render();
+            }
+        }
+
+        // 编辑股权穿透图
+        function editRect(dom) {
+            if (canEditRect) {
+                $(dom).removeClass('active');
+                canEditRect = false;
+            } else {
+                $(dom).addClass('active');
+                canEditRect = true;
+            }
+            initZrender();
+        }
+
+
+
+        function ajaxtouzidata(node, branchCompanyCode) {
 
             if (!node.isTouzi || node.ajaxtouzi) {
                 return;
@@ -1612,11 +1777,11 @@
             $.ajax({
                 url: INDEX_URL + '/cms_guquanmapinvestment',
                 data: {
-                    keyNo: KeyNo
+                    branchCompanyCode: branchCompanyCode
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    if (data.touzi && data.touzi.DetailList.length > 0) {
+                    if (data.touzi && data.touzi.children.length > 0) {
                         addTreeChild(node, data);
                     }
                 },
@@ -1629,10 +1794,10 @@
             }
             $.each(node.children, function (index, vo) {
                 var cnode = vo.children[0];
-                $.each(data.touzi.DetailList, function (i, ndata) {
-                    if (ndata.KeyNo == cnode.KeyNo) {
-                        if (ndata.DetailList.length > 0) {
-                            cnode.DetailList = ndata.DetailList;
+                $.each(data.touzi.children, function (i, ndata) {
+                    if (ndata.branchCompanyCode == cnode.branchCompanyCode) {
+                        if (ndata.children.length > 0) {
+                            cnode.children = ndata.children;
                             transTree(cnode, 2);
                             cnode._children = cnode.children;
                             cnode.children = null;
@@ -1649,22 +1814,22 @@
         }
 
         //动态加载股东节点
-        function ajaxgudongdata(node, KeyNo) {
+        function ajaxgudongdata(node, branchCompanyCode) {
             if (node.isTouzi || node.ajaxgudong) {
                 return;
             }
-            if (KeyNo == null) {
+            if (branchCompanyCode == null) {
                 return;
             }
             $.ajax({
                 url: INDEX_URL + '/cms_guquanmapownership',
                 data: {
-                    keyNo: KeyNo,
+                    branchCompanyCode: branchCompanyCode,
                     level: 2,
                 },
                 dataType: 'JSON',
                 success: function (data) {
-                    if (data.gudong && data.gudong.DetailList.length > 0) {
+                    if (data.gudong && data.gudong.children.length > 0) {
                         addGudongTreeChild(node, data);
                     }
                 }
@@ -1673,10 +1838,10 @@
         function addGudongTreeChild(node, data) {
             $.each(node.children, function (index, vo) {
                 var cnode = vo.children[0];
-                $.each(data.gudong.DetailList, function (i, ndata) {
-                    if (ndata.KeyNo == cnode.KeyNo && ndata.Name.replace(/[^\X]/g, '') == cnode.Name.replace(/[^\X]/g, '')) {
-                        if (ndata.DetailList.length > 0) {
-                            cnode.DetailList = ndata.DetailList;
+                $.each(data.gudong.children, function (i, ndata) {
+                    if (ndata.branchCompanyCode == cnode.branchCompanyCode && ndata.branchCompanyName.replace(/[^\X]/g, '') == cnode.branchCompanyName.replace(/[^\X]/g, '')) {
+                        if (ndata.children.length > 0) {
+                            cnode.children = ndata.children;
                             transTree(cnode, 1);
                             cnode._children = cnode.children;
                             cnode.children = null;
@@ -1698,20 +1863,18 @@
         function resizeScreen() {
             if (document.body.clientHeight > 700) {
                 $('#screenArea').height(document.body.clientHeight - 66);
-            } else if (window.iframe) {
-                $('#screenArea').width(1186);
-                $('#screenArea').height(418);
-                $('#main').width(1186);
-                $('#main').height(418);
             } else {
-                $('#screenArea').height(640);
+                $('#screenArea').width(1000);
+                $('#main').width(1000);
+                $('#screenArea').height(600);
+                $('#main').height(600);
             }
         }
 
         function popclose(dom) {
             $(dom).parent().parent().fadeOut();
-            if (showKeyNo) {
-                showKeyNo = '';
+            if (showbranchCompanyCode) {
+                showbranchCompanyCode = '';
             }
         }
 
@@ -1771,7 +1934,7 @@
             //设置保存图片的类型
             var imgdata = canvas.toDataURL('image/jpeg', qual);
             var filename = '股权穿透图_' + new Date().toLocaleDateString() + '.jpeg';
-            post(INDEX_URL + '/cms_downloadimg?filename=' + filename, { img: imgdata });
+            //post(INDEX_URL + '/cms_downloadimg?filename=' + filename, { img: imgdata });
         }
         function post(URL, PARAMS) {
             var temp = document.createElement("form");
@@ -1808,6 +1971,17 @@
             }
             return "";
         }
+        // 获取参数值
+        function getQueryVariable(variable)
+		{
+			var query = window.location.search.substring(1);
+			var vars = query.split("&");
+			for (var i=0;i<vars.length;i++) {
+					var pair = vars[i].split("=");
+					if(pair[0] == variable){return pair[1];}
+			}
+			return(false);
+		}
     </SCRIPT>
 
     <STYLE>
@@ -1838,14 +2012,14 @@
         }
 
         .detail-count {
-            color: #128BED;
+            color: #0b6666;
             font-size: 16px;
             padding-left: 6px;
         }
 
         .detail-a,
         .detail-a:hover {
-            color: #128BED;
+            color: #0b6666;
             font-size: 14px;
         }
 
@@ -2000,7 +2174,7 @@
         }
 
         /**/
-        function showDetail2(keyNo, tupuUrl, type) {
+        function showDetail2(branchCompanyCode, tupuUrl, type) {
             $(".company-detail").hide();
 
             if (type && type == 'person') {
@@ -2008,7 +2182,7 @@
                 $.ajax({
                     url: url,
                     type: 'GET',
-                    data: { "keyNo": keyNo },
+                    data: { "branchCompanyCode": branchCompanyCode },
                     dataType: 'JSON',
                     success: function (data) {
                         if (!data.name) return;
@@ -2018,28 +2192,28 @@
                         $("#NameBar").after($("#PerDeailTpl").html());
 
                         /*人物搜索里的查看图谱*/
-                        if (_currentKeyNo == keyNo || !data.boss_id) {
+                        if (_currentbranchCompanyCode == branchCompanyCode || !data.boss_id) {
                             $("#ShowPerTupu").attr('canshow', '0');
                             $("#ShowPerTupu").hide();
                         } else {
-                            $("#ShowPerTupu").attr('keyno', keyNo);
+                            $("#ShowPerTupu").attr('branchCompanyCode', branchCompanyCode);
                             $("#ShowPerTupu").attr('canshow', '1');
                             $("#ShowPerTupu").show();
                         }
                         /*muhou3 muhou4里的查看图谱*/
-                        if (_currentKeyNo == keyNo) {
+                        if (_currentbranchCompanyCode == branchCompanyCode) {
                             $("#ShowPerTupuA").parent().hide();
                         } else {
                             $("#ShowPerTupuA").parent().show();
-                            $("#ShowPerTupuA").attr("href", "/company_muhou4?keyNo=" + keyNo + "&name=" + encodeURIComponent(data.name));
+                            $("#ShowPerTupuA").attr("href", "/company_muhou4?branchCompanyCode=" + branchCompanyCode + "&name=" + encodeURIComponent(data.name));
                         }
 
                         $("#BossInfo").hide();
 
-                        $('.allRrelative').attr('href', '/pl/' + keyNo);
+                        $('.allRrelative').attr('href', '/pl/' + branchCompanyCode);
 
                         $('.ea_name').text(data.name ? data.name : '-');
-                        $('.ea_name').attr('href', '/pl/' + keyNo);
+                        $('.ea_name').attr('href', '/pl/' + branchCompanyCode);
 
 
                         $('.ea_defaultImg').text();
@@ -2048,7 +2222,7 @@
                         if (data.boss_id) {
                             $('#face_oss').attr('src', data.face_oss);
                         } else {
-                            $('#face_oss').attr('src', 'https://co-image.qichacha.com/PersonImage/' + keyNo + '.jpg');
+                            $('#face_oss').attr('src', 'https://co-image.qichacha.com/PersonImage/' + branchCompanyCode + '.jpg');
                         }
 
                         $('#PerCom').text(data.companyname ? data.companyname : '-');
@@ -2079,7 +2253,7 @@
                                 obj.OperName = obj.OperName ? obj.OperName : '-';
                                 if (index < 10) {
                                     html += '<tr><td>' +
-                                        '<a class="c_a" target="_blank" href="/firm/' + obj.KeyNo + '"><span>' + obj.Name + '</span></a></td>' +
+                                        '<a class="c_a" target="_blank" href="/firm/' + obj.branchCompanyCode + '"><span>' + obj.Name + '</span></a></td>' +
                                         '<td style="text-align: center;">' + obj.OperName + '</td></tr>'
                                 }
                             })
@@ -2244,7 +2418,7 @@
                 $.ajax({
                     url: url,
                     type: 'GET',
-                    data: { "keyNo": keyNo },
+                    data: { "branchCompanyCode": branchCompanyCode },
                     dataType: 'JSON',
                     success: function (data) {
                         if (data.Status != 200) {
@@ -2255,14 +2429,14 @@
                         companyDetail.find('.mao-company-name').text(data.Result.Name);
                         companyDetail.find('.mao-company-status').text(data.Result.ShortStatus || '-');
                         if (data.Result.Oper && data.Result.Oper.Name) {
-                            if (data.Result.Oper.KeyNo) {
-                                if (data.Result.Oper.KeyNo[0] == 'p') {
-                                    companyDetail.find('.mao-oper').html('<a target="_blank" href="/pl/' + data.Result.Oper.KeyNo + '.html">' + data.Result.Oper.Name + '</a>');
+                            if (data.Result.Oper.branchCompanyCode) {
+                                if (data.Result.Oper.branchCompanyCode[0] == 'p') {
+                                    companyDetail.find('.mao-oper').html('<a target="_blank" href="/pl/' + data.Result.Oper.branchCompanyCode + '.html">' + data.Result.Oper.Name + '</a>');
                                 } else {
-                                    companyDetail.find('.mao-oper').html('<a target="_blank" href="/firm/' + data.Result.Oper.KeyNo + '.html">' + data.Result.Oper.Name + '</a>');
+                                    companyDetail.find('.mao-oper').html('<a target="_blank" href="/firm/' + data.Result.Oper.branchCompanyCode + '.html">' + data.Result.Oper.Name + '</a>');
                                 }
                             } else {
-                                companyDetail.find('.mao-oper').html('<a target="_blank" rel="nofollow" href="/people?name=' + encodeURI(data.Result.Oper.Name) + '&keyno=' + keyNo + '">' + data.Result.Oper.Name + '</a>');
+                                companyDetail.find('.mao-oper').html('<a target="_blank" rel="nofollow" href="/people?name=' + encodeURI(data.Result.Oper.Name) + '&branchCompanyCode=' + branchCompanyCode + '">' + data.Result.Oper.Name + '</a>');
                             }
                             if (data.Result.Oper.OperType == 1) {
                                 companyDetail.find('.mao-oper').prev().text('法定代表人：');
@@ -2285,17 +2459,17 @@
 
                         companyDetail.find('.mao-ziben').text(data.Result.RegistCapi || '-');
                         companyDetail.find('.mao-date').text((data.Result.StartDate || ''));
-                        companyDetail.find('.mao-company-name').attr("href", "firm/" + keyNo + ".html");
+                        companyDetail.find('.mao-company-name').attr("href", "firm/" + branchCompanyCode + ".html");
                         if (!tupuUrl) {
                             tupuUrl = 'company_relation';
                         }
-                        companyDetail.find('.mao-tupu-link').attr("href", tupuUrl + "?keyNo=" + keyNo + "&name=" + encodeURIComponent(data.Result.Name));
+                        companyDetail.find('.mao-tupu-link').attr("href", tupuUrl + "?branchCompanyCode=" + branchCompanyCode + "&name=" + encodeURIComponent(data.Result.Name));
                         //companyDetail.find('.mao-tupu-link').attr("onclick","zhugeTrack(\'图谱页面-侧边栏企业信息-查看图谱\')");
                         companyDetail.find('.close').click(function () {
                             companyDetail.fadeOut();
                         });
 
-                        if (_currentKeyNo == keyNo) {
+                        if (_currentbranchCompanyCode == branchCompanyCode) {
                             $(".mao-tupu-link").parent().hide();
                         } else {
                             $(".mao-tupu-link").parent().show();
@@ -2309,17 +2483,17 @@
                             html += "<thead><tr><th style='text-align: left'>名称</th><th>类型</th></tr></thead>";
                             for (var i = 0; i < data.Result.Partners.length; i++) {
                                 html += "<tr>";
-                                if (data.Result.Partners[i].KeyNo) {
-                                    if (data.Result.Partners[i].KeyNo[0] == 'p') {
-                                        html += '<td><a onclick="" target="_blank" href="/pl/' + data.Result.Partners[i].KeyNo + '.html">' + data.Result.Partners[i].StockName + '</a></td>';
+                                if (data.Result.Partners[i].branchCompanyCode) {
+                                    if (data.Result.Partners[i].branchCompanyCode[0] == 'p') {
+                                        html += '<td><a onclick="" target="_blank" href="/pl/' + data.Result.Partners[i].branchCompanyCode + '.html">' + data.Result.Partners[i].StockName + '</a></td>';
                                     } else {
-                                        html += '<td><a onclick="" target="_blank" href="/firm/' + data.Result.Partners[i].KeyNo + '.html">' + data.Result.Partners[i].StockName + '</a></td>';
+                                        html += '<td><a onclick="" target="_blank" href="/firm/' + data.Result.Partners[i].branchCompanyCode + '.html">' + data.Result.Partners[i].StockName + '</a></td>';
                                     }
                                 } else {
                                     if (data.Result.Partners[i].StockName.length > 3) {
                                         html += "<td>" + data.Result.Partners[i].StockName + "</td>";
                                     } else {
-                                        html += '<td><a onclick="" target="_blank" rel="nofollow" href="/people?name=' + encodeURI(data.Result.Partners[i].StockName) + '&keyno=' + keyNo + '">' + data.Result.Partners[i].StockName + '</a></td>';
+                                        html += '<td><a onclick="" target="_blank" rel="nofollow" href="/people?name=' + encodeURI(data.Result.Partners[i].StockName) + '&branchCompanyCode=' + branchCompanyCode + '">' + data.Result.Partners[i].StockName + '</a></td>';
                                     }
                                 }
                                 html += "<td>" + (data.Result.Partners[i].StockType || "-") + "</td>";
@@ -2341,7 +2515,7 @@
                             html += "<thead><tr><th  style='text-align: left'>名称</th></tr></thead>";
                             for (var i = 0; i < data.Result.touziList.length; i++) {
                                 html += "<tr>";
-                                html += "<td><a onclick='' href='/firm/" + data.Result.touziList[i].KeyNo + ".html' target='_blank'>" + data.Result.touziList[i].Name + "</a></td>";
+                                html += "<td><a onclick='' href='/firm/" + data.Result.touziList[i].branchCompanyCode + ".html' target='_blank'>" + data.Result.touziList[i].Name + "</a></td>";
                                 html += "</tr>";
                             }
                             html += '</table>';
@@ -2356,10 +2530,10 @@
                             html += "<thead><tr><th  style='text-align: left'>名称</th><th>类型</th></tr></thead>";
                             for (var i = 0; i < data.Result.Employees.length; i++) {
                                 html += "<tr>";
-                                if (data.Result.Employees[i].KeyNo && data.Result.Employees[i].KeyNo[0] == 'p') {
-                                    html += '<td><a onclick="" target="_blank" href="/pl/' + data.Result.Employees[i].KeyNo + '.html">' + data.Result.Employees[i].Name + '</a></td>';
+                                if (data.Result.Employees[i].branchCompanyCode && data.Result.Employees[i].branchCompanyCode[0] == 'p') {
+                                    html += '<td><a onclick="" target="_blank" href="/pl/' + data.Result.Employees[i].branchCompanyCode + '.html">' + data.Result.Employees[i].Name + '</a></td>';
                                 } else {
-                                    html += '<td><a onclick="" target="_blank" rel="nofollow" href="/people?name=' + encodeURI(data.Result.Employees[i].Name) + '&keyno=' + keyNo + '">' + data.Result.Employees[i].Name + '</a></td>';
+                                    html += '<td><a onclick="" target="_blank" rel="nofollow" href="/people?name=' + encodeURI(data.Result.Employees[i].Name) + '&branchCompanyCode=' + branchCompanyCode + '">' + data.Result.Employees[i].Name + '</a></td>';
                                 }
                                 html += "<td>" + (data.Result.Employees[i].Job || "-") + "</td>";
                                 html += "</tr>";

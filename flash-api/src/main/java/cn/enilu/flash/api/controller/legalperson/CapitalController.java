@@ -1,6 +1,7 @@
 package cn.enilu.flash.api.controller.legalperson;
 
 import cn.enilu.flash.bean.entity.legalperson.Capital;
+import cn.enilu.flash.bean.vo.node.CapitalNode;
 import cn.enilu.flash.bean.vo.query.SearchFilter;
 import cn.enilu.flash.service.legalperson.CapitalService;
 
@@ -21,6 +22,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/lpm/capital")
 public class CapitalController {
@@ -28,6 +31,11 @@ public class CapitalController {
 	@Autowired
 	private CapitalService capitalService;
 
+	@RequestMapping(value = "/tree",method = RequestMethod.GET)
+	public Object tree(@RequestParam(required = false) String enterpriseCode) {
+		List<CapitalNode> list = capitalService.queryAllNode(enterpriseCode);
+		return Rets.success(list);
+	}
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list(@RequestParam(required = false) String enterpriseCode) {
 	Page<Capital> page = new PageFactory<Capital>().defaultPage();
