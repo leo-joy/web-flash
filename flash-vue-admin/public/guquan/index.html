@@ -446,7 +446,8 @@
                 dataType: 'JSON',
                 success: function (data) {
                     $('#load_data').hide();
-                    if (data && data.data.length>0 && data.success) {
+                    if (data && data.data && data.data.length>0 && data.success) {
+                        $('#no_data').hide();
                         console.log(data)
                         if(data.data[0].enterpriseName) {
                             gudongData['branchCompanyName']= data.data[0].enterpriseName
@@ -463,8 +464,6 @@
                                 maoScale(2)
                             }
                         }, 500);
-                        
-
                     } else {
                         $('#no_data').show();
                         $('#screenArea').hide();
@@ -487,7 +486,7 @@
                 dataType: 'JSON',
                 success: function (data) {
                     $('#load_data').hide();
-                    if (data && data.data.length>0 && data.success) {
+                    if (data && data.data && data.data.length>0 && data.success) {
                         $('#no_data').hide();
                         console.log(data)
                         if(data.data[0].enterpriseName) {
@@ -499,7 +498,6 @@
                         console.log(touziData)
                         transTree(touziData, 2);
                         initTree(touziData, isClose);
-                        drawGuquan();
                         setTimeout(function () {
                             if(isExtend) {
                                 maoScale(2)
@@ -896,7 +894,7 @@
                 })
             }
             if (gudongData && !touziData) {
-                option.series[0].rootLocation.y = '165%';
+                option.series[0].rootLocation.y = '65%';
             }
             myChart.setOption(option);
             initZrender();
