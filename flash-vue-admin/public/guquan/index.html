@@ -445,10 +445,8 @@
                 type: 'GET',
                 dataType: 'JSON',
                 success: function (data) {
-                    console.log(data)
                     $('#load_data').hide();
-                    if (data && data.success) {
-                        $('#no_data').hide();
+                    if (data && data.data.length>0 && data.success) {
                         console.log(data)
                         if(data.data[0].enterpriseName) {
                             gudongData['branchCompanyName']= data.data[0].enterpriseName
@@ -457,7 +455,6 @@
                         }
                         
                         gudongData['children']= data.data
-                        console.log('股东数据----',gudongData)
                         transTree(gudongData, 1);
                         initTree(gudongData, isClose);
                         drawGuquan();
@@ -489,9 +486,8 @@
                 type: 'GET',
                 dataType: 'JSON',
                 success: function (data) {
-                    console.log(data)
                     $('#load_data').hide();
-                    if (data && data.success) {
+                    if (data && data.data.length>0 && data.success) {
                         $('#no_data').hide();
                         console.log(data)
                         if(data.data[0].enterpriseName) {
@@ -510,14 +506,6 @@
                             }
                         }, 500);
                         
-
-                    } else {
-                        $('#no_data').show();
-                        $('#screenArea').hide();
-                        if (window.iframe) {
-                            $('.guquan-liframe').hide();
-                            $('.guquan-lnodata').show();
-                        }
                     }
                 }
             });
@@ -866,7 +854,7 @@
                 type: 'broken',
                 color: "#aaa"
             };
-            if (gudongData) {
+            if (gudongData && gudongData.branchCompanyName) {
                 option.series.push({
                     type: "tree",
                     orient: "vertical",
@@ -887,7 +875,7 @@
                     data: [gudongData]
                 });
             }
-            if (touziData) {
+            if (touziData && touziData.branchCompanyName) {
                 option.series.push({
                     type: "tree",
                     orient: "vertical",
@@ -910,7 +898,6 @@
             if (gudongData && !touziData) {
                 option.series[0].rootLocation.y = '165%';
             }
-            console.log('option---',option)
             myChart.setOption(option);
             initZrender();
             animatieChart(myChart);
