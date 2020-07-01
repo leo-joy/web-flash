@@ -75,7 +75,7 @@
         if (vipStartTime) {
             zhugeIdentify.vip_start_time = '-';
         }
-        window.zhuge.identify('2972f7c3461753f9e13f6f8486a8b270', zhugeIdentify);
+        //window.zhuge.identify('2972f7c3461753f9e13f6f8486a8b270', zhugeIdentify);
         var userId = '2972f7c3461753f9e13f6f8486a8b270';
         var userGroupid = '11';
         var freeCompanies = ["234939362", "234918766", "234869620", "234862605", "234637704", "234609748", "234574018", "234562348", "234552748", "234321036", "234291314", "234262338", "234257777", "234251384", "234048899", "234030743", "233994738", "233986592", "233982296", "233759644", "233742429", "233695732", "233682207", "233679277", "233003766", "232989162", "232965219", "232960002", "232954883", "232706275", "232684453", "232662034", "232569641", "232566461", "232273127", "232231774", "232228097", "232221827", "232012556", "231990504", "231988264", "231958617", "231952753", "231740000", "231690479", "231686307", "231675898", "230899046", "230832426", "230797696", "9cce0780ab7644008b73bc2120479d31"];
@@ -325,6 +325,7 @@
         <DIV class="tupu-toolbar">
             <UL>
                 <LI id="changeScreen" onclick="changeScreen(this);"><SPAN class="screen"></SPAN>全屏</LI>
+                <LI id="extendItem" onclick="extendItem(this);"><SPAN class="extented"></SPAN>展开</LI>
                 <LI onclick="maoScale(1);"><SPAN class="big"></SPAN>放大</LI>
                 <LI onclick="maoScale(2);"><SPAN class="small"></SPAN>缩小</LI>
                 <LI onclick="maoRefresh();"><SPAN class="refresh"></SPAN>刷新</LI>
@@ -408,6 +409,7 @@
         var _currentbranchCompanyCode;
         var canEditRect = false;
         var mbtnW = 18;
+        var isExtend = false; // ture 为关闭子节点 false 展开全部节点
 
         $(document).ready(function () {
             resizeScreen();
@@ -415,9 +417,7 @@
             myChart = echarts.init(document.getElementById('main'));
             //new window.zoomutil({dom: $('#mainGuquan')[0], chart:myChart}); // add zoomutil feature
             //getRootData(enterpriseCode);
-            getInvestData(enterpriseCode);
-            getCapitalData(enterpriseCode);
-            //getData();
+            getData(true);
         });
 
         window.onresize = function () {
@@ -427,72 +427,17 @@
         var gudongData={}; // 股东信息数据
         var touziData={}; // 投资公司信息数据
 
-        function getData() {
+
+
+        function getData(isClose) {
+            var enterpriseCode = getQueryVariable('id')*1 || 1
             $('#load_data').show();
-            //var url = INDEX_URL+"/cms_guquanmap3";
-            var url = "./company.json";
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: {
-                    branchCompanyCode: getQueryString("branchCompanyCode"),
-                },
-                dataType: 'JSON',
-                success: function (data) {
-                    $('#load_data').hide();
-                    if (data && data.status === 200) {
-                        $('#no_data').hide();
-                        rootData = data;
-                        gudongData = data.gudong;
-                        touziData = data.touzi;
-                        transTree(gudongData, 1);
-                        initTree(gudongData);
-                        transTree(touziData, 2);
-                        initTree(touziData);
-                        drawGuquan();
-                        setTimeout(function () {maoScale(2)}, 500);
-                    } else {
-                        $('#no_data').show();
-                        $('#screenArea').hide();
-                        if (window.iframe) {
-                            $('.guquan-liframe').hide();
-                            $('.guquan-lnodata').show();
-                        }
-                    }
-                }
-            });
+            getInvestData(enterpriseCode, isClose);
+            getCapitalData(enterpriseCode, isClose);
         }
-
-        // 获取根节点的相关信息
-        function getRootData(enterpriseCode) {
-            $('#load_data').show();
-            var url = INDEX_URL+'/lpm/businesslicense/list?page=1&limit=1&id=' + enterpriseCode;
-            $.ajax({
-                url: url,
-                type: 'GET',
-                dataType: 'JSON',
-                success: function (data) {
-                    $('#load_data').hide();
-                    if (data && data.success === 20000) {
-                        $('#no_data').hide();
-                        rootData = data.records[0]
-                        console.log(rootData)
-
-                    } else {
-                        $('#no_data').show();
-                        $('#screenArea').hide();
-                        if (window.iframe) {
-                            $('.guquan-liframe').hide();
-                            $('.guquan-lnodata').show();
-                        }
-                    }
-                }
-            });
-        }
-
 
         // 获取股东的相关信息
-        function getCapitalData(enterpriseCode) {
+        function getCapitalData(enterpriseCode, isClose) {
             $('#load_data').show();
             var url = INDEX_URL+'/lpm/capital/tree?page=1&limit=1000&enterpriseCode=' + enterpriseCode;
             $.ajax({
@@ -514,11 +459,12 @@
                         gudongData['children']= data.data
                         console.log('股东数据----',gudongData)
                         transTree(gudongData, 1);
-                        initTree(gudongData);
+                        initTree(gudongData, isClose);
                         drawGuquan();
                         setTimeout(function () {
-                            
-                            maoScale(2)
+                            if(isExtend) {
+                                maoScale(2)
+                            }
                         }, 500);
                         
 
@@ -535,8 +481,7 @@
         }
 
         // 获取投资公司的相关信息
-        function getInvestData(enterpriseCode) {
-            $('#load_data').show();
+        function getInvestData(enterpriseCode, isClose) {
             //var url = INDEX_URL+'/lpm/invest/company/tree';
             var url = INDEX_URL+'/lpm/invest/company/tree?page=1&limit=1000&enterpriseCode=' + enterpriseCode;
             $.ajax({
@@ -557,11 +502,12 @@
                         touziData['children']= data.data
                         console.log(touziData)
                         transTree(touziData, 2);
-                        initTree(touziData);
+                        initTree(touziData, isClose);
                         drawGuquan();
                         setTimeout(function () {
-                            
-                            maoScale(2)
+                            if(isExtend) {
+                                maoScale(2)
+                            }
                         }, 500);
                         
 
@@ -850,7 +796,7 @@
         }
 
         // 创建股权图的根节点
-        function initTree(data) {
+        function initTree(data, isClose) {
             if (!data) return;
             data.name = data.branchCompanyName;
             data.editable = false;
@@ -890,7 +836,7 @@
                         getNode(data.children[i]);
                     }
                 }
-                if (data.children && data.children.length > 0 && data.branchCompanyCode && data.branchCompanyCode != getQueryString("branchCompanyCode")) {
+                if (isClose && data.children && data.children.length > 0 && data.branchCompanyCode && data.branchCompanyCode != getQueryString("branchCompanyCode")) {
                     data._children = data.children;
                     data.children = null;
                     data.extend = 1;
@@ -1552,6 +1498,20 @@
                 $(dom).html('<span class="screen"></span>全屏');
                 exitFullScreen();
             }
+        }
+
+        // 展开所有节点
+        function extendItem(dom) {
+            if (!isExtend) {
+                $(dom).html('<span class="extented"></span>收起');
+                getData(false);
+                isExtend = true
+            } else {
+                $(dom).html('<span class="extent"></span>展开');
+                getData(true);
+                isExtend = false
+            }
+            
         }
  
         // 切换全屏
