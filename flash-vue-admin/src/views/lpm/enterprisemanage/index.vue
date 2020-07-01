@@ -40,7 +40,8 @@
       <el-tab-pane label="分公司信息"><branchcompany /></el-tab-pane>
       <el-tab-pane label="投资企业"><investcompany /></el-tab-pane>
       <el-tab-pane label="动产抵押登记"><propertypledge @viewfile="viewfile" /></el-tab-pane>
-      <el-tab-pane label="知识产权出质登记"><stockpledge @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="股权出质登记"><stockpledge @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane label="知识产权出质登记"><knowledgepledge @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="商标信息"><trademark @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="税务信息"><tallage @viewfile="viewfile" /></el-tab-pane>
     </el-tabs>
@@ -77,6 +78,7 @@ import branchcompany from '@/views/lpm/branchcompany/index.vue'
 import investcompany from '@/views/lpm/investcompany/index.vue'
 import propertypledge from '@/views/lpm/propertypledge/index.vue'
 import stockpledge from '@/views/lpm/stockpledge/index.vue'
+import knowledgepledge from '@/views/lpm/knowledgepledge/index.vue'
 import trademark from '@/views/lpm/trademark/index.vue'
 import tallage from '@/views/lpm/tallage/index.vue'
 export default {
@@ -96,6 +98,7 @@ export default {
     investcompany,
     propertypledge,
     stockpledge,
+    knowledgepledge,
     trademark,
     tallage,
     PDFView
