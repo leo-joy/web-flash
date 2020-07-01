@@ -560,7 +560,7 @@ export default {
         // 法定代表人
         const legalRepresentative = investCompany.OperName
         // 注册资本
-        const registeredCapital = investCompany.RegistCapi
+        const registeredCapital = investCompany.RegistCapi ? investCompany.RegistCapi : 0
         // 成立日期
         const setupDate = investCompany.establishDate
 
