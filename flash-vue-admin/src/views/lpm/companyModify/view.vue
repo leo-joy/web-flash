@@ -53,6 +53,13 @@
                     <span>变更为</span>
                     <span><b style="color:green">{{ item.registeredAddressNew }}</b></span>
                   </div>
+                  <div v-if="item.liquidationExitState+'' === 'true'" class="modifyList">
+                    <span><b>股权清算退出备注：</b></span>
+                    <span>由</span>
+                    <span><b style="color:red">{{ item.liquidationExitOld }}</b></span>
+                    <span>变更为</span>
+                    <span><b style="color:green">{{ item.liquidationExitNew }}</b></span>
+                  </div>
                   <div v-if="item.registeredCapitalState+'' === 'true'" class="modifyList">
                     <span><b>注册资本变更：</b></span>
                     <span>由</span>

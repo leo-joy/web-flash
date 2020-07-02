@@ -74,6 +74,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        liquidationExitState: '',
+        liquidationExitOld: '',
+        liquidationExitNew: '',
         registeredCapitalState: '',
         registeredCapitalOld: 0,
         registeredCapitalNew: 0,
@@ -394,6 +397,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        liquidationExitState: '',
+        liquidationExitOld: '',
+        liquidationExitNew: '',
         registeredCapitalState: '',
         registeredCapitalOld: 0,
         registeredCapitalNew: 0,
@@ -520,6 +526,7 @@ export default {
       this.form.enterpriseId = this.companyList[0].id
       this.form.enterpriseNameOld = this.companyList[0].enterpriseName
       this.form.registeredAddressOld = this.companyList[0].registeredAddress
+      this.form.liquidationExitOld = this.companyList[0].liquidationExit
       this.form.registeredCapitalOld = this.companyList[0].registeredCapital * 1
       this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
       this.form.businessScopeOld = this.companyList[0].businessScope
@@ -591,6 +598,9 @@ export default {
             registeredAddressState: this.form.registeredAddressState ? this.form.registeredAddressState : 'false',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
+            liquidationExitState: this.form.liquidationExitState ? this.form.liquidationExitState : 'false',
+            liquidationExitOld: this.form.liquidationExitOld,
+            liquidationExitNew: this.form.liquidationExitNew,
             registeredCapitalState: this.form.registeredCapitalState ? this.form.registeredCapitalState : 'false',
             registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(1) : 0,
             registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(1) : 0,
@@ -781,6 +791,10 @@ export default {
 
         if (this.form.registeredAddressState === 'true') {
           this.form.registeredAddressState = true
+        }
+
+        if (this.form.liquidationExitState === 'true') {
+          this.form.liquidationExitState = true
         }
 
         if (this.form.registeredCapitalState === 'true') {

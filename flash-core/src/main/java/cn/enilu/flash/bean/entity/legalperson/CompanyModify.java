@@ -212,6 +212,14 @@ public class CompanyModify extends BaseEntity {
     @Column(name="ownership_new", columnDefinition = "VARCHAR(128) COMMENT '改制后'")
     private String ownershipNew;
 
+    @Column(name="liquidation_exit_state", columnDefinition = "VARCHAR(8) COMMENT '股权清算退出状态'")
+    private String liquidationExitState;
+
+    @Column(name="liquidation_exit_old", columnDefinition = "VARCHAR(128) COMMENT '股权清算退出前'")
+    private String liquidationExitOld;
+
+    @Column(name="liquidation_exit_new", columnDefinition = "VARCHAR(128) COMMENT '股权清算退出后'")
+    private String liquidationExitNew;
 
 
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '1内部审批文件'")

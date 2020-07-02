@@ -47,9 +47,9 @@
           <div v-if="scope.row.registeredAddressState+'' === 'true'">
             <span><b>注册地址：</b></span>
             <span>由</span>
-            <span><b style="color:red">{{ scope.row.registeredAddressOld }}万元</b></span>
+            <span><b style="color:red">{{ scope.row.registeredAddressOld }}</b></span>
             <span>变更为</span>
-            <span><b style="color:green">{{ scope.row.registeredAddressNew }}万元</b></span>
+            <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
           </div>
           <div v-if="scope.row.registeredCapitalState+'' === 'true'">
             <span><b>注册资本：</b></span>
@@ -64,6 +64,13 @@
             <span><b style="color:red">{{ scope.row.ownershipOld }}</b></span>
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.ownershipNew }}</b></span>
+          </div>
+          <div v-if="scope.row.liquidationExitState+'' === 'true'">
+            <span><b>股权清算退出备注：</b></span>
+            <span>由</span>
+            <span><b style="color:red">{{ scope.row.liquidationExitOld }}</b></span>
+            <span>变更为</span>
+            <span><b style="color:green">{{ scope.row.liquidationExitNew }}</b></span>
           </div>
           <div v-if="scope.row.operatingPeriodEndState+'' === 'true'">
             <span><b>经营期限：</b></span>
@@ -121,6 +128,7 @@
             v-if="scope.row.enterpriseNameState+'' === 'false'
               && scope.row.legalRepresentativeState+'' === 'false'
               && scope.row.registeredAddressState+'' === 'false'
+              && scope.row.liquidationExitState+'' === 'false'
               && scope.row.registeredCapitalState+'' === 'false'
               && scope.row.ownershipState+'' === 'false'
               && scope.row.operatingPeriodEndState+'' === 'false'
@@ -209,6 +217,7 @@
                   <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
                   <el-checkbox v-model="form.registeredCapitalState" label="注册资本" />
                   <el-checkbox v-model="form.ownershipState" label="改制" />
+                  <el-checkbox v-model="form.liquidationExitState" label="股权清算退出" />
                   <el-checkbox v-model="form.businessScopeState" label="经营范围" />
                   <el-checkbox v-model="form.constitutionState" label="章程" />
                   <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
@@ -281,6 +290,20 @@
                   </el-form-item>
                   <el-form-item label="新注册地址">
                     <el-input v-model="form.registeredAddressNew" minlength="1" />
+                  </el-form-item>
+                </el-card>
+                <br>
+              </el-col>
+              <el-col v-if="form.liquidationExitState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>股权清算退出</span>
+                  </div>
+                  <el-form-item label="原备注">
+                    <el-input v-model="form.liquidationExitOld" />
+                  </el-form-item>
+                  <el-form-item label="新备注">
+                    <el-input v-model="form.liquidationExitNew" minlength="1" />
                   </el-form-item>
                 </el-card>
                 <br>

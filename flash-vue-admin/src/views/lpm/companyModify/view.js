@@ -36,6 +36,9 @@ export default {
         value: 'ownershipState',
         label: '改制'
       }, {
+        value: 'liquidationExitState',
+        label: '股权清算退出'
+      }, {
         value: 'operatingPeriodEndState',
         label: '经营期限变更'
       }, {
@@ -61,22 +64,6 @@ export default {
         label: '股东变更'
       }],
       companyModifyTypeValue: [],
-      companyModifyType: {
-        allTypeState: true,
-        enterpriseNameState: true,
-        registeredAddressState: true,
-        registeredCapitalState: true,
-        ownershipState: true,
-        businessScopeState: true,
-        constitutionState: true,
-        operatingPeriodEndState: true,
-        legalRepresentativeState: true,
-        chairmanState: true,
-        directorState: true,
-        supervisorState: true,
-        generalManagerState: true,
-        shareholderModifyState: true
-      },
       accessoryFilesListCompanyModify: [], // 1内部审批文件
       companyReferenceRegisterFilesListCompanyModify: [], // 2工商申请表
       shareholdersDecideFilesListCompanyModify: [], // 3股东会决议
