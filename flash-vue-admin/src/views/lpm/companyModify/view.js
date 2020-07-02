@@ -15,24 +15,68 @@ export default {
     return {
       id: '',
       /* 企业变更信息模块 */
-      companyModifyData: [], // 企业变更信息相关数据
+      companyModifyData: [], // 企业变更信息数据
+      companyModifyDataAll: [], // 全部企业变更信息数据
       fileDialogVisible: false, // 文件列表弹出框
       currentCompanyModify: {}, // 当前变更对象
       noAccessoryCause: '', // 无附件原因
-      // companyModifyType: {
-      //   enterpriseNameState: true,
-      //   registeredAddressState: true,
-      //   ownershipState: true,
-      //   businessScopeState: true,
-      //   constitutionState: true,
-      //   operatingPeriodEndState: true,
-      //   legalRepresentativeState: true,
-      //   chairmanState: true,
-      //   directorState: true,
-      //   supervisorState: true,
-      //   generalManagerState: true,
-      //   shareholderModifyState: true
-      // },
+      companyModifyTypeOptions: [{
+        value: 'enterpriseNameState',
+        label: '企业名称变更'
+      }, {
+        value: 'legalRepresentativeState',
+        label: '法人变更'
+      }, {
+        value: 'registeredAddressState',
+        label: '地址变更'
+      }, {
+        value: 'registeredCapitalState',
+        label: '注册资本变更'
+      }, {
+        value: 'ownershipState',
+        label: '改制'
+      }, {
+        value: 'operatingPeriodEndState',
+        label: '经营期限变更'
+      }, {
+        value: 'businessScopeState',
+        label: '经营范围变更'
+      }, {
+        value: 'constitutionState',
+        label: '章程变更'
+      }, {
+        value: 'chairmanState',
+        label: '董事长变更'
+      }, {
+        value: 'generalManagerState',
+        label: '经理变更'
+      }, {
+        value: 'directorState',
+        label: '董事变更'
+      }, {
+        value: 'supervisorState',
+        label: '监事变更'
+      }, {
+        value: 'shareholderModifyState',
+        label: '股东变更'
+      }],
+      companyModifyTypeValue: [],
+      companyModifyType: {
+        allTypeState: true,
+        enterpriseNameState: true,
+        registeredAddressState: true,
+        registeredCapitalState: true,
+        ownershipState: true,
+        businessScopeState: true,
+        constitutionState: true,
+        operatingPeriodEndState: true,
+        legalRepresentativeState: true,
+        chairmanState: true,
+        directorState: true,
+        supervisorState: true,
+        generalManagerState: true,
+        shareholderModifyState: true
+      },
       accessoryFilesListCompanyModify: [], // 1内部审批文件
       companyReferenceRegisterFilesListCompanyModify: [], // 2工商申请表
       shareholdersDecideFilesListCompanyModify: [], // 3股东会决议
@@ -110,13 +154,16 @@ export default {
   },
   methods: {
     init() {
-      // 获取企业的id
-      const id = this.$route.query.id
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCause = response.data[0].detail
       })
+      this.getCompanyModifyList()
+    },
 
-      // 企业变更数据
+    // 企业变更数据
+    getCompanyModifyList() {
+      // 获取企业的id
+      const id = this.$route.query.id
       companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
         var accessoryArr = [
           'accessoryFiles', // 1内部审批文件
@@ -146,10 +193,33 @@ export default {
       })
     },
 
+    // 过滤变更数据
+    filterTypeList() {
+      const tempModifyData = this.companyModifyDataAll
+      const filterArr = this.companyModifyTypeValue
+      const tempArr = []
+      if (filterArr.length === 0) {
+        this.companyModifyData = this.companyModifyDataAll
+        return
+      }
+      if (tempModifyData && tempModifyData.length > 0) {
+        for (let i = 0; i < tempModifyData.length; i++) {
+          for (let j = 0; j < filterArr.length; j++) {
+            if (tempModifyData[i][filterArr[j]] === 'true') {
+              tempArr.push(tempModifyData[i])
+            }
+          }
+        }
+        this.companyModifyData = tempArr
+      } else {
+        this.companyModifyData = this.companyModifyDataAll
+      }
+    },
+
     // 格式化 无附件原因
     formatterNoAccessoryCause(num) {
       if (num) {
-        return '备注：'+showDictLabel(this.noAccessoryCause.toString(), num)
+        return '备注：' + showDictLabel(this.noAccessoryCause.toString(), num)
       } else {
         return '' // '没有无附件备注原因'
       }
@@ -253,7 +323,8 @@ export default {
                 if (records.length === p + 1) {
                   this.companyModifyData = []
                   this.companyModifyData = newRecords
-                  console.log('companyModifyData:', this.companyModifyData)
+                  this.companyModifyDataAll = []
+                  this.companyModifyDataAll = newRecords
                 }
               }
             }
@@ -269,7 +340,6 @@ export default {
     openFilesDialog(openFilesDialog) {
       this.fileDialogVisible = true
       this.currentCompanyModify = openFilesDialog
-      console.log(this.currentCompanyModify)
     }
   }
 }
