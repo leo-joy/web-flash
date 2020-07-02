@@ -229,9 +229,9 @@
 
         .water-mark {
             position: absolute;
-            z-index: 15;
+            z-index: 1;
             font-size: 12px;
-            color: #aaa;
+            color: #efefef;
             text-align: center;
             width: 100%;
             bottom: 20px;
@@ -333,7 +333,7 @@
                 <LI onclick="editRect(this);"><SPAN class="sel"></SPAN>编辑</LI>
             </UL>
         </DIV>
-        <DIV class="water-mark">股权穿透图由雅居乐集团基于公司信息利用大数据分析引擎独家生成</DIV>
+        <DIV class="water-mark"></DIV>
         <DIV style="display:none" class="company-detail tp-detail" id="company-detail">
             <DIV class="e_close-bar"><SPAN class="ea_title">公司信息</SPAN> <SPAN class="ea_close"
                     onclick="popclose(this)">×</SPAN> </DIV>
@@ -432,7 +432,6 @@
         function getData(isClose) {
             var enterpriseCode = getQueryVariable('id')*1 || 1
             $('#load_data').show();
-            getInvestData(enterpriseCode, isClose);
             getCapitalData(enterpriseCode, isClose);
         }
 
@@ -458,12 +457,7 @@
                         gudongData['children']= data.data
                         transTree(gudongData, 1);
                         initTree(gudongData, isClose);
-                        drawGuquan();
-                        setTimeout(function () {
-                            if(isExtend) {
-                                maoScale(2)
-                            }
-                        }, 500);
+                        getInvestData(enterpriseCode, isClose);
                     } else {
                         $('#no_data').show();
                         $('#screenArea').hide();
@@ -503,8 +497,8 @@
                                 maoScale(2)
                             }
                         }, 500);
-                        
                     }
+                    drawGuquan();
                 }
             });
         }
