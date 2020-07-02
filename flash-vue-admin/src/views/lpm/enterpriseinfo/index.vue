@@ -133,28 +133,42 @@
             border
             highlight-current-row
             class="my-table"
-            empty-text="暂无数据或您没有权限查看相关数据"
+            empty-text="暂无数据"
             @current-change="handleCurrentChange"
           >
             <el-table-column label="序号" type="index" width="50" />
-            <el-table-column label="企业名称">
+            <el-table-column label="企业名称" width="350">
               <template slot-scope="scope">
                 <el-button type="text" @click="detail(scope.row)">{{ scope.row.enterpriseName }}</el-button>
               </template>
             </el-table-column>
-            <el-table-column label="社会信用代码" width="210">
+            <el-table-column label="社会信用代码" width="180">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
+            </el-table-column>
+            <el-table-column label="注册资本(万元)" width="120">
+              <template slot-scope="scope">{{ scope.row.registeredCapital }}</template>
             </el-table-column>
             <el-table-column label="法定代表人" width="100">
               <template slot-scope="scope">{{ scope.row.legalRepresentative }}</template>
+            </el-table-column>
+            <el-table-column v-if="(searchType === 'chairman' || searchType === 'director' || searchType === 'supervisor' || searchType === 'generalManager') && keyword !== ''" label="董事长" width="100">
+              <template slot-scope="scope">{{ scope.row.chairman }}</template>
+            </el-table-column>
+            <el-table-column v-if="(searchType === 'chairman' || searchType === 'director' || searchType === 'supervisor' || searchType === 'generalManager') && keyword !== ''" label="董事" width="200">
+              <template slot-scope="scope">{{ scope.row.director }}</template>
+            </el-table-column>
+            <el-table-column v-if="(searchType === 'chairman' || searchType === 'director' || searchType === 'supervisor' || searchType === 'generalManager') && keyword !== ''" label="监事" width="120">
+              <template slot-scope="scope">{{ scope.row.supervisor }}</template>
+            </el-table-column>
+            <el-table-column v-if="(searchType === 'chairman' || searchType === 'director' || searchType === 'supervisor' || searchType === 'generalManager') && keyword !== ''" label="总经理" width="100">
+              <template slot-scope="scope">{{ scope.row.generalManager }}</template>
             </el-table-column>
             <el-table-column label="成立日期" width="100">
               <template slot-scope="scope">{{ scope.row.setupDate.replace(' 00:00:00', '') }}</template>
             </el-table-column>
             <el-table-column
               prop="registrationStatus"
-              label="登记状态"
-              width="80"
+              label="状态"
               :formatter="formatterRegistrationStatus"
             />
             <el-table-column v-if="moduleType !== 'dashboard'" label="投资同步状态" width="140">

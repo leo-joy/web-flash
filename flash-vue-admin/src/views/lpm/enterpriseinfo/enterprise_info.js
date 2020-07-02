@@ -159,7 +159,6 @@ export default {
         }
         listQuery[this.searchType] = this.keyword
         mainmemberList(listQuery).then(response => {
-          console.log(response)
           const records = response.data.records
           const pIds = []
           for (let i = 0; i < records.length; i++) {
@@ -172,7 +171,14 @@ export default {
           }
           this.listQuery.ids = pIds.length > 0 ? pIds.toString() : '2000000'
           getList(this.listQuery).then(response => {
-            this.list = response.data.records
+            const companys = response.data.records
+            for (let i = 0; i < companys.length; i++) {
+              companys[i]['chairman'] = records[i]['chairman']
+              companys[i]['director'] = records[i]['director']
+              companys[i]['supervisor'] = records[i]['supervisor']
+              companys[i]['generalManager'] = records[i]['generalManager']
+            }
+            this.list = companys
             this.listLoading = false
             this.total = response.data.total
             this.listQuery.page = response.data.current || 1
@@ -527,6 +533,15 @@ export default {
     // 获取主要人员信息列表
     searchTypeHander(val) {
       this.memberType = val
+      if (this.memberType === 'chairman' || this.memberType === 'director' || this.memberType === 'supervisor' || this.memberType === 'generalManager') {
+        if (this.keyword === '') {
+          this.list = []
+        } else {
+          this.search()
+        }
+      } else {
+        this.search()
+      }
     },
 
     // 批量同步投资企业
@@ -771,7 +786,7 @@ export default {
         // 法定代表人
         const legalRepresentative = investCompany.OperName
         // 注册资本
-        const registeredCapital = investCompany.RegistCapi? investCompany.RegistCapi:0
+        const registeredCapital = investCompany.RegistCapi ? investCompany.RegistCapi : 0
         // 成立日期
         const setupDate = investCompany.establishDate
 
