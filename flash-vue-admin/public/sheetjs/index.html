@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>报表导出</title>
+<script src="jquery.min.js"></script>
+<script src="ga.js"></script>
+<script src="canvas-datagrid.js"></script>
+<script src="shim.js"></script>
+<script src="xlsx.full.min.js"></script>
+</head>
+<body>
+<p>
+	<!-- <input type="submit" value="加载报表" onclick="process_wb()"> -->
+	<input type="submit" value="导出报表" id="xport" onclick="export_xlsx()" disabled="true">
+</p>
+<div id="htmlout"></div>
+<br />
+
+<script>
+/*jshint browser:true */
+/* eslint-env browser */
+/* eslint no-use-before-define:0 */
+/*global Uint8Array, Uint16Array, ArrayBuffer */
+/*global XLSX */
+
+var X = XLSX; // 组件
+var INDEX_URL = 'http://localhost:9595/dev-api/' //后台ip
+var cDg; //canvas 数据
+var XPORT = document.getElementById('xport'); // 导出按钮
+var HTMLOUT = document.getElementById('htmlout'); //excel画布
+var titleArr = ['企业名称','社会统一信用代码','法人代表','注册资本','成立日期'];
+(function(){
+	process_wb()
+})()
+// 加载数据
+function process_wb() {
+	/* get data */
+	let page = getQueryVariable('page')*1 || 1;
+	let limit = getQueryVariable('limit')*1 || 2000;
+	let pIds = getQueryVariable('pIds') || '';
+	let ids = getQueryVariable('ids') || '';
+	var url = INDEX_URL+'lpm/businesslicense/list?page='+page+'&limit='+limit+'&pIds='+pIds+'&ids='+ids;
+	$.ajax({
+		url: url,
+		type: 'GET',
+		dataType: 'JSON',
+		success: function (data) {
+			if (data && data.data && data.data.records.length>0 && data.success) {
+				console.log(data)
+				var records = data.data.records
+				var data = []
+				//data.push(titleArr)
+				for(let i=0;i<records.length;i++) {
+					let tempArr = []
+					tempArr.push(records[i].enterpriseName)
+					tempArr.push(records[i].unifiedSocialCreditCode)
+					tempArr.push(records[i].legalRepresentative)
+					tempArr.push(records[i].registeredCapital?records[i].registeredCapital+' 万元':'')
+					tempArr.push(records[i].setupDate.replace(' 00:00:00',''))
+					data.push(tempArr)
+				}
+
+				/* update canvas-datagrid */
+				if(!cDg) cDg = canvasDatagrid({ allowSorting:false, parentNode:HTMLOUT, data:data });
+				console.log(cDg)
+				cDg.style.height = '100%';
+				cDg.style.width = '100%';
+				cDg.args.allowSorting = false;
+				cDg.args.allowColumnReordering = false;
+				//cDg.data = data;
+
+				XPORT.disabled = false;
+
+				/* create schema (for A,B,C column headings) */
+				var ref = "A1:E" + records.length;
+				var range = XLSX.utils.decode_range(ref);
+				for(var i = range.s.c; i <= range.e.c; ++i) {
+					cDg.schema[i - range.s.c].title = XLSX.utils.encode_col(i)+' '+titleArr[i];
+				}
+
+				HTMLOUT.style.height = (window.innerHeight-100) + "px";
+				HTMLOUT.style.width = (window.innerWidth) + "px";
+
+				if(typeof console !== 'undefined') {
+					console.log("output", new Date());
+				}
+			}
+		}
+	});
+}
+
+// 导出excle 
+var export_xlsx = (function() {
+	function prep(arr) {
+		var out = [];
+		for(var i = 0; i < arr.length; ++i) {
+			if(!arr[i]) continue;
+			if(Array.isArray(arr[i])) { out[i] = arr[i]; continue };
+			var o = new Array();
+			Object.keys(arr[i]).forEach(function(k) { o[+k] = arr[i][k] });
+			out[i] = o;
+		}
+		return out;
+	}
+
+	return function export_xlsx() {
+		if(!cDg) return;
+		let newData = cDg.data
+		newData.unshift(titleArr)
+		/* convert canvas-datagrid data to worksheet */
+		var new_ws = XLSX.utils.aoa_to_sheet(prep(newData));
+		/* build workbook */
+		var new_wb = XLSX.utils.book_new();
+		XLSX.utils.book_append_sheet(new_wb, new_ws, 'Sheet');
+		/* write file and trigger a download */
+		XLSX.writeFile(new_wb, '企业列表.xlsx', {bookSST:true});
+		cDg.data.shift()
+	};
+})();
+
+// 获取参数
+function getQueryVariable(variable)
+{
+	var query = window.location.search.substring(1);
+	var vars = query.split("&");
+	for (var i=0;i<vars.length;i++) {
+			var pair = vars[i].split("=");
+			if(pair[0] == variable){return pair[1];}
+	}
+	return(false);
+}
+</script>
+</body>
+</html>
