@@ -375,6 +375,11 @@ export default {
       this.listQuery.page = 1
       this.fetchData()
     },
+    handleTagRadioClick() {
+      this.listQuery.tag = this.tagRadio
+      this.listQuery.page = 1
+      this.fetchData()
+    },
     handleLeftNodeClick(data, node) {
       this.listQuery.pIds = data.id
       this.fetchData()

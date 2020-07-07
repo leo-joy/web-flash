@@ -26,6 +26,7 @@ export default {
       registrationPlaceBL: '', // 企业注册地
       currencyBL: '', // 币种
       registrationStatusBL: '', // 登记状态
+      tagList: '', // 企业标签
       businessLicenseListBL: [], // 营业执照的附件
       approvalFilesListBL: [], // 核准文件的附件
       companyArticlesAssociationListBL: [], // 股东决定的相关附件
@@ -106,7 +107,9 @@ export default {
         this.translateDict('企业注册类型', response.data.registrationType, 'registrationTypeBL')
         this.translateDict('企业注册地', response.data.registrationPlace, 'registrationPlaceBL')
         this.translateDict('币种', response.data.currency, 'currencyBL')
-        this.translateDict('登记状态【营业执照】', response.data.registrationStatus, 'registrationStatusBL')
+        if(response.data.tags) {
+          this.translateDictList('企业标签', response.data.tags.split('-'), 'tagList')
+        }
         this.getFilesList('BL', accessoryArr, arr)
         getParentdept(response.data.pid).then(response => {
           this.parentOrg = response.data.simplename + ' / '
@@ -161,6 +164,18 @@ export default {
     translateDict(str, num, field) {
       dictList({ name: str }).then(response => {
         this[field] = showDictLabel(response.data[0].detail, num)
+      })
+    },
+
+    translateDictList(str, arr, field) {
+      dictList({ name: str }).then(response => {
+        this[field] = []
+        for (let i = 0; i < arr.length; i++) {
+          const obj = {}
+          obj.value = arr[i]
+          obj.name = showDictLabel(response.data[0].detail, arr[i])
+          this[field].push(obj)
+        }
       })
     },
 

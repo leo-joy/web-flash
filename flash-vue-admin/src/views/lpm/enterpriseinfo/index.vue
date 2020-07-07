@@ -15,6 +15,21 @@
       <el-row>
         <el-col :span="2">
           <template>
+            <el-radio v-model="tagRadio" label="" @change="handleTagRadioClick">全部标签</el-radio>
+          </template>
+        </el-col>
+        <el-col :span="22">
+          <template>
+            <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
+            <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio>
+            <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
+          </template>
+        </el-col>
+      </el-row>
+      <br>
+      <el-row>
+        <el-col :span="2">
+          <template>
             <el-radio v-model="deptRadio" label="24" @change="handleRadioClick">全部企业</el-radio>
           </template>
         </el-col>
@@ -123,7 +138,6 @@
                 @click.native="search"
               >{{ $t('button.search') }}</el-button>
             </el-col>
-
           </el-row>
           <br>
           <el-table

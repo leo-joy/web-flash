@@ -242,6 +242,18 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
+            <el-form-item label="企业标签">
+              <el-select v-model="form.tags" multiple placeholder="请企业标签" style="width:100%">
+                <el-option
+                  v-for="item in companyTagOptions"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
             <el-form-item label="备注信息">
               <el-input v-model="form.remark" minlength="1" />
             </el-form-item>

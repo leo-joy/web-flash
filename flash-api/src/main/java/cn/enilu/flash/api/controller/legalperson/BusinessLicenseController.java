@@ -140,6 +140,7 @@ public class BusinessLicenseController {
 					   @RequestParam(required = false) String unifiedSocialCreditCode,
 					   @RequestParam(required = false) String legalRepresentative,
 					   @RequestParam(required = false) String pIds,
+					   @RequestParam(required = false) String tag,
 					   @RequestParam(required = false) String registrationType,
 					   @RequestParam(required = false) String registrationStatus,
 					   @RequestParam(required = false) String ids,
@@ -149,6 +150,7 @@ public class BusinessLicenseController {
 		page.addFilter("unifiedSocialCreditCode", SearchFilter.Operator.LIKE,unifiedSocialCreditCode);
 		page.addFilter("legalRepresentative", SearchFilter.Operator.LIKE,legalRepresentative);
 		page.addFilter("pIds", SearchFilter.Operator.LIKE,pIds);
+		page.addFilter("tags", SearchFilter.Operator.LIKE,tag);
 		page.addFilter("id", SearchFilter.Operator.EQ,id);
 		if(ids != null && !ids.isEmpty()) {
 			ArrayList lists = new ArrayList(Arrays.asList(ids.split(",")));

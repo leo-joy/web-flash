@@ -27,7 +27,7 @@
               </el-row> -->
           <el-row>
             <el-col :span="24">
-              <el-form-item label="组织属性：">{{grandfatherOrg}} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
+              <el-form-item label="组织属性：">{{ grandfatherOrg }} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
             </el-col>
           </el-row>
 
@@ -143,6 +143,15 @@
           <el-row>
             <el-col :span="24">
               <el-form-item label="经营范围：">{{ businesslicenseData.businessScope }}</el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="24">
+              <el-form-item label="企业标签：">
+                <el-tag v-for="tag in tagList" :key="tag.value" style="margin: 0 10px" size="small" :type="tag.value">
+                  {{ tag.name }}
+                </el-tag>
+              </el-form-item>
             </el-col>
           </el-row>
           <el-row>

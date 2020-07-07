@@ -32,6 +32,7 @@ export default {
       currencyList: [], // 币种，从数据字典中获取
       registrationStatusList: [], // 登记状态，从数据字典中获取
       registrationTypeList: [], // 企业注册类型，从数据字典中获取
+      companyTagOptions: [], // 企业标签，从数据字典中获取
       uploadUrl: '',
       uploadFileId: '',
       uploadHeaders: {
@@ -62,6 +63,7 @@ export default {
         registrationStatus: '',
         registeredAddress: '',
         businessAddress: '',
+        tags: '',
         remark: '',
         businessScope: '',
         businessLicense: '',
@@ -2089,6 +2091,10 @@ export default {
         this.registrationStatusList = getDictList(response.data[0].detail)
       })
 
+      dictList({ name: '企业标签' }).then(response => {
+        this.companyTagOptions = getDictList(response.data[0].detail)
+      })
+
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
       console.log(this.$route.query.registrationType)
@@ -2124,6 +2130,7 @@ export default {
           }
 
           this.form.registrationPlace = this.form.registrationPlace.split('-')
+          this.form.tags = this.form.tags?this.form.tags.split('-'):''
           // this.listQuery.ids = response.data.businessLicense
           // getListIds(this.listQuery).then(response => {
           //   console.log(response.data)
@@ -2166,6 +2173,7 @@ export default {
         registrationStatus: '',
         registeredAddress: '',
         businessAddress: '',
+        tags: '',
         remark: '',
         businessScope: '',
         businessLicense: '',
@@ -2202,6 +2210,7 @@ export default {
             registrationStatus: this.form.registrationStatus,
             registeredAddress: this.form.registeredAddress,
             businessAddress: this.form.businessAddress,
+            tags: this.form.tags ? this.form.tags.join('-') : '',
             remark: this.form.remark,
             businessScope: this.form.businessScope,
             businessLicense: this.form.businessLicense.replace(/(^\s*)|(\s*$)/g, ''),

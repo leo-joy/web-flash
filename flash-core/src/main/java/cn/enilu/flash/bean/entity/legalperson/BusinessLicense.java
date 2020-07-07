@@ -104,6 +104,9 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="business_scope", columnDefinition = "TEXT COMMENT '经营范围'")
     private String businessScope;
 
+    @Column(name="tags", columnDefinition = "VARCHAR(128) COMMENT '标签'")
+    private String tags;
+
     @Column(name="remark", columnDefinition = "TEXT COMMENT '备注信息'")
     private String remark;
 
