@@ -13,10 +13,10 @@
       <el-col :span="8">
         <h4>统一社会信用代码：{{ businesslicenseData.unifiedSocialCreditCode }}</h4>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="6">
         <h4>法定代表人：{{ businesslicenseData.legalRepresentative }}</h4>
       </el-col>
-      <el-col :span="5">
+      <el-col :span="4">
         <h4>成立日期：{{ businesslicenseData.setupDate?businesslicenseData.setupDate.replace(' 00:00:00',''):'' }}</h4>
       </el-col>
     </el-row>
