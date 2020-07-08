@@ -87,7 +87,7 @@
           </el-col>
           <el-col :span="24">
             <el-form-item label="接口凭证" prop="token">
-              <el-input v-model="form.token" minlength="1" />
+              <el-input v-model="form.token" minlength="1" disabled />
             </el-form-item>
           </el-col>
           <el-col :span="24">
