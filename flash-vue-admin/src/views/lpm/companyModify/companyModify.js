@@ -11,6 +11,7 @@ import { remove as removeCapitalModify, getList as getCapitalModifyList, save as
 import permission from '@/directive/permission/index.js'
 import { getToken } from '@/utils/auth'
 import { getApiUrl } from '@/utils/utils'
+import { parseTime } from '@/utils'
 import { Loading } from 'element-ui'
 
 export default {
@@ -589,7 +590,7 @@ export default {
             applicantContact: this.form.applicantContact,
             applyType: this.form.applyType,
             applyReason: this.form.applyReason,
-            modifyDate: this.form.modifyDate,
+            modifyDate: this.form.modifyDate ? parseTime(this.form.modifyDate, '{y}-{m}-{d}') : '',
             remark: this.form.remark,
             enterpriseId: this.form.enterpriseId,
             enterpriseNameState: this.form.enterpriseNameState ? this.form.enterpriseNameState : 'false',
