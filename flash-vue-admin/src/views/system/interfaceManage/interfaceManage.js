@@ -1,3 +1,4 @@
+import { getUuid } from '@/utils/common'
 import { remove, getList, save } from '@/api/system/interfaceManage'
 
 // 权限判断指令
@@ -132,6 +133,7 @@ export default {
       this.formTitle = '添加接口管理'
       this.formVisible = true
       this.isAdd = true
+      this.form.token = getUuid()
     },
     save() {
       this.$refs['form'].validate((valid) => {
