@@ -37,12 +37,6 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="序号" width="60">
-        <template slot-scope="scope">{{ scope.row.serialNumber }}</template>
-      </el-table-column>
-      <el-table-column label="企业名称" width="300">
-        <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
-      </el-table-column>
       <el-table-column label="许可文件编号" width="150">
         <template slot-scope="scope">{{ scope.row.permissionFileCode }}</template>
       </el-table-column>
@@ -101,17 +95,12 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="序号">
-              <el-input v-model="form.serialNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="许可文件编号">
               <el-input v-model="form.permissionFileCode" minlength="1" />
             </el-form-item>
           </el-col>
-          <el-col :span="24">
-            <el-form-item label="许可文件名称">
+          <el-col :span="12">
+            <el-form-item label="许可文件名称" prop="permissionFileName">
               <el-input v-model="form.permissionFileName" minlength="1" />
             </el-form-item>
           </el-col>

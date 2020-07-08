@@ -26,11 +26,9 @@ public class AdministrativeLicense extends BaseEntity {
     private String enterpriseName;
 
     @Column(name="serial_number", columnDefinition = "VARCHAR(64) COMMENT '序号'")
-    @NotBlank(message = "序号不能为空")
     private String serialNumber;
 
     @Column(name="permission_file_code", columnDefinition = "VARCHAR(64) COMMENT '许可文件编号'")
-    @NotBlank(message = "许可文件编号不能为空")
     private String permissionFileCode;
 
     @Column(name="permission_file_name", columnDefinition = "VARCHAR(128) COMMENT '许可文件名称'")
@@ -50,14 +48,12 @@ public class AdministrativeLicense extends BaseEntity {
     private String permissionOrg;
 
     @Column(name="permission_content", columnDefinition = "TEXT COMMENT '许可内容'")
-    @NotBlank(message = "许可不能为空")
     private String permissionContent;
 
     @Column(columnDefinition = "VARCHAR(32) COMMENT '状态'")
     private String status;
 
     @Column(name="responsible_person", columnDefinition = "VARCHAR(32) COMMENT '经办人'")
-    @NotBlank(message = "经办人不能为空")
     private String responsiblePerson;
 
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '详情'")

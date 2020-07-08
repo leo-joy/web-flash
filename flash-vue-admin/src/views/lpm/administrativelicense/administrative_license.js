@@ -42,7 +42,6 @@ export default {
       accessoryFilesList: [],
       isAdd: true,
       form: {
-        serialNumber: '',
         enterpriseName: '',
         enterpriseCode: '',
         permissionFileCode: '',
@@ -59,6 +58,9 @@ export default {
       rules: {
         enterpriseName: [
           { required: true, message: '请选择公司名称', trigger: 'blur' }
+        ],
+        permissionFileName: [
+          { required: true, message: '请填写许可文件名称', trigger: 'blur' }
         ],
         permissionOrg: [
           { required: true, message: '请填写许可机关', trigger: 'blur' }
@@ -163,7 +165,6 @@ export default {
     },
     resetForm() {
       this.form = {
-        serialNumber: '',
         enterpriseName: '',
         enterpriseCode: '',
         permissionFileCode: '',
@@ -192,13 +193,12 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           save({
-            serialNumber: this.form.serialNumber,
             enterpriseName: this.form.enterpriseName,
             enterpriseCode: this.form.enterpriseCode,
             permissionFileCode: this.form.permissionFileCode,
             permissionFileName: this.form.permissionFileName,
-            validityFrom: parseTime(this.form.validityFrom, '{y}-{m}-{d}'),
-            validityEnd: parseTime(this.form.validityEnd, '{y}-{m}-{d}'),
+            validityFrom: this.form.validityFrom ? parseTime(this.form.validityFrom, '{y}-{m}-{d}') : '',
+            validityEnd: this.form.validityEnd ? parseTime(this.form.validityEnd, '{y}-{m}-{d}') : '',
             permissionOrg: this.form.permissionOrg,
             permissionContent: this.form.permissionContent,
             status: this.form.status,
