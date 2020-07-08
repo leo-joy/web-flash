@@ -312,7 +312,7 @@ export default {
           data.id === '45') {
         this.companyListQuery.pIds = '-' + data.id + '_'
       } else if (data.id === '244' || data.id === '103' || data.id === '106' || data.id === '107' || data.id === '30' || data.id === '36') {
-        this.companyListQuery.pIds = '_' + data.id + '_'
+        this.companyListQuery.pIds = '-' + data.id + '_'
       } else {
         this.companyListQuery.pIds = data.id
       }

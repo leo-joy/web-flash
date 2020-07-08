@@ -12,7 +12,7 @@
           >{{ $t('button.delete') }}</el-button>
         </el-col>
       </el-row>-->
-      <el-row>
+      <!-- <el-row>
         <el-col :span="2">
           <template>
             <el-radio v-model="tagRadio" label="" @change="handleTagRadioClick">全部标签</el-radio>
@@ -26,7 +26,7 @@
           </template>
         </el-col>
       </el-row>
-      <br>
+      <br> -->
       <el-row>
         <el-col :span="2">
           <template>
@@ -35,15 +35,15 @@
         </el-col>
         <el-col :span="22">
           <template>
-            <el-radio v-model="deptRadio" label="_244_" @change="handleRadioClick">控股公司</el-radio>
-            <el-radio v-model="deptRadio" label="_51_" @change="handleRadioClick">雅生活集团</el-radio>
-            <el-radio v-model="deptRadio" label="_103_" @change="handleRadioClick">雅城集团</el-radio>
-            <el-radio v-model="deptRadio" label="_104_" @change="handleRadioClick">教育集团</el-radio>
-            <el-radio v-model="deptRadio" label="_102_" @change="handleRadioClick">环保集团</el-radio>
-            <el-radio v-model="deptRadio" label="_106_" @change="handleRadioClick">资本集团</el-radio>
-            <el-radio v-model="deptRadio" label="_105_" @change="handleRadioClick">房管集团</el-radio>
-            <el-radio v-model="deptRadio" label="_107_" @change="handleRadioClick">商业集团</el-radio>
-            <el-radio v-model="deptRadio" label="_108_" @change="handleRadioClick">城更集团</el-radio>
+            <el-radio v-model="deptRadio" label="-244_" @change="handleRadioClick">控股公司</el-radio>
+            <el-radio v-model="deptRadio" label="-51_" @change="handleRadioClick">雅生活集团</el-radio>
+            <el-radio v-model="deptRadio" label="-103_" @change="handleRadioClick">雅城集团</el-radio>
+            <el-radio v-model="deptRadio" label="-104_" @change="handleRadioClick">教育集团</el-radio>
+            <el-radio v-model="deptRadio" label="-102_" @change="handleRadioClick">环保集团</el-radio>
+            <el-radio v-model="deptRadio" label="-106_" @change="handleRadioClick">资本集团</el-radio>
+            <el-radio v-model="deptRadio" label="-105_" @change="handleRadioClick">房管集团</el-radio>
+            <el-radio v-model="deptRadio" label="-107_" @change="handleRadioClick">商业集团</el-radio>
+            <el-radio v-model="deptRadio" label="-108_" @change="handleRadioClick">城更集团</el-radio>
           </template>
         </el-col>
       </el-row>
@@ -56,12 +56,11 @@
         </el-col>
         <el-col :span="22">
           <template>
-            <el-radio v-model="deptRadio" label="_30_" border size="mini" @change="handleRadioClick">集团本部</el-radio>
-            <el-radio v-model="deptRadio" label="_32_" border size="mini" @change="handleRadioClick">广州区域</el-radio>
-            <el-radio v-model="deptRadio" label="_37_" border size="mini" @change="handleRadioClick">中山区域</el-radio>
-            <el-radio v-model="deptRadio" label="_38_" border size="mini" @change="handleRadioClick">深圳区域</el-radio>
-            <el-radio v-model="deptRadio" label="_43_" border size="mini" @change="handleRadioClick">北京区域</el-radio>
-            <el-radio v-model="deptRadio" label="_40_" border size="mini" @change="handleRadioClick">上海区域</el-radio>
+            <el-radio v-model="deptRadio" label="-30_" border size="mini" @change="handleRadioClick">集团本部</el-radio>
+            <el-radio v-model="deptRadio" label="-32_" border size="mini" @change="handleRadioClick">广州区域</el-radio>
+            <el-radio v-model="deptRadio" label="-37_" border size="mini" @change="handleRadioClick">中山区域</el-radio>
+            <el-radio v-model="deptRadio" label="-43_" border size="mini" @change="handleRadioClick">北京区域</el-radio>
+            <el-radio v-model="deptRadio" label="-40_" border size="mini" @change="handleRadioClick">上海区域</el-radio>
             <el-button
               v-permission="['/businesslicense/ca']"
               type="primary"
@@ -78,12 +77,11 @@
         </el-col>
         <el-col :span="22">
           <template>
-            <el-radio v-model="deptRadio" label="_41_" border size="mini" @change="handleRadioClick">南京区域</el-radio>
-            <el-radio v-model="deptRadio" label="_46_" border size="mini" @change="handleRadioClick">重庆区域</el-radio>
-            <el-radio v-model="deptRadio" label="_42_" border size="mini" @change="handleRadioClick">西安区域</el-radio>
-            <el-radio v-model="deptRadio" label="_39_" border size="mini" @change="handleRadioClick">海南区域</el-radio>
-            <el-radio v-model="deptRadio" label="_44_" border size="mini" @change="handleRadioClick">武汉区域</el-radio>
-            <el-radio v-model="deptRadio" label="_45_" border size="mini" @change="handleRadioClick">云南区域</el-radio>
+            <el-radio v-model="deptRadio" label="-41_" border size="mini" @change="handleRadioClick">南京区域</el-radio>
+            <el-radio v-model="deptRadio" label="-46_" border size="mini" @change="handleRadioClick">重庆区域</el-radio>
+            <el-radio v-model="deptRadio" label="-42_" border size="mini" @change="handleRadioClick">西安区域</el-radio>
+            <el-radio v-model="deptRadio" label="-39_" border size="mini" @change="handleRadioClick">海南区域</el-radio>
+            <el-radio v-model="deptRadio" label="-45_" border size="mini" @change="handleRadioClick">云南区域</el-radio>
             <!-- <el-button
                 v-permission="['/lpm/businesslicenseEdit']"
                 type="success"
@@ -138,6 +136,12 @@
                 @click.native="search"
               >{{ $t('button.search') }}</el-button>
             </el-col>
+            <!-- <el-col :span="2">
+              <el-button
+                type="success"
+                @click.native="exportExcel"
+              >导出</el-button>
+            </el-col> -->
           </el-row>
           <br>
           <el-table
@@ -151,7 +155,7 @@
             @current-change="handleCurrentChange"
           >
             <el-table-column label="序号" type="index" width="50" />
-            <el-table-column label="企业名称" width="350">
+            <el-table-column label="企业名称" width="300">
               <template slot-scope="scope">
                 <el-button type="text" @click="detail(scope.row)">{{ scope.row.enterpriseName }}</el-button>
               </template>
