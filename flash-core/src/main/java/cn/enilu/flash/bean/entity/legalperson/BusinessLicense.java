@@ -85,6 +85,9 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="registration_authority", columnDefinition = "VARCHAR(128) COMMENT '登记机关'")
     private String registrationAuthority;
 
+    @Column(name="registration_authority_en", columnDefinition = "VARCHAR(128) COMMENT '英文登记机关'")
+    private String registrationAuthorityEn;
+
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="approval_date", columnDefinition = "DATE COMMENT '核准日期'")
     private Date approvalDate;
@@ -98,11 +101,21 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="registered_address", columnDefinition = "VARCHAR(128) COMMENT '注册地址'")
     private String registeredAddress;
 
+    @Column(name="registered_address_en", columnDefinition = "VARCHAR(128) COMMENT '英文注册地址'")
+    private String registeredAddressEn;
+
     @Column(name="business_address", columnDefinition = "VARCHAR(128) COMMENT '经营地址'")
     private String businessAddress;
 
     @Column(name="business_scope", columnDefinition = "TEXT COMMENT '经营范围'")
     private String businessScope;
+
+    @Column(name="business_scope_en", columnDefinition = "TEXT COMMENT '英文经营范围'")
+    private String businessScopeEn;
+
+    @Column(name="real_proportion", columnDefinition = "FLOAT COMMENT '实际占比（%）'")
+    @Type(type="java.lang.Float")
+    private Float realProportion;
 
     @Column(name="tags", columnDefinition = "VARCHAR(128) COMMENT '标签'")
     private String tags;
@@ -116,8 +129,8 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="init_invest", columnDefinition = "VARCHAR(8) COMMENT '是否同步过投资公司'")
     private String initInvest;
 
-    @Column(name="business_license", columnDefinition = "VARCHAR(64) COMMENT '营业执照'")
-    private String businessLicense;
+    @Column(name="business_license_files", columnDefinition = "VARCHAR(64) COMMENT '营业执照'")
+    private String businessLicenseFiles;
 
     @Column(name="approval_files", columnDefinition = "VARCHAR(64) COMMENT '核准文件'")
     private String approvalFiles;

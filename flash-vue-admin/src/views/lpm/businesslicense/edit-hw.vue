@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="180px">
         <el-row>
           <el-col :span="24">
             <el-button icon="el-icon-plus" size="small" type="primary" @click="save">{{
@@ -18,8 +18,9 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="24">
-            <el-form-item label="组织属性">
+          <el-col :span="20">
+            <el-form-item label=" ">
+              <div class="item-label">组织属性<br>Organization</div>
               <el-input
                 v-model="form.pName"
                 placeholder="请选择组织属性"
@@ -39,40 +40,41 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="24">
-            <el-form-item :label="$t('businessLicenseMgr.enterpriseName')" prop="enterpriseName">
+          <el-col :span="4">
+            &nbsp;
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="">
+              <div class="item-label">企业编号<br>Company Number</div>
+              <el-input v-model="form.enterpriseCode" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="">
+              <div class="item-label">登记状态<br>Registration Status</div>
+              <el-select v-model="form.registrationStatus" placeholder="请选择">
+                <el-option
+                  v-for="item in registrationStatusList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label=" " prop="enterpriseName">
+              <div class="item-label">{{ $t('businessLicenseMgr.enterpriseName') }}</div>
               <el-input v-model="form.enterpriseName" minlength="1" />
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="24">
-            <el-form-item label="企业英文名称">
-              <el-input
-                v-model="form.enterpriseNameEn"
-                minlength="1"
-              />
-            </el-form-item>
-          </el-col> -->
-          <!-- <el-col :span="24">
-            <el-form-item label="企业商用名称">
-              <el-input v-model="form.enterpriseNameBusiness" minlength="1"></el-input>
-            </el-form-item>
-          </el-col> -->
           <el-col :span="12">
-            <el-form-item label="统一社会信用代码">
-              <el-input
-                v-model="form.unifiedSocialCreditCode"
-                minlength="1"
-              />
-            </el-form-item>
-          </el-col>
-
-          <!-- <el-col :span="12">
-            <el-form-item label="企业编码">
-              <el-input v-model="form.enterpriseCode" minlength="1"></el-input>
-            </el-form-item>
-          </el-col> -->
-          <el-col :span="12">
-            <el-form-item label="企业类型">
+            <el-form-item label="">
+              <div class="item-label">企业类型<br>Type of Company</div>
               <el-select v-model="form.type" placeholder="请选择">
                 <el-option
                   v-for="item in typeList"
@@ -83,45 +85,22 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="12">
-            <el-form-item label="自定义企业类型">
-              <el-select v-model="form.customType" placeholder="请选择">
-                <el-option
-                  v-for="item in customTypeList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select>
-            </el-form-item>
-          </el-col> -->
+        </el-row>
+        <el-row>
           <el-col :span="12">
-            <el-form-item label="企业注册地" prop="registrationPlace">
-              <el-cascader
-                v-model="form.registrationPlace"
-                :options="provinces"
-                @change="handleChange"
-              />
-              <!-- <el-select v-model="form.registrationPlace" placeholder="请选择">
-                <el-option
-                  v-for="item in registrationPlaceList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select> -->
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="法定代表人">
+            <el-form-item label="">
+              <div class="item-label">Company Name</div>
               <el-input
-                v-model="form.legalRepresentative"
+                v-model="form.enterpriseNameEn"
                 minlength="1"
               />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
-            <el-form-item label="币种" prop="currency">
+            <el-form-item label="" prop="currency">
+              <div class="item-label">股本币种<br>Capital Currency</div>
               <el-select v-model="form.currency" placeholder="请选择">
                 <el-option
                   v-for="item in currencyList"
@@ -133,15 +112,19 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="注册资本(万元)" prop="registeredCapital">
+            <el-form-item label="" prop="registeredCapital">
+              <div class="item-label">股本<br>Capital</div>
               <el-input
                 v-model.number="form.registeredCapital"
                 minlength="1"
               />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
-            <el-form-item label="成立日期">
+            <el-form-item label="">
+              <div class="item-label">成立日期<br>Register Date</div>
               <el-date-picker
                 v-model="form.setupDate"
                 type="date"
@@ -151,37 +134,20 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="取得日期">
-              <el-date-picker
-                v-model="form.achieveDate"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
+            <el-form-item label="" prop="registrationPlace">
+              <div class="item-label">企业注册地<br>Place of Incorporation</div>
+              <el-cascader
+                v-model="form.registrationPlace"
+                :options="provinces"
+                @change="handleChange"
               />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="12">
-            <el-form-item label="营业期限自">
-              <el-date-picker
-                v-model="form.operatingPeriodFrom"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="营业期限至">
-              <el-date-picker
-                v-model="form.operatingPeriodEnd"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="登记机关">
+            <el-form-item label="">
+              <div class="item-label">登记机关</div>
               <el-input
                 v-model="form.registrationAuthority"
                 minlength="1"
@@ -189,60 +155,65 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="核准日期">
-              <el-date-picker
-                v-model="form.approvalDate"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
+            <el-form-item label="">
+              <div class="item-label">实际持有股权（%）<br>Shareholdings(%)</div>
+              <el-slider v-model="form.realProportion" show-input />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="">
+              <div class="item-label">Registration Authority</div>
+              <el-input
+                v-model="form.registrationAuthorityEn"
+                minlength="1"
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="企业注册类型" prop="registrationType">
-              <el-select v-model="form.registrationType" placeholder="请选择">
-                <el-option
-                  v-for="item in registrationTypeList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="地址">
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">地址</div>
               <el-input
                 v-model="form.registeredAddress"
                 minlength="1"
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="登记状态">
-              <el-select v-model="form.registrationStatus" placeholder="请选择">
-                <el-option
-                  v-for="item in registrationStatusList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">Address</div>
+              <el-input
+                v-model="form.registeredAddressEn"
+                minlength="1"
+              />
             </el-form-item>
           </el-col>
-
-          <!-- <el-col :span="24">
-            <el-form-item label="经营地址">
-              <el-input v-model="form.businessAddress" minlength="1"></el-input>
-            </el-form-item>
-          </el-col> -->
+        </el-row>
+        <el-row>
           <el-col :span="24">
-            <el-form-item label="经营范围">
-              <el-input v-model="form.businessScope" type="textarea" rows="5" />
+            <el-form-item label="">
+              <div class="item-label">业务性质</div>
+              <el-input v-model="form.businessScope" type="textarea" rows="3" />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
-            <el-form-item label="企业标签">
+            <el-form-item label="">
+              <div class="item-label">Nature of Business</div>
+              <el-input v-model="form.businessScopeEn" type="textarea" rows="3" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">企业标签</div>
               <el-select v-model="form.tags" multiple placeholder="请企业标签" style="width:100%">
                 <el-option
                   v-for="item in companyTagOptions"
@@ -253,32 +224,20 @@
               </el-select>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :span="24">
-            <el-form-item label="备注信息">
+            <el-form-item label="">
+              <div class="item-label">备注信息</div>
               <el-input v-model="form.remark" minlength="1" />
             </el-form-item>
           </el-col>
         </el-row>
+
         <el-row>
-          <el-col :span="12">
-            <el-form-item label="核准文件">
-              <el-upload
-                class="upload-demo"
-                :action="uploadUrl"
-                :headers="uploadHeaders"
-                :file-list="approvalFilesList"
-                :before-upload="handleBeforeUpload"
-                :on-remove="approvalFilesRemoveFile"
-                :on-success="approvalFilesUploadSuccess"
-                :on-preview="hanglePreview"
-              >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <span slot="tip" class="el-upload__tip">&nbsp;</span>
-              </el-upload>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="营业执照">
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">公司注册证<br>Certificate of Incorporation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <el-upload
                 class="upload-demo"
                 :action="uploadUrl"
@@ -289,7 +248,7 @@
                 :on-success="businessLicenseFilesUploadSuccess"
                 :on-preview="hanglePreview"
               >
-                <el-button size="small" type="primary">点击上传</el-button>
+                <el-button size="small">点击上传</el-button>
                 <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
             </el-form-item>
@@ -297,7 +256,8 @@
         </el-row>
         <el-row>
           <el-col :span="12">
-            <el-form-item label="公司章程">
+            <el-form-item label="">
+              <div class="item-label">公司章程<br>Company Article&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <el-upload
                 class="upload-demo"
                 :action="uploadUrl"
@@ -308,13 +268,36 @@
                 :on-success="companyArticlesAssociationUploadSuccess"
                 :on-preview="hanglePreview"
               >
-                <el-button size="small" type="primary">点击上传</el-button>
+                <el-button size="small">点击上传</el-button>
                 <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="股东决定">
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">商业登记证<br>Business Registration Certificate&nbsp;&nbsp;</div>
+              <el-upload
+                class="upload-demo"
+                :action="uploadUrl"
+                :headers="uploadHeaders"
+                :file-list="approvalFilesList"
+                :before-upload="handleBeforeUpload"
+                :on-remove="approvalFilesRemoveFile"
+                :on-success="approvalFilesUploadSuccess"
+                :on-preview="hanglePreview"
+              >
+                <el-button size="small">点击上传</el-button>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">股东名册<br>Register of Directors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <el-upload
                 class="upload-demo"
                 :action="uploadUrl"
@@ -325,15 +308,16 @@
                 :on-success="shareholdersDecideUploadSuccess"
                 :on-preview="hanglePreview"
               >
-                <el-button size="small" type="primary">点击上传</el-button>
+                <el-button size="small">点击上传</el-button>
                 <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="12">
-            <el-form-item label="申请注册文件">
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">周年申报表<br>Annual Return&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <el-upload
                 class="upload-demo"
                 :action="uploadUrl"
@@ -344,13 +328,16 @@
                 :on-success="applicationRegistrationFilesUploadSuccess"
                 :on-preview="hanglePreview"
               >
-                <el-button size="small" type="primary">点击上传</el-button>
+                <el-button size="small">点击上传</el-button>
                 <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="其他文件">
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">董事名册<br>Register of Members&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <el-upload
                 class="upload-demo"
                 :action="uploadUrl"
@@ -361,7 +348,7 @@
                 :on-success="otherFilesUploadSuccess"
                 :on-preview="hanglePreview"
               >
-                <el-button size="small" type="primary">点击上传</el-button>
+                <el-button size="small">点击上传</el-button>
                 <span slot="tip" class="el-upload__tip">&nbsp;</span>
               </el-upload>
             </el-form-item>
@@ -369,16 +356,27 @@
         </el-row>
         <el-row>
           <el-col :span="19">&nbsp;</el-col>
-          <el-col :span="3">
+          <el-col :span="5">
             <el-button style="float:right" icon="el-icon-plus" type="primary" @click="save">{{
               $t("button.save")
             }}</el-button>
           </el-col>
         </el-row>
-
       </el-form>
     </div>
   </div>
 </template>
 
-<script src="./edit.js"></script>
+<script src="./edit-hw.js"></script>
+<style rel="stylesheet/scss" lang="scss" scoped>
+  .item-label {
+    margin-left:-150px;
+    color:#606266;
+    float:left;
+    line-height:20px;
+    font-weight:bold;
+  }
+  .el-form-item{
+    margin-bottom:25px;
+  }
+</style>

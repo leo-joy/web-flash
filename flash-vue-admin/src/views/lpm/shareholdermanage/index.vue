@@ -56,7 +56,9 @@
             width="55"
           />
           <el-table-column label="企业名称">
-            <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
+            <template slot-scope="scope">
+              {{ scope.row.enterpriseName }}
+            </template>
           </el-table-column>
           <el-table-column label="统一社会信用代码" width="200">
             <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
@@ -141,7 +143,9 @@
           @current-change="handleCurrentChange"
         >
           <el-table-column label="企业名称">
-            <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
+            <template slot-scope="scope">
+              <el-button type="text" @click="detail(scope.row)">{{ scope.row.enterpriseName }}</el-button>
+            </template>
           </el-table-column>
           <el-table-column label="注册资本" width="100">
             <template slot-scope="scope">{{ scope.row.registeredCapital }}</template>
@@ -158,6 +162,11 @@
             width="100"
             :formatter="formatterRegistrationStatus"
           />
+          <el-table-column label="操作" width="80">
+            <template slot-scope="scope">
+              <el-button v-permission="['/enterprisemanage']" type="text" @click="editInfo(scope.row.id)">{{ $t('button.edit') }}</el-button>
+            </template>
+          </el-table-column>
         </el-table>
         <br>
         <el-pagination

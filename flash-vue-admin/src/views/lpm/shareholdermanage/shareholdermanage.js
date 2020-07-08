@@ -319,7 +319,21 @@ export default {
       })
       const res = showDictLabel(this.registrationStatusBL, row.registrationStatus)
       return res
-    }
+    },
+    detail(row) {
+      const routeUrl = this.$router.resolve({ path: '/lpm/detailEnterpriseinfoHw', query: { id: row.id }})
+      window.open(routeUrl.href, '_blank')
+    },
+    editInfo(id) {
+      this.$router.push({ path: '/enterprisemanagehw', query: { id: id }})
+      // this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
+      // if (this.checkSel()) {
+      //   this.isAdd = false
+      //   this.form = this.selRow
+      //   this.formTitle = '编辑注册公司'
+      //   this.formVisible = true
+      // }
+    },
 
   }
 }

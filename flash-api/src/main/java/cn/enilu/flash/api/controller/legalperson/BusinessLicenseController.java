@@ -72,10 +72,10 @@ public class BusinessLicenseController {
 		String mainModuleName = response.getEnterpriseName();
 		String fileStatus = "1";
 
-		String businessLicenseFiles = response.getBusinessLicense();	// 营业执照附件
-		Long businessLicenseModuleId = Long.valueOf(1000001).longValue();
-		String businessLicenseModuleName = "营业执照";
-		fileService.update(businessLicenseFiles, mainModuleId, mainModuleName, businessLicenseModuleId, businessLicenseModuleName, fileStatus);
+		String businessLicenseFilesFiles = response.getBusinessLicenseFiles();	// 营业执照附件
+		Long businessLicenseFilesModuleId = Long.valueOf(1000001).longValue();
+		String businessLicenseFilesModuleName = "营业执照";
+		fileService.update(businessLicenseFilesFiles, mainModuleId, mainModuleName, businessLicenseFilesModuleId, businessLicenseFilesModuleName, fileStatus);
 
 		String approvalFilesFiles = response.getApprovalFiles();	// 核准文件附件
 		Long approvalFilesModuleId = Long.valueOf(1000002).longValue();
@@ -114,8 +114,8 @@ public class BusinessLicenseController {
 		BusinessLicense response = businessLicenseService.get(id);
 		String fileStatus = "0";
 
-		String businessLicenseFiles = response.getBusinessLicense();	// 营业执照附件
-		fileService.updateFileStatus(businessLicenseFiles , fileStatus);
+		String businessLicenseFilesFiles = response.getBusinessLicenseFiles();	// 营业执照附件
+		fileService.updateFileStatus(businessLicenseFilesFiles , fileStatus);
 
 		String approvalFilesFiles = response.getApprovalFiles();	// 核准文件附件
 		fileService.updateFileStatus(approvalFilesFiles , fileStatus);

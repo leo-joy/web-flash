@@ -69,7 +69,6 @@ public class UserController extends BaseController {
     }
     @RequestMapping(method = RequestMethod.POST)
     @BussinessLog(value = "编辑账号", key = "name", dict = UserDict.class)
-    @RequiresPermissions(value = {Permission.USER_EDIT})
     public Object save( @Valid UserDto user,BindingResult result){
         if(user.getId()==null) {
             // 判断账号是否重复

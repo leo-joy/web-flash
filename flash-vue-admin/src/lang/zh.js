@@ -44,6 +44,9 @@ export default {
     // 子菜单
     businessLicense: '营业执照',
     editBusinessLicense: '企业注册',
+    editbusinesslicenseHw: '海外企业注册',
+    enterpriseManageHw: '海外企业管理',
+    detailEnterpriseinfoHw: '企业详情',
     mainmember: '主要人员信息',
     shareholder: '股东信息',
     seal: '印章信息',
@@ -134,6 +137,7 @@ export default {
     search: '搜索',
     reset: '重置',
     submit: '提交',
+    save: '保存',
     cancel: '取消',
     clear: '清除',
     back: '返回',
