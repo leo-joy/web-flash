@@ -120,11 +120,11 @@
           </el-col>
         </el-row>
         <el-row>
-          <el-col v-if="this.userParamType === '1'" :span="8">
+          <!-- <el-col :span="8">
             <el-form-item label="工号" prop="workNumber">
               <el-input v-model="form.workNumber" />
             </el-form-item>
-          </el-col>
+          </el-col> -->
 
           <!-- <el-col :span="8">
             <el-form-item label="英文姓氏" prop="englishSurnames">
@@ -157,8 +157,13 @@
             </el-form-item>
           </el-col> -->
           <el-col :span="8">
-            <el-form-item label="电话" prop="phone">
+            <el-form-item label="电话">
               <el-input v-model="form.phone" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="邮箱">
+              <el-input v-model="form.email" />
             </el-form-item>
           </el-col>
           <!-- <el-col :span="8">
@@ -173,19 +178,20 @@
           </el-col> -->
         </el-row>
         <el-row>
+          
           <el-col :span="8">
-            <el-form-item label="邮箱" prop="email">
-              <el-input v-model="form.email" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="内地身份证" prop="identityCardChinese">
+            <el-form-item label="内地身份证号" prop="identityCardChinese">
               <el-input v-model="form.identityCardChinese" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="香港身份证" prop="identityCardHk">
+            <el-form-item label="香港身份证号" prop="identityCardHk">
               <el-input v-model="form.identityCardHk" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
+            <el-form-item label="护照号码" prop="passportNo">
+              <el-input v-model="form.passportNo" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -237,11 +243,7 @@
               </el-select>
             </el-form-item>
           </el-col> -->
-          <el-col :span="8">
-            <el-form-item label="护照号码" prop="passportNo">
-              <el-input v-model="form.passportNo" />
-            </el-form-item>
-          </el-col>
+          
           <!-- <el-col :span="8">
             <el-form-item label="职务" prop="duty">
               <el-select v-model="form.duty" placeholder="请选择">
@@ -327,8 +329,7 @@ import {
 } from '@/api/system/user'
 import { list as deptList } from '@/api/system/dept'
 import { getList as dictList } from '@/api/system/dict'
-import { getDictList } from '@/utils/common'
-import { showDictLabel } from '@/utils/common'
+import { getDictList, showDictLabel, getUuid } from '@/utils/common'
 import { parseTime } from '@/utils/index'
 import { roleTreeListByIdUser } from '@/api/system/role'
 // 权限判断指令
@@ -554,7 +555,7 @@ export default {
       var self = this
       this.$refs['form'].validate(valid => {
         if (valid) {
-          var form = self.form
+          const form = self.form
           if (form.status === true) {
             // 启用
             form.status = 1
@@ -562,6 +563,7 @@ export default {
             // 冻结
             form.status = 2
           }
+          const uuid = getUuid()
           form.birthday = parseTime(form.birthday, '{y}-{m}-{d}')
           form.academic = form.academic
           form.specialty = form.specialty
@@ -569,11 +571,10 @@ export default {
           form.duty = form.duty
           form.experience = form.experience
           form.type = form.type
-          form.account = 'yjl' + form.phone // 登录名
-          form.password = 'yjl' + form.phone // 密码
-          form.rePassword = 'yjl' + form.phone // 重复密码
+          form.account = 'yjl-' + uuid // 登录名
+          form.password = 'yjl-' + uuid // 密码
+          form.rePassword = 'yjl-' + uuid // 重复密码
           form.deptid = form.type === '1' ? 24 : 36 // 部门
-          console.log(form)
           saveUser(form).then(response => {
             this.$message({
               message: '提交成功',
@@ -583,7 +584,6 @@ export default {
             this.formVisible = false
           })
         } else {
-          console.log('error submit!!')
           return false
         }
       })
