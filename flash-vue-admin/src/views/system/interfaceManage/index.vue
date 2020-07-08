@@ -19,7 +19,7 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="系统编号">
+      <el-table-column label="系统编号" width="100">
         <template slot-scope="scope">
           {{ scope.row.code }}
         </template>
@@ -29,19 +29,25 @@
           {{ scope.row.name }}
         </template>
       </el-table-column>
-      <el-table-column label="接口地址">
+      <!-- <el-table-column label="接口地址">
         <template slot-scope="scope">
           {{ scope.row.url }}
         </template>
-      </el-table-column>
-      <el-table-column label="启用状态">
-        <template slot-scope="scope">
-          {{ scope.row.status*1===1?'启用':'冻结' }}
-        </template>
-      </el-table-column>
-      <el-table-column label="接口凭证">
+      </el-table-column> -->
+      <el-table-column label="接口凭证" width="180">
         <template slot-scope="scope">
           {{ scope.row.token }}
+        </template>
+      </el-table-column>
+      <el-table-column label="接口描述">
+        <template slot-scope="scope">
+          {{ scope.row.description }}
+        </template>
+      </el-table-column>
+      
+      <el-table-column label="启用状态" width="100">
+        <template slot-scope="scope">
+          {{ scope.row.status*1===1?'启用':'冻结' }}
         </template>
       </el-table-column>
     </el-table>
@@ -80,11 +86,11 @@
               <el-input v-model="form.name" minlength="1" />
             </el-form-item>
           </el-col>
-          <el-col :span="24">
+          <!-- <el-col :span="24">
             <el-form-item label="接口地址" prop="url">
               <el-input v-model="form.url" minlength="1" />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="24">
             <el-form-item label="接口凭证" prop="token">
               <el-input v-model="form.token" minlength="1" disabled />
