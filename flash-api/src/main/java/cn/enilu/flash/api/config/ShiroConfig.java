@@ -76,6 +76,8 @@ public class ShiroConfig {
         //营业执照信息列表请求获取不拦截
         filterRuleMap.put("/lpm/businesslicense","anon");
         filterRuleMap.put("/lpm/businesslicense/list","anon");
+        filterRuleMap.put("/lpm/main/member","anon");
+        filterRuleMap.put("/lpm/main/member/list","anon");
         filterRuleMap.put("/lpm/capital/list","anon");
         filterRuleMap.put("/lpm/capital/tree","anon");
         filterRuleMap.put("/lpm/invest/company/list","anon");
