@@ -160,9 +160,9 @@
             </el-col>
           </el-row>
 
-          <el-row v-if="businessLicenseListBL.length>0">
+          <el-row v-if="businessLicenseFilesListBL.length>0">
             <el-col :span="24">
-              <FilesListComponent file-title="营业执照附件" :files-list="businessLicenseListBL" />
+              <FilesListComponent file-title="营业执照附件" :files-list="businessLicenseFilesListBL" />
             </el-col>
           </el-row>
 

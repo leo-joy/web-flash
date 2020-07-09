@@ -27,7 +27,7 @@ export default {
       currencyBL: '', // 币种
       registrationStatusBL: '', // 登记状态
       tagList: '', // 企业标签
-      businessLicenseListBL: [], // 营业执照的附件
+      businessLicenseFilesListBL: [], // 营业执照的附件
       approvalFilesListBL: [], // 核准文件的附件
       companyArticlesAssociationListBL: [], // 股东决定的相关附件
       shareholdersDecideListBL: [], // 公司章程的相关附件
@@ -97,7 +97,7 @@ export default {
       businesslicense(id).then(response => {
         this.businesslicenseData = response.data
         this.logTitle = '【 ' + response.data.enterpriseName + ' 】'
-        var accessoryArr = ['businessLicense', 'approvalFiles',
+        var accessoryArr = ['businessLicenseFiles', 'approvalFiles',
           'companyArticlesAssociation', 'shareholdersDecide',
           'applicationRegistrationFiles', 'otherFiles']
         var arr = []
@@ -107,7 +107,7 @@ export default {
         this.translateDict('企业注册类型', response.data.registrationType, 'registrationTypeBL')
         this.translateDict('企业注册地', response.data.registrationPlace, 'registrationPlaceBL')
         this.translateDict('币种', response.data.currency, 'currencyBL')
-        if(response.data.tags) {
+        if (response.data.tags) {
           this.translateDictList('企业标签', response.data.tags.split('-'), 'tagList')
         }
         this.getFilesList('BL', accessoryArr, arr)
@@ -132,23 +132,17 @@ export default {
       }
       for (let j = 0; j < accessoryArr.length; j++) {
         const Module = module
+        const _ids = record[0][accessoryArr[j]] ? record[0][accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '') : ''
+        if (!_ids) {
+          break
+        }
         var listQuery = {
           page: 1,
           limit: 20,
-          ids: record[0][accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')
+          ids: _ids
         }
-        if (record.length > 1 && accessoryArr[j] === 'accessoryFiles') {
-          let ids = ''
-          for (let p = 0; p < record.length; p++) {
-            if (record[p]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')) {
-              ids = record[p]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '') + ' ' + ids
-            }
-          }
-          listQuery.ids = ids
-        }
-        if (!listQuery.ids) {
-          // console.log('没有找到：' + accessoryArr[j] + 'List' + Module + ' 相关的原文！')
-        } else {
+
+        if (_ids) {
           getListIds(listQuery).then(response => {
             for (let i = 0; i < response.data.records.length; i++) {
               const file = {}
@@ -156,6 +150,8 @@ export default {
               file.name = response.data.records[i].originalFileName
               this[accessoryArr[j] + 'List' + Module].push(file)
             }
+            console.log(accessoryArr[j] + 'List' + Module)
+            console.log(this[accessoryArr[j] + 'List' + Module])
           })
         }
       }
