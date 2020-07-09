@@ -1085,7 +1085,7 @@
                   <div slot="header" class="clearfix">
                     机构信用代码证
                   </div>
-                  <el-form-item label="机构信用代码证">
+                  <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
                       :action="uploadUrl"

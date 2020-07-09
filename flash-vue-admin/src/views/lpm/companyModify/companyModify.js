@@ -18,6 +18,7 @@ export default {
   directives: { permission },
   data() {
     return {
+      loginInfo: {}, // 当前登录人信息
       formVisible: false,
       formTitle: '添加企业变更',
       activeNames: ['1', '2', '3'],
@@ -1286,7 +1287,14 @@ export default {
     },
     fetchCapitalModifyOldData() {
       this.listCapitalModifyOldLoading = true
-      this.listCapitalModifyOldQuery.serialIdModify = this.form.id + ',new'
+      const userId = this.$store.state.user ? this.$store.state.user.profile.id : ''
+      console.log('createBy:', this.form.createBy)
+      console.log('userId:', userId)
+      this.listCapitalModifyOldQuery.serialIdModify = this.form.id + ',new-' + userId
+      // this.loginInfo = this.$store.state.user.profile
+      if (userId * 1 === this.form.modifyBy * 1) {
+        this.listCapitalModifyOldQuery.createBy = userId
+      }
       getCapitalModifyList(this.listCapitalModifyOldQuery).then(response => {
         this.listCapitalModifyOld = response.data.records || []
         this.listCapitalModifyOldLoading = false
@@ -1294,7 +1302,11 @@ export default {
     },
     fetchCapitalModifyNewData() {
       this.listCapitalModifyNewLoading = true
-      this.listCapitalModifyNewQuery.serialIdModify = this.form.id + ',new'
+      const userId = this.$store.state.user ? this.$store.state.user.profile.id : ''
+      this.listCapitalModifyNewQuery.serialIdModify = this.form.id + ',new-' + userId
+      if (userId * 1 === this.form.modifyBy * 1) {
+        this.listCapitalModifyNewQuery.createBy = userId
+      }
       getCapitalModifyList(this.listCapitalModifyNewQuery).then(response => {
         this.listCapitalModifyNew = response.data.records || []
         this.listCapitalModifyNewLoading = false
@@ -1362,10 +1374,11 @@ export default {
     saveCapitalModify() {
       this.$refs['formCapitalModify'].validate((valid) => {
         if (valid) {
+          const userId = this.$store.state.user ? this.$store.state.user.profile.id : ''
           saveCapitalModify({
             enterpriseCode: this.formCapitalModify.enterpriseCode,
             enterpriseName: this.formCapitalModify.enterpriseName,
-            serialIdModify: 'new',
+            serialIdModify: 'new-' + userId,
             modifyStatusType: this.formCapitalModify.modifyStatusType,
             serialNumber: this.formCapitalModify.serialNumber,
             shareholder: this.formCapitalModify.shareholder,
