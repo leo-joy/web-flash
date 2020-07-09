@@ -178,7 +178,7 @@
           </el-col> -->
         </el-row>
         <el-row>
-          
+
           <el-col :span="8">
             <el-form-item label="内地身份证号" prop="identityCardChinese">
               <el-input v-model="form.identityCardChinese" />
@@ -243,7 +243,7 @@
               </el-select>
             </el-form-item>
           </el-col> -->
-          
+
           <!-- <el-col :span="8">
             <el-form-item label="职务" prop="duty">
               <el-select v-model="form.duty" placeholder="请选择">
@@ -582,11 +582,15 @@ export default {
             })
             this.fetchData()
             this.formVisible = false
+            this.getAllUserList()
           })
         } else {
           return false
         }
       })
+    },
+    async getAllUserList() {
+      await this.$store.dispatch('common/getUserList')
     },
     checkSel() {
       if (this.selRow && this.selRow.id) {

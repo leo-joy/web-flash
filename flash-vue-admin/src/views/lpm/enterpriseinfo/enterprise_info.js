@@ -146,6 +146,11 @@ export default {
       })
 
       this.fetchData()
+
+      const userList = this.$store.state.common.userList
+      if ((!userList || userList.length === 0) && this.moduleType === '2') {
+        this.getAllUserList()
+      }
     },
     fetchData() {
       this.listLoading = true
@@ -204,6 +209,9 @@ export default {
         })
       }
     },
+    async getAllUserList() {
+      await this.$store.dispatch('common/getUserList')
+    },
     initSearchParams() {
       if (this.searchType === 'enterpriseName') {
         this.listQuery.enterpriseName = this.keyword
@@ -219,6 +227,13 @@ export default {
       this.initSearchParams()
       this.listQuery.page = 1
       this.fetchData()
+    },
+    exportExcel() {
+      const routeUrl = this.$router.resolve({
+        path: '/sheetjs/index.html',
+        query: { pIds: this.deptRadio }
+      })
+      window.open(routeUrl.href.replace('#', ''), '_blank')
     },
     reset() {
       this.listQuery.id = ''

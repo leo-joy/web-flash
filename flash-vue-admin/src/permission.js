@@ -35,6 +35,12 @@ router.beforeEach(async(to, from, next) => {
           // get user info
           store.dispatch('user/getInfo')
           const accessRoutes = await store.dispatch('menu/getSideMenus')
+          // 登录清空所有用户信息
+          store.dispatch('common/removeUserList')
+          // 获取所有用户信息
+          // if (store.state.common.userList.length === 0) {
+          //   store.dispatch('common/getUserList')
+          // }
           router.addRoutes(accessRoutes)
           next({ ...to, replace: true })
         } catch (error) {

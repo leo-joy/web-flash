@@ -331,10 +331,18 @@ export default {
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
       this.fetchData()
-      getUserList(this.listUserQuery).then(response => {
-        this.restaurants = response.data.records
-        // this.add()
-      })
+
+      const userList = this.$store.state.common.userList
+      if (!userList || userList.length === 0) {
+        getUserList(this.listUserQuery).then(response => {
+          this.restaurants = response.data.records
+          this.getAllUserList()
+          // this.add()
+        })
+      } else {
+        this.restaurants = userList
+      }
+      
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCauseList = getDictList(response.data[0].detail)
       })
@@ -363,6 +371,9 @@ export default {
           this.mainmemberData = response.data.records[0]
         }
       })
+    },
+    async getAllUserList() {
+      await this.$store.dispatch('common/getUserList')
     },
     search() {
       this.fetchData()
@@ -1276,12 +1287,18 @@ export default {
       })
 
       // 请求自然人股东全部列表
-      getUserList({
-        page: 1,
-        limit: 50000
-      }).then(response => {
-        this.naturalPersonShareholders = response.data.records
-      })
+      const userList = this.restaurants
+      if (userList && userList.length === 0) {
+        getUserList({
+          page: 1,
+          limit: 50000
+        }).then(response => {
+          this.naturalPersonShareholders = response.data.records
+        })
+      } else {
+        this.naturalPersonShareholders = userList
+      }
+
       this.fetchCapitalModifyOldData()
       this.fetchCapitalModifyNewData()
     },
