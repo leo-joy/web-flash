@@ -3,8 +3,7 @@ import { getList as companyModify } from '@/api/lpm/companyModify'
 import FilesListComponent from '@/components/FilesList/minFilesList.vue'
 import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
 import { getList as dictList } from '@/api/system/dict'
-import { getDictList } from '@/utils/common'
-import { showDictLabel, getDictNum } from '@/utils/common'
+import { showDictLabel } from '@/utils/common'
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
@@ -19,6 +18,7 @@ export default {
       companyModifyDataAll: [], // 全部企业变更信息数据
       fileDialogVisible: false, // 文件列表弹出框
       currentCompanyModify: {}, // 当前变更对象
+      newFilesListObj: {}, // 文件列表汇总
       noAccessoryCause: '', // 无附件原因
       companyModifyTypeOptions: [{
         value: 'enterpriseNameState',
@@ -63,6 +63,28 @@ export default {
         value: 'shareholderModifyState',
         label: '股东变更'
       }],
+      fileTypeArr: [
+        'accessoryFiles', // 1内部审批文件
+        'companyReferenceRegisterFiles', // 2工商申请表
+        'shareholdersDecideFiles', // 3股东会决议
+        'seniorManagementFiles', // 4董事会决议
+        'companyArticlesAssociationFiles', // 5公司章程
+        'appointDismissFiles', // 6任职免职书
+        'promiseFiles', // 7住所使用证明
+        'delegationFiles', // 8股权转让合同
+        'approvalFiles', // 9核准文件
+        'businessLicenseFiles', // 10营业执照
+        'sealFiles', // 11印章备案文件
+        'openAccountFiles', // 12开户许可证
+        'orgCreditCodeFiles', // 13机构信用代码证
+        'authorizationFiles', // 14外商投资批准文件（批复和批准证书）或备案文件
+        'companyModifyRegisterFiles', // 15外商投资企业变更备案回执
+        'stockPledgeFiles', // 16质权合同
+        'liquidationFiles', // 17清算报告
+        'liquidationPersonFiles', // 18清算组成员备案通知书
+        'tallageFiles', // 19清税证明
+        'noticeFiles', // 20公告报纸样张
+        'otherFiles'], // 21其它文件
       companyModifyTypeValue: [],
       accessoryFilesListCompanyModify: [], // 1内部审批文件
       companyReferenceRegisterFilesListCompanyModify: [], // 2工商申请表
@@ -145,6 +167,10 @@ export default {
         this.noAccessoryCause = response.data[0].detail
       })
       this.getCompanyModifyList()
+      // const _this = this
+      // setTimeout(function() {
+      //   _this.getNewFilesList()
+      // }, 3000)
     },
 
     // 企业变更数据
@@ -152,31 +178,8 @@ export default {
       // 获取企业的id
       const id = this.$route.query.id
       companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
-        var accessoryArr = [
-          'accessoryFiles', // 1内部审批文件
-          'companyReferenceRegisterFiles', // 2工商申请表
-          'shareholdersDecideFiles', // 3股东会决议
-          'seniorManagementFiles', // 4董事会决议
-          'companyArticlesAssociationFiles', // 5公司章程
-          'appointDismissFiles', // 6任职免职书
-          'promiseFiles', // 7住所使用证明
-          'delegationFiles', // 8股权转让合同
-          'approvalFiles', // 9核准文件
-          'businessLicenseFiles', // 10营业执照
-          'sealFiles', // 11印章备案文件
-          'openAccountFiles', // 12开户许可证
-          'orgCreditCodeFiles', // 13机构信用代码证
-          'authorizationFiles', // 14外商投资批准文件（批复和批准证书）或备案文件
-          'companyModifyRegisterFiles', // 15外商投资企业变更备案回执
-          'stockPledgeFiles', // 16质权合同
-          'liquidationFiles', // 17清算报告
-          'liquidationPersonFiles', // 18清算组成员备案通知书
-          'tallageFiles', // 19清税证明
-          'noticeFiles', // 20公告报纸样张
-          'otherFiles'] // 21其它文件
-
         var shareholderArr = ['shareholderOld', 'shareholderNew']
-        this.getFilesList('CompanyModify', accessoryArr, response.data, shareholderArr)
+        this.getFilesList('CompanyModify', this.fileTypeArr, response.data, shareholderArr)
       })
     },
 
@@ -323,10 +326,44 @@ export default {
       // }
     },
 
-    // 弹出文件列表
+    // 弹出单条变更记录的文件列表
     openFilesDialog(openFilesDialog) {
       this.fileDialogVisible = true
       this.currentCompanyModify = openFilesDialog
+    },
+
+    // 打开全部文件
+    openAllFilesDialog() {
+      if (this.companyModifyDataAll && this.companyModifyDataAll.length > 0 && this.newFilesListObj) {
+        this.$message({
+          message: '恭喜你，成功获取到最新的公司相关文件！请查看！',
+          type: 'success'
+        })
+        this.getNewFilesList()
+        this.fileDialogVisible = true
+        this.currentCompanyModify = this.newFilesListObj
+      } else {
+        this.$message('没有找到相关文件！')
+      }
+    },
+
+    // 最新文件列表
+    getNewFilesList() {
+      const tempObj = {}
+      if (this.companyModifyDataAll && this.companyModifyDataAll.length > 0) {
+        const data = this.companyModifyDataAll
+        const len = data.length - 1
+        for (let i = len; i >= 0; i--) {
+          for (let j = 0; j < this.fileTypeArr.length; j++) {
+            if (data[i][this.fileTypeArr[j]] !== '' && data[i][this.fileTypeArr[j] + 'ListCompanyModify'] !== '') {
+              tempObj[this.fileTypeArr[j] + 'ListCompanyModify'] = data[i][this.fileTypeArr[j] + 'ListCompanyModify']
+            }
+          }
+        }
+        this.newFilesListObj = tempObj
+      } else {
+        console.log('数据还没有请求完成')
+      }
     }
   }
 }

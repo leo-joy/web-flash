@@ -3,7 +3,7 @@
     <el-row>
       <el-col :span="1">&nbsp;
       </el-col>
-      <el-col :span="20">
+      <el-col :span="16">
         <el-select v-model="companyModifyTypeValue" multiple placeholder="请变更类型" style="width:100%" @change="filterTypeList">
           <el-option
             v-for="item in companyModifyTypeOptions"
@@ -15,6 +15,9 @@
       </el-col>
       <el-col :span="2">
         <el-button type="primary" icon="el-icon-search" style="margin-left:10px;" @click.native="filterTypeList">{{ $t('button.search') }}</el-button>
+      </el-col>
+      <el-col :span="5">
+        <el-button v-permission="['/newFilesList']" type="success" style="margin-left:10px;float:right" @click="openAllFilesDialog()">公司最新文件</el-button>
       </el-col>
     </el-row>
     <br>
