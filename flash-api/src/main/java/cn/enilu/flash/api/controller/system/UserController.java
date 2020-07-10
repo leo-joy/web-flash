@@ -27,6 +27,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,7 +56,8 @@ public class UserController extends BaseController {
             page.addFilter(SearchFilter.build("account", SearchFilter.Operator.LIKE, account));
         }
         if(StringUtil.isNotEmpty(type)){
-            page.addFilter(SearchFilter.build("type", SearchFilter.Operator.EQ, type));
+            ArrayList lists = new ArrayList(Arrays.asList(type.split(",")));
+            page.addFilter("type", SearchFilter.Operator.IN,lists);
         }
         if(StringUtil.isNotEmpty(id)){
             page.addFilter(SearchFilter.build("id", SearchFilter.Operator.EQ, id));

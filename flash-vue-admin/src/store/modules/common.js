@@ -14,7 +14,7 @@ const actions = {
   // get user info
   getUserList({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getUserList({ page: 1, limit: 50000 }).then(response => {
+      getUserList({ page: 1, limit: 50000, type: '1,2' }).then(response => {
         const { records } = response.data
         if (!records) {
           reject('Verification failed, please Login again.')

@@ -22,7 +22,7 @@
       </el-row>
       <br>
       <el-row>
-        <el-col :span="24">
+        <el-col :span="12">
           <el-button
             v-permission="['/businesslicense/add']"
             type="success"
@@ -46,6 +46,15 @@
           >{{ $t('button.delete') }}</el-button>
           <!-- <el-button :disabled="true" type="info" icon="el-icon-role" @click.native="openRole">角色分配</el-button> -->
         </el-col>
+        <el-col :span="12">
+          <el-button
+            style="float:right"
+            type="primary"
+            size="small"
+            icon="el-icon-config"
+            @click.native="edit"
+          >设置为高级管理人员</el-button>
+        </el-col>
       </el-row>
     </div>
 
@@ -61,24 +70,24 @@
       <el-table-column label="姓名">
         <template slot-scope="scope">{{ scope.row.name }}</template>
       </el-table-column>
-      <el-table-column label="英文名">
+      <!-- <el-table-column label="英文名">
         <template slot-scope="scope">{{ scope.row.englishName }}</template>
-      </el-table-column>
-      <el-table-column label="性别">
+      </el-table-column> -->
+      <el-table-column label="性别" width="60">
         <template slot-scope="scope">{{ scope.row.sexName }}</template>
       </el-table-column>
 
       <!-- <el-table-column prop="academic" label="学历" :formatter="formatterAcademic"></el-table-column>
       <el-table-column prop="specialty" label="专业" :formatter="formatterSpecialty"></el-table-column>
       <el-table-column prop="post" label="职称" :formatter="formatterPost"></el-table-column>
-      <el-table-column prop="duty" label="职务" :formatter="formatterDuty"></el-table-column>
-      <el-table-column prop="type" label="用户类型" :formatter="formatterUserType"></el-table-column> -->
+      <el-table-column prop="duty" label="职务" :formatter="formatterDuty"></el-table-column> -->
       <el-table-column label="电话">
         <template slot-scope="scope">{{ scope.row.phone }}</template>
       </el-table-column>
       <el-table-column label="邮箱">
         <template slot-scope="scope">{{ scope.row.email }}</template>
       </el-table-column>
+      <el-table-column prop="type" label="用户类型" :formatter="formatterUserType" />
       <el-table-column label="状态">
         <template slot-scope="scope">{{ scope.row.statusName }}</template>
       </el-table-column>
@@ -259,7 +268,7 @@
 
           <el-col :span="8">
             <el-form-item label="用户类型" prop="type">
-              <el-select v-model="form.type" :disabled="true" placeholder="请选择">
+              <el-select v-model="form.type" placeholder="请选择">
                 <el-option
                   v-for="item in userTypeList"
                   :key="item.value"
@@ -470,7 +479,7 @@ export default {
       // if( this.$route.path === '/advancedUser') {
       //   userType = 1
       // }
-      this.listQuery.type = userType || this.$attrs.userTypeValue
+      //this.listQuery.type = userType || this.$attrs.userTypeValue
       console.log(this.$route.query)
       this.userParamType = userType || this.$attrs.userTypeValue
       // this.form.type = "'"+this.$route.meta.userType+"'"
@@ -481,6 +490,7 @@ export default {
       })
     },
     search() {
+      this.listQuery.page = 1
       this.fetchData()
     },
     reset() {
