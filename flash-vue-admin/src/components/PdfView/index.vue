@@ -1,23 +1,22 @@
 <template>
   <div class="pdf">
-    <div class="arrow">
-      <button @click="changePdfPage(0)">上一页</button>
-      {{ currentPage }} / {{ pageCount }}
-      <button @click="changePdfPage(1)">下一页</button>
-      <button @click="rotateL()">&#x27F3;</button>
-      <button @click="rotateR()">&#x27F2;</button>
+    <div class="btnContainer">
+      <el-button size="mini" icon="el-icon-arrow-left" @click="changePdfPage(0)">上一页</el-button>
+      <el-button size="mini" @click="changePdfPage(1)">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
+      <el-button size="mini" @click="rotateL()">&#x27F3; 顺时针旋转</el-button>
+      <el-button size="mini" @click="rotateR()">&#x27F2; 逆时针旋转</el-button>
+      <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前第 {{ currentPage }} 页， 总共 {{ pageCount }} 页</span>
       <div
         v-if="loadedRatio > 0 && loadedRatio < 1"
         style="background-color: green; color: white; text-align: center"
         :style="{ width: loadedRatio * 100 + '%' }"
       >{{ Math.floor(loadedRatio * 100) }}%</div>
       <!-- <button @click="$refs.pdf.print()">print</button> -->
-
     </div>
 
     <pdf
       ref="pdf"
-      style="border: none; display: inline-block; width: 100%;"
+      style="border:1px dotted #efefef;padding:5px;background-color:#ffffff; display: inline-block; width: 100%;"
       :src="src"
       :page="currentPage"
       :rotate="rotate"
@@ -29,22 +28,30 @@
       @loaded="loadPdfHandler"
       @link-clicked="currentPage = $event"
     />
-    <div class="arrow">
-      <button @click="changePdfPage(0)">上一页</button>
-      {{ currentPage }} / {{ pageCount }}
-      <button @click="changePdfPage(1)">下一页</button>
-      <button @click="rotateL()">&#x27F3;</button>
-      <button @click="rotateR()">&#x27F2;</button>
+    <div class="btnContainer">
+      <el-button size="mini" icon="el-icon-arrow-left" @click="changePdfPage(0)">上一页</el-button>
+      <el-button size="mini" @click="changePdfPage(1)">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
+      <el-button size="mini" @click="rotateL()">&#x27F3; 顺时针旋转</el-button>
+      <el-button size="mini" @click="rotateR()">&#x27F2; 逆时针旋转</el-button>
+      <span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;当前第 {{ currentPage }} 页， 总共 {{ pageCount }} 页</span>
       <div
         v-if="loadedRatio > 0 && loadedRatio < 1"
         style="background-color: green; color: white; text-align: center"
         :style="{ width: loadedRatio * 100 + '%' }"
       >{{ Math.floor(loadedRatio * 100) }}%</div>
       <!-- <button @click="$refs.pdf.print()">print</button> -->
-
     </div>
   </div>
 </template>
+<style lang="scss">
+ .pdf {
+   margin-top:-30px;
+ }
+ .btnContainer {
+   padding:5px 30px 5px 30px;
+   float: right;
+ }
+</style>
 <script>
 import pdf from 'vue-pdf'
 export default {
