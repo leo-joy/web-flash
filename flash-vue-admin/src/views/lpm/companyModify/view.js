@@ -4,12 +4,14 @@ import FilesListComponent from '@/components/FilesList/minFilesList.vue'
 import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
 import { getList as dictList } from '@/api/system/dict'
 import { showDictLabel } from '@/utils/common'
+import PDFView from '@/components/PdfView/index.vue'
+import { getApiUrl } from '@/utils/utils'
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 export default {
   directives: { permission },
-  components: { FilesListComponent },
+  components: { FilesListComponent, PDFView },
   data() {
     return {
       id: '',
@@ -63,6 +65,28 @@ export default {
         value: 'shareholderModifyState',
         label: '股东变更'
       }],
+      filterText: '',
+      filesData: [],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      },
+      title: '变更文件',
+      src: '',
+      generalFileTypeArr: [
+        'businessLicenseFiles', // 10营业执照
+        'companyArticlesAssociationFiles', // 5公司章程
+        'shareholdersDecideFiles', // 3股东会决议
+        'seniorManagementFiles', // 4董事会决议
+        'stockPledgeFiles' // 16质权合同
+      ],
+      generalFileTypeObj: [
+        { 'businessLicenseFiles': '营业执照' }, // 10营业执照
+        { 'companyArticlesAssociationFiles': '公司章程' }, // 5公司章程
+        { 'shareholdersDecideFiles': '股东会决议' }, // 3股东会决议
+        { 'seniorManagementFiles': '董事会决议' }, // 4董事会决议
+        { 'stockPledgeFiles': '质权合同' } // 16质权合同
+      ],
       fileTypeArr: [
         'accessoryFiles', // 1内部审批文件
         'companyReferenceRegisterFiles', // 2工商申请表
@@ -85,6 +109,28 @@ export default {
         'tallageFiles', // 19清税证明
         'noticeFiles', // 20公告报纸样张
         'otherFiles'], // 21其它文件
+      fileTypeObj: [
+        { 'accessoryFiles': '1、内部审批文件' },
+        { 'companyReferenceRegisterFiles': '2、工商申请表' },
+        { 'shareholdersDecideFiles': '3、股东会决议' },
+        { 'seniorManagementFiles': '4、董事会决议' },
+        { 'companyArticlesAssociationFiles': '5、公司章程' },
+        { 'appointDismissFiles': '6、任职免职书' },
+        { 'promiseFiles': '7、住所使用证明' },
+        { 'delegationFiles': '8、股权转让合同' },
+        { 'approvalFiles': '9、核准文件' },
+        { 'businessLicenseFiles': '10、营业执照' },
+        { 'sealFiles': '11、印章备案文件' },
+        { 'openAccountFiles': '12、开户许可证' },
+        { 'orgCreditCodeFiles': '13、机构信用代码证' },
+        { 'authorizationFiles': '14、外商投资批准文件（批复和批准证书）或备案文件' },
+        { 'companyModifyRegisterFiles': '15、外商投资企业变更备案回执' },
+        { 'stockPledgeFiles': '16、质权合同' },
+        { 'liquidationFiles': '17、清算报告' },
+        { 'liquidationPersonFiles': '18、清算组成员备案通知书' },
+        { 'tallageFiles': '19、清税证明' },
+        { 'noticeFiles': '20、公告报纸样张' },
+        { 'otherFiles': '21、其它文件' }],
       companyModifyTypeValue: [],
       accessoryFilesListCompanyModify: [], // 1内部审批文件
       companyReferenceRegisterFilesListCompanyModify: [], // 2工商申请表
@@ -156,12 +202,30 @@ export default {
       if (newUrl !== oldUrl) {
         this.init()
       }
+    },
+    filterText(val) {
+      this.$refs.tree.filter(val)
     }
   },
   created() {
     this.init()
   },
   methods: {
+    filterNode(value, data) {
+      if (!value) return true
+      return data.label.indexOf(value) !== -1
+    },
+    viewPdf(item) {
+      console.log(item)
+      if (item.id * 1 > 21) {
+        this.src = getApiUrl() + '/file/download?idFile=' + item.id + '&fileName=' + encodeURI(item.label)
+      } else {
+        this.$message({
+          showClose: true,
+          message: '您好！这是文件清单！请点击查看具体文件！'
+        })
+      }
+    },
     init() {
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCause = response.data[0].detail
@@ -327,9 +391,42 @@ export default {
     },
 
     // 弹出单条变更记录的文件列表
-    openFilesDialog(openFilesDialog) {
+    openFilesDialog(results) {
       this.fileDialogVisible = true
-      this.currentCompanyModify = openFilesDialog
+      this.currentCompanyModify = results
+      this.title = '本次变更文件'
+      this.initFilesList(results, this.fileTypeArr, this.fileTypeObj)
+    },
+
+    initFilesList(results, fileTypeArr, fileTypeObj) {
+      const tempArr = []
+      let flag = true
+      for (let i = 0; i < fileTypeArr.length; i++) {
+        const mainObj = {}
+        mainObj.id = '' + i
+        mainObj.label = fileTypeObj[i][fileTypeArr[i]]
+        if (results[fileTypeArr[i] + 'ListCompanyModify'] && results[fileTypeArr[i] + 'ListCompanyModify'].length > 0) {
+          const newArr = []
+          const arr = results[fileTypeArr[i] + 'ListCompanyModify']
+          for (let j = 0; j < arr.length; j++) {
+            if (j === 0 && flag) {
+              flag = false
+              this.src = getApiUrl() + '/file/download?idFile=' + arr[0].id + '&fileName=' + encodeURI(arr[0].label)
+            }
+            const sonObj = {}
+            sonObj.id = arr[j].id
+            sonObj.label = arr[j].name
+            newArr.push(sonObj)
+          }
+          mainObj.children = newArr
+        } else {
+          mainObj.children = []
+        }
+        if (mainObj.children && mainObj.children.length > 0) {
+          tempArr.push(mainObj)
+        }
+      }
+      this.filesData = tempArr
     },
 
     // 打开全部文件
@@ -342,6 +439,8 @@ export default {
         this.getNewFilesList()
         this.fileDialogVisible = true
         this.currentCompanyModify = this.newFilesListObj
+        this.title = '公司最新文件'
+        this.initFilesList(this.newFilesListObj, this.generalFileTypeArr, this.generalFileTypeObj)
       } else {
         this.$message('没有找到相关文件！')
       }

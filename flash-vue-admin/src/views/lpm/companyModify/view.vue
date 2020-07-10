@@ -166,12 +166,36 @@
       </el-col>
     </el-row>
     <el-dialog
-      title="附件列表"
+      :title="title"
       :visible.sync="fileDialogVisible"
-      width="60%"
+      width="90%"
       :close-on-press-escape="false"
     >
-      <table class="dp-table" border="0">
+      <el-row>
+        <el-col :span="8" sytle="border-right:#ccc 1px solid;">
+          <el-input
+            v-model="filterText"
+            style="margin-top:-50px;margin-bottom:20px;padding-right:30px;"
+            size="small"
+            placeholder="可输入文件名进行搜索过滤"
+          />
+          <br>
+          <el-tree
+            ref="tree"
+            class="filter-tree"
+            icon-class="el-icon-folder-opened"
+            :data="filesData"
+            :props="defaultProps"
+            default-expand-all
+            :filter-node-method="filterNode"
+            @node-click="viewPdf"
+          />
+        </el-col>
+        <el-col :span="16">
+          <PDFView :src="src" />
+        </el-col>
+      </el-row>
+      <!-- <table class="dp-table" border="0">
         <tr>
           <th width="7%">序号</th>
           <th width="27%">文件类型</th>
@@ -451,7 +475,7 @@
           </td>
         </tr>
 
-      </table>
+      </table> -->
       <br>
       <div><b>*附件备注：</b>{{ currentCompanyModify.remark? currentCompanyModify.remark:'没有备注信息' }}</div>
     </el-dialog>
@@ -497,6 +521,17 @@
 }
 .modifyList {
   padding:5px
+}
+.filter-tree {
+  padding-right:30px;
+}
+
+.el-tree-node__children {
+  padding:3px 0;
+  color:#00a2ff;
+}
+.el-tree-node {
+  white-space:normal;
 }
 </style>
 <script src="./view.js"></script>
