@@ -342,7 +342,7 @@ export default {
       } else {
         this.restaurants = userList
       }
-      
+
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCauseList = getDictList(response.data[0].detail)
       })
@@ -504,6 +504,9 @@ export default {
         otherRemark: '', // 21其它文件-无附件备注
         id: ''
       }
+
+      this.directorTags = [] // 董事
+      this.supervisorTags = [] // 监事
       this.accessoryFilesList = [] // 1内部审批文件
       this.companyReferenceRegisterFilesList = [] // 2工商申请表
       this.shareholdersDecideFilesList = [] // 3股东会决议
@@ -543,30 +546,21 @@ export default {
       this.form.registeredCapitalOld = this.companyList[0].registeredCapital * 1
       this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
       this.form.businessScopeOld = this.companyList[0].businessScope
-      this.form.legalRepresentativeOld = this.companyList[0].legalRepresentative
 
-      // 董事长
+      // 注释初始化数据 【法人】
+      // this.form.legalRepresentativeOld = this.companyList[0].legalRepresentative
       if (this.mainmemberData) {
-        this.form.chairmanIdOld = this.mainmemberData.chairmanId
-        this.form.chairmanOld = this.mainmemberData.chairman
-      }
-
-      // 经理
-      if (this.mainmemberData) {
-        this.form.generalManagerIdOld = this.mainmemberData.generalManagerId
-        this.form.generalManagerOld = this.mainmemberData.generalManager
-      }
-      // 董事
-      if (this.mainmemberData) {
-        this.form.directorIdOld = this.mainmemberData.directorId
-        this.form.directorOld = this.mainmemberData.director
+        // 注释初始化数据 【董事长、经理、董事、监事】
+        // this.form.chairmanIdOld = this.mainmemberData.chairmanId
+        // this.form.chairmanOld = this.mainmemberData.chairman
+        // this.form.generalManagerIdOld = this.mainmemberData.generalManagerId
+        // this.form.generalManagerOld = this.mainmemberData.generalManager
+        // this.form.directorIdOld = this.mainmemberData.directorId
+        // this.form.directorOld = this.mainmemberData.director
+        // this.form.supervisorIdOld = this.mainmemberData.supervisorId
+        // this.form.supervisorOld = this.mainmemberData.supervisor
       }
 
-      // 监事
-      if (this.mainmemberData) {
-        this.form.supervisorIdOld = this.mainmemberData.supervisorId
-        this.form.supervisorOld = this.mainmemberData.supervisor
-      }
     },
     add() {
       this.resetForm()
