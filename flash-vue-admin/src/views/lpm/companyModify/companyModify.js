@@ -944,6 +944,12 @@ export default {
       if (queryString) {
         var restaurants = this.restaurants
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+        if (results && results.length === 0) {
+          this.$message({
+            message: '您输入的信息没有匹配到相应的结果！请检查输入是否正确！如匹配到不可通过右侧➕来添加！',
+            type: 'warning'
+          })
+        }
         cb(results)
       }
     },
