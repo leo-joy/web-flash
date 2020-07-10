@@ -721,10 +721,10 @@ export default {
                     shareholder: tempObj.shareholder,
                     subscribedCapitalType: tempObj.subscribedCapitalType,
                     subscribedCapitalContribution: tempObj.subscribedCapitalContribution,
-                    subscribedCapitalDate: tempObj.subscribedCapitalDate,
+                    subscribedCapitalDate: tempObj.subscribedCapitalDate ? parseTime(tempObj.subscribedCapitalDate, '{y}-{m}-{d}') : '',
                     realityCapitalType: tempObj.realityCapitalType,
                     realityCapitalContribution: tempObj.realityCapitalContribution,
-                    realityCapitalDate: tempObj.realityCapitalDate,
+                    realityCapitalDate: tempObj.realityCapitalDate ? parseTime(tempObj.realityCapitalDate, '{y}-{m}-{d}') : '',
                     responsiblePerson: tempObj.responsiblePerson,
                     shareholderType: tempObj.shareholderType,
                     shareholderMold: tempObj.shareholderMold,
@@ -946,7 +946,7 @@ export default {
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
         if (results && results.length === 0) {
           this.$message({
-            message: '您输入的信息没有匹配到相应的结果！请检查输入是否正确！如匹配到不可通过右侧➕来添加！',
+            message: '您输入的信息没有匹配到相应的结果！请检查输入是否正确！如匹配到不可通过右侧➕搜索配置高级管理人员！',
             type: 'warning'
           })
         }
@@ -1401,10 +1401,10 @@ export default {
             shareholder: this.formCapitalModify.shareholder,
             subscribedCapitalType: this.formCapitalModify.subscribedCapitalType,
             subscribedCapitalContribution: this.formCapitalModify.subscribedCapitalContribution,
-            subscribedCapitalDate: this.formCapitalModify.subscribedCapitalDate,
+            subscribedCapitalDate: this.formCapitalModify.subscribedCapitalDate ? parseTime(this.formCapitalModify.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.formCapitalModify.realityCapitalType,
             realityCapitalContribution: this.formCapitalModify.realityCapitalContribution,
-            realityCapitalDate: this.formCapitalModify.realityCapitalDate,
+            realityCapitalDate: this.formCapitalModify.realityCapitalDate ? parseTime(this.formCapitalModify.realityCapitalDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.formCapitalModify.responsiblePerson,
             shareholderType: this.formCapitalModify.shareholderType,
             shareholderMold: this.formCapitalModify.shareholderMold,

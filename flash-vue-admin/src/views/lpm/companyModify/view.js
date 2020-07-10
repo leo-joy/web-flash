@@ -336,7 +336,7 @@ export default {
     openAllFilesDialog() {
       if (this.companyModifyDataAll && this.companyModifyDataAll.length > 0 && this.newFilesListObj) {
         this.$message({
-          message: '恭喜你，成功获取到最新的公司相关文件！请查看！',
+          message: '成功获取到最新的公司相关文件！请查看！',
           type: 'success'
         })
         this.getNewFilesList()

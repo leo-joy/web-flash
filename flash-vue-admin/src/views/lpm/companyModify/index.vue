@@ -1549,7 +1549,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="认缴出资额（万元）">
-              <el-input v-model.number="formCapitalModify.subscribedCapitalContribution" minlength="1" />
+              <el-input v-model="formCapitalModify.subscribedCapitalContribution" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -1578,7 +1578,7 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="实缴出资额（万元）">
-              <el-input v-model.number="formCapitalModify.realityCapitalContribution" minlength="1" />
+              <el-input v-model="formCapitalModify.realityCapitalContribution" />
             </el-form-item>
           </el-col>
           <el-col :span="8">
