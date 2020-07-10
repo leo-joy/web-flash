@@ -19,6 +19,8 @@ export default {
       enterpriseType: '', // 企业类型
       registrationStatusBL: '', // 登记状态
       filterText: '',
+      advancedSearch: false, // 是否展开高级搜索
+      advancedSearchIcon: 'el-icon-arrow-down',
       searchType: 'enterpriseName',
       keyword: '',
       options: [{
@@ -174,14 +176,19 @@ export default {
           if (this.moduleType === '1' || this.moduleType === '2') {
             this.companys = this.$store.state.user.companys
           }
+          // pIds = pIds.reverse()
           this.listQuery.ids = pIds.length > 0 ? pIds.toString() : '2000000'
           getList(this.listQuery).then(response => {
             const companys = response.data.records
             for (let i = 0; i < companys.length; i++) {
-              companys[i]['chairman'] = records[i]['chairman']
-              companys[i]['director'] = records[i]['director']
-              companys[i]['supervisor'] = records[i]['supervisor']
-              companys[i]['generalManager'] = records[i]['generalManager']
+              for (let j = 0; j < records.length; j++) {
+                if (companys[i]['id'] * 1 === records[j]['enterpriseCode'] * 1) {
+                  companys[i]['chairman'] = records[j]['chairman']
+                  companys[i]['director'] = records[j]['director']
+                  companys[i]['supervisor'] = records[j]['supervisor']
+                  companys[i]['generalManager'] = records[j]['generalManager']
+                }
+              }
             }
             this.list = companys
             this.listLoading = false
@@ -227,6 +234,14 @@ export default {
       this.initSearchParams()
       this.listQuery.page = 1
       this.fetchData()
+    },
+    openAdvancedSearch() {
+      this.advancedSearch = !this.advancedSearch
+      if (this.advancedSearch) {
+        this.advancedSearchIcon = 'el-icon-arrow-up'
+      } else {
+        this.advancedSearchIcon = 'el-icon-arrow-down'
+      }
     },
     exportExcel() {
       const routeUrl = this.$router.resolve({

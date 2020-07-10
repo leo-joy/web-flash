@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="block">
+    <div v-if="advancedSearch" class="block">
       <!-- <el-row>
         <el-col :span="24">
           <el-button type="success" icon="el-icon-plus" @click.native="add">{{ $t('button.add') }}</el-button>
@@ -12,21 +12,6 @@
           >{{ $t('button.delete') }}</el-button>
         </el-col>
       </el-row>-->
-      <!-- <el-row>
-        <el-col :span="2">
-          <template>
-            <el-radio v-model="tagRadio" label="" @change="handleTagRadioClick">全部标签</el-radio>
-          </template>
-        </el-col>
-        <el-col :span="22">
-          <template>
-            <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
-            <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio>
-            <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
-          </template>
-        </el-col>
-      </el-row>
-      <br> -->
       <el-row>
         <el-col :span="2">
           <template>
@@ -99,7 +84,22 @@
       </el-row>
       <br>
       <el-row>
-        <!-- <el-col :span="5">
+        <el-col :span="2">
+          <template>
+            <el-radio v-model="tagRadio" label="" @change="handleTagRadioClick">全部标签</el-radio>
+          </template>
+        </el-col>
+        <el-col :span="22">
+          <template>
+            <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
+            <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio>
+            <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
+          </template>
+        </el-col>
+      </el-row>
+      <br>
+
+      <!-- <el-col :span="5">
           <el-input v-model="filterText" class="filterInput" placeholder="输入关键字进行树过滤" />
           <div ref="treecontainer" class="filter-tree">
             <el-tree
@@ -113,10 +113,13 @@
           </div>
 
         </el-col> -->
+    </div>
+    <div class="block">
+      <el-row>
         <el-col :span="24">
           <el-row :gutter="24">
             <el-col :span="4">
-              <el-select v-model="searchType" @change="searchTypeHander" placeholder="搜索类型">
+              <el-select v-model="searchType" placeholder="搜索类型" @change="searchTypeHander">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -125,7 +128,7 @@
                 />
               </el-select>
             </el-col>
-            <el-col :span="17">
+            <el-col :span="14">
               <el-input v-model="keyword" placeholder="请输入搜索关键字" />
             </el-col>
 
@@ -135,6 +138,12 @@
                 icon="el-icon-search"
                 @click.native="search"
               >{{ $t('button.search') }}</el-button>
+            </el-col>
+            <el-col :span="2">
+              <el-button
+                :icon="advancedSearchIcon"
+                @click.native="openAdvancedSearch"
+              >高级搜索</el-button>
             </el-col>
             <!-- <el-col :span="2">
               <el-button
