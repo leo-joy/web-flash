@@ -26,17 +26,21 @@
                 </el-col>
               </el-row> -->
           <el-row>
-            <el-col :span="24">
+            <el-col :span="12">
               <el-form-item label="组织属性：">{{ grandfatherOrg }} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="企业注册地：">
+                {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
-            <el-col :span="24">
+            <el-col :span="12">
               <el-form-item label="企业名称：">{{ businesslicenseData.enterpriseName }}</el-form-item>
             </el-col>
-            <el-col :span="24">
-              <el-form-item v-if="businesslicenseData.enterpriseNameEn" label="企业英文名称：">{{ businesslicenseData.enterpriseNameEn }}</el-form-item>
+            <el-col :span="12">
+              <el-form-item v-if="businesslicenseData.enterpriseNameEn" label="英文名称：">{{ businesslicenseData.enterpriseNameEn }}</el-form-item>
             </el-col>
           </el-row>
           <el-row>
@@ -75,22 +79,24 @@
 
           <el-row>
             <el-col :span="12">
-              <el-form-item label="法定代表人：">{{ businesslicenseData.legalRepresentative }}</el-form-item>
+              <el-form-item label="法人 / 负责人：">{{ businesslicenseData.legalRepresentative }}</el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item v-if="businesslicenseData.legalRepresentative" label="负责人：">{{ businesslicenseData.legalRepresentative }}</el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
             <el-col :span="12">
               <el-form-item
                 label="注册资本："
               >{{ businesslicenseData.registeredCapital }} 万{{ currencyBL }}</el-form-item>
             </el-col>
+          </el-row>
+          <el-row>
             <el-col :span="12">
               <el-form-item
                 label="成立日期："
               >{{ businesslicenseData.setupDate?businesslicenseData.setupDate.replace(' 00:00:00',''):'' }}</el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item
+                label="核准日期："
+              >{{ businesslicenseData.approvalDate?businesslicenseData.approvalDate.replace(' 00:00:00',''):'' }}</el-form-item>
             </el-col>
           </el-row>
 
@@ -102,26 +108,16 @@
             </el-col>
             <el-col :span="12">
               <el-form-item
-                v-if="businesslicenseData.achieveDate"
-                label="取得日期："
-              >{{ businesslicenseData.achieveDate?businesslicenseData.achieveDate.replace(' 00:00:00',''):'' }}</el-form-item>
-            </el-col>
-
-          </el-row>
-
-          <el-row>
-            <el-col :span="12">
-              <el-form-item
                 label="营业期限至："
               >{{ businesslicenseData.operatingPeriodEnd?businesslicenseData.operatingPeriodEnd.replace(' 00:00:00',''):'长期' }}</el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item
-                label="核准日期："
-              >{{ businesslicenseData.approvalDate?businesslicenseData.approvalDate.replace(' 00:00:00',''):'' }}</el-form-item>
+                v-if="businesslicenseData.achieveDate"
+                label="取得日期："
+              >{{ businesslicenseData.achieveDate?businesslicenseData.achieveDate.replace(' 00:00:00',''):'' }}</el-form-item>
             </el-col>
           </el-row>
-
           <el-row>
             <el-col :span="12">
               <el-form-item label="登记机关：">{{ businesslicenseData.registrationAuthority }}</el-form-item>
@@ -145,7 +141,7 @@
               <el-form-item label="经营范围：">{{ businesslicenseData.businessScope }}</el-form-item>
             </el-col>
           </el-row>
-          <el-row>
+          <el-row v-if="tagList && tagList.length>0">
             <el-col :span="24">
               <el-form-item label="企业标签：">
                 <el-tag v-for="tag in tagList" :key="tag.value" style="margin: 0 10px" size="small" :type="tag.value">
@@ -154,7 +150,7 @@
               </el-form-item>
             </el-col>
           </el-row>
-          <el-row>
+          <el-row v-if="businesslicenseData.remark">
             <el-col :span="24">
               <el-form-item label="备注：">{{ businesslicenseData.remark }}</el-form-item>
             </el-col>

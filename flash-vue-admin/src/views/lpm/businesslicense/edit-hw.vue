@@ -139,7 +139,7 @@
               <el-cascader
                 v-model="form.registrationPlace"
                 :options="provinces"
-                @change="handleChange"
+                @change="handleRegistrationPlaceChange"
               />
             </el-form-item>
           </el-col>

@@ -23,7 +23,6 @@ export default {
       enterpriseType: '', // 企业类型
       customTypeBL: '', // 自定义企业类型
       registrationTypeBL: '', // 企业注册类型
-      registrationPlaceBL: '', // 企业注册地
       currencyBL: '', // 币种
       registrationStatusBL: '', // 登记状态
       tagList: '', // 企业标签
@@ -105,7 +104,7 @@ export default {
         this.translateDict('企业类型', response.data.type, 'enterpriseType')
         this.translateDict('自定义企业类型', response.data.customType, 'customTypeBL')
         this.translateDict('企业注册类型', response.data.registrationType, 'registrationTypeBL')
-        this.translateDict('企业注册地', response.data.registrationPlace, 'registrationPlaceBL')
+        this.translateDict('登记状态【营业执照】', response.data.registrationStatus, 'registrationStatusBL')
         this.translateDict('币种', response.data.currency, 'currencyBL')
         if (response.data.tags) {
           this.translateDictList('企业标签', response.data.tags.split('-'), 'tagList')

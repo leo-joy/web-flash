@@ -64,7 +64,7 @@
             <el-col :span="12">
               <el-form-item>
                 <div class="item-label">企业注册地<br>Place of Incorporation</div>
-                {{ registrationPlaceBL }}</el-form-item>
+                {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</el-form-item>
             </el-col>
           </el-row>
           <el-row>

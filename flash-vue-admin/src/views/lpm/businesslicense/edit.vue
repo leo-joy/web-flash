@@ -41,17 +41,14 @@
           </el-col>
           <el-col :span="24">
             <el-form-item :label="$t('businessLicenseMgr.enterpriseName')" prop="enterpriseName">
-              <el-input v-model="form.enterpriseName" minlength="1" />
+              <el-input v-model="form.enterpriseName" />
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="24">
-            <el-form-item label="企业英文名称">
-              <el-input
-                v-model="form.enterpriseNameEn"
-                minlength="1"
-              />
+          <el-col :span="24">
+            <el-form-item label="英文名称">
+              <el-input v-model="form.enterpriseNameEn" />
             </el-form-item>
-          </el-col> -->
+          </el-col>
           <!-- <el-col :span="24">
             <el-form-item label="企业商用名称">
               <el-input v-model="form.enterpriseNameBusiness" minlength="1"></el-input>
@@ -100,7 +97,7 @@
               <el-cascader
                 v-model="form.registrationPlace"
                 :options="provinces"
-                @change="handleChange"
+                @change="handleRegistrationPlaceChange"
               />
               <!-- <el-select v-model="form.registrationPlace" placeholder="请选择">
                 <el-option

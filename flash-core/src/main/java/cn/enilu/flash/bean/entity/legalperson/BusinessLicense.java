@@ -44,8 +44,11 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="enterprise_code", columnDefinition = "VARCHAR(64) COMMENT '企业编号'")
     private String enterpriseCode;
 
-    @Column(name="registration_place", columnDefinition = "VARCHAR(32) COMMENT '企业注册地'")
+    @Column(name="registration_place", columnDefinition = "VARCHAR(32) COMMENT '企业注册地code'")
     private String registrationPlace;
+
+    @Column(name="registration_place_name", columnDefinition = "VARCHAR(32) COMMENT '企业注册地名称'")
+    private String registrationPlaceName;
 
     @Column(name="type", columnDefinition = "VARCHAR(32) COMMENT '企业类型'")
     private String type;
