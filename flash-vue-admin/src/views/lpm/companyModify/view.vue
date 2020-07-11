@@ -85,11 +85,11 @@
                     <span><b style="color:green">{{ item.operatingPeriodEndNew?item.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
                   </div>
                   <div v-if="item.businessScopeState+'' === 'true'" class="modifyList">
-                    <span><b>经营范围变更：</b></span>
-                    <span>由</span>
-                    <span>{{ item.businessScopeOld }}</span>
-                    <span>变更为</span>
-                    <span><b>{{ item.businessScopeNew }}</b></span>
+                    <div><b>经营范围：由 </b></div>
+                    <div>{{ item.businessScopeOld }}</div>
+                    <br>
+                    <div><b>变更为:</b></div>
+                    <div>{{ item.businessScopeNew }}</div>
                   </div>
                   <div v-if="item.constitutionState+'' === 'true'" class="modifyList">
                     <span><b>章程变更：</b></span>

@@ -80,11 +80,11 @@
             <span><b style="color:green">{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</b></span>
           </div>
           <div v-if="scope.row.businessScopeState+'' === 'true'">
-            <span><b>经营范围：</b></span>
-            <span>由</span>
-            <span>{{ scope.row.businessScopeOld }}</span>
-            <span>变更为</span>
-            <span><b>{{ scope.row.businessScopeNew }}</b></span>
+            <div><b>经营范围：由 </b></div>
+            <div>{{ scope.row.businessScopeOld }}</div>
+            <br>
+            <div><b>变更为:</b></div>
+            <div>{{ scope.row.businessScopeNew }}</div>
           </div>
           <div v-if="scope.row.constitutionState+'' === 'true'">
             <span><b>章程：</b></span>
