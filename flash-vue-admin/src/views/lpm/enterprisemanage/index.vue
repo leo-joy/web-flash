@@ -1,13 +1,13 @@
 <template>
   <div>
-    <el-row lass="dp-row">
+    <el-row>
       <el-col :span="1">&nbsp;
       </el-col>
       <el-col :span="22">
-        <h2 style="color:#176c6b;">{{ businesslicenseData.enterpriseName }}</h2>
+        <h2 style="color:#176c6b;margin:10px 0 0 0;">{{ businesslicenseData.enterpriseName }}</h2>
       </el-col>
     </el-row>
-    <el-row lass="dp-row">
+    <el-row>
       <el-col :span="1">&nbsp;
       </el-col>
       <el-col :span="8">

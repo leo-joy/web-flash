@@ -1,33 +1,32 @@
 <template>
   <div>
-    <el-row lass="dp-row">
+    <el-row>
       <el-col :span="1">&nbsp;
       </el-col>
       <el-col :span="22">
-        <h2 style="color:#176c6b;">{{ businesslicenseData.enterpriseName }}</h2>
-        <h4 style="color:#176c6b;margin-top:-20px">{{ businesslicenseData.enterpriseNameEn }}</h4>
+        <h2 style="color:#176c6b;margin:10px 0 0 0;">{{ businesslicenseData.enterpriseName }}</h2>
+        <h4 style="color:#176c6b;margin-top:0px">{{ businesslicenseData.enterpriseNameEn }}</h4>
       </el-col>
     </el-row>
-    <el-row lass="dp-row">
+    <el-row>
       <el-col :span="1">&nbsp;
       </el-col>
       <el-col :span="7">
-        <h4>
+        <h4 style="margin:0 0 20px 0">
           <div class="item-label">公司编号<br>Company Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           {{ businesslicenseData.enterpriseCode }}</h4>
       </el-col>
       <el-col :span="7">
-        <h4>
+        <h4 style="margin:0 0 20px 0">
           <div class="item-label">成立日期<br>Register Date&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           {{ businesslicenseData.setupDate?businesslicenseData.setupDate.replace(' 00:00:00',''):'' }}</h4>
       </el-col>
       <el-col :span="9">
-        <h4>
+        <h4 style="margin:0 0 20px 0">
           <div class="item-label">注册地<br>Place of Incorporation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
           香港 <br> HK</h4>
       </el-col>
     </el-row>
-    <br>
     <!-- <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
       <el-radio-button label="top">top</el-radio-button>
       <el-radio-button label="right">right</el-radio-button>
