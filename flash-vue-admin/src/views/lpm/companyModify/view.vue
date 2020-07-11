@@ -17,7 +17,7 @@
         <el-button type="primary" icon="el-icon-search" style="margin-left:10px;" @click.native="filterTypeList">{{ $t('button.search') }}</el-button>
       </el-col>
       <el-col :span="5">
-        <el-button v-permission="['/newFilesList']" type="success" style="margin-left:10px;float:right" @click="openAllFilesDialog()">公司最新文件</el-button>
+        <el-button v-permission="['/newFilesList']" style="margin-left:10px;float:right" @click="openAllFilesDialog()">公司最新文件</el-button>
       </el-col>
     </el-row>
     <br>
@@ -32,7 +32,7 @@
                 </el-col>
 
                 <el-col :span="3">
-                  <el-button type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
+                  <el-button style="float:right" type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
                 </el-col>
                 <el-col :span="24">
                   <div v-if="item.enterpriseNameState+'' === 'true'" class="modifyList">
@@ -484,7 +484,7 @@
 <style lang="scss">
 .dp-table {
   width:100%;
-  border-bottom:1px solid #ebeef5;
+  border:1px dotted #ebeef5;
   border-collapse:collapse;
 }
 
