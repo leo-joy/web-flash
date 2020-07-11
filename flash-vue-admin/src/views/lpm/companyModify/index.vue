@@ -678,7 +678,7 @@
               </el-col>
             </el-row>
           </el-collapse-item>
-          <el-collapse-item name="3" title="上传相关文件，注：只能上传pdf格式文件，且不超过20MB">
+          <el-collapse-item name="3" title="上传相关文件，注：只能上传pdf格式文件，且不超过100MB">
             <el-row>
               <el-col :span="12">
                 <el-card class="box-card">
@@ -696,7 +696,7 @@
                       :on-success="accessoryFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -729,7 +729,7 @@
                       :on-success="companyReferenceRegisterFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -764,7 +764,7 @@
                       :on-success="shareholdersDecideFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -796,7 +796,7 @@
                       :on-success="seniorManagementFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -830,7 +830,7 @@
                       :on-success="companyArticlesAssociationFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -862,7 +862,7 @@
                       :on-success="appointDismissFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -896,7 +896,7 @@
                       :on-success="promiseFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -928,7 +928,7 @@
                       :on-success="delegationFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -963,7 +963,7 @@
                       :on-success="approvalFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -995,7 +995,7 @@
                       :on-success="businessLicenseFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1029,7 +1029,7 @@
                       :on-success="sealFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1061,7 +1061,7 @@
                       :on-success="openAccountFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1096,7 +1096,7 @@
                       :on-success="orgCreditCodeFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1128,7 +1128,7 @@
                       :on-success="authorizationFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1162,7 +1162,7 @@
                       :on-success="companyModifyRegisterFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1194,7 +1194,7 @@
                       :on-success="stockPledgeFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1228,7 +1228,7 @@
                       :on-success="liquidationFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1260,7 +1260,7 @@
                       :on-success="liquidationPersonFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1294,7 +1294,7 @@
                       :on-success="tallageFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1326,7 +1326,7 @@
                       :on-success="noticeFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>
@@ -1359,7 +1359,7 @@
                       :on-success="otherFilesUploadSuccess"
                       :on-preview="hanglePreview"
                     >
-                      <el-button size="small" type="primary">点击上传</el-button>
+                      <el-button size="small">点击上传</el-button>
                       <span slot="tip" class="el-upload__tip">&nbsp;</span>
                     </el-upload>
                   </el-form-item>

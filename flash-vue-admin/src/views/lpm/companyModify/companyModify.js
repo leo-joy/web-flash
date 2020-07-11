@@ -1015,9 +1015,6 @@ export default {
         this.form.directorIdNew = this.form.directorIdNew.replace(id, '')
         this.form.directorNew = this.form.directorNew.replace(name, '')
       }
-      console.log(this.form.directorIdNew)
-      console.log(this.form.directorNew)
-      console.log(this.directorTags)
     },
 
     handleSupervisorSelect(item) {
@@ -1060,12 +1057,21 @@ export default {
         this.form.supervisorIdNew = this.form.supervisorIdNew.replace(id, '')
         this.form.supervisorNew = this.form.supervisorNew.replace(name, '')
       }
-      console.log(this.form.supervisorIdNew)
-      console.log(this.form.supervisorNew)
-      console.log(this.supervisorTags)
     },
 
-    handleBeforeUpload() {
+    handleBeforeUpload(file) {
+      const isPdf = file.type === 'application/pdf'
+      const isLt100M = file.size / 1024 / 1024 < 100
+      if (!isPdf) {
+        this.$message.error('上传文件只能是 pdf 格式!')
+        return false
+      }
+
+      if (!isLt100M) {
+        this.$message.error('上传文件大小不能超过 100MB!')
+        return false
+      }
+
       if (this.uploadFileId !== '') {
         this.$message({
           message: this.$t('common.mustSelectOne'),

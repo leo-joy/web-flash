@@ -149,6 +149,7 @@ export default {
     deleteConfirm: '你确认删除该记录？',
     tooltip: '提示',
     warning: '警告',
+    uploading: '文件上传中。。。',
     optionSuccess: '操作成功',
     uploadError: '上传文件失败',
     isRequired: '不能为空',
