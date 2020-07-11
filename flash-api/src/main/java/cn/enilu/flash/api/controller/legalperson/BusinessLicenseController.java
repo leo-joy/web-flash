@@ -156,7 +156,11 @@ public class BusinessLicenseController {
 			ArrayList lists = new ArrayList(Arrays.asList(ids.split(",")));
 			page.addFilter("id", SearchFilter.Operator.IN,lists);
 		}
-		page.addFilter("registrationType", SearchFilter.Operator.EQ,registrationType);
+		if(registrationType != null && !registrationType.isEmpty()) {
+			ArrayList lists = new ArrayList(Arrays.asList(registrationType.split(",")));
+			page.addFilter("registrationType", SearchFilter.Operator.IN,lists);
+		}
+		//page.addFilter("registrationType", SearchFilter.Operator.EQ,registrationType);
 		page.addFilter("registrationStatus", SearchFilter.Operator.EQ,registrationStatus);
 		// 添加排序规则
 		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC,"type"));

@@ -15,7 +15,7 @@
       <el-row>
         <el-col :span="2">
           <template>
-            <el-radio v-model="deptRadio" label="24" @change="handleRadioClick">全部企业</el-radio>
+            <el-radio v-model="registrationTypeRadio" label="1,2,4" @change="handleRegistrationTypeRadioClick">全部企业</el-radio>
           </template>
         </el-col>
         <el-col :span="22">
@@ -92,8 +92,10 @@
         <el-col :span="22">
           <template>
             <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
-            <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio>
+            <!-- <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio> -->
             <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
+            <el-radio v-model="registrationTypeRadio" label="1,4" @change="handleRegistrationTypeRadioClick">国内企业</el-radio>
+            <el-radio v-model="registrationTypeRadio" label="2" @change="handleRegistrationTypeRadioClick">境外/香港企业</el-radio>
           </template>
         </el-col>
       </el-row>
@@ -203,8 +205,8 @@
             </el-table-column>
             <el-table-column v-if="moduleType !== 'dashboard'" label="操作" width="80">
               <template slot-scope="scope">
-                <el-button v-if="moduleType == '2'" v-permission="['/editCompany']" type="text" @click="modify(scope.row.id)">{{ $t('button.modity') }}</el-button>
-                <el-button v-if="moduleType == '1'" v-permission="['/enterprisemanage']" type="text" @click="edit(scope.row.id)">{{ $t('button.edit') }}</el-button>
+                <el-button v-if="moduleType == '2'" v-permission="['/editCompany']" type="text" @click="modify(scope.row)">{{ $t('button.modity') }}</el-button>
+                <el-button v-if="moduleType == '1'" v-permission="['/enterprisemanage']" type="text" @click="edit(scope.row)">{{ $t('button.edit') }}</el-button>
                 <!-- <el-button type="text" @click="detail(scope.row)">详情</el-button> -->
               </template>
             </el-table-column>

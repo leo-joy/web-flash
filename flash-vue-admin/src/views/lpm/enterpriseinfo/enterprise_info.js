@@ -22,6 +22,8 @@ export default {
       advancedSearch: false, // 是否展开高级搜索
       advancedSearchIcon: 'el-icon-arrow-down',
       searchType: 'enterpriseName',
+      tagRadio: '',
+      registrationTypeRadio: '1,2,4', // 默认展示全部
       keyword: '',
       options: [{
         value: 'enterpriseName',
@@ -124,13 +126,13 @@ export default {
       deptList().then(response => {
         this.deptTree.data = response.data
       })
-      if (this.$store.state.user.companys) {
-        this.deptRadio = '24'
-        this.listQuery.pIds = 24
-      } else {
-        this.deptRadio = '27'
-        this.listQuery.pIds = 27
-      }
+      // if (this.$store.state.user.companys) {
+      //   this.deptRadio = '24'
+      //   this.listQuery.pIds = 24
+      // } else {
+      //   this.deptRadio = '27'
+      //   this.listQuery.pIds = 27
+      // }
 
       if (this.$route.path) {
         const tempArr = this.$route.path.split('/')
@@ -177,6 +179,7 @@ export default {
             this.companys = this.$store.state.user.companys
           }
           // pIds = pIds.reverse()
+          this.listQuery.registrationType = this.registrationTypeRadio
           this.listQuery.ids = pIds.length > 0 ? pIds.toString() : '2000000'
           getList(this.listQuery).then(response => {
             const companys = response.data.records
@@ -204,6 +207,7 @@ export default {
         if (this.moduleType === '1' || this.moduleType === '2') {
           this.companys = this.$store.state.user.companys
         }
+        this.listQuery.registrationType = this.registrationTypeRadio
         this.listQuery.ids = this.companys ? this.companys.toString() : ''
         getList(this.listQuery).then(response => {
           this.list = response.data.records
@@ -338,26 +342,6 @@ export default {
       })
       return false
     },
-    edit(id) {
-      this.$router.push({ path: '/enterprisemanage', query: { id: id }})
-      // this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
-      // if (this.checkSel()) {
-      //   this.isAdd = false
-      //   this.form = this.selRow
-      //   this.formTitle = '编辑注册公司'
-      //   this.formVisible = true
-      // }
-    },
-    modify(id) {
-      this.$router.push({ path: '/editCompany', query: { id: id }})
-      // this.$router.push({ path: '/lpm/businesslicenseEdit', query: { id: id }})
-      // if (this.checkSel()) {
-      //   this.isAdd = false
-      //   this.form = this.selRow
-      //   this.formTitle = '编辑注册公司'
-      //   this.formVisible = true
-      // }
-    },
     remove() {
       if (this.checkSel()) {
         var id = this.selRow.id
@@ -401,12 +385,25 @@ export default {
       return data.simplename.indexOf(value) !== -1
     },
     handleRadioClick() {
+      this.listQuery.registrationType = ''
+      this.registrationTypeRadio = ''
       this.listQuery.pIds = this.deptRadio
       this.listQuery.page = 1
       this.fetchData()
     },
     handleTagRadioClick() {
+      this.listQuery.registrationType = ''
+      this.registrationTypeRadio = ''
       this.listQuery.tag = this.tagRadio
+      this.listQuery.page = 1
+      this.fetchData()
+    },
+    handleRegistrationTypeRadioClick() {
+      this.listQuery.registrationType = this.registrationTypeRadio
+      this.listQuery.pIds = ''
+      this.deptRadio = ''
+      this.listQuery.tag = ''
+      this.tagRadio = ''
       this.listQuery.page = 1
       this.fetchData()
     },
@@ -414,9 +411,23 @@ export default {
       this.listQuery.pIds = data.id
       this.fetchData()
     },
+    edit(row) {
+      let urlType = ''
+      if (row.registrationType * 1 === 2) {
+        urlType = 'Hw'
+      }
+      this.$router.push({ path: '/enterprisemanage' + urlType, query: { id: row.id }})
+    },
     detail(row) {
-      const routeUrl = this.$router.resolve({ path: '/lpm/detailEnterpriseinfo', query: { id: row.id }})
+      let urlType = ''
+      if (row.registrationType * 1 === 2) {
+        urlType = 'Hw'
+      }
+      const routeUrl = this.$router.resolve({ path: '/lpm/detailEnterpriseinfo' + urlType, query: { id: row.id }})
       window.open(routeUrl.href, '_blank')
+    },
+    modify(row) {
+      this.$router.push({ path: '/editCompany', query: { id: row.id }})
     },
     // 格式化 企业类型
     formatterEnterpriseType(row) {
