@@ -126,7 +126,6 @@
               <el-form-item label="登记状态：">{{ registrationStatusBL }}</el-form-item>
             </el-col>
           </el-row>
-
           <el-row>
             <el-col :span="24">
               <el-form-item label="地址：">{{ businesslicenseData.registeredAddress }}</el-form-item>
@@ -141,13 +140,17 @@
               <el-form-item label="经营范围：">{{ businesslicenseData.businessScope }}</el-form-item>
             </el-col>
           </el-row>
-          <el-row v-if="tagList && tagList.length>0">
-            <el-col :span="24">
+          <el-row>
+            <el-col v-if="tagList && tagList.length>0" :span="12">
               <el-form-item label="企业标签：">
                 <el-tag v-for="tag in tagList" :key="tag.value" style="margin: 0 10px" size="small" :type="tag.value">
                   {{ tag.name }}
                 </el-tag>
               </el-form-item>
+            </el-col>
+            <el-col v-if="businesslicenseData.realProportion" :span="12">
+              <el-form-item label="实际持有股权：">
+                {{ businesslicenseData.realProportion }} % </el-form-item>
             </el-col>
           </el-row>
           <el-row v-if="businesslicenseData.remark">

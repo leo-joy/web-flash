@@ -227,6 +227,11 @@
               </el-select>
             </el-form-item>
           </el-col>
+          <el-col :span="12">
+            <el-form-item label="实际持有股权（%）">
+              <el-slider v-model="form.realProportion" show-input />
+            </el-form-item>
+          </el-col>
 
           <!-- <el-col :span="24">
             <el-form-item label="经营地址">
