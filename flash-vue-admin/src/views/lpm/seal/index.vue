@@ -37,12 +37,6 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="序号" width="60">
-        <template slot-scope="scope">{{ scope.row.serialNumber }}</template>
-      </el-table-column>
-      <el-table-column label="企业名称">
-        <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
-      </el-table-column>
       <el-table-column label="印章名称">
         <template slot-scope="scope">{{ scope.row.sealName }}</template>
       </el-table-column>
@@ -91,12 +85,6 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="序号">
-              <el-input v-model="form.serialNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-
           <el-col :span="12">
             <el-form-item label="印章名称">
               <el-input v-model="form.sealName" minlength="1" />

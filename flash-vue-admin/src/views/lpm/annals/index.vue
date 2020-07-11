@@ -37,9 +37,6 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="序号" width="60">
-        <template slot-scope="scope">{{ scope.row.serialNumber }}</template>
-      </el-table-column>
       <el-table-column label="企业名称">
         <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
       </el-table-column>
@@ -51,9 +48,6 @@
       </el-table-column>
       <el-table-column label="经办人" width="100">
         <template slot-scope="scope">{{ scope.row.responsiblePerson }}</template>
-      </el-table-column>
-      <el-table-column label="详情">
-        <template slot-scope="scope">{{ scope.row.accessoryFiles }}</template>
       </el-table-column>
     </el-table>
     <br>
@@ -93,12 +87,6 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="序号" prop="serialNumber">
-              <el-input v-model.number="form.serialNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-
           <el-col :span="12">
             <el-form-item label="报送年度" prop="submissionYear">
               <el-input v-model.number="form.submissionYear" minlength="1" />

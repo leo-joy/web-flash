@@ -37,16 +37,10 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="序号" width="60">
-        <template slot-scope="scope">{{ scope.row.serialNumber }}</template>
-      </el-table-column>
-      <el-table-column label="企业名称" width="300">
-        <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
-      </el-table-column>
       <el-table-column label="注册号" width="150">
         <template slot-scope="scope">{{ scope.row.trademarkRegisterCode }}</template>
       </el-table-column>
-      <el-table-column label="商标名称" width="300">
+      <el-table-column label="商标名称">
         <template slot-scope="scope">{{ scope.row.trademarkName }}</template>
       </el-table-column>
       <el-table-column
@@ -100,18 +94,8 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="序号" prop="serialNumber">
-              <el-input v-model="form.serialNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="注册号" prop="trademarkRegisterCode">
               <el-input v-model="form.trademarkRegisterCode" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="商标名称" prop="trademarkName">
-              <el-input v-model="form.trademarkName" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -124,6 +108,11 @@
                   :value="item.value"
                 />
               </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="24">
+            <el-form-item label="商标名称" prop="trademarkName">
+              <el-input v-model="form.trademarkName" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">

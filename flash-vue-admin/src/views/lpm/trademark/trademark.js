@@ -59,9 +59,6 @@ export default {
         trademarkRegisterCode: [
           { required: true, message: '请填写注册号', trigger: 'blur' }
         ],
-        serialNumber: [
-          { required: true, message: '请填写序号', trigger: 'blur' }
-        ],
         trademarkName: [
           { required: true, message: '请填写商标名称', trigger: 'blur' }
         ],
@@ -70,9 +67,6 @@ export default {
         ],
         trademarkRegisterDate: [
           { required: true, message: '请填写注册日期', trigger: 'blur' }
-        ],
-        responsiblePerson: [
-          { required: true, message: '请填写经办人', trigger: 'blur' }
         ]
       },
       listQuery: {
@@ -203,7 +197,7 @@ export default {
             trademarkRegisterCode: this.form.trademarkRegisterCode,
             trademarkName: this.form.trademarkName,
             trademarkType: this.form.trademarkType,
-            trademarkRegisterDate: parseTime(this.form.trademarkRegisterDate, '{y}-{m}-{d}'),
+            trademarkRegisterDate: this.form.trademarkRegisterDate ? parseTime(this.form.trademarkRegisterDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.form.responsiblePerson,
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id

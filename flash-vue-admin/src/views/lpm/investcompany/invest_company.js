@@ -45,7 +45,7 @@ export default {
         registeredCapital: '',
         currency: '',
         registrationStatus: '',
-        proportion: '',
+        proportion: 0,
         remark: '',
         realityCapitalContribution: '',
         id: ''
@@ -176,7 +176,7 @@ export default {
         registeredCapital: '',
         currency: '',
         registrationStatus: '',
-        proportion: '',
+        proportion: 0,
         remark: '',
         realityCapitalContribution: '',
         id: ''

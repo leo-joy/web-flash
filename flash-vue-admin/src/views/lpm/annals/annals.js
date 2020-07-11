@@ -49,9 +49,6 @@ export default {
         enterpriseName: [
           { required: true, message: '请选择公司名称', trigger: 'blur' }
         ],
-        serialNumber: [
-          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
-        ],
         submissionYear: [
           { required: true, message: '请输入年度', trigger: 'blur' },
           { type: 'number', message: '只能输入是数值', trigger: 'blur' }
@@ -176,7 +173,7 @@ export default {
             enterpriseName: this.form.enterpriseName,
             enterpriseCode: this.form.enterpriseCode,
             submissionYear: this.form.submissionYear,
-            submissionDate: parseTime(this.form.submissionDate, '{y}-{m}-{d}'),
+            submissionDate: this.form.submissionDate ? parseTime(this.form.submissionDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.form.responsiblePerson,
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id

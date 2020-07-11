@@ -19,7 +19,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class StockPledge extends BaseEntity {
     @Column(name="serial_number", columnDefinition = "VARCHAR(64) COMMENT '序号'")
-    @NotBlank(message = "序号不能为空")
     private String serialNumber;
 
     @Column(name="enterprise_code", columnDefinition = "VARCHAR(64) COMMENT '所属企业编码'")
@@ -31,7 +30,6 @@ public class StockPledge extends BaseEntity {
     private String enterpriseName;
 
     @Column(name="register_code", columnDefinition = "VARCHAR(64) COMMENT '登记编号'")
-    @NotBlank(message = "登记编号不能为空")
     private String registerCode;
 
     @Column(name="pledgor", columnDefinition = "VARCHAR(128) COMMENT '出质人'")
@@ -62,7 +60,6 @@ public class StockPledge extends BaseEntity {
     private String status;
 
     @Column(name="responsible_person", columnDefinition = "VARCHAR(32) COMMENT '经办人'")
-    @NotBlank(message = "经办人不能为空")
     private String responsiblePerson;
 
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '详情'")

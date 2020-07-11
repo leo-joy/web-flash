@@ -46,7 +46,7 @@
         />
         <el-table-column
           prop="realityCapitalContribution"
-          label="认缴出资额（万元）"
+          label="实缴出资额（万元）"
           width="100"
         />
         <el-table-column label="认缴出资日期" width="120">

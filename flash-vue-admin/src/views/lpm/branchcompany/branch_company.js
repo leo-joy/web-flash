@@ -38,7 +38,7 @@ export default {
         registeredCapital: '',
         currency: '',
         registrationStatus: '',
-        proportion: '',
+        proportion: 0,
         remark: '',
         id: ''
       },
@@ -158,7 +158,7 @@ export default {
         registeredCapital: '',
         currency: '',
         registrationStatus: '',
-        proportion: '',
+        proportion: 0,
         remark: '',
         id: ''
       }

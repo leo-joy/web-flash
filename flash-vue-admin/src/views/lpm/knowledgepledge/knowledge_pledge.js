@@ -80,9 +80,6 @@ export default {
         ],
         status: [
           { required: true, message: '请选择状态', trigger: 'blur' }
-        ],
-        responsiblePerson: [
-          { required: true, message: '请填写经办人', trigger: 'blur' }
         ]
       },
       listQuery: {

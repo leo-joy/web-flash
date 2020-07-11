@@ -14,17 +14,17 @@
               <el-form-item label="种类">
                 <span>{{ formatterPropertyType(props.row) }}</span>
               </el-form-item>
-              <el-form-item label="出质人名称">
+              <el-form-item label="出质人">
                 <span>{{ props.row.pledgorName }}</span>
               </el-form-item>
-              <el-form-item label="质权人名称">
+              <el-form-item label="质权人">
                 <span>{{ props.row.pledgeeName }}</span>
               </el-form-item>
               <el-form-item label="质权登记期限">
                 <span>{{ props.row.pledgeeCertificateNumber }}</span>
               </el-form-item>
               <el-form-item label="状态">
-                <span>{{ formatterStockStatus(props.row) }}</span>
+                <span>{{ formatterKnowledgeStatus(props.row) }}</span>
               </el-form-item>
               <el-form-item label="经办人">
                 <span>{{ props.row.responsiblePerson }}</span>
@@ -33,8 +33,8 @@
           </template>
         </el-table-column>
         <el-table-column prop="propertyName" label="名称" width="200" />
-        <el-table-column prop="pledgorName" label="出质人名称" />
-        <el-table-column prop="pledgeeName" label="质权人名称" />
+        <el-table-column prop="pledgorName" label="出质人" />
+        <el-table-column prop="pledgeeName" label="质权人" />
         <el-table-column
           prop="status"
           label="状态"

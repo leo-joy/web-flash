@@ -196,8 +196,8 @@ export default {
             unlawfulActType: this.form.unlawfulActType,
             administrativePunishContent: this.form.administrativePunishContent,
             decisionOrgName: this.form.decisionOrgName,
-            validityFrom: parseTime(this.form.validityFrom, '{y}-{m}-{d}'),
-            publicityDate: parseTime(this.form.publicityDate, '{y}-{m}-{d}'),
+            validityFrom: this.form.validityFrom ? parseTime(this.form.validityFrom, '{y}-{m}-{d}') : '',
+            publicityDate: this.form.publicityDate ? parseTime(this.form.publicityDate, '{y}-{m}-{d}') : '',
             remark: this.form.remark,
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id

@@ -181,8 +181,8 @@ export default {
             enterpriseName: this.form.enterpriseName,
             enterpriseCode: this.form.enterpriseCode,
             sealName: this.form.sealName,
-            activeDate: parseTime(this.form.activeDate, '{y}-{m}-{d}'),
-            obsoleteDate: parseTime(this.form.obsoleteDate, '{y}-{m}-{d}'),
+            activeDate: this.form.activeDate ? parseTime(this.form.activeDate, '{y}-{m}-{d}') : '',
+            obsoleteDate: this.form.obsoleteDate ? parseTime(this.form.obsoleteDate, '{y}-{m}-{d}') : '',
             status: this.form.status,
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id

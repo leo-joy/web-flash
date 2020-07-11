@@ -15,7 +15,7 @@ import java.util.Date;
 
 @Entity(name="t_lpm_seal")
 @Data
-@Table(appliesTo = "t_lpm_seal",comment = "股东信息")
+@Table(appliesTo = "t_lpm_seal",comment = "印章信息")
 @EntityListeners(AuditingEntityListener.class)
 public class Seal extends BaseEntity {
 

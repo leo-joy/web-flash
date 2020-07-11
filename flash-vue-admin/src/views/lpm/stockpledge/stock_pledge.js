@@ -79,9 +79,6 @@ export default {
         ],
         stockPledgeRegisterDate: [
           { required: true, message: '请填写股权出质设立登记日期', trigger: 'blur' }
-        ],
-        responsiblePerson: [
-          { required: true, message: '请填写经办人', trigger: 'blur' }
         ]
       },
       listQuery: {

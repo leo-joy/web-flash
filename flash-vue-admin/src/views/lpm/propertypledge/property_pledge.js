@@ -191,7 +191,7 @@ export default {
             enterpriseName: this.form.enterpriseName,
             enterpriseCode: this.form.enterpriseCode,
             registerCode: this.form.registerCode,
-            registerDate: parseTime(this.form.registerDate, '{y}-{m}-{d}'),
+            registerDate: this.form.registerDate ? parseTime(this.form.registerDate, '{y}-{m}-{d}') : '',
             registerOrg: this.form.registerOrg,
             byAssureBondContribution: this.form.byAssureBondContribution,
             status: this.form.status,

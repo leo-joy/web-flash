@@ -37,12 +37,6 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="序号" width="60">
-        <template slot-scope="scope">{{ scope.row.serialNumber }}</template>
-      </el-table-column>
-      <el-table-column label="企业名称" width="300">
-        <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
-      </el-table-column>
       <el-table-column label="登记编号" width="150">
         <template slot-scope="scope">{{ scope.row.registerCode }}</template>
       </el-table-column>
@@ -107,14 +101,13 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="序号">
-              <el-input v-model="form.serialNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="12">
             <el-form-item label="登记编号">
               <el-input v-model="form.registerCode" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" prop="responsiblePerson">
+            <el-form-item label="经办人">
+              <el-input v-model="form.responsiblePerson" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -128,11 +121,6 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="出质股权数额" prop="pledgeStockContribution">
-              <el-input v-model.number="form.pledgeStockContribution" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="质权人" prop="pledgee">
               <el-input v-model="form.pledgee" minlength="1" />
             </el-form-item>
@@ -140,6 +128,11 @@
           <el-col :span="12">
             <el-form-item label="证照/证件号码(质权人)" prop="pledgeeCertificateNumber">
               <el-input v-model="form.pledgeeCertificateNumber" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="出质股权数额" prop="pledgeStockContribution">
+              <el-input v-model.number="form.pledgeStockContribution" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -162,11 +155,6 @@
                   :value="item.value"
                 />
               </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12" prop="responsiblePerson">
-            <el-form-item label="经办人">
-              <el-input v-model="form.responsiblePerson" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="24">

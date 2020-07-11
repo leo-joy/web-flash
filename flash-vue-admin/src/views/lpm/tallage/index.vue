@@ -19,11 +19,6 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="所属企业名称">
-        <template slot-scope="scope">
-          {{ scope.row.enterpriseName }}
-        </template>
-      </el-table-column>
       <el-table-column label="税务登记号">
         <template slot-scope="scope">
           {{ scope.row.dutyParagraph }}

@@ -197,9 +197,9 @@ export default {
             transcriptStatus: this.form.transcriptStatus,
             transcriptCode: this.form.transcriptCode,
             statementContent: this.form.statementContent,
-            statementDate: parseTime(this.form.statementDate, '{y}-{m}-{d}'),
+            statementDate: this.form.statementDate ? parseTime(this.form.statementDate, '{y}-{m}-{d}') : '',
             replaceStatus: this.form.replaceStatus,
-            publicityDate: parseTime(this.form.publicityDate, '{y}-{m}-{d}'),
+            publicityDate: this.form.publicityDate ? parseTime(this.form.publicityDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.form.responsiblePerson,
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id

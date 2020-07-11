@@ -19,7 +19,6 @@ import java.util.Date;
 @EntityListeners(AuditingEntityListener.class)
 public class Trademark extends BaseEntity {
     @Column(name="serial_number", columnDefinition = "VARCHAR(64) COMMENT '序号'")
-    @NotBlank(message = "序号不能为空")
     private String serialNumber;
 
     @Column(name="enterprise_code", columnDefinition = "VARCHAR(64) COMMENT '所属企业编码'")
@@ -46,7 +45,6 @@ public class Trademark extends BaseEntity {
     private Date trademarkRegisterDate;
 
     @Column(name="responsible_person", columnDefinition = "VARCHAR(32) COMMENT '经办人'")
-    @NotBlank(message = "经办人不能为空")
     private String responsiblePerson;
 
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '详情'")

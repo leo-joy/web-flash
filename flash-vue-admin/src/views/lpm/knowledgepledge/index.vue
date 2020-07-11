@@ -37,12 +37,6 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="序号" width="60">
-        <template slot-scope="scope">{{ scope.row.serialNumber }}</template>
-      </el-table-column>
-      <el-table-column label="企业名称" width="300">
-        <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
-      </el-table-column>
       <el-table-column label="知识产权登记证号" width="150">
         <template slot-scope="scope">{{ scope.row.propertyRegisterCode }}</template>
       </el-table-column>
@@ -108,18 +102,34 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="序号">
-              <el-input v-model="form.serialNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="知识产权登记证号" prop="propertyRegisterCode">
               <el-input v-model="form.propertyRegisterCode" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="名称" prop="propertyName">
+            <el-form-item label="产权登记名称" prop="propertyName">
               <el-input v-model="form.propertyName" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="出质人" prop="pledgorName">
+              <el-input v-model="form.pledgorName" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="质权登记期限" prop="pledgeeCertificateNumber">
+              <el-input v-model="form.pledgeeCertificateNumber" minlength="1" />
+            </el-form-item>
+          </el-col>
+          
+          <el-col :span="12">
+            <el-form-item label="质权人" prop="pledgeeName">
+              <el-input v-model="form.pledgeeName" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="经办人" prop="responsiblePerson">
+              <el-input v-model="form.responsiblePerson" minlength="1" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -135,21 +145,6 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="出质人名称" prop="pledgorName">
-              <el-input v-model="form.pledgorName" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="质权人名称" prop="pledgeeName">
-              <el-input v-model="form.pledgeeName" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="质权登记期限" prop="pledgeeCertificateNumber">
-              <el-input v-model="form.pledgeeCertificateNumber" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
             <el-form-item label="状态" prop="status">
               <el-select v-model="form.status" placeholder="请选择">
                 <el-option
@@ -161,11 +156,7 @@
               </el-select>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="经办人" prop="responsiblePerson">
-              <el-input v-model="form.responsiblePerson" minlength="1" />
-            </el-form-item>
-          </el-col>
+          
           <el-col :span="24">
             <el-form-item label="详情附件">
               <el-upload

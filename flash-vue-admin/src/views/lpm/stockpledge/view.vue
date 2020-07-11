@@ -35,7 +35,7 @@
             </el-form>
           </template>
         </el-table-column>
-        <el-table-column prop="registerCode" label="登记编号" width="150" />
+        <el-table-column prop="registerCode" label="登记编号" width="180" />
         <el-table-column prop="pledgor" label="出质人" />
         <el-table-column prop="pledgeStockContribution" label="出质股权数额" width="160" />
         <el-table-column prop="pledgee" label="质权人" />
