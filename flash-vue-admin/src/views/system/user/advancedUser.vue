@@ -105,7 +105,7 @@
       @next-click="fetchNext"
     />
 
-    <el-dialog :title="formTitle" :visible.sync="formVisible" width="70%">
+    <el-dialog :title="formTitle" :visible.sync="formVisible" :append-to-body="true" width="70%">
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="8">

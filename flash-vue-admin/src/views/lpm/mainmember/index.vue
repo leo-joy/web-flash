@@ -64,7 +64,7 @@
       @next-click="fetchNext"
     />
 
-    <el-dialog :title="formTitle" :visible.sync="formVisible" width="80%">
+    <el-dialog :title="formTitle" :visible.sync="formVisible" :append-to-body="true" width="80%">
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="24">
@@ -236,74 +236,14 @@
     </el-dialog>
 
     <!-- 高级管理人员 -->
-    <el-dialog :title="formAdvancedUserTitle" :visible.sync="formAdvancedUserVisible" width="70%">
-      <el-form ref="advancedUserForm" :model="advancedUserForm" :rules="advancedUserRules" label-width="120px">
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="姓名" prop="name">
-              <el-input v-model="advancedUserForm.name" minlength="1" />
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="8">
-            <el-form-item label="性别">
-              <el-radio-group v-model="advancedUserForm.sex">
-                <el-radio :label="1">男</el-radio>
-                <el-radio :label="2">女</el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="是否启用" prop="status">
-              <el-switch v-model="advancedUserForm.status" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="英文名" prop="englishName">
-              <el-input v-model="advancedUserForm.englishName" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="电话" prop="phone">
-              <el-input v-model="advancedUserForm.phone" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="邮箱" prop="email">
-              <el-input v-model="advancedUserForm.email" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="8">
-            <el-form-item label="内地身份证" prop="identityCardChinese">
-              <el-input v-model="advancedUserForm.identityCardChinese" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="香港身份证" prop="identityCardHk">
-              <el-input v-model="advancedUserForm.identityCardHk" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="8">
-            <el-form-item label="护照号码" prop="passportNo">
-              <el-input v-model="advancedUserForm.passportNo" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item label="地址" prop="address">
-              <el-input v-model="advancedUserForm.address" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="saveUser">{{ $t('button.submit') }}</el-button>
-        </el-form-item>
-      </el-form>
+    <el-dialog
+      :title="formAdvancedUserTitle"
+      :visible.sync="formAdvancedUserVisible"
+      :append-to-body="true"
+      width="80%"
+      @close="initAdvancedUserList"
+    >
+      <advanced-user />
     </el-dialog>
   </div>
 </template>

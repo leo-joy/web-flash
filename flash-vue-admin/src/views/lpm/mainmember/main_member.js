@@ -4,13 +4,16 @@ import { getApiUrl } from '@/utils/utils'
 import { getToken } from '@/utils/auth'
 import { getListIds } from '@/api/cms/fileInfo'
 import { getList as getEnterpriseList } from '@/api/lpm/businesslicense'
-import { getList as getUserList, saveUser } from '@/api/system/user'
+import { getList as getUserList } from '@/api/system/user'
 import { remove, getList, save } from '@/api/lpm/mainmember'
+import advancedUser from '@/views/system/user/advancedUser.vue'
+ 
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 export default {
   directives: { permission },
+  components: { advancedUser },
   data() {
     return {
       formVisible: false,
@@ -64,17 +67,6 @@ export default {
           { required: true, message: '请添加董事', trigger: 'blur' }
         ]
       },
-      advancedUserRules: {
-        name: [
-          { required: true, message: '请输入用户名', trigger: 'blur' },
-          { min: 2, max: 20, message: '长度在 2 到 20 个字符', trigger: 'blur' }
-        ],
-        phone: [
-          { required: true, message: '请输入手机号', trigger: 'blur' },
-          { min: 11, max: 11, message: '长度在11位数字', trigger: 'blur' }
-        ],
-        email: [{ required: true, message: '请输入email', trigger: 'blur' }]
-      },
       listQuery: {
         page: 1,
         limit: 10,
@@ -83,6 +75,7 @@ export default {
       listUserQuery: {
         page: 1,
         limit: 50000,
+        type: '1,2',
         account: undefined,
         name: undefined
       },
@@ -98,28 +91,7 @@ export default {
       timeout: null,
       // 高级管理人员添加
       formAdvancedUserTitle: '添加高级管理人员',
-      formAdvancedUserVisible: false,
-      advancedUserForm: {
-        id: '',
-        account: '',
-        name: '',
-        birthday: '',
-        sex: 1,
-        academic: '',
-        specialty: '',
-        post: '',
-        duty: '',
-        experience: '',
-        type: '1',
-        email: '',
-        phone: '',
-        password: '',
-        rePassword: '',
-        dept: '',
-        status: true,
-        deptid: 1,
-        deptName: ''
-      }
+      formAdvancedUserVisible: false
     }
   },
   filters: {
@@ -402,6 +374,12 @@ export default {
       if (queryString) {
         var restaurants = this.restaurants
         var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+        if (results && results.length === 0) {
+          this.$message({
+            message: '您输入的信息没有匹配到相应的结果！请检查输入是否正确！如匹配到不可通过右侧➕搜索配置高级管理人员！',
+            type: 'warning'
+          })
+        }
         cb(results)
       }
     },
@@ -508,78 +486,17 @@ export default {
       console.log(this.supervisorTags)
     },
     handleIconClick(ev) {
-      // getUserList(this.listUserQuery).then(response => {
-      //   this.restaurants = response.data.records
-      // })
       this.addAdvancedUser()
-      // this.$router.push({ path: '/advancedUser/1' })
-      // console.log(ev)
-    },
-
-    // 高级管理人员
-    resetAdvancedUserForm() {
-      this.advancedUserForm = {
-        id: '',
-        account: '',
-        name: '',
-        birthday: '',
-        sex: 1,
-        academic: '',
-        specialty: '',
-        post: '',
-        duty: '',
-        experience: '',
-        type: 1,
-        email: '',
-        phone: '',
-        password: '',
-        rePassword: '',
-        dept: '',
-        status: true,
-        deptid: 1
-      }
     },
     addAdvancedUser() {
-      this.resetAdvancedUserForm()
       this.formAdvancedUserTitle = '添加高级管理人员'
       this.formAdvancedUserVisible = true
       this.isAdvancedUserAdd = true
-      console.log(this.advancedUserForm)
     },
-    saveUser() {
-      var self = this
-      this.$refs['advancedUserForm'].validate(valid => {
-        if (valid) {
-          var form = self.advancedUserForm
-          if (form.status === true) {
-            // 启用
-            form.status = 1
-          } else {
-            // 冻结
-            form.status = 2
-          }
-          form.type = '1'
-          form.account = 'yjl' + form.phone // 登录名
-          form.password = 'yjl' + form.phone // 密码
-          form.rePassword = 'yjl' + form.phone // 重复密码
-          form.deptid = 36 // 部门
-          console.log(form)
-          saveUser(form).then(response => {
-            this.$message({
-              message: '提交成功',
-              type: 'success'
-            })
-            getUserList(this.listUserQuery).then(response => {
-              this.restaurants = response.data.records
-              this.formAdvancedUserVisible = false
-            })
-          })
-        } else {
-          console.log('发生错误')
-          return false
-        }
+    initAdvancedUserList() {
+      getUserList(this.listUserQuery).then(response => {
+        this.restaurants = response.data.records
       })
     }
-
   }
 }
