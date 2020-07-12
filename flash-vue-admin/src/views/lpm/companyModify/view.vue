@@ -4,7 +4,7 @@
       <el-col :span="1">&nbsp;
       </el-col>
       <el-col :span="16">
-        <el-select v-model="companyModifyTypeValue" multiple placeholder="请变更类型" style="width:100%" @change="filterTypeList">
+        <el-select v-model="companyModifyTypeValue" multiple placeholder="请选择变更类型" style="width:100%" @change="filterTypeList">
           <el-option
             v-for="item in companyModifyTypeOptions"
             :key="item.value"
@@ -526,7 +526,7 @@
   padding-right:30px;
 }
 
-.el-tree-node__children {
+.filter-tree .el-tree-node__children {
   padding:3px 0;
   color:#00a2ff;
 }
