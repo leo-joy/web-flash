@@ -38,56 +38,148 @@ function process_wb() {
 	/* get data */
 	let page = getQueryVariable('page')*1 || 1;
 	let limit = getQueryVariable('limit')*1 || 2000;
-	let pIds = getQueryVariable('pIds') || '';
+	let registrationType = getQueryVariable('registrationType');
 	let ids = getQueryVariable('ids') || '';
-	var url = INDEX_URL+'lpm/businesslicense/list?page='+page+'&limit='+limit+'&pIds='+pIds+'&ids='+ids;
-	$.ajax({
-		url: url,
-		type: 'GET',
-		dataType: 'JSON',
-		success: function (data) {
-			if (data && data.data && data.data.records.length>0 && data.success) {
-				console.log(data)
-				var records = data.data.records
-				var data = []
-				//data.push(titleArr)
-				for(let i=0;i<records.length;i++) {
-					let tempArr = []
-					tempArr.push(records[i].enterpriseName)
-					tempArr.push(records[i].unifiedSocialCreditCode)
-					tempArr.push(records[i].legalRepresentative)
-					tempArr.push(records[i].registeredCapital?records[i].registeredCapital+' 万元':'')
-					tempArr.push(records[i].setupDate.replace(' 00:00:00',''))
-					data.push(tempArr)
-				}
+	let pIds = getQueryVariable('pIds') || '';
+	let keyword = getQueryVariable('keyword') || '';
+	let tag = getQueryVariable('tag') || '';
+	let searchType = getQueryVariable('searchType') || '';
 
-				/* update canvas-datagrid */
-				if(!cDg) cDg = canvasDatagrid({ allowSorting:false, parentNode:HTMLOUT, data:data });
-				console.log(cDg)
-				cDg.style.height = '100%';
-				cDg.style.width = '100%';
-				cDg.args.allowSorting = false;
-				cDg.args.allowColumnReordering = false;
-				//cDg.data = data;
-
-				XPORT.disabled = false;
-
-				/* create schema (for A,B,C column headings) */
-				var ref = "A1:E" + records.length;
-				var range = XLSX.utils.decode_range(ref);
-				for(var i = range.s.c; i <= range.e.c; ++i) {
-					cDg.schema[i - range.s.c].title = XLSX.utils.encode_col(i)+' '+titleArr[i];
-				}
-
-				HTMLOUT.style.height = (window.innerHeight-100) + "px";
-				HTMLOUT.style.width = (window.innerWidth) + "px";
-
-				if(typeof console !== 'undefined') {
-					console.log("output", new Date());
+	
+	
+	if (( searchType === 'chairman' ||
+          searchType === 'director' ||
+          searchType === 'supervisor' ||
+          searchType === 'generalManager') && keyword) {
+		let urlMainmember = INDEX_URL+'lpm/main/member/list?page='+page+
+		    '&'+searchType+'='+keyword+
+			'&limit='+limit;
+		$.ajax({
+			url: urlMainmember,
+			type: 'GET',
+			dataType: 'JSON',
+			success: function (data) {
+				if (data && data.data && data.data.records.length>0 && data.success) {
+					console.log(data)
+					var records = data.data.records
+			        var ids = []
+					for (let i = 0; i < records.length; i++) {
+						ids.push(records[i].enterpriseCode)
+					}
+					ids = ids.length > 0 ? ids.toString() : '2000000'
+					let url = INDEX_URL+'lpm/businesslicense/list?page='+page+
+						'&limit=3000'+
+						'&ids='+ids;
+					$.ajax({
+						url: url,
+						type: 'GET',
+						dataType: 'JSON',
+						success: function (data) {
+							if (data && data.data && data.data.records.length>0 && data.success) {
+								const companys = data.data.records
+								for (let i = 0; i < companys.length; i++) {
+									for (let j = 0; j < records.length; j++) {
+										if (companys[i]['id'] * 1 === records[j]['enterpriseCode'] * 1) {
+										companys[i]['chairman'] = records[j]['chairman']
+										companys[i]['director'] = records[j]['director']
+										companys[i]['supervisor'] = records[j]['supervisor']
+										companys[i]['generalManager'] = records[j]['generalManager']
+										}
+									}
+								}
+								console.log(companys)
+								initTable(companys, 2)
+								//data.push(titleArr)
+							}
+						}
+					});
+					
 				}
 			}
+		});
+
+	} else {
+		let url = INDEX_URL+'lpm/businesslicense/list?page='+page+
+			'&limit='+limit+
+			'&registrationType='+registrationType+
+			'&'+searchType+'='+keyword+
+			'&pIds='+pIds+
+			'&tag='+tag+
+			'&ids='+ids;
+		$.ajax({
+			url: url,
+			type: 'GET',
+			dataType: 'JSON',
+			success: function (data) {
+				if (data && data.data && data.data.records.length>0 && data.success) {
+					console.log(data)
+					var records = data.data.records
+					initTable(records, 1)
+					//data.push(titleArr)
+				}
+			}
+		});
+	}		
+	
+}
+
+// 绘制表格
+function initTable(records, type) {
+	var data = []
+	var ref = "A1:E" + records.length;
+	if(type === 1) {
+		for(let i=0;i<records.length;i++) {
+			let tempArr = []
+			tempArr.push(records[i].enterpriseName)
+			tempArr.push(records[i].unifiedSocialCreditCode)
+			tempArr.push(records[i].legalRepresentative)
+			tempArr.push(records[i].registeredCapital?records[i].registeredCapital+' 万元':'')
+			tempArr.push(records[i].setupDate.replace(' 00:00:00',''))
+			data.push(tempArr)
 		}
-	});
+		titleArr = ['企业名称','社会统一信用代码','法人代表','注册资本','成立日期'];
+		ref = "A1:E" + records.length;
+	} else {
+		for(let i=0;i<records.length;i++) {
+			let tempArr = []
+			tempArr.push(records[i].enterpriseName)
+			tempArr.push(records[i].unifiedSocialCreditCode)
+			tempArr.push(records[i].legalRepresentative)
+			tempArr.push(records[i].chairman)
+			tempArr.push(records[i].director)
+			tempArr.push(records[i].supervisor)
+			tempArr.push(records[i].generalManager)
+			tempArr.push(records[i].registeredCapital?records[i].registeredCapital+' 万元':'')
+			tempArr.push(records[i].setupDate.replace(' 00:00:00',''))
+			data.push(tempArr)
+		}
+		titleArr = ['企业名称','社会统一信用代码','法人代表','董事长','董事','监事','总经理','注册资本','成立日期'];
+		ref = "A1:I" + records.length;
+	}
+	
+	/* update canvas-datagrid */
+	if(!cDg) cDg = canvasDatagrid({ allowSorting:false, parentNode:HTMLOUT, data:data });
+	console.log(cDg)
+	cDg.style.height = '100%';
+	cDg.style.width = '100%';
+	cDg.args.allowSorting = false;
+	cDg.args.allowColumnReordering = false;
+	//cDg.data = data;
+
+	XPORT.disabled = false;
+
+	/* create schema (for A,B,C column headings) */
+	var range = XLSX.utils.decode_range(ref);
+	for(var i = range.s.c; i <= range.e.c; ++i) {
+		cDg.schema[i - range.s.c].title = XLSX.utils.encode_col(i)+' '+titleArr[i];
+	}
+
+	HTMLOUT.style.height = (window.innerHeight-100) + "px";
+	HTMLOUT.style.width = (window.innerWidth) + "px";
+
+	if(typeof console !== 'undefined') {
+		console.log("output", new Date());
+	}
 }
 
 // 导出excle 

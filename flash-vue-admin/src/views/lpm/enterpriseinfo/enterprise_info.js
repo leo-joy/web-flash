@@ -248,9 +248,12 @@ export default {
       }
     },
     exportExcel() {
+      const query = this.listQuery
+      Object.assign(query, { 'searchType': this.searchType })
+      Object.assign(query, { 'keyword': this.keyword })
       const routeUrl = this.$router.resolve({
         path: '/sheetjs/index.html',
-        query: { pIds: this.deptRadio }
+        query: query
       })
       window.open(routeUrl.href.replace('#', ''), '_blank')
     },

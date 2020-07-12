@@ -48,7 +48,6 @@
             <el-radio v-model="deptRadio" label="-40_" border size="mini" @change="handleRadioClick">上海区域</el-radio>
             <el-button
               v-permission="['/businesslicense/ca']"
-              type="primary"
               size="small"
               @click.native="businessCirclesSynErgodic()"
             >{{ $t('button.businessCirclesSyn') }}</el-button>
@@ -75,10 +74,14 @@
               >{{ $t('button.add') }}</el-button> -->
             <el-button
               v-permission="['/businesslicense/ca']"
-              type="primary"
               size="small"
               @click.native="investCompanySynErgodic()"
             >同步投资公司</el-button>
+            <el-button
+              v-permission="['/businesslicense/export']"
+              size="small"
+              @click.native="exportExcel"
+            >导出结果报表</el-button>
           </template>
         </el-col>
       </el-row>
@@ -147,12 +150,6 @@
                 @click.native="openAdvancedSearch"
               >高级搜索</el-button>
             </el-col>
-            <!-- <el-col :span="2">
-              <el-button
-                type="success"
-                @click.native="exportExcel"
-              >导出</el-button>
-            </el-col> -->
           </el-row>
           <br>
           <el-table
