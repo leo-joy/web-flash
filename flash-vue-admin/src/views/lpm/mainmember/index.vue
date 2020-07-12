@@ -38,16 +38,16 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="董事长" width="100">
+      <el-table-column v-if="registrationType !== 2" label="董事长" width="100">
         <template slot-scope="scope">{{ scope.row.chairman }}</template>
       </el-table-column>
       <el-table-column label="董事">
         <template slot-scope="scope">{{ scope.row.director }}</template>
       </el-table-column>
-      <el-table-column label="监事" width="150">
+      <el-table-column v-if="registrationType !== 2" label="监事" width="150">
         <template slot-scope="scope">{{ scope.row.supervisor }}</template>
       </el-table-column>
-      <el-table-column label="总经理" width="100">
+      <el-table-column v-if="registrationType !== 2" label="总经理" width="100">
         <template slot-scope="scope">{{ scope.row.generalManager }}</template>
       </el-table-column>
     </el-table>
@@ -88,7 +88,7 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col v-if="registrationType !== 2" :span="12">
             <el-form-item label="董事长">
               <el-autocomplete
                 v-model="form.chairman"
@@ -111,7 +111,7 @@
               </el-autocomplete>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <el-col v-if="registrationType !== 2" :span="12">
             <el-form-item label="总经理">
               <el-autocomplete
                 v-model="form.generalManager"
@@ -172,7 +172,7 @@
             </el-form-item>
           </el-col>
 
-          <el-col :span="24">
+          <el-col v-if="registrationType !== 2" :span="24">
             <el-form-item label="监事" prop="supervisor">
               <div>
                 <el-col :span="24">

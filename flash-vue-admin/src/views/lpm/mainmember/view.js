@@ -1,5 +1,6 @@
 import { getListIds } from '@/api/cms/fileInfo'
 import { getList as mainmember } from '@/api/lpm/mainmember'
+import { getList as getEnterpriseList } from '@/api/lpm/businesslicense'
 import { getList as getUserList } from '@/api/system/user'
 import FilesListComponent from '@/components/FilesList/index.vue'
 
@@ -21,7 +22,9 @@ export default {
       userInfoTitle: '主要人员信息详情',
       userInfoVisible: false,
       userInfoList: [],
-      
+
+      registrationType: 1,
+
       listQuery: {
         page: 1,
         limit: 20,
@@ -66,6 +69,10 @@ export default {
         this.mainmemberData = response.data.records
         var accessoryArr = ['accessoryFiles']
         this.getFilesList('Mainmember', accessoryArr, response.data.records)
+      })
+
+      getEnterpriseList({ page: 1, limit: 1, id: this.$route.query.id }).then(response => {
+        this.registrationType = response.data.records[0].registrationType ? response.data.records[0].registrationType * 1 : 1
       })
     },
 

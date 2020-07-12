@@ -22,6 +22,7 @@ export default {
       },
       companyList: [],
       companyListLength: 0,
+      registrationType: 1,
       companyTree: {
         show: false,
         defaultProps: {
@@ -168,6 +169,7 @@ export default {
       getEnterpriseList(this.companyListQuery).then(response => {
         this.companyList = response.data.records
         this.listLoading = false
+        this.registrationType = this.companyList[0].registrationType ? this.companyList[0].registrationType * 1 : 1
       })
     },
     search() {
@@ -221,7 +223,7 @@ export default {
     },
     add() {
       this.resetForm()
-      this.formTitle = '添加主要人员信息'
+      this.formTitle = this.registrationType === 1 ? '添加主要人员信息' : '添加董事'
       this.formVisible = true
       this.isAdd = true
       this.directorTags = []
@@ -278,7 +280,7 @@ export default {
       if (this.checkSel()) {
         this.isAdd = false
         this.form = this.selRow
-        this.formTitle = '编辑主要人员信息'
+        this.formTitle = this.registrationType === 1 ? '编辑主要人员信息' : '编辑董事'
         this.formVisible = true
         if (this.selRow.directorId) {
           this.directorTags = []

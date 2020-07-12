@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="block">
       <el-table :data="mainmemberData" style="width: 100%">
-        <el-table-column prop="chairman" label="董事长" width="100">
+        <el-table-column v-if="registrationType !== 2" prop="chairman" label="董事长" width="100">
           <template slot-scope="scope">
             <!-- <el-button
                         type="text"
@@ -28,7 +28,7 @@
             >{{ name }}</el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="supervisor" label="监事" width="100">
+        <el-table-column v-if="registrationType !== 2" prop="supervisor" label="监事" width="100">
           <template slot-scope="scope">
             <!-- <el-button
                         type="text"
@@ -39,7 +39,7 @@
             >{{ scope.row.supervisor }}</el-button>
           </template>
         </el-table-column>
-        <el-table-column prop="generalManager" label="总经理" width="100">
+        <el-table-column v-if="registrationType !== 2" prop="generalManager" label="总经理" width="100">
           <template slot-scope="scope">
             <!-- <el-button
                         type="text"
