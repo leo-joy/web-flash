@@ -19,7 +19,7 @@ export default {
       enterpriseType: '', // 企业类型
       registrationStatusBL: '', // 登记状态
       filterText: '',
-      advancedSearch: false, // 是否展开高级搜索
+      advancedSearch: true, // 是否展开高级搜索
       advancedSearchIcon: 'el-icon-arrow-down',
       searchType: 'enterpriseName',
       tagRadio: '',
