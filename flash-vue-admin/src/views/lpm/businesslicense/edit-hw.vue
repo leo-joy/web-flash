@@ -297,7 +297,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="">
-              <div class="item-label">股东名册<br>Register of Directors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              <div class="item-label">股东名册<br>Register of Members&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
               <el-upload
                 class="upload-demo"
                 :action="uploadUrl"
@@ -306,6 +306,26 @@
                 :before-upload="handleBeforeUpload"
                 :on-remove="shareholdersDecideRemoveFile"
                 :on-success="shareholdersDecideUploadSuccess"
+                :on-preview="hanglePreview"
+              >
+                <el-button size="small">点击上传</el-button>
+                <span slot="tip" class="el-upload__tip">&nbsp;</span>
+              </el-upload>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="">
+              <div class="item-label">董事名册<br>Register of Directors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+              <el-upload
+                class="upload-demo"
+                :action="uploadUrl"
+                :headers="uploadHeaders"
+                :file-list="otherFilesList"
+                :before-upload="handleBeforeUpload"
+                :on-remove="otherFilesRemoveFile"
+                :on-success="otherFilesUploadSuccess"
                 :on-preview="hanglePreview"
               >
                 <el-button size="small">点击上传</el-button>
@@ -326,26 +346,6 @@
                 :before-upload="handleBeforeUpload"
                 :on-remove="applicationRegistrationFilesRemoveFile"
                 :on-success="applicationRegistrationFilesUploadSuccess"
-                :on-preview="hanglePreview"
-              >
-                <el-button size="small">点击上传</el-button>
-                <span slot="tip" class="el-upload__tip">&nbsp;</span>
-              </el-upload>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="24">
-            <el-form-item label="">
-              <div class="item-label">董事名册<br>Register of Members&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-              <el-upload
-                class="upload-demo"
-                :action="uploadUrl"
-                :headers="uploadHeaders"
-                :file-list="otherFilesList"
-                :before-upload="handleBeforeUpload"
-                :on-remove="otherFilesRemoveFile"
-                :on-success="otherFilesUploadSuccess"
                 :on-preview="hanglePreview"
               >
                 <el-button size="small">点击上传</el-button>
