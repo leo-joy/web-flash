@@ -33,23 +33,24 @@
         <el-tabs v-model="activeName" type="border-card" @tab-click="handleClick">
           <el-tab-pane label="基础数据" name="first">
             <el-tabs :tab-position="tabPosition" style="height: auto;padding-top:10px">
-              <el-tab-pane label="基本信息"><div><businesslicense /></div></el-tab-pane>
-              <el-tab-pane label="主要人员信息"><mainmember /></el-tab-pane>
+              <el-tab-pane label="基本信息"><div><detailcommon /></div></el-tab-pane>
+              <!-- <el-tab-pane label="主要人员信息"><mainmember /></el-tab-pane> -->
               <el-tab-pane label="股东信息"><shareholder /></el-tab-pane>
-              <el-tab-pane label="印章信息"><seal /></el-tab-pane>
-              <el-tab-pane label="年报信息"><annals /></el-tab-pane>
-              <el-tab-pane label="股权及出资信息"><capital /></el-tab-pane>
-              <el-tab-pane label="行政许可信息"><administrativelicense /></el-tab-pane>
+
+              <!-- <el-tab-pane label="股权及出资信息"><capital /></el-tab-pane> -->
+              <!-- <el-tab-pane label="行政许可信息"><administrativelicense /></el-tab-pane> -->
               <el-tab-pane label="行政处罚信息"><administrativepunish /></el-tab-pane>
               <el-tab-pane label="证照废弃声明"><certificatecancel /></el-tab-pane>
-              <el-tab-pane label="清算信息"><liquidation /></el-tab-pane>
               <el-tab-pane label="分公司信息"><branchcompany /></el-tab-pane>
               <el-tab-pane label="投资企业"><investcompany /></el-tab-pane>
               <el-tab-pane label="动产抵押登记"><propertypledge /></el-tab-pane>
               <el-tab-pane label="股权出质登记"><stockpledge /></el-tab-pane>
               <el-tab-pane label="知识产权出质登记"><knowledgepledge /></el-tab-pane>
+              <el-tab-pane label="印章信息"><seal /></el-tab-pane>
+              <el-tab-pane label="年报信息"><annals /></el-tab-pane>
+              <el-tab-pane label="清算信息"><liquidation /></el-tab-pane>
               <el-tab-pane label="商标信息"><trademark /></el-tab-pane>
-              <el-tab-pane label="税务信息"><tallage /></el-tab-pane>
+              <!-- <el-tab-pane label="税务信息"><tallage /></el-tab-pane> -->
             </el-tabs>
           </el-tab-pane>
           <el-tab-pane label="公司文件" name="second">
@@ -102,13 +103,14 @@
 <script>
 import { get as getBusinesslicense } from '@/api/lpm/businesslicense'
 
-import businesslicense from '@/views/lpm/businesslicense/view.vue'
-import mainmember from '@/views/lpm/mainmember/view.vue'
+import detailcommon from '@/views/lpm/enterpriseinfo/detail-common.vue'
+// import businesslicense from '@/views/lpm/businesslicense/view.vue'
+// import mainmember from '@/views/lpm/mainmember/view.vue'
 import shareholder from '@/views/lpm/shareholder/view.vue'
 import seal from '@/views/lpm/seal/view.vue'
 import annals from '@/views/lpm/annals/view.vue'
-import capital from '@/views/lpm/capital/view.vue'
-import administrativelicense from '@/views/lpm/administrativelicense/view.vue'
+// import capital from '@/views/lpm/capital/view.vue'
+// import administrativelicense from '@/views/lpm/administrativelicense/view.vue'
 import administrativepunish from '@/views/lpm/administrativepunish/view.vue'
 import certificatecancel from '@/views/lpm/certificatecancel/view.vue'
 import liquidation from '@/views/lpm/liquidation/view.vue'
@@ -118,20 +120,21 @@ import propertypledge from '@/views/lpm/propertypledge/view.vue'
 import knowledgepledge from '@/views/lpm/knowledgepledge/view.vue'
 import stockpledge from '@/views/lpm/stockpledge/view.vue'
 import trademark from '@/views/lpm/trademark/view.vue'
-import tallage from '@/views/lpm/tallage/view.vue'
+// import tallage from '@/views/lpm/tallage/view.vue'
 
 import companymodify from '@/views/lpm/companyModify/view.vue'
 
 export default {
   name: 'CompanyLayout',
   components: {
-    businesslicense,
-    mainmember,
+    detailcommon,
+    // businesslicense,
+    // mainmember,
     shareholder,
     seal,
     annals,
-    capital,
-    administrativelicense,
+    // capital,
+    // administrativelicense,
     administrativepunish,
     certificatecancel,
     liquidation,
@@ -141,7 +144,7 @@ export default {
     stockpledge,
     knowledgepledge,
     trademark,
-    tallage,
+    // tallage,
 
     companymodify
   },

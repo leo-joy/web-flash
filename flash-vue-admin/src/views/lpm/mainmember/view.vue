@@ -28,7 +28,7 @@
             >{{ name }}</el-button>
           </template>
         </el-table-column>
-        <el-table-column v-if="registrationType !== 2" prop="supervisor" label="监事" width="100">
+        <el-table-column v-if="registrationType !== 2" prop="supervisor" label="监事" width="180">
           <template slot-scope="scope">
             <!-- <el-button
                         type="text"
