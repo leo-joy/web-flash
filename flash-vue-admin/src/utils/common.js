@@ -2016,18 +2016,6 @@ export function getCityDate() {
       ]
     },
     {
-      'label': '香港特别行政区',
-      'level': '1',
-      'value': '8100',
-      'children': [
-        {
-          'label': '香港',
-          'level': '1',
-          'value': '8100'
-        }
-      ]
-    },
-    {
       'label': '澳门特别行政区',
       'level': '1',
       'value': '8200',
@@ -2036,6 +2024,54 @@ export function getCityDate() {
           'label': '澳门',
           'level': '1',
           'value': '8200'
+        }
+      ]
+    },
+    {
+      'label': '香港',
+      'level': '1',
+      'value': '8100',
+      'children': [
+        {
+          'label': 'HK',
+          'level': '1',
+          'value': '8100'
+        }
+      ]
+    },
+    {
+      'label': '开曼',
+      'level': '1',
+      'value': '8300',
+      'children': [
+        {
+          'label': 'Cayman',
+          'level': '1',
+          'value': '8300'
+        }
+      ]
+    },
+    {
+      'label': '新加坡',
+      'level': '1',
+      'value': '8400',
+      'children': [
+        {
+          'label': 'Singapore',
+          'level': '1',
+          'value': '8400'
+        }
+      ]
+    },
+    {
+      'label': '维尔京群岛',
+      'level': '1',
+      'value': '8500',
+      'children': [
+        {
+          'label': 'BVI',
+          'level': '1',
+          'value': '8500'
         }
       ]
     }
