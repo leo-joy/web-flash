@@ -125,43 +125,43 @@
 
           <el-row v-if="businessLicenseFilesListBL.length>0">
             <el-col :span="24">
-              <FilesListComponent file-title="营业执照附件" :files-list="businessLicenseFilesListBL" />
-            </el-col>
-          </el-row>
-
-          <el-row v-if="approvalFilesListBL.length>0">
-            <el-col :span="24">
-              <FilesListComponent file-title="核准文件附件" :files-list="approvalFilesListBL" />
+              <FilesListComponent file-title="公司注册证 / Certificate of Incorporation" :files-list="businessLicenseFilesListBL" />
             </el-col>
           </el-row>
 
           <el-row v-if="companyArticlesAssociationListBL.length>0">
             <el-col :span="24">
               <FilesListComponent
-                file-title="公司章程附件"
+                file-title="公司章程 / Company Article"
                 :files-list="companyArticlesAssociationListBL"
               />
             </el-col>
           </el-row>
 
-          <el-row v-if="shareholdersDecideListBL.length>0">
+          <el-row v-if="approvalFilesListBL.length>0">
             <el-col :span="24">
-              <FilesListComponent file-title="股东决定附件" :files-list="shareholdersDecideListBL" />
+              <FilesListComponent file-title="商业登记证 / Business Registration Certificate" :files-list="approvalFilesListBL" />
             </el-col>
           </el-row>
 
+          
+
+          <el-row v-if="shareholdersDecideListBL.length>0">
+            <el-col :span="24">
+              <FilesListComponent file-title="股东名册 / Register of Members" :files-list="shareholdersDecideListBL" />
+            </el-col>
+          </el-row>
+          <el-row v-if="otherFilesListBL.length>0">
+            <el-col :span="24">
+              <FilesListComponent file-title="董事名册 / Register of Directors" :files-list="otherFilesListBL" />
+            </el-col>
+          </el-row>
           <el-row v-if="applicationRegistrationFilesListBL.length>0">
             <el-col :span="24">
               <FilesListComponent
-                file-title="申请注册文件"
+                file-title="周年申报表 / Annual Return"
                 :files-list="applicationRegistrationFilesListBL"
               />
-            </el-col>
-          </el-row>
-
-          <el-row v-if="otherFilesListBL.length>0">
-            <el-col :span="24">
-              <FilesListComponent file-title="其他文件" :files-list="otherFilesListBL" />
             </el-col>
           </el-row>
 
