@@ -28,7 +28,7 @@
       @loaded="loadPdfHandler"
       @link-clicked="currentPage = $event"
     />
-    <div class="btnContainer">
+    <!-- <div class="btnContainer" style="margin-bottom:30px;">
       <el-button size="mini" icon="el-icon-arrow-left" @click="changePdfPage(0)">上一页</el-button>
       <el-button size="mini" @click="changePdfPage(1)">下一页<i class="el-icon-arrow-right el-icon--right" /></el-button>
       <el-button size="mini" @click="rotateL()">&#x27F3; 顺时针旋转</el-button>
@@ -39,8 +39,8 @@
         style="background-color: green; color: white; text-align: center"
         :style="{ width: loadedRatio * 100 + '%' }"
       >{{ Math.floor(loadedRatio * 100) }}%</div>
-      <!-- <button @click="$refs.pdf.print()">print</button> -->
-    </div>
+      <button @click="$refs.pdf.print()">print</button>
+    </div> -->
   </div>
 </template>
 <style lang="scss">
