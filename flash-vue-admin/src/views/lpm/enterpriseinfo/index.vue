@@ -168,7 +168,7 @@
                 <el-button type="text" @click="detail(scope.row)">{{ scope.row.enterpriseName }}</el-button>
               </template>
             </el-table-column>
-            <el-table-column label="社会信用代码" width="180">
+            <el-table-column label="统一社会信用代码/登记号" width="200">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
             </el-table-column>
             <el-table-column label="注册资本(万元)" width="120">

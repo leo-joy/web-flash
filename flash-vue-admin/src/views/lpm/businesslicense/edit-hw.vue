@@ -48,7 +48,7 @@
           <el-col :span="12">
             <el-form-item label="">
               <div class="item-label">企业编号<br>Company Number</div>
-              <el-input v-model="form.enterpriseCode" minlength="1" />
+              <el-input v-model="form.unifiedSocialCreditCode" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
