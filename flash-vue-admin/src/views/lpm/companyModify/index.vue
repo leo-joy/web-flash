@@ -59,7 +59,7 @@
             <span><b style="color:green">{{ scope.row.registeredCapitalNew }}万元</b></span>
           </div>
           <div v-if="scope.row.ownershipState+'' === 'true'">
-            <span><b>改制：</b></span>
+            <span><b>企业类型：</b></span>
             <span>由</span>
             <span><b style="color:red">{{ scope.row.ownershipOld }}</b></span>
             <span>变更为</span>
@@ -216,7 +216,7 @@
                   <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
                   <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
                   <el-checkbox v-model="form.registeredCapitalState" label="注册资本" />
-                  <el-checkbox v-model="form.ownershipState" label="改制" />
+                  <el-checkbox v-model="form.ownershipState" label="企业类型" />
                   <el-checkbox v-model="form.liquidationExitState" label="股权清算退出" />
                   <el-checkbox v-model="form.businessScopeState" label="经营范围" />
                   <el-checkbox v-model="form.constitutionState" label="章程" />
@@ -331,12 +331,12 @@
               <el-col v-if="form.ownershipState === true" :span="24">
                 <el-card class="box-card">
                   <div slot="header" class="clearfix">
-                    <span>改制</span>
+                    <span>企业类型</span>
                   </div>
-                  <el-form-item label="改制前">
+                  <el-form-item label="企业类型变更前">
                     <el-input v-model="form.ownershipOld" />
                   </el-form-item>
-                  <el-form-item label="改制后">
+                  <el-form-item label="企业类型变更后">
                     <el-input v-model="form.ownershipNew" minlength="1" />
                   </el-form-item>
                 </el-card>

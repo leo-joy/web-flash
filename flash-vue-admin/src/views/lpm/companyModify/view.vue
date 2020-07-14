@@ -71,7 +71,7 @@
                     <span><b style="color:green">{{ item.registeredCapitalNew }}</b></span>
                   </div>
                   <div v-if="item.ownershipState+'' === 'true'" class="modifyList">
-                    <span><b>改制：</b></span>
+                    <span><b>企业类型变更：</b></span>
                     <span>由</span>
                     <span><b style="color:red">{{ item.ownershipOld }}</b></span>
                     <span>变更为</span>

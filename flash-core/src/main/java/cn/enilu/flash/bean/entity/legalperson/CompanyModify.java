@@ -203,13 +203,13 @@ public class CompanyModify extends BaseEntity {
     @Column(name="constitution_new", columnDefinition = "TEXT COMMENT '新章程添加部分'")
     private String constitutionNew;
 
-    @Column(name="ownership_state", columnDefinition = "VARCHAR(8) COMMENT '改制状态'")
+    @Column(name="ownership_state", columnDefinition = "VARCHAR(8) COMMENT '企业类型变更状态'")
     private String ownershipState;
 
-    @Column(name="ownership_old", columnDefinition = "VARCHAR(128) COMMENT '改制前'")
+    @Column(name="ownership_old", columnDefinition = "VARCHAR(128) COMMENT '企业类型变更前'")
     private String ownershipOld;
 
-    @Column(name="ownership_new", columnDefinition = "VARCHAR(128) COMMENT '改制后'")
+    @Column(name="ownership_new", columnDefinition = "VARCHAR(128) COMMENT '企业类型变更后'")
     private String ownershipNew;
 
     @Column(name="liquidation_exit_state", columnDefinition = "VARCHAR(8) COMMENT '股权清算退出状态'")

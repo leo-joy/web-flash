@@ -36,7 +36,7 @@ export default {
         label: '注册资本变更'
       }, {
         value: 'ownershipState',
-        label: '改制'
+        label: '企业类型变更'
       }, {
         value: 'liquidationExitState',
         label: '股权清算退出'
