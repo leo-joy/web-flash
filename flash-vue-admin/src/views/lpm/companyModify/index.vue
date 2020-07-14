@@ -87,11 +87,11 @@
             <div>{{ scope.row.businessScopeNew }}</div>
           </div>
           <div v-if="scope.row.constitutionState+'' === 'true'">
-            <span><b>章程：</b></span>
-            <span>由</span>
-            <span>{{ scope.row.constitutionOld }}</span>
-            <span>变更为</span>
-            <span><b>{{ scope.row.constitutionNew }}</b></span>
+            <div><b>章程：由 </b></div>
+            <div>{{ scope.row.constitutionOld }}</div>
+            <br>
+            <div><b>变更为:</b></div>
+            <div>{{ scope.row.constitutionNew }}</div>
           </div>
           <div v-if="scope.row.chairmanState+'' === 'true'">
             <span><b>董事长：</b></span>

@@ -92,11 +92,11 @@
                     <div>{{ item.businessScopeNew }}</div>
                   </div>
                   <div v-if="item.constitutionState+'' === 'true'" class="modifyList">
-                    <span><b>章程变更：</b></span>
-                    <span>由</span>
-                    <span>{{ item.constitutionOld }}</span>
-                    <span>变更为</span>
-                    <span><b>{{ item.constitutionNew }}</b></span>
+                    <div><b>章程变更：由 </b></div>
+                    <div>{{ item.constitutionOld }}</div>
+                    <br>
+                    <div><b>变更为:</b></div>
+                    <div>{{ item.constitutionNew }}</div>
                   </div>
                   <div v-if="item.chairmanState+'' === 'true'" class="modifyList">
                     <span><b>董事长变更：</b></span>
