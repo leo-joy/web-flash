@@ -2040,7 +2040,7 @@ export function getCityDate() {
       ]
     },
     {
-      'label': '开曼',
+      'label': '开曼群岛',
       'level': '1',
       'value': '8300',
       'children': [
@@ -2072,6 +2072,54 @@ export function getCityDate() {
           'label': 'BVI',
           'level': '1',
           'value': '8500'
+        }
+      ]
+    },
+    {
+      'label': '美国',
+      'level': '1',
+      'value': '8600',
+      'children': [
+        {
+          'label': 'USA',
+          'level': '1',
+          'value': '8600'
+        }
+      ]
+    },
+    {
+      'label': '越南',
+      'level': '1',
+      'value': '8700',
+      'children': [
+        {
+          'label': 'Vietnam',
+          'level': '1',
+          'value': '8700'
+        }
+      ]
+    },
+    {
+      'label': '马来西亚',
+      'level': '1',
+      'value': '8800',
+      'children': [
+        {
+          'label': 'Malaysia',
+          'level': '1',
+          'value': '8800'
+        }
+      ]
+    },
+    {
+      'label': '柬埔寨',
+      'level': '1',
+      'value': '8900',
+      'children': [
+        {
+          'label': 'Cambodia',
+          'level': '1',
+          'value': '8900'
         }
       ]
     }
