@@ -78,6 +78,10 @@ public class ShiroConfig {
         filterRuleMap.put("/lpm/businesslicense/list","anon");
         filterRuleMap.put("/lpm/main/member","anon");
         filterRuleMap.put("/lpm/main/member/list","anon");
+        filterRuleMap.put("/lpm/company/modify","anon");
+        filterRuleMap.put("/lpm/company/modify/list","anon");
+        filterRuleMap.put("/lpm/capital/modify","anon");
+        filterRuleMap.put("/lpm/capital/modify/list","anon");
         filterRuleMap.put("/lpm/capital/list","anon");
         filterRuleMap.put("/lpm/capital/tree","anon");
         filterRuleMap.put("/lpm/invest/company/list","anon");
