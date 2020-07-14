@@ -52,6 +52,7 @@ export default {
         permissionContent: '',
         status: '',
         responsiblePerson: '',
+        level: '',
         accessoryFiles: '',
         id: ''
       },
@@ -175,6 +176,7 @@ export default {
         permissionContent: '',
         status: '',
         responsiblePerson: '',
+        level: '',
         accessoryFiles: '',
         id: ''
       }
@@ -203,6 +205,7 @@ export default {
             permissionContent: this.form.permissionContent,
             status: this.form.status,
             responsiblePerson: this.form.responsiblePerson,
+            level: this.form.level,
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''),
             id: this.form.id
           }).then(response => {

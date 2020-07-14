@@ -135,6 +135,11 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
+            <el-form-item label="等级">
+              <el-input v-model="form.level" minlength="1" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item label="状态">
               <el-select v-model="form.status" placeholder="请选择">
                 <el-option

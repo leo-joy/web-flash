@@ -50,6 +50,9 @@ public class AdministrativeLicense extends BaseEntity {
     @Column(name="permission_content", columnDefinition = "TEXT COMMENT '许可内容'")
     private String permissionContent;
 
+    @Column(columnDefinition = "VARCHAR(32) COMMENT '等级'")
+    private String level;
+
     @Column(columnDefinition = "VARCHAR(32) COMMENT '状态'")
     private String status;
 

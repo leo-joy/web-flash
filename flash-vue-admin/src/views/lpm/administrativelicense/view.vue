@@ -23,6 +23,9 @@
               <el-form-item label="许可内容">
                 <span>{{ props.row.permissionContent }}</span>
               </el-form-item>
+              <el-form-item label="等级">
+                <span>{{ props.row.level }}</span>
+              </el-form-item>
               <el-form-item label="状态">
                 <span>{{ formatterLicenseStatus(props.row) }}</span>
               </el-form-item>
