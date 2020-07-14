@@ -164,6 +164,7 @@ export default {
       this.uploadHeaders['Authorization'] = getToken()
       console.log(this.$route.query.registrationType)
       this.form.registrationType = this.$route.query.registrationType ? this.$route.query.registrationType + '' : ''
+
       const id = this.$route.query.id
       if (id) {
         get(id).then(response => {
@@ -196,6 +197,10 @@ export default {
 
           this.form.registrationPlace = this.form.registrationPlace ? this.form.registrationPlace.split('-') : ''
           this.form.tags = this.form.tags ? this.form.tags.split('-') : ''
+          if (this.form.registrationType * 1 === 2) {
+            this.form.registeredCapital = this.form.registeredCapital ? this.form.registeredCapital * 10000 : 0
+            this.form.issuedShareCapital = this.form.issuedShareCapital ? this.form.issuedShareCapital * 10000 : 0
+          }
           // this.listQuery.ids = response.data.businessLicense
           // getListIds(this.listQuery).then(response => {
           //   console.log(response.data)
@@ -263,12 +268,12 @@ export default {
             alert('请现在组织属性')
             return false
           }
-          const registeredCapital = this.form.registeredCapital ? parseFloat(this.form.registeredCapital).toFixed(2) : 0
-          const issuedShareCapital = this.form.issuedShareCapital ? parseFloat(this.form.issuedShareCapital).toFixed(2) : 0
+          let registeredCapital = this.form.registeredCapital ? this.form.registeredCapital : 0
+          let issuedShareCapital = this.form.issuedShareCapital ? this.form.issuedShareCapital : 0
           if (this.form.pid * 1 === 26) {
             this.form.registrationType = 2
-            // registeredCapital = registeredCapital / 10000
-            // issuedShareCapital = issuedShareCapital / 10000
+            registeredCapital = parseFloat(registeredCapital / 10000).toFixed(6)
+            issuedShareCapital = parseFloat(issuedShareCapital / 10000).toFixed(6)
           }
           save({
             unifiedSocialCreditCode: this.form.unifiedSocialCreditCode,
