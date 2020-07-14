@@ -66,6 +66,10 @@ public class BusinessLicense extends BaseEntity {
     @Column(name="registered_capital", columnDefinition = "FLOAT COMMENT '注册资本'")
     private Float registeredCapital;
 
+    @Type(type="java.lang.Float")
+    @Column(name="issued_share_capital", columnDefinition = "FLOAT COMMENT '已发行股本'")
+    private Float issuedShareCapital;
+
     @Column(name="currency", columnDefinition = "VARCHAR(32) COMMENT '币种'")
     private String currency;
 
