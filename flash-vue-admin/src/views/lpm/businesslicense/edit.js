@@ -53,6 +53,7 @@ export default {
         registrationPlaceName: '',
         legalRepresentative: '',
         registeredCapital: 0,
+        issuedShareCapital: 0,
         realProportion: 0,
         currency: '',
         setupDate: '',
@@ -87,7 +88,7 @@ export default {
         ],
         registeredCapital: [
           { required: true, message: '请输入注册资本金额', trigger: 'blur' },
-          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留两位小数' }
         ],
         // currency: [
         //   { required: true, message: '请选择币种', trigger: 'blur' }
@@ -228,6 +229,7 @@ export default {
         registrationPlaceName: '',
         legalRepresentative: '',
         registeredCapital: 0,
+        issuedShareCapital: 0,
         realProportion: 0,
         currency: '',
         setupDate: '',
@@ -261,8 +263,12 @@ export default {
             alert('请现在组织属性')
             return false
           }
+          const registeredCapital = this.form.registeredCapital ? parseFloat(this.form.registeredCapital).toFixed(2) : 0
+          const issuedShareCapital = this.form.issuedShareCapital ? parseFloat(this.form.issuedShareCapital).toFixed(2) : 0
           if (this.form.pid * 1 === 26) {
             this.form.registrationType = 2
+            // registeredCapital = registeredCapital / 10000
+            // issuedShareCapital = issuedShareCapital / 10000
           }
           save({
             unifiedSocialCreditCode: this.form.unifiedSocialCreditCode,
@@ -276,7 +282,8 @@ export default {
             registrationPlace: this.form.registrationPlace ? this.form.registrationPlace.join('-') : '',
             registrationPlaceName: this.form.registrationPlaceName,
             legalRepresentative: this.form.legalRepresentative,
-            registeredCapital: this.form.registeredCapital ? parseFloat(this.form.registeredCapital).toFixed(1) : 0,
+            registeredCapital: registeredCapital,
+            issuedShareCapital: issuedShareCapital,
             realProportion: this.form.realProportion ? parseFloat(this.form.realProportion).toFixed(1) : 0,
             currency: this.form.currency,
             setupDate: this.form.setupDate ? parseTime(this.form.setupDate, '{y}-{m}-{d}') : '',

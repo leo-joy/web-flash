@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <div class="block">
-      <el-form ref="form" :model="form" :rules="rules" label-width="180px">
+      <el-form ref="form" :model="form" :rules="rules" label-width="200px">
         <el-row>
           <el-col :span="24">
             <el-button icon="el-icon-plus" size="small" type="primary" @click="save">{{
@@ -68,7 +68,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label=" " prop="enterpriseName">
-              <div class="item-label">{{ $t('businessLicenseMgr.enterpriseName') }}</div>
+              <div class="item-label">{{ $t('businessLicenseMgr.enterpriseName') }}<br>&nbsp;&nbsp;&nbsp;</div>
               <el-input v-model="form.enterpriseName" minlength="1" />
             </el-form-item>
           </el-col>
@@ -89,10 +89,18 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="">
-              <div class="item-label">Company Name</div>
+              <div class="item-label">Company Name<br>&nbsp;&nbsp;&nbsp;</div>
               <el-input
                 v-model="form.enterpriseNameEn"
                 minlength="1"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="registeredCapital">
+              <div class="item-label">法定股本<br>Authorized Share Capital</div>
+              <el-input
+                v-model="form.registeredCapital"
               />
             </el-form-item>
           </el-col>
@@ -112,11 +120,10 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="" prop="registeredCapital">
-              <div class="item-label">股本<br>Capital</div>
+            <el-form-item label="">
+              <div class="item-label">已发行股本<br>Issued Share Capital</div>
               <el-input
-                v-model.number="form.registeredCapital"
-                minlength="1"
+                v-model="form.issuedShareCapital"
               />
             </el-form-item>
           </el-col>
@@ -370,7 +377,7 @@
 <script src="./edit-hw.js"></script>
 <style rel="stylesheet/scss" lang="scss" scoped>
   .item-label {
-    margin-left:-150px;
+    margin-left:-180px;
     color:#606266;
     float:left;
     line-height:20px;

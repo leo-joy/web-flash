@@ -2,7 +2,7 @@
   <div class="dp-container">
     <el-row>
       <el-col :span="24">
-        <el-form ref="form" :model="form" :rules="rules" label-width="220px">
+        <el-form ref="form" :model="form" :rules="rules" label-width="200px">
           <el-row>
             <el-col :span="24">
               <el-form-item>
@@ -45,33 +45,38 @@
           <el-row>
             <el-col :span="12">
               <el-form-item>
-                <div class="item-label">股本<br>Capital Currency</div>
-                {{ businesslicenseData.registeredCapital }} 万{{ currencyBL }}</el-form-item>
+                <div class="item-label">法定股本<br>Authorized Share Capital</div>
+                {{ businesslicenseData.registeredCapital*10000 }} {{ currencyBL }}</el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item>
-                <div class="item-label">实际持有股权<br>Shareholdings</div>
-                {{ businesslicenseData.realProportion }} % </el-form-item>
+                <div class="item-label">已发行股本<br>Issued Share Capital</div>
+                {{ businesslicenseData.issuedShareCapital*10000 }} {{ currencyBL }}</el-form-item>
             </el-col>
           </el-row>
 
           <el-row>
             <el-col :span="12">
               <el-form-item>
+                <div class="item-label">实际持有股权<br>Shareholdings</div>
+                {{ businesslicenseData.realProportion }} % </el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item>
                 <div class="item-label">成立日期<br>Register Date</div>
                 {{ businesslicenseData.setupDate?businesslicenseData.setupDate.replace(' 00:00:00',''):'' }}</el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item>
+                <div class="item-label">登记机关</div>
+                {{ businesslicenseData.registrationAuthority }}</el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item>
                 <div class="item-label">企业注册地<br>Place of Incorporation</div>
                 {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</el-form-item>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="24">
-              <el-form-item>
-                <div class="item-label">登记机关</div>
-                {{ businesslicenseData.registrationAuthority }}</el-form-item>
             </el-col>
             <el-col :span="24">
               <el-form-item>
@@ -143,9 +148,6 @@
               <FilesListComponent file-title="商业登记证 / Business Registration Certificate" :files-list="approvalFilesListBL" />
             </el-col>
           </el-row>
-
-          
-
           <el-row v-if="shareholdersDecideListBL.length>0">
             <el-col :span="24">
               <FilesListComponent file-title="股东名册 / Register of Members" :files-list="shareholdersDecideListBL" />
@@ -186,7 +188,7 @@
   padding: 0 10px;
 }
 .item-label {
-    margin-left:-150px;
+    margin-left:-180px;
     padding-top:10px;
     color:#606266;
     float:left;

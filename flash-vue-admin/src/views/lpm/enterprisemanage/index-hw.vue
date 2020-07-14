@@ -24,7 +24,7 @@
       <el-col :span="9">
         <h4 style="margin:0 0 20px 0">
           <div class="item-label">注册地<br>Place of Incorporation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          香港 <br> HK</h4>
+          {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[0]:'' }} <br> {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</h4>
       </el-col>
     </el-row>
     <!-- <el-radio-group v-model="tabPosition" style="margin-bottom: 30px;">
