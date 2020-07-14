@@ -29,10 +29,6 @@
             <el-col :span="12">
               <el-form-item label="组织属性：">{{ grandfatherOrg }} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
             </el-col>
-            <el-col :span="12">
-              <el-form-item label="企业注册地：">
-                {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</el-form-item>
-            </el-col>
           </el-row>
 
           <el-row>
@@ -43,6 +39,7 @@
               <el-form-item v-if="businesslicenseData.enterpriseNameEn" label="英文名称：">{{ businesslicenseData.enterpriseNameEn }}</el-form-item>
             </el-col>
           </el-row>
+
           <el-row>
             <el-col :span="12">
               <el-form-item
@@ -55,6 +52,15 @@
             <!-- <el-col :span="12">
                     <el-form-item label="企业编码：">{{ businesslicenseData.enterpriseCode }}</el-form-item>
                   </el-col> -->
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item label="企业注册地：">
+                {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item label="登记状态：">{{ registrationStatusBL }}</el-form-item>
+            </el-col>
           </el-row>
           <!-- <el-row>
                   <el-col :span="12">
@@ -121,9 +127,6 @@
           <el-row>
             <el-col :span="12">
               <el-form-item label="登记机关：">{{ businesslicenseData.registrationAuthority }}</el-form-item>
-            </el-col>
-            <el-col :span="12">
-              <el-form-item label="登记状态：">{{ registrationStatusBL }}</el-form-item>
             </el-col>
           </el-row>
           <el-row>

@@ -2,8 +2,9 @@
   <div style="background-color:#fffff;border:1px #efefef dotted;margin:5px;">
     <div style="padding:5px 10px;">
 
-      <el-button v-permission="['/newFilesList']" style="border:none;padding:5px;z-index:10;margin:0;margin-left:10px;position:absolute;right:50px;top:50px;" @click="openAllFilesDialog()">
+      <el-button v-permission="['/newFilesList']" style="border:none;padding:5px;z-index:10;margin:0;margin-left:10px;position:absolute;right:130px;top:50px;" @click="openAllFilesDialog()">
         <img class="user-avatar" title="点击营业执照查看公司文件" src="@/assets/img/zhizhao.png">
+        <div style="margin-top:10px;">点击营业执照查看公司文件</div>
       </el-button>
       
       <el-collapse v-model="activeNames" @change="handleChange">
