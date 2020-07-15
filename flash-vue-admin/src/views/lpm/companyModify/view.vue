@@ -41,11 +41,26 @@
                     <div class="modifyList"><b>法定代表人： </b>{{ item.legalRepresentativeNew }}</div>
                     <div class="modifyList"><b>经营期限： </b>{{ item.operatingPeriodEndNew?item.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</div>
                     <div class="modifyList"><b>注册地址： </b>{{ item.registeredAddressNew }}</div>
-                    <div class="modifyList"><b>经营范围： </b>{{ item.businessScopeNew }}</div>
+                    <div class="modifyList"><b>经营范围： </b><br><br>{{ item.businessScopeNew }}<br></div>
                     <div class="modifyList"><b>董事长： </b>{{ item.chairmanNew }}</div>
                     <div class="modifyList"><b>董事： </b>{{ item.directorNew }}</div>
                     <div class="modifyList"><b>监事： </b>{{ item.supervisorNew }}</div>
                     <div class="modifyList"><b>总经理： </b>{{ item.generalManagerNew }}</div>
+                    <br>
+                    <table class="dp-table" border="1">
+                      <tr>
+                        <td>股东信息</td>
+                        <td>
+                          <el-row>
+                            <el-col v-for="sonItemOld in item.shareholderOldList" :key="sonItemOld.id" :span="24">
+                              <h4>股东：{{ sonItemOld.shareholder }}</h4>
+                              <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
+                              <div><hr></div>
+                            </el-col>
+                          </el-row>
+                        </td>
+                      </tr>
+                    </table>
                   </div>
                   <div v-if="item.enterpriseNameState+'' === 'true'" class="modifyList">
                     <span><b>企业名称变更：</b></span>

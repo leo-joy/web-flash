@@ -317,7 +317,7 @@ export default {
         for (let p = 0; p < records.length; p++) {
           const Module = module
           const tempRecord = records[p]
-          if (tempRecord.shareholderModifyState === 'true') {
+          if (tempRecord.newRegisteredState === 'true' || tempRecord.shareholderModifyState === 'true') {
             // this.listCapitalModifyOldQuery.ids = tempRecord.shareholderIdsOld
             // getCapitalModifyList(this.listCapitalModifyOldQuery).then(response => {
             //   tempRecord['shareholderOldList'] = response.data.records || []

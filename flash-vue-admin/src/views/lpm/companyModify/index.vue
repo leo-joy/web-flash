@@ -121,7 +121,7 @@
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
           </div>
-          
+
           <div v-if="scope.row.newRegisteredState+'' === 'true'">
             <div><b>企业名称： </b>{{ scope.row.enterpriseNameNew }}</div>
             <div><b>注册资本： </b>{{ scope.row.registeredCapitalNew }} 万元</div>
@@ -725,6 +725,55 @@
                         </el-autocomplete>
                       </el-form-item>
                     </el-col>
+                  </el-row>
+                  <el-row>
+                    <div class="block">
+                      <div slot="header" class="clearfix">
+                          <b>股东信息<br></b>
+                        </div>
+                      <el-row>
+                        <el-col :span="24">
+                          <el-button type="success" size="mini" icon="el-icon-plus" @click.native="addCapitalModifyOld">{{ $t('button.add') }}</el-button>
+                          <el-button type="primary" size="mini" icon="el-icon-edit" @click.native="editCapitalModifyOld">{{ $t('button.edit') }}</el-button>
+                          <el-button type="danger" size="mini" icon="el-icon-delete" @click.native="removeCapitalModifyOld">{{ $t('button.delete') }}</el-button>
+                        </el-col>
+                      </el-row>
+                    </div>
+                    <el-table
+                      v-loading="listCapitalModifyOldLoading"
+                      :data="listCapitalModifyOld"
+                      element-loading-text="Loading"
+                      border
+                      fit
+                      highlight-current-row
+                      @current-change="handleCurrentCapitalModifyOldChange"
+                    >
+                      <!-- <el-table-column label="是否是新变更" width="60">
+                            <template slot-scope="scope">
+                              {{ scope.row.modifyStatusType }}
+                            </template>
+                          </el-table-column> -->
+                      <el-table-column label="股东">
+                        <template slot-scope="scope">
+                          {{ scope.row.shareholder }}
+                        </template>
+                      </el-table-column>
+                      <el-table-column label="认缴出资额（万元）" width="150">
+                        <template slot-scope="scope">
+                          {{ scope.row.subscribedCapitalContribution }}
+                        </template>
+                      </el-table-column>
+                      <el-table-column label="认缴日期" width="150">
+                        <template slot-scope="scope">
+                          {{ scope.row.subscribedCapitalDate.replace(' 00:00:00','') }}
+                        </template>
+                      </el-table-column>
+                      <el-table-column label="占比（%）" width="100">
+                        <template slot-scope="scope">
+                          {{ scope.row.proportion }}
+                        </template>
+                      </el-table-column>
+                    </el-table>
                   </el-row>
                 </el-card>
                 <br>
