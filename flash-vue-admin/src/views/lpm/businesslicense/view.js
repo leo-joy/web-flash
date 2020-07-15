@@ -109,6 +109,10 @@ export default {
         if (response.data.tags) {
           this.translateDictList('企业标签', response.data.tags.split('-'), 'tagList')
         }
+        if (this.businesslicenseData.registrationType * 1 === 2) {
+          this.businesslicenseData.registeredCapital = this.businesslicenseData.registeredCapital ? parseFloat(this.businesslicenseData.registeredCapital * 10000).toFixed(2) : 0
+          this.businesslicenseData.issuedShareCapital = this.businesslicenseData.issuedShareCapital ? parseFloat(this.businesslicenseData.issuedShareCapital * 10000).toFixed(2) : 0
+        }
         this.getFilesList('BL', accessoryArr, arr)
         getParentdept(response.data.pid).then(response => {
           this.parentOrg = response.data.simplename + ' / '

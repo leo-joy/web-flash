@@ -45,13 +45,13 @@
           <el-row>
             <el-col :span="12">
               <el-form-item>
-                <div class="item-label">法定股本<br>Authorized Share Capital</div>
-                {{ businesslicenseData.registeredCapital*10000 }} {{ currencyBL }}</el-form-item>
+                <div class="item-label">已发行股本<br>Issued Share Capital</div>
+                {{ businesslicenseData.registeredCapital }} {{ currencyBL }}</el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item>
-                <div class="item-label">已发行股本<br>Issued Share Capital</div>
-                {{ businesslicenseData.issuedShareCapital*10000 }} {{ currencyBL }}</el-form-item>
+                <div class="item-label">法定股本<br>Authorized Share Capital</div>
+                {{ businesslicenseData.issuedShareCapital }} {{ currencyBL }}</el-form-item>
             </el-col>
           </el-row>
 
@@ -76,7 +76,9 @@
             <el-col :span="12">
               <el-form-item>
                 <div class="item-label">企业注册地<br>Place of Incorporation</div>
-                {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</el-form-item>
+                <div class="item-label" style="margin-left:0px;font-weight:normal;color:#000;">{{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[0]:'' }}<br>
+                  {{ businesslicenseData.registrationPlaceName?businesslicenseData.registrationPlaceName.split('-')[1]:'' }}</div>
+              </el-form-item>
             </el-col>
             <el-col :span="24">
               <el-form-item>

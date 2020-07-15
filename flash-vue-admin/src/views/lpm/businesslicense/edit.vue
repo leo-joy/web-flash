@@ -132,8 +132,7 @@
           <el-col :span="12">
             <el-form-item label="注册资本(万元)" prop="registeredCapital">
               <el-input
-                v-model.number="form.registeredCapital"
-                minlength="1"
+                v-model="form.registeredCapital"
               />
             </el-form-item>
           </el-col>

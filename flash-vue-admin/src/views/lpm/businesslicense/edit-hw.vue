@@ -98,7 +98,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="" prop="registeredCapital">
-              <div class="item-label">法定股本<br>Authorized Share Capital</div>
+              <div class="item-label">已发行股本<br>Issued Share Capital</div>
               <el-input
                 v-model="form.registeredCapital"
               />
@@ -121,7 +121,7 @@
           </el-col>
           <el-col :span="12">
             <el-form-item label="">
-              <div class="item-label">已发行股本<br>Issued Share Capital</div>
+              <div class="item-label">法定股本<br>Authorized Share Capital</div>
               <el-input
                 v-model="form.issuedShareCapital"
               />
