@@ -2,6 +2,9 @@ import { remove, getList, save } from '@/api/lpm/businesslicense'
 import { parseTime } from '@/utils'
 import { getList as dictList } from '@/api/system/dict'
 import { showDictLabel } from '@/utils/common'
+import { getList as getCapitalList } from '@/api/lpm/capital'
+import { getList as getInvestCompanyList } from '@/api/lpm/investcompany'
+
 import advancedUser from '@/views/system/user/advancedUser.vue'
 
 // 权限判断指令
@@ -280,9 +283,26 @@ export default {
       //   this.formVisible = true
       // }
     },
-    remove() {
+    async remove() {
       if (this.checkSel()) {
         var id = this.selRow.id
+        const capitalResponse = await getCapitalList({ page: 1, limit: 1, branchCompanyCode: id })
+        if (capitalResponse && capitalResponse.data.records.length > 0) {
+          this.$message({
+            message: '该企业被设置为 【' + capitalResponse.data.records[0].enterpriseName + '】的股东！请先删除股东记录！',
+            type: 'warning'
+          })
+          return
+        }
+        const investCompanyResponse = await getInvestCompanyList({ page: 1, limit: 1, branchCompanyCode: id })
+        if (investCompanyResponse && investCompanyResponse.data.records.length > 0) {
+          this.$message({
+            message: '该企业被设置为【' + investCompanyResponse.data.records[0].enterpriseName + '】的投资公司！请先删除投资记录！',
+            type: 'warning'
+          })
+          return
+        }
+
         this.$confirm(this.$t('common.deleteConfirm'), this.$t('common.tooltip'), {
           confirmButtonText: this.$t('button.submit'),
           cancelButtonText: this.$t('button.cancel'),
@@ -333,7 +353,7 @@ export default {
       //   this.formTitle = '编辑注册公司'
       //   this.formVisible = true
       // }
-    },
+    }
 
   }
 }
