@@ -253,6 +253,18 @@
                   </el-select>
                 </el-form-item>
               </el-col>
+              <el-col :span="8">
+                <el-form-item label="币种">
+                  <el-select v-model="form.currency" placeholder="请选择">
+                    <el-option
+                      v-for="item in currencyList"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
+                </el-form-item>
+              </el-col>
               <!-- <el-col :span="24">
                 <el-form-item label="详情附件">
                   <el-upload

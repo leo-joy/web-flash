@@ -92,7 +92,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="24" />
-          <el-col :span="24">
+          <el-col :span="16">
             <el-form-item label="请选择被投资公司" prop="branchCompanyName">
               <el-autocomplete
                 v-model="form.branchCompanyName"
@@ -118,6 +118,18 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
+            <el-form-item label="币种">
+              <el-select v-model="form.currency" placeholder="请选择">
+                <el-option
+                  v-for="item in currencyList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="认缴金额（万元）" prop="realityCapitalContribution">
               <el-input v-model.number="form.realityCapitalContribution" />
             </el-form-item>
@@ -127,7 +139,6 @@
               <el-slider v-model="form.proportion" show-input />
             </el-form-item>
           </el-col>
-          
         </el-row>
         <br>
         <br>

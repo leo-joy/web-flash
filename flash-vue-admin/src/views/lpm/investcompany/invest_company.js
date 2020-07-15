@@ -6,6 +6,7 @@ import axios from 'axios'
 import { parseTime } from '@/utils'
 import { getList as dictList } from '@/api/system/dict'
 import { showDictLabel, getDictNum } from '@/utils/common'
+import { getDictList } from '@/utils/common'
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
@@ -21,6 +22,7 @@ export default {
         limit: 2000,
         id: undefined
       },
+      currencyList: [], // 币种，从数据字典中获取
       companyList: [],
       companyTree: {
         show: false,
@@ -111,6 +113,9 @@ export default {
       })
       dictList({ name: '币种' }).then(response => {
         this.currencyDict = response.data[0].detail
+      })
+      dictList({ name: '币种' }).then(response => {
+        this.currencyList = getDictList(response.data[0].detail)
       })
     },
     fetchData() {

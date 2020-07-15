@@ -33,6 +33,7 @@ export default {
       subscribedCapitalTypeCapital: '', // 认缴出资方式
       realityCapitalTypeCapital: '', // 实缴出资方式
       typeList: [], // 类型，从数据字典中获取
+      currencyList: [], // 币种，从数据字典中获取
       statusList: [], // 状态，从数据字典中获取
       shareholderMold: 1, // 股东分类
       shareholderType: '', // 股东类型
@@ -174,6 +175,10 @@ export default {
 
       dictList({ name: '类型【股东信息】' }).then(response => {
         this.typeList = getDictList(response.data[0].detail)
+      })
+
+      dictList({ name: '币种' }).then(response => {
+        this.currencyList = getDictList(response.data[0].detail)
       })
 
       dictList({ name: '状态【股东信息】' }).then(response => {
