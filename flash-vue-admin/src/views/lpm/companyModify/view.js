@@ -23,6 +23,9 @@ export default {
       newFilesListObj: {}, // 文件列表汇总
       noAccessoryCause: '', // 无附件原因
       companyModifyTypeOptions: [{
+        value: 'newRegisteredState',
+        label: '新注册'
+      }, {
         value: 'enterpriseNameState',
         label: '企业名称变更'
       }, {
@@ -323,10 +326,10 @@ export default {
             // getCapitalModifyList(this.listCapitalModifyNewQuery).then(response => {
             //   tempRecord['shareholderNewList'] = response.data.records || []
             // })
-            this.listCapitalModifyOldQuery.ids = tempRecord.shareholderIdsOld
+            this.listCapitalModifyOldQuery.ids = tempRecord.shareholderIdsOld ? tempRecord.shareholderIdsOld : '-1'
             const response1 = await getCapitalModifyList(this.listCapitalModifyOldQuery)
             tempRecord['shareholderOldList'] = response1.data.records || []
-            this.listCapitalModifyNewQuery.ids = tempRecord.shareholderIdsNew
+            this.listCapitalModifyNewQuery.ids = tempRecord.shareholderIdsNew ? tempRecord.shareholderIdsNew : '-1'
             const response2 = await getCapitalModifyList(this.listCapitalModifyNewQuery)
             tempRecord['shareholderNewList'] = response2.data.records || []
           } else {

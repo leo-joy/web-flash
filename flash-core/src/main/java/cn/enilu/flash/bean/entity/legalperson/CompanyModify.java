@@ -224,6 +224,8 @@ public class CompanyModify extends BaseEntity {
     @Column(name="liquidation_exit_new", columnDefinition = "VARCHAR(128) COMMENT '股权清算退出后'")
     private String liquidationExitNew;
 
+    @Column(name="new_registered_state", columnDefinition = "VARCHAR(8) COMMENT '企业新注册状态'")
+    private String newRegisteredState;
 
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '1内部审批文件'")
     private String accessoryFiles;

@@ -35,6 +35,18 @@
                   <el-button style="float:right" type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
                 </el-col>
                 <el-col :span="24">
+                  <div v-if="item.newRegisteredState+'' === 'true'" class="modifyList">
+                    <div class="modifyList"><b>企业名称： </b>{{ item.enterpriseNameNew }}</div>
+                    <div class="modifyList"><b>注册资本： </b>{{ item.registeredCapitalNew }} 万元</div>
+                    <div class="modifyList"><b>法定代表人： </b>{{ item.legalRepresentativeNew }}</div>
+                    <div class="modifyList"><b>经营期限： </b>{{ item.operatingPeriodEndNew?item.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</div>
+                    <div class="modifyList"><b>注册地址： </b>{{ item.registeredAddressNew }}</div>
+                    <div class="modifyList"><b>经营范围： </b>{{ item.businessScopeNew }}</div>
+                    <div class="modifyList"><b>董事长： </b>{{ item.chairmanNew }}</div>
+                    <div class="modifyList"><b>董事： </b>{{ item.directorNew }}</div>
+                    <div class="modifyList"><b>监事： </b>{{ item.supervisorNew }}</div>
+                    <div class="modifyList"><b>总经理： </b>{{ item.generalManagerNew }}</div>
+                  </div>
                   <div v-if="item.enterpriseNameState+'' === 'true'" class="modifyList">
                     <span><b>企业名称变更：</b></span>
                     <span>由</span>
@@ -128,7 +140,7 @@
                   </div>
                   <table class="dp-table" border="1">
                     <tr v-if="item.shareholderModifyState === 'true'">
-                      <td>股东变更</td>
+                      <td>股东信息</td>
                       <td>
                         <el-row>
                           <el-col v-for="sonItemOld in item.shareholderOldList" :key="sonItemOld.id" :span="24">
@@ -138,6 +150,7 @@
                           </el-col>
                         </el-row>
                       </td>
+                      <td v-if="item.shareholderNewList.length>0">>></td>
                       <td>
                         <el-row>
                           <el-col v-for="sonItemNew in item.shareholderNewList" :key="sonItemNew.id" :span="24">

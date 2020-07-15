@@ -121,8 +121,21 @@
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.supervisorNew }}</b></span>
           </div>
+          
+          <div v-if="scope.row.newRegisteredState+'' === 'true'">
+            <div><b>企业名称： </b>{{ scope.row.enterpriseNameNew }}</div>
+            <div><b>注册资本： </b>{{ scope.row.registeredCapitalNew }} 万元</div>
+            <div><b>法定代表人： </b>{{ scope.row.legalRepresentativeNew }}</div>
+            <div><b>经营期限： </b>{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</div>
+            <div><b>注册地址： </b>{{ scope.row.registeredAddressNew }}</div>
+            <div><b>经营范围： </b>{{ scope.row.businessScopeNew }}</div>
+            <div><b>董事长： </b>{{ scope.row.chairmanNew }}</div>
+            <div><b>董事： </b>{{ scope.row.directorNew }}</div>
+            <div><b>监事： </b>{{ scope.row.supervisorNew }}</div>
+            <div><b>总经理： </b>{{ scope.row.generalManagerNew }}</div>
+          </div>
           <div v-if="scope.row.shareholderModifyState+'' === 'true'">
-            <span><b>股东或股权有变更</b></span>
+            <span><b>股东或股权</b></span>
           </div>
           <div
             v-if="scope.row.enterpriseNameState+'' === 'false'
@@ -139,6 +152,7 @@
               && scope.row.directorState+'' === 'false'
               && scope.row.supervisorState+'' === 'false'
               && scope.row.shareholderModifyState+'' === 'false'
+              && scope.row.newRegisteredState+'' === 'false'
             "
           >
             <span>无变更事项</span>
@@ -227,6 +241,7 @@
                   <el-checkbox v-model="form.supervisorState" label="监事备案" />
                   <el-checkbox v-model="form.generalManagerState" label="经理备案" />
                   <el-checkbox v-model="form.shareholderModifyState" label="股东变更" />
+                  <el-checkbox v-model="form.newRegisteredState" label="新注册企业" />
                 </el-form-item>
               </el-col>
               <el-col v-if="form.enterpriseNameState === true" :span="24">
@@ -529,6 +544,159 @@
                     </el-col>
                     <el-col :span="24">
                       <el-form-item label="新监事" prop="supervisor">
+                        <el-autocomplete
+                          v-model="supervisorValue"
+                          popper-class="my-autocomplete"
+                          :fetch-suggestions="querySearchAsync"
+                          style="width: 100%;"
+                          placeholder="请输入监事姓名"
+                          @select="handleSupervisorSelect"
+                        >
+                          <i
+                            slot="suffix"
+                            class="el-icon-circle-plus-outline el-input__icon"
+                            @click="handleIconClick"
+                          />
+                          <el-tag
+                            v-for="tag in supervisorTags"
+                            slot="append"
+                            :key="tag.name"
+                            closable
+                            @close="handleSupervisorDelete(tag.id, tag.name)"
+                          >{{ tag.name }}</el-tag>
+                          <template slot-scope="{ item }">
+                            <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                            <span class="addr">电话：{{ item.phone }}</span>
+                            <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                          </template>
+                        </el-autocomplete>
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-card>
+                <br>
+              </el-col>
+
+              <el-col v-if="form.newRegisteredState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>企业新注册</span>
+                  </div>
+                  <el-row>
+                    <el-col :span="12">
+                      <el-form-item label="企业名称">
+                        <el-input v-model="form.enterpriseNameNew" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="注册资本(万元)" prop="registeredCapitalNew">
+                        <el-input v-model="form.registeredCapitalNew" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="法定代表人">
+                        <el-input v-model="form.legalRepresentativeNew" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="经营期限">
+                        <el-date-picker
+                          v-model="form.operatingPeriodEndNew"
+                          type="date"
+                          placeholder="选择日期【如果是长期，为空即可】"
+                          style="width: 100%;"
+                        />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="注册地址">
+                        <el-input v-model="form.registeredAddressNew" minlength="1" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="经营范围">
+                        <el-input v-model="form.businessScopeNew" type="textarea" rows="5" />
+                      </el-form-item>
+                    </el-col>
+
+                    <el-col :span="12">
+                      <el-form-item label="董事长">
+                        <el-autocomplete
+                          v-model="form.chairmanNew"
+                          style="width:100%"
+                          popper-class="my-autocomplete"
+                          :fetch-suggestions="querySearchAsync"
+                          placeholder="请输入姓名"
+                          @select="handleChairmanSelect"
+                        >
+                          <i
+                            slot="suffix"
+                            class="el-icon-circle-plus-outline el-input__icon"
+                            @click="handleIconClick"
+                          />
+                          <template slot-scope="{ item }">
+                            <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                            <span class="addr">电话：{{ item.phone }}</span>
+                            <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                          </template>
+                        </el-autocomplete>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="经理">
+                        <el-autocomplete
+                          v-model="form.generalManagerNew"
+                          style="width:100%"
+                          popper-class="my-autocomplete"
+                          :fetch-suggestions="querySearchAsync"
+                          placeholder="请输入姓名"
+                          @select="handleGeneralManagerSelect"
+                        >
+                          <i
+                            slot="suffix"
+                            class="el-icon-circle-plus-outline el-input__icon"
+                            @click="handleIconClick"
+                          />
+                          <template slot-scope="{ item }">
+                            <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                            <span class="addr">电话：{{ item.phone }}</span>
+                            <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                          </template>
+                        </el-autocomplete>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="董事" prop="director">
+                        <el-autocomplete
+                          v-model="directorValue"
+                          popper-class="my-autocomplete"
+                          :fetch-suggestions="querySearchAsync"
+                          style="width: 100%;"
+                          placeholder="请输入董事姓名"
+                          @select="handleDirectorSelect"
+                        >
+                          <i
+                            slot="suffix"
+                            class="el-icon-circle-plus-outline el-input__icon"
+                            @click="handleIconClick"
+                          />
+                          <el-tag
+                            v-for="tag in directorTags"
+                            slot="append"
+                            :key="tag.name"
+                            closable
+                            @close="handleDirectorDelete(tag.id, tag.name)"
+                          >{{ tag.name }}</el-tag>
+                          <template slot-scope="{ item }">
+                            <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                            <span class="addr">电话：{{ item.phone }}</span>
+                            <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                          </template>
+                        </el-autocomplete>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="24">
+                      <el-form-item label="监事" prop="supervisor">
                         <el-autocomplete
                           v-model="supervisorValue"
                           popper-class="my-autocomplete"

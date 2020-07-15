@@ -125,6 +125,8 @@ export default {
         shareholderIdsOld: '',
         shareholderIdsNew: '',
 
+        newRegisteredState: '',
+
         accessoryFiles: '', // 1内部审批文件
         companyReferenceRegisterFiles: '', // 2工商申请表
         shareholdersDecideFiles: '', // 3股东会决议
@@ -466,6 +468,8 @@ export default {
         shareholderIdsOld: '',
         shareholderIdsNew: '',
 
+        newRegisteredState: '',
+
         accessoryFiles: '', // 1内部审批文件
         companyReferenceRegisterFiles: '', // 2工商申请表
         shareholdersDecideFiles: '', // 3股东会决议
@@ -566,7 +570,6 @@ export default {
         // this.form.supervisorIdOld = this.mainmemberData.supervisorId
         // this.form.supervisorOld = this.mainmemberData.supervisor
       }
-
     },
     add() {
       this.resetForm()
@@ -659,6 +662,8 @@ export default {
             shareholderModifyState: this.form.shareholderModifyState ? this.form.shareholderModifyState : 'false',
             shareholderIdsOld: shareholderIdsOldArr.toString(),
             shareholderIdsNew: shareholderIdsNewArr.toString(),
+
+            newRegisteredState: this.form.newRegisteredState ? this.form.newRegisteredState : 'false',
 
             accessoryFiles: this.form.accessoryFiles.replace(/(^\s*)|(\s*$)/g, ''), // 1内部审批文件
             companyReferenceRegisterFiles: this.form.companyReferenceRegisterFiles.replace(/(^\s*)|(\s*$)/g, ''), // 2工商申请表
@@ -870,6 +875,26 @@ export default {
 
         if (this.form.shareholderModifyState === 'true') {
           this.form.shareholderModifyState = true
+        }
+
+        if (this.form.newRegisteredState === 'true') {
+          this.form.newRegisteredState = true
+          if (this.selRow.directorIdNew) {
+            this.directorTags = []
+            const directorIdArr = this.selRow.directorIdNew.split('、')
+            const directorArr = this.selRow.directorNew.split('、')
+            for (let j = 0; j < directorIdArr.length; j++) {
+              this.directorTags.push({ name: directorArr[j], id: directorIdArr[j] })
+            }
+          }
+          if (this.selRow.supervisorIdNew) {
+            this.supervisorTags = []
+            const supervisorIdArr = this.selRow.supervisorIdNew.split('、')
+            const supervisorArr = this.selRow.supervisorNew.split('、')
+            for (let j = 0; j < supervisorIdArr.length; j++) {
+              this.supervisorTags.push({ name: supervisorArr[j], id: supervisorIdArr[j] })
+            }
+          }
         }
 
         var accessoryArr = [
