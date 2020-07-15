@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(name="t_lpm_capital_modify")
@@ -42,9 +43,9 @@ public class CapitalModify extends BaseEntity {
     @Column(name="subscribed_capital_type", columnDefinition = "VARCHAR(32) COMMENT '认缴出资方式'")
     private String subscribedCapitalType;
 
-    @Type(type="java.lang.Float")
-    @Column(name="subscribed_capital_contribution", columnDefinition = "FLOAT COMMENT '认缴出资额（万元）'")
-    private Float subscribedCapitalContribution;
+    @Type(type="java.math.BigDecimal")
+    @Column(name="subscribed_capital_contribution", columnDefinition = "DECIMAL COMMENT '认缴出资额（万元）'")
+    private BigDecimal subscribedCapitalContribution;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="subscribed_capital_date", columnDefinition = "DATE COMMENT '认缴出资日期'")
@@ -53,9 +54,9 @@ public class CapitalModify extends BaseEntity {
     @Column(name="reality_capital_type", columnDefinition = "VARCHAR(32) COMMENT '实缴出资方式'")
     private String realityCapitalType;
 
-    @Type(type="java.lang.Float")
-    @Column(name="reality_capital_contribution", columnDefinition = "FLOAT COMMENT '实缴出资额（万元）'")
-    private Float realityCapitalContribution;
+    @Type(type="java.math.BigDecimal")
+    @Column(name="reality_capital_contribution", columnDefinition = "DECIMAL COMMENT '实缴出资额（万元）'")
+    private BigDecimal realityCapitalContribution;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="reality_capital_date", columnDefinition = "DATE COMMENT '实缴出资日期'")

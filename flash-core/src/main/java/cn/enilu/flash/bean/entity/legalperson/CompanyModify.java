@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(name="t_lpm_company_modify")
@@ -82,11 +83,13 @@ public class CompanyModify extends BaseEntity {
     @Column(name="registered_capital_state", columnDefinition = "VARCHAR(16) COMMENT '注册资本状态'")
     private String registeredCapitalState;
 
-    @Column(name="registered_capital_old", columnDefinition = "FLOAT COMMENT '旧注册资本'")
-    private String registeredCapitalOld;
+    @Type(type="java.math.BigDecimal")
+    @Column(name="registered_capital_old", columnDefinition = "DECIMAL COMMENT '旧注册资本'")
+    private BigDecimal registeredCapitalOld;
 
-    @Column(name="registered_capital_new", columnDefinition = "FLOAT COMMENT '新注册资本'")
-    private String registeredCapitalNew;
+    @Type(type="java.math.BigDecimal")
+    @Column(name="registered_capital_new", columnDefinition = "DECIMAL COMMENT '新注册资本'")
+    private BigDecimal registeredCapitalNew;
 
 
     @Column(name="business_scope_state", columnDefinition = "VARCHAR(16) COMMENT '经营范围变更状态'")

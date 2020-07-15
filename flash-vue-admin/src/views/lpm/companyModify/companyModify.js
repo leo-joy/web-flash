@@ -189,10 +189,16 @@ export default {
           { required: true, message: '请选中股东名称', trigger: 'blur' }
         ],
         registeredCapitalOld: [
-          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
         ],
         registeredCapitalNew: [
-          { type: 'number', message: '只能输入是数值', trigger: 'blur' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+        ],
+        subscribedCapitalContribution: [
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+        ],
+        realityCapitalContribution: [
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
         ]
       },
       listQuery: {
@@ -247,10 +253,10 @@ export default {
         serialNumber: '',
         shareholder: '',
         subscribedCapitalType: '',
-        subscribedCapitalContribution: '',
+        subscribedCapitalContribution: 0,
         subscribedCapitalDate: '',
         realityCapitalType: '',
-        realityCapitalContribution: '',
+        realityCapitalContribution: 0,
         realityCapitalDate: '',
         responsiblePerson: '',
         shareholderType: '',
@@ -609,8 +615,8 @@ export default {
             liquidationExitOld: this.form.liquidationExitOld,
             liquidationExitNew: this.form.liquidationExitNew,
             registeredCapitalState: this.form.registeredCapitalState ? this.form.registeredCapitalState : 'false',
-            registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(1) : 0,
-            registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(1) : 0,
+            registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(4) : 0,
+            registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(4) : 0,
             ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
             ownershipOld: this.form.ownershipOld,
             ownershipNew: this.form.ownershipNew,
@@ -720,10 +726,10 @@ export default {
                     serialNumber: tempObj.serialNumber,
                     shareholder: tempObj.shareholder,
                     subscribedCapitalType: tempObj.subscribedCapitalType,
-                    subscribedCapitalContribution: tempObj.subscribedCapitalContribution,
+                    subscribedCapitalContribution: tempObj.subscribedCapitalContribution ? parseFloat(tempObj.subscribedCapitalContribution).toFixed(4) : 0,
                     subscribedCapitalDate: tempObj.subscribedCapitalDate ? parseTime(tempObj.subscribedCapitalDate, '{y}-{m}-{d}') : '',
                     realityCapitalType: tempObj.realityCapitalType,
-                    realityCapitalContribution: tempObj.realityCapitalContribution,
+                    realityCapitalContribution: tempObj.realityCapitalContribution ? parseFloat(tempObj.realityCapitalContribution).toFixed(4) : 0,
                     realityCapitalDate: tempObj.realityCapitalDate ? parseTime(tempObj.realityCapitalDate, '{y}-{m}-{d}') : '',
                     responsiblePerson: tempObj.responsiblePerson,
                     shareholderType: tempObj.shareholderType,
@@ -1297,7 +1303,8 @@ export default {
       if (userList && userList.length === 0) {
         getUserList({
           page: 1,
-          limit: 50000
+          limit: 50000,
+          type: '1,2'
         }).then(response => {
           this.naturalPersonShareholders = response.data.records
         })
@@ -1361,10 +1368,10 @@ export default {
         serialNumber: '',
         shareholder: '',
         subscribedCapitalType: '',
-        subscribedCapitalContribution: '',
+        subscribedCapitalContribution: 0,
         subscribedCapitalDate: '',
         realityCapitalType: '',
-        realityCapitalContribution: '',
+        realityCapitalContribution: 0,
         realityCapitalDate: '',
         responsiblePerson: '',
         shareholderMold: 1,
@@ -1406,10 +1413,10 @@ export default {
             serialNumber: this.formCapitalModify.serialNumber,
             shareholder: this.formCapitalModify.shareholder,
             subscribedCapitalType: this.formCapitalModify.subscribedCapitalType,
-            subscribedCapitalContribution: this.formCapitalModify.subscribedCapitalContribution,
+            subscribedCapitalContribution: this.formCapitalModify.subscribedCapitalContribution ? parseFloat(this.formCapitalModify.subscribedCapitalContribution).toFixed(4) : 0,
             subscribedCapitalDate: this.formCapitalModify.subscribedCapitalDate ? parseTime(this.formCapitalModify.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.formCapitalModify.realityCapitalType,
-            realityCapitalContribution: this.formCapitalModify.realityCapitalContribution,
+            realityCapitalContribution: this.formCapitalModify.realityCapitalContribution ? parseFloat(this.formCapitalModify.realityCapitalContribution).toFixed(4) : 0,
             realityCapitalDate: this.formCapitalModify.realityCapitalDate ? parseTime(this.formCapitalModify.realityCapitalDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.formCapitalModify.responsiblePerson,
             shareholderType: this.formCapitalModify.shareholderType,

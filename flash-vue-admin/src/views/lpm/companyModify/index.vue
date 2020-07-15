@@ -316,12 +316,12 @@
                   <el-row>
                     <el-col :span="12">
                       <el-form-item label="原资本(万元)" prop="registeredCapitalOld">
-                        <el-input v-model.number="form.registeredCapitalOld" minlength="1" />
+                        <el-input v-model="form.registeredCapitalOld" />
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="新资本(万元)" prop="registeredCapitalNew">
-                        <el-input v-model.number="form.registeredCapitalNew" minlength="1" />
+                        <el-input v-model="form.registeredCapitalNew" />
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -1548,7 +1548,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="认缴出资额（万元）">
+            <el-form-item label="认缴出资额（万元）" prop="subscribedCapitalContribution">
               <el-input v-model="formCapitalModify.subscribedCapitalContribution" />
             </el-form-item>
           </el-col>
@@ -1577,7 +1577,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="8">
-            <el-form-item label="实缴出资额（万元）">
+            <el-form-item label="实缴出资额（万元）" prop="realityCapitalContribution">
               <el-input v-model="formCapitalModify.realityCapitalContribution" />
             </el-form-item>
           </el-col>
