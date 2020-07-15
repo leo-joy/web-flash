@@ -1,5 +1,6 @@
 import { Loading } from 'element-ui'
 import pdf from 'vue-pdf'
+import { getList as getEnterpriseList } from '@/api/lpm/businesslicense'
 import { list as deptList } from '@/api/system/dept'
 import { getList as dictList } from '@/api/system/dict'
 import { getDictList, getCityDate } from '@/utils/common'
@@ -108,7 +109,13 @@ export default {
       shareholdersDecideList: [],
       applicationRegistrationFilesList: [],
       otherFilesList: [],
-      provinces: []
+      provinces: [],
+      companyListQuery: {
+        page: 1,
+        limit: 3000,
+        id: undefined
+      },
+      companyList: []
     }
   },
   filters: {
@@ -158,6 +165,11 @@ export default {
 
       dictList({ name: '企业标签' }).then(response => {
         this.companyTagOptions = getDictList(response.data[0].detail)
+      })
+
+      getEnterpriseList(this.companyListQuery).then(response => {
+        this.companyList = response.data.records
+        this.listLoading = false
       })
 
       this.uploadUrl = getApiUrl() + '/file'
@@ -268,6 +280,17 @@ export default {
             alert('请现在组织属性')
             return false
           }
+          if (!this.form.id) {
+            var result = this.companyList.filter(word => word.enterpriseName === this.form.enterpriseName)
+            if (result.length > 0) {
+              this.$message({
+                message: '您好！ 此公司在系统中已经存在！请检查公司名称是否正确！',
+                type: 'error'
+              })
+              return
+            }
+          }
+
           let registeredCapital = this.form.registeredCapital ? this.form.registeredCapital : 0
           let issuedShareCapital = this.form.issuedShareCapital ? this.form.issuedShareCapital : 0
           if (this.form.pid * 1 === 26) {
