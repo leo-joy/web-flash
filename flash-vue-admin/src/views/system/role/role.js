@@ -325,7 +325,7 @@ export default {
       if (this.checkSel()) {
         const companyRoleQuery = {
           page: 1,
-          limit: 2000,
+          limit: 3000,
           roleId: this.selRow.id
         }
         companyListByRoleId(companyRoleQuery).then(response => {

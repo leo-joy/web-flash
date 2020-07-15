@@ -21,7 +21,7 @@ export default {
       sealStatus: '', // 印章状态
       companyListQuery: {
         page: 1,
-        limit: 2000,
+        limit: 3000,
         mainModuleId: '11',
         id: undefined
       },

@@ -23,7 +23,7 @@ export default {
       replaceStatus: '', // 是否补领
       companyListQuery: {
         page: 1,
-        limit: 2000,
+        limit: 3000,
         id: undefined
       },
       companyList: [],

@@ -40,7 +40,7 @@ export default {
       shareholderStatus: '', // 股东状态
       companyListQuery: {
         page: 1,
-        limit: 2000,
+        limit: 3000,
         id: undefined
       },
       companyList: [],

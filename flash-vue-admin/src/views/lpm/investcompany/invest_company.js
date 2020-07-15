@@ -19,7 +19,7 @@ export default {
       formTitle: '添加投资企业',
       companyListQuery: {
         page: 1,
-        limit: 2000,
+        limit: 3000,
         id: undefined
       },
       currencyList: [], // 币种，从数据字典中获取
