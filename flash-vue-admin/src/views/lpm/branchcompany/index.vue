@@ -93,7 +93,7 @@
               <el-autocomplete
                 v-model="form.branchCompanyName"
                 popper-class="my-autocomplete"
-                style="min-width:600px;line-height:10px;"
+                style="min-width:100%;line-height:10px;"
                 :fetch-suggestions="querySearchAsync"
                 placeholder="请输入分公司名称"
                 @select="handleBranchCompanySelect"
