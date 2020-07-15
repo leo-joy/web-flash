@@ -273,7 +273,7 @@ export default {
       // 请求公司股东全部列表
       getEnterpriseList({
         page: 1,
-        limit: 2000
+        limit: 3000
       }).then(response => {
         this.enterpriseShareholders = response.data.records
       })
@@ -371,7 +371,7 @@ export default {
         // 请求公司股东全部列表
         getEnterpriseList({
           page: 1,
-          limit: 2000
+          limit: 3000
         }).then(response => {
           this.enterpriseShareholders = response.data.records
         })
