@@ -148,6 +148,14 @@ export default {
       this.uploadUrl = getApiUrl() + '/file'
       this.uploadHeaders['Authorization'] = getToken()
       this.fetchData()
+      // 请求自然人股东全部列表
+      getUserList({
+        page: 1,
+        limit: 50000,
+        type: '1,2'
+      }).then(response => {
+        this.naturalPersonShareholders = response.data.records
+      })
     },
     fetchData() {
       this.listLoading = true
@@ -277,14 +285,6 @@ export default {
       }).then(response => {
         this.enterpriseShareholders = response.data.records
       })
-
-      // 请求自然人股东全部列表
-      getUserList({
-        page: 1,
-        limit: 50000
-      }).then(response => {
-        this.naturalPersonShareholders = response.data.records
-      })
     },
     save() {
       this.$refs['form'].validate((valid) => {
@@ -374,14 +374,6 @@ export default {
           limit: 3000
         }).then(response => {
           this.enterpriseShareholders = response.data.records
-        })
-
-        // 请求自然人股东全部列表
-        getUserList({
-          page: 1,
-          limit: 50000
-        }).then(response => {
-          this.naturalPersonShareholders = response.data.records
         })
       }
     },
@@ -523,15 +515,24 @@ export default {
       // getUserList(this.listUserQuery).then(response => {
       //   this.enterpriseShareholders = response.data.records
       // })
-      alert('如果没有搜索到，如有权限可以新增股东信息')
+      const routeUrl = this.$router.resolve({ path: '/lpm/businesslicenseEdit' })
+      window.open(routeUrl.href, '_blank')
       console.log(ev)
     },
 
     // 搜索自然人股东相关函数
     querySearchNaturalPersonAsync(queryString, cb) {
-      var naturalPersonShareholders = this.naturalPersonShareholders
-      var results = queryString ? naturalPersonShareholders.filter(this.createStateNaturalPersonFilter(queryString)) : naturalPersonShareholders
-      cb(results)
+      if (queryString) {
+        var naturalPersonShareholders = this.naturalPersonShareholders
+        var results = queryString ? naturalPersonShareholders.filter(this.createStateNaturalPersonFilter(queryString)) : naturalPersonShareholders
+        if (results && results.length === 0) {
+          this.$message({
+            message: '您输入的信息没有匹配到相应的结果！请检查输入是否正确！如匹配到不可通过右侧➕搜索配置自然股东！',
+            type: 'warning'
+          })
+        }
+        cb(results)
+      }
     },
     createStateNaturalPersonFilter(queryString) {
       return (state) => {
@@ -555,10 +556,9 @@ export default {
       this.form.branchCompanyCode = item.id
     },
     handleIconNaturalPersonClick(ev) {
-      // getUserList(this.listUserQuery).then(response => {
-      //   this.enterpriseShareholders = response.data.records
-      // })
-      alert('如果没有搜索到，如有权限可以新增股东信息')
+      const routeUrl = this.$router.resolve({ path: '/advancedUser/1' })
+      window.open(routeUrl.href, '_blank')
+      // this.$router.push({ path: '/advancedUser/1' })
       console.log(ev)
     }
 
