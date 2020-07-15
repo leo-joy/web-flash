@@ -14,7 +14,7 @@
       <el-col :span="7">
         <h4 style="margin:0 0 20px 0">
           <div class="item-label">公司编号<br>Company Number&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-          {{ businesslicenseData.enterpriseCode }}</h4>
+          {{ businesslicenseData.unifiedSocialCreditCode }}</h4>
       </el-col>
       <el-col :span="7">
         <h4 style="margin:0 0 20px 0">
