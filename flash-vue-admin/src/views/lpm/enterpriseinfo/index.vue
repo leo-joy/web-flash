@@ -15,6 +15,23 @@
       <el-row>
         <el-col :span="2">
           <template>
+            <el-radio v-model="tagRadio" label="" @change="handleTagRadioClick">全部标签</el-radio>
+          </template>
+        </el-col>
+        <el-col :span="22">
+          <template>
+            <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
+            <!-- <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio> -->
+            <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
+            <el-radio v-model="registrationTypeRadio" label="1,4" @change="handleRegistrationTypeRadioClick">国内企业</el-radio>
+            <el-radio v-model="registrationTypeRadio" label="2" @change="handleRegistrationTypeRadioClick">境外/香港企业</el-radio>
+          </template>
+        </el-col>
+      </el-row>
+      <br>
+      <el-row>
+        <el-col :span="2">
+          <template>
             <el-radio v-model="registrationTypeRadio" label="1,2,4" @change="handleRegistrationTypeRadioClick">全部企业</el-radio>
           </template>
         </el-col>
@@ -82,23 +99,6 @@
               size="small"
               @click.native="exportExcel"
             >导出结果报表</el-button>
-          </template>
-        </el-col>
-      </el-row>
-      <br>
-      <el-row>
-        <el-col :span="2">
-          <template>
-            <el-radio v-model="tagRadio" label="" @change="handleTagRadioClick">全部标签</el-radio>
-          </template>
-        </el-col>
-        <el-col :span="22">
-          <template>
-            <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
-            <!-- <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio> -->
-            <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
-            <el-radio v-model="registrationTypeRadio" label="1,4" @change="handleRegistrationTypeRadioClick">国内企业</el-radio>
-            <el-radio v-model="registrationTypeRadio" label="2" @change="handleRegistrationTypeRadioClick">境外/香港企业</el-radio>
           </template>
         </el-col>
       </el-row>
