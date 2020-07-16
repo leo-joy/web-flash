@@ -3,6 +3,7 @@ import { parseTime } from '@/utils'
 import { getList as dictList } from '@/api/system/dict'
 import { showDictLabel } from '@/utils/common'
 import { getList as getCapitalList } from '@/api/lpm/capital'
+import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
 import { getList as getInvestCompanyList } from '@/api/lpm/investcompany'
 
 import advancedUser from '@/views/system/user/advancedUser.vue'
@@ -294,6 +295,16 @@ export default {
           })
           return
         }
+
+        const capitalModifyResponse = await getCapitalModifyList({ page: 1, limit: 1, branchCompanyCode: id })
+        if (capitalModifyResponse && capitalModifyResponse.data.records.length > 0) {
+          this.$message({
+            message: '该企业在企业股权变更中被设置为 【' + capitalModifyResponse.data.records[0].enterpriseName + '】的股东！请先删除股东记录！',
+            type: 'warning'
+          })
+          return
+        }
+
         const investCompanyResponse = await getInvestCompanyList({ page: 1, limit: 1, branchCompanyCode: id })
         if (investCompanyResponse && investCompanyResponse.data.records.length > 0) {
           this.$message({

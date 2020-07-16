@@ -34,11 +34,13 @@ public class CapitalModifyController {
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list(@RequestParam(required = false) String modifyStatusType,
+					   @RequestParam(required = false) String branchCompanyCode,
 					   @RequestParam(required = false) String serialIdModify,
 					   @RequestParam(required = false) String createBy,
 					   @RequestParam(required = false) String ids) {
 	Page<CapitalModify> page = new PageFactory<CapitalModify>().defaultPage();
 		page.addFilter("modifyStatusType", SearchFilter.Operator.EQ,modifyStatusType);
+		page.addFilter("branchCompanyCode", SearchFilter.Operator.EQ,branchCompanyCode);
 		if(serialIdModify != null && !serialIdModify.isEmpty()) {
 			ArrayList lists = new ArrayList(Arrays.asList(serialIdModify.split(",")));
 			page.addFilter("serialIdModify", SearchFilter.Operator.IN,lists);
