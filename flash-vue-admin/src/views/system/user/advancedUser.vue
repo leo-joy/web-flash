@@ -48,6 +48,7 @@
         </el-col>
         <el-col :span="12">
           <el-button
+            v-if="userParamType*1 !== 2"
             style="float:right"
             type="primary"
             size="small"
@@ -475,14 +476,14 @@ export default {
         const tempArr = this.$route.path.split('/')
         userType = tempArr[tempArr.length - 1]
       }
-      console.log(userType)
       // if( this.$route.path === '/advancedUser') {
       //   userType = 1
       // }
-      //this.listQuery.type = userType || this.$attrs.userTypeValue
-      console.log(this.$route.query)
+      // this.listQuery.type = userType || this.$attrs.userTypeValue
       this.userParamType = userType || this.$attrs.userTypeValue
-      // this.form.type = "'"+this.$route.meta.userType+"'"
+      if (userType * 1 === 2) {
+        this.listQuery.type = 2
+      }
       getList(this.listQuery).then(response => {
         this.list = response.data.records
         this.listLoading = false
@@ -547,7 +548,7 @@ export default {
     add() {
       this.resetForm()
       this.formTitle =
-        this.userParamType === '1' ? '添加高级管理人员' : '添加股东信息'
+      this.userParamType === '1' ? '添加高级管理人员' : '添加股东信息'
       this.formVisible = true
       this.isAdd = true
       console.log(this.form)
