@@ -27,7 +27,7 @@
               </el-row> -->
           <el-row>
             <el-col :span="12">
-              <el-form-item label="组织属性：">{{ grandfatherOrg }} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
+              <el-form-item label="组织机构：">{{ grandfatherOrg }} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
             </el-col>
           </el-row>
 

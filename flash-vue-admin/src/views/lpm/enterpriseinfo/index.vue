@@ -229,10 +229,10 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
           <el-col :span="24">
-            <el-form-item label="组织属性">
+            <el-form-item label="组织机构">
               <el-input
                 v-model="form.pname"
-                placeholder="请选择组织属性"
+                placeholder="请选择组织机构"
                 readonly="readonly"
                 @click.native="deptTree.show = !deptTree.show"
               />

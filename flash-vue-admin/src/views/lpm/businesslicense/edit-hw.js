@@ -82,7 +82,7 @@ export default {
       },
       rules: {
         // pName: [
-        //   { required: true, message: '请选中组织属性', trigger: 'blur' }
+        //   { required: true, message: '请选中组织机构', trigger: 'blur' }
         // ],
         enterpriseName: [
           { required: true, message: '请输入企业名称', trigger: 'blur' }
@@ -277,7 +277,7 @@ export default {
       this.$refs['form'].validate((valid) => {
         if (valid) {
           if (!this.form.pid) {
-            alert('请现在组织属性')
+            alert('请选择组织机构')
             return false
           }
           if (!this.form.id) {

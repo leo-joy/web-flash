@@ -20,10 +20,10 @@
         <el-row>
           <el-col :span="20">
             <el-form-item label=" ">
-              <div class="item-label">组织属性<br>Organization</div>
+              <div class="item-label">组织机构<br>Organization</div>
               <el-input
                 v-model="form.pName"
-                placeholder="请选择组织属性"
+                placeholder="请选择组织机构"
                 readonly="readonly"
                 @click.native="deptTree.show = !deptTree.show"
               />

@@ -6,7 +6,7 @@
           <el-row>
             <el-col :span="24">
               <el-form-item>
-                <div class="item-label">组织属性<br>Organizational</div>
+                <div class="item-label">组织机构<br>Organizational</div>
                 {{ grandfatherOrg }} {{ parentOrg }} {{ businesslicenseData.pName }}</el-form-item>
             </el-col>
           </el-row>

@@ -81,7 +81,7 @@
 
                     <el-row>
                       <el-col :span="24">
-                        <el-form-item label="组织属性：">{{ businesslicenseData.pName }}</el-form-item>
+                        <el-form-item label="组织机构：">{{ businesslicenseData.pName }}</el-form-item>
                       </el-col>
                     </el-row>
 
