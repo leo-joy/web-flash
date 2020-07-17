@@ -25,11 +25,16 @@
 /*global XLSX */
 
 var X = XLSX; // 组件
-var INDEX_URL = 'http://localhost:9595/dev-api/' //后台ip
+//var INDEX_URL = 'http://localhost:9595/dev-api/' //开发后台ip
+var INDEX_URL = 'http://faren.agile.com.cn/prod-api/' //正式服务后台ip
+
 var cDg; //canvas 数据
 var XPORT = document.getElementById('xport'); // 导出按钮
 var HTMLOUT = document.getElementById('htmlout'); //excel画布
-var titleArr = ['企业名称','社会统一信用代码','法人代表','注册资本','成立日期'];
+var titleArr = ['组织机构','企业名称','社会统一信用代码','法人代表','注册资本(万元)','成立日期',
+		'企业类型','币种','取得日期','营业期限自','营业期限至',
+		'登记机关','核准日期','登记状态','注册地址','经营范围',
+		'实际占比（%）','企业注册地名称'];
 (function(){
 	process_wb()
 })()
@@ -37,7 +42,7 @@ var titleArr = ['企业名称','社会统一信用代码','法人代表','注册
 function process_wb() {
 	/* get data */
 	let page = getQueryVariable('page')*1 || 1;
-	let limit = getQueryVariable('limit')*1 || 2000;
+	let limit = 3000;
 	let registrationType = getQueryVariable('registrationType');
 	let ids = getQueryVariable('ids') || '';
 	let pIds = getQueryVariable('pIds') || '';
@@ -126,22 +131,50 @@ function process_wb() {
 // 绘制表格
 function initTable(records, type) {
 	var data = []
-	var ref = "A1:E" + records.length;
+	var ref = "A1:T" + records.length;
 	if(type === 1) {
+		titleArr = ['组织机构','企业名称','社会统一信用代码','法人代表','注册资本(万元)','成立日期',
+		'企业类型','币种','取得日期','营业期限自','营业期限至',
+		'登记机关','核准日期','登记状态','注册地址','经营范围',
+		'实际占比（%）','企业注册地名称','注册类型','标签'
+	     ];
 		for(let i=0;i<records.length;i++) {
 			let tempArr = []
+			tempArr.push(records[i].pName)
 			tempArr.push(records[i].enterpriseName)
 			tempArr.push(records[i].unifiedSocialCreditCode)
 			tempArr.push(records[i].legalRepresentative)
-			tempArr.push(records[i].registeredCapital?records[i].registeredCapital+' 万元':'')
+			tempArr.push(records[i].registeredCapital?records[i].registeredCapital:'')
 			tempArr.push(records[i].setupDate.replace(' 00:00:00',''))
+
+			tempArr.push(records[i].type)
+			tempArr.push(records[i].currency)
+			tempArr.push(records[i].achieveDate.replace(' 00:00:00',''))
+			tempArr.push(records[i].operatingPeriodFrom.replace(' 00:00:00',''))
+			tempArr.push(records[i].operatingPeriodEnd.replace(' 00:00:00',''))
+
+			tempArr.push(records[i].registrationAuthority)
+			tempArr.push(records[i].approvalDate)
+			tempArr.push(records[i].registrationStatus)
+			tempArr.push(records[i].registeredAddress)
+			tempArr.push(records[i].businessScope)
+
+			tempArr.push(records[i].realProportion)
+			tempArr.push(records[i].registrationPlaceName)
+			tempArr.push(records[i].registrationType)
+			tempArr.push(records[i].tags)
 			data.push(tempArr)
 		}
-		titleArr = ['企业名称','社会统一信用代码','法人代表','注册资本','成立日期'];
-		ref = "A1:E" + records.length;
+		ref = "A1:T" + records.length;
 	} else {
+		titleArr = ['组织机构','企业名称','社会统一信用代码','法人代表','董事长','董事','监事','总经理','注册资本(万元)','成立日期',
+		'企业类型','币种','取得日期','营业期限自','营业期限至',
+		'登记机关','核准日期','登记状态','注册地址','经营范围',
+		'实际占比（%）','企业注册地名称','注册类型','标签'
+	    ];
 		for(let i=0;i<records.length;i++) {
 			let tempArr = []
+			tempArr.push(records[i].pName)
 			tempArr.push(records[i].enterpriseName)
 			tempArr.push(records[i].unifiedSocialCreditCode)
 			tempArr.push(records[i].legalRepresentative)
@@ -149,12 +182,29 @@ function initTable(records, type) {
 			tempArr.push(records[i].director)
 			tempArr.push(records[i].supervisor)
 			tempArr.push(records[i].generalManager)
-			tempArr.push(records[i].registeredCapital?records[i].registeredCapital+' 万元':'')
+			tempArr.push(records[i].registeredCapital?records[i].registeredCapital:'')
 			tempArr.push(records[i].setupDate.replace(' 00:00:00',''))
+
+			tempArr.push(records[i].type)
+			tempArr.push(records[i].currency)
+			tempArr.push(records[i].achieveDate.replace(' 00:00:00',''))
+			tempArr.push(records[i].operatingPeriodFrom.replace(' 00:00:00',''))
+			tempArr.push(records[i].operatingPeriodEnd.replace(' 00:00:00',''))
+
+			tempArr.push(records[i].registrationAuthority)
+			tempArr.push(records[i].approvalDate)
+			tempArr.push(records[i].registrationStatus)
+			tempArr.push(records[i].registeredAddress)
+			tempArr.push(records[i].businessScope)
+
+			tempArr.push(records[i].realProportion)
+			tempArr.push(records[i].registrationPlaceName)
+			tempArr.push(records[i].registrationType)
+			tempArr.push(records[i].tags)
+
 			data.push(tempArr)
 		}
-		titleArr = ['企业名称','社会统一信用代码','法人代表','董事长','董事','监事','总经理','注册资本','成立日期'];
-		ref = "A1:I" + records.length;
+		ref = "A1:X" + records.length;
 	}
 	
 	/* update canvas-datagrid */
