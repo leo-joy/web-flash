@@ -104,9 +104,11 @@
                   @click="handleIconClick"
                 />
                 <template slot-scope="{ item }">
-                  <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
-                  <span class="addr">电话：{{ item.phone }}</span>
-                  <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                  <div class="name">{{ item.name }} <span v-if="item.workNumber" class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                  <span v-if="item.type*1 === 1" class="addr">类型：高级管理人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span v-if="item.type*1 === 2" class="addr">类型：自然人股东&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span v-if="item.jobName" class="addr">职务：{{ item.jobName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="addr">性别：{{ item.sexName }}</span>
                 </template>
               </el-autocomplete>
             </el-form-item>
@@ -127,9 +129,11 @@
                   @click="handleIconClick"
                 />
                 <template slot-scope="{ item }">
-                  <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
-                  <span class="addr">电话：{{ item.phone }}</span>
-                  <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                  <div class="name">{{ item.name }} <span v-if="item.workNumber" class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                  <span v-if="item.type*1 === 1" class="addr">类型：高级管理人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span v-if="item.type*1 === 2" class="addr">类型：自然人股东&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span v-if="item.jobName" class="addr">职务：{{ item.jobName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="addr">性别：{{ item.sexName }}</span>
                 </template>
               </el-autocomplete>
             </el-form-item>
@@ -159,9 +163,11 @@
                       @close="handleDirectorDelete(tag.id, tag.name)"
                     >{{ tag.name }}</el-tag>
                     <template slot-scope="{ item }">
-                      <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
-                      <span class="addr">电话：{{ item.phone }}</span>
-                      <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                      <div class="name">{{ item.name }} <span v-if="item.workNumber" class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                      <span v-if="item.type*1 === 1" class="addr">类型：高级管理人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.type*1 === 2" class="addr">类型：自然人股东&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.jobName" class="addr">职务：{{ item.jobName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span class="addr">性别：{{ item.sexName }}</span>
                     </template>
                   </el-autocomplete>
                 </el-col>
@@ -197,9 +203,11 @@
                       @close="handleSupervisorDelete(tag.id, tag.name)"
                     >{{ tag.name }}</el-tag>
                     <template slot-scope="{ item }">
-                      <div class="name">{{ item.name }} <span class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
-                      <span class="addr">电话：{{ item.phone }}</span>
-                      <span class="addr">&nbsp;&nbsp;&nbsp;&nbsp;邮箱：{{ item.email }}</span>
+                      <div class="name">{{ item.name }} <span v-if="item.workNumber" class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                      <span v-if="item.type*1 === 1" class="addr">类型：高级管理人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.type*1 === 2" class="addr">类型：自然人股东&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.jobName" class="addr">职务：{{ item.jobName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span class="addr">性别：{{ item.sexName }}</span>
                     </template>
                   </el-autocomplete>
                 </el-col>

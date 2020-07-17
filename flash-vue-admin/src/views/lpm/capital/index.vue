@@ -119,10 +119,8 @@
                     />
                     <template slot-scope="{ item }" style="width:300px">
                       <div class="name">{{ item.enterpriseName }}</div>
-                      <span
-                        class="addr"
-                      >法人：{{ item.legalRepresentative }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                      <span class="addr">地址：{{ item.businessAddress }}</span>
+                      <span class="addr">信用代码：{{ item.unifiedSocialCreditCode }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span class="addr">地址：{{ item.registeredAddress }}</span>
                     </template>
                   </el-autocomplete>
                 </el-form-item>
@@ -144,9 +142,10 @@
                     />
                     <template slot-scope="{ item }" style="width:300px">
                       <div class="name">{{ item.name }}</div>
-                      <span
-                        class="addr"
-                      >部门：{{ item.deptName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.workNumber" class="addr">工号：{{ item.workNumber }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.jobName" class="addr">职务：{{ item.jobName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.type*1 === 1" class="addr">类型：高级管理人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                      <span v-if="item.type*1 === 2" class="addr">类型：自然人股东&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
                       <span class="addr">性别：{{ item.sexName }}</span>
                     </template>
                   </el-autocomplete>
