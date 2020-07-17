@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <link rel="icon" href="/favicon.ico">
     <title><%= webpackConfig.name %></title>
+    <script>
+      var isChrome = window.navigator.userAgent.indexOf('Chrome') > -1
+      if(!isChrome){
+        alert('您好！ 您的浏览器目前不支持。如没有chrome浏览器！请前往IT桌面助手进行安装。')
+      }
+    </script>
   </head>
   <body>
     <noscript>
