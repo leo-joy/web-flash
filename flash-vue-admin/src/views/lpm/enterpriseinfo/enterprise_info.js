@@ -519,18 +519,29 @@ export default {
               let currency = '1'
               if (data.registCapital) {
                 if (data.registCapital.indexOf('人民币') > -1) {
-                  currency = getDictNum(_this.currencyDict, '人民币')
+                  currency = getDictNum(_this.currencyDict, '人民币/RMB')
                 } else if (data.registCapital.indexOf('美元') > -1) {
-                  currency = getDictNum(_this.currencyDict, '美元')
+                  currency = getDictNum(_this.currencyDict, '美元/USD')
                 } else if (data.registCapital.indexOf('港') > -1) {
-                  currency = getDictNum(_this.currencyDict, '港元')
+                  currency = getDictNum(_this.currencyDict, '港元/HKD')
                 } else if (data.registCapital.indexOf('澳') > -1) {
-                  currency = getDictNum(_this.currencyDict, '澳元')
+                  currency = getDictNum(_this.currencyDict, '澳币/AUD')
+                } else if (data.registCapital.indexOf('新加坡') > -1) {
+                  currency = getDictNum(_this.currencyDict, '新加坡元/SGD')
                 } else {
                   currency = oldItem.currency || '1'
                 }
               }
+
+              var currentItem = {}
+              for (const key in oldItem) {
+                if (key !== 'createBy' && key !== 'createTime' && key !== 'modifyBy' && key !== 'modifyTime') {
+                  currentItem[key] = oldItem[key]
+                }
+              }
+
               save({
+                ...currentItem,
                 unifiedSocialCreditCode: unifiedSocialCreditCode, // 统一社会信息代码
                 enterpriseCode: enterpriseCode, // 企业编号
                 enterpriseName: enterpriseName, // 企业名称
@@ -543,7 +554,11 @@ export default {
                 operatingPeriodEnd: operatingPeriodEnd ? parseTime(operatingPeriodEnd, '{y}-{m}-{d}') : '', // 营业期限至
                 registrationAuthority: registrationAuthority, // 登记机关
                 businessScope: businessScope, // 经营范围
-                registeredCapital: parseFloat(registeredCapital).toFixed(1), // 注册资本
+                registeredCapital: parseFloat(registeredCapital).toFixed(4), // 注册资本
+
+                /**
+                 * 数据库中原始数据
+                 */
                 currency: currency, // 币种
                 initCa: 1, // 是否工商初始化过， 1 是
                 registrationType: oldItem.registrationType || 1, // 企业注册类型
@@ -741,43 +756,49 @@ export default {
 
     // 初始化投资企业
     async initInvestCompany(pCurrentCompany, _this) {
-      const currentCompany = pCurrentCompany
+      const currentCompany = {}
+      for (const key in pCurrentCompany) {
+        if (key !== 'createBy' && key !== 'createTime' && key !== 'modifyBy' && key !== 'modifyTime') {
+          currentCompany[key] = pCurrentCompany[key]
+        }
+      }
       currentCompany.initInvest = 1 // 是否同步过投资公司 1 是
       const businesslicense = await save({
-        unifiedSocialCreditCode: currentCompany.unifiedSocialCreditCode,
-        enterpriseName: currentCompany.enterpriseName,
-        enterpriseNameEn: currentCompany.enterpriseNameEn,
-        enterpriseNameBusiness: currentCompany.enterpriseNameBusiness,
-        enterpriseCode: currentCompany.enterpriseCode,
-        type: currentCompany.type,
-        customType: currentCompany.customType,
-        registrationType: currentCompany.registrationType,
-        registrationPlace: currentCompany.registrationPlace,
-        legalRepresentative: currentCompany.legalRepresentative,
-        registeredCapital: parseFloat(currentCompany.registeredCapital).toFixed(1) || 0,
-        currency: currentCompany.currency,
-        setupDate: currentCompany.setupDate ? parseTime(currentCompany.setupDate, '{y}-{m}-{d}') : '',
-        achieveDate: currentCompany.achieveDate ? parseTime(currentCompany.achieveDate, '{y}-{m}-{d}') : '',
-        operatingPeriodFrom: currentCompany.operatingPeriodFrom ? parseTime(currentCompany.operatingPeriodFrom, '{y}-{m}-{d}') : '',
-        operatingPeriodEnd: currentCompany.operatingPeriodEnd ? parseTime(currentCompany.operatingPeriodEnd, '{y}-{m}-{d}') : '',
-        registrationAuthority: currentCompany.registrationAuthority,
-        approvalDate: currentCompany.approvalDate ? parseTime(currentCompany.approvalDate, '{y}-{m}-{d}') : '',
-        registrationStatus: currentCompany.registrationStatus,
-        registeredAddress: currentCompany.registeredAddress,
-        businessAddress: currentCompany.businessAddress,
-        remark: currentCompany.remark,
-        businessScope: currentCompany.businessScope,
-        businessLicense: currentCompany.businessLicense.replace(/(^\s*)|(\s*$)/g, ''),
-        approvalFiles: currentCompany.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''),
-        companyArticlesAssociation: currentCompany.companyArticlesAssociation.replace(/(^\s*)|(\s*$)/g, ''),
-        shareholdersDecide: currentCompany.shareholdersDecide.replace(/(^\s*)|(\s*$)/g, ''),
-        applicationRegistrationFiles: currentCompany.applicationRegistrationFiles.replace(/(^\s*)|(\s*$)/g, ''),
-        otherFiles: currentCompany.otherFiles.replace(/(^\s*)|(\s*$)/g, ''),
-        pid: currentCompany.pid,
-        pIds: currentCompany.pIds,
-        pName: currentCompany.pName,
-        id: currentCompany.id,
-        initCa: currentCompany.initCa, // CA 是否同步
+        ...currentCompany,
+        // unifiedSocialCreditCode: currentCompany.unifiedSocialCreditCode,
+        // enterpriseName: currentCompany.enterpriseName,
+        // enterpriseNameEn: currentCompany.enterpriseNameEn,
+        // enterpriseNameBusiness: currentCompany.enterpriseNameBusiness,
+        // enterpriseCode: currentCompany.enterpriseCode,
+        // type: currentCompany.type,
+        // customType: currentCompany.customType,
+        // registrationType: currentCompany.registrationType,
+        // registrationPlace: currentCompany.registrationPlace,
+        // legalRepresentative: currentCompany.legalRepresentative,
+        // registeredCapital: parseFloat(currentCompany.registeredCapital).toFixed(1) || 0,
+        // currency: currentCompany.currency,
+        // setupDate: currentCompany.setupDate ? parseTime(currentCompany.setupDate, '{y}-{m}-{d}') : '',
+        // achieveDate: currentCompany.achieveDate ? parseTime(currentCompany.achieveDate, '{y}-{m}-{d}') : '',
+        // operatingPeriodFrom: currentCompany.operatingPeriodFrom ? parseTime(currentCompany.operatingPeriodFrom, '{y}-{m}-{d}') : '',
+        // operatingPeriodEnd: currentCompany.operatingPeriodEnd ? parseTime(currentCompany.operatingPeriodEnd, '{y}-{m}-{d}') : '',
+        // registrationAuthority: currentCompany.registrationAuthority,
+        // approvalDate: currentCompany.approvalDate ? parseTime(currentCompany.approvalDate, '{y}-{m}-{d}') : '',
+        // registrationStatus: currentCompany.registrationStatus,
+        // registeredAddress: currentCompany.registeredAddress,
+        // businessAddress: currentCompany.businessAddress,
+        // remark: currentCompany.remark,
+        // businessScope: currentCompany.businessScope,
+        // businessLicense: currentCompany.businessLicense.replace(/(^\s*)|(\s*$)/g, ''),
+        // approvalFiles: currentCompany.approvalFiles.replace(/(^\s*)|(\s*$)/g, ''),
+        // companyArticlesAssociation: currentCompany.companyArticlesAssociation.replace(/(^\s*)|(\s*$)/g, ''),
+        // shareholdersDecide: currentCompany.shareholdersDecide.replace(/(^\s*)|(\s*$)/g, ''),
+        // applicationRegistrationFiles: currentCompany.applicationRegistrationFiles.replace(/(^\s*)|(\s*$)/g, ''),
+        // otherFiles: currentCompany.otherFiles.replace(/(^\s*)|(\s*$)/g, ''),
+        // pid: currentCompany.pid,
+        // pIds: currentCompany.pIds,
+        // pName: currentCompany.pName,
+        // id: currentCompany.id,
+        // initCa: currentCompany.initCa, // CA 是否同步
         initInvest: 1 // 是否同步过投资公司 1 是
       })
       if (businesslicense.success) {
