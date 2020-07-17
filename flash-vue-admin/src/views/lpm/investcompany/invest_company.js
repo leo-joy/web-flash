@@ -424,13 +424,15 @@ export default {
       let currency = '1'
       if (data.registCapital) {
         if (data.registCapital.indexOf('人民币') > -1) {
-          currency = getDictNum(_this.currencyDict, '人民币')
+          currency = getDictNum(_this.currencyDict, '人民币/RMB')
         } else if (data.registCapital.indexOf('美元') > -1) {
-          currency = getDictNum(_this.currencyDict, '美元')
+          currency = getDictNum(_this.currencyDict, '美元/USD')
         } else if (data.registCapital.indexOf('港') > -1) {
-          currency = getDictNum(_this.currencyDict, '港元')
+          currency = getDictNum(_this.currencyDict, '港元/HKD')
         } else if (data.registCapital.indexOf('澳') > -1) {
-          currency = getDictNum(_this.currencyDict, '澳元')
+          currency = getDictNum(_this.currencyDict, '澳币/AUD')
+        } else if (data.registCapital.indexOf('新加坡') > -1) {
+          currency = getDictNum(_this.currencyDict, '新加坡元/SGD')
         } else {
           currency = '1'
         }
