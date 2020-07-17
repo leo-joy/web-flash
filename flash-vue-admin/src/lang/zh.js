@@ -33,6 +33,7 @@ export default {
      * 企业信息管理
      */
     lpm: '企业管理',
+    threeMeeting: '三会管理',
     enterpriseInfo: '企业信息管理',
     editCompany: '企业变更',
 
