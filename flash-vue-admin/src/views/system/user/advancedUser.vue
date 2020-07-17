@@ -54,7 +54,7 @@
             size="small"
             icon="el-icon-config"
             @click.native="edit"
-          >设置为高级管理人员</el-button>
+          >设置高级管理人员/自然人股东</el-button>
         </el-col>
       </el-row>
     </div>
@@ -68,7 +68,7 @@
       highlight-current-row
       @current-change="handleCurrentChange"
     >
-      <el-table-column label="姓名">
+      <el-table-column label="姓名" width="100">>
         <template slot-scope="scope">{{ scope.row.name }}</template>
       </el-table-column>
       <!-- <el-table-column label="英文名">
@@ -77,19 +77,17 @@
       <el-table-column label="性别" width="60">
         <template slot-scope="scope">{{ scope.row.sexName }}</template>
       </el-table-column>
-
-      <!-- <el-table-column prop="academic" label="学历" :formatter="formatterAcademic"></el-table-column>
-      <el-table-column prop="specialty" label="专业" :formatter="formatterSpecialty"></el-table-column>
-      <el-table-column prop="post" label="职称" :formatter="formatterPost"></el-table-column>
-      <el-table-column prop="duty" label="职务" :formatter="formatterDuty"></el-table-column> -->
-      <el-table-column label="电话">
-        <template slot-scope="scope">{{ scope.row.phone }}</template>
+      <el-table-column label="工号" width="80">
+        <template slot-scope="scope">{{ scope.row.workNumber }}</template>
+      </el-table-column>
+      <el-table-column label="职务">
+        <template slot-scope="scope">{{ scope.row.jobName }}</template>
       </el-table-column>
       <el-table-column label="邮箱">
         <template slot-scope="scope">{{ scope.row.email }}</template>
       </el-table-column>
-      <el-table-column prop="type" label="用户类型" :formatter="formatterUserType" />
-      <el-table-column label="状态">
+      <el-table-column prop="type" width="120" label="用户类型" :formatter="formatterUserType" />
+      <el-table-column label="状态" width="80">
         <template slot-scope="scope">{{ scope.row.statusName }}</template>
       </el-table-column>
     </el-table>
@@ -442,30 +440,17 @@ export default {
   },
   created() {
     this.init()
-    dictList({ name: '学历' }).then(response => {
-      this.academicList = getDictList(response.data[0].detail)
-    })
-
-    dictList({ name: '专业' }).then(response => {
-      this.specialtyList = getDictList(response.data[0].detail)
-    })
-
-    dictList({ name: '职称' }).then(response => {
-      this.postList = getDictList(response.data[0].detail)
-    })
-
-    dictList({ name: '职务' }).then(response => {
-      this.dutyList = getDictList(response.data[0].detail)
-    })
-
-    dictList({ name: '用户类型' }).then(response => {
-      this.userTypeList = getDictList(response.data[0].detail)
-    })
   },
   methods: {
     init() {
       deptList().then(response => {
         this.deptTree.data = response.data
+      })
+      dictList({ name: '用户类型' }).then(response => {
+        this.userTypeList = getDictList(response.data[0].detail)
+      })
+      dictList({ name: '用户类型' }).then(response => {
+        this.userType = response.data[0].detail
       })
       this.fetchData()
     },
@@ -686,43 +671,8 @@ export default {
         })
       })
     },
-    // 格式化 学历
-    formatterAcademic(row) {
-      dictList({ name: '学历' }).then(response => {
-        this.academic = response.data[0].detail
-      })
-      const res = showDictLabel(this.academic, row.academic)
-      return res
-    },
-    // 格式化 专业
-    formatterSpecialty(row) {
-      dictList({ name: '专业' }).then(response => {
-        this.specialty = response.data[0].detail
-      })
-      const res = showDictLabel(this.specialty, row.specialty)
-      return res
-    },
-    // 格式化 职称
-    formatterPost(row) {
-      dictList({ name: '职称' }).then(response => {
-        this.post = response.data[0].detail
-      })
-      const res = showDictLabel(this.post, row.post)
-      return res
-    },
-    // 格式化 职务
-    formatterDuty(row) {
-      dictList({ name: '职务' }).then(response => {
-        this.duty = response.data[0].detail
-      })
-      const res = showDictLabel(this.duty, row.duty)
-      return res
-    },
     // 格式化 用户类型
     formatterUserType(row) {
-      dictList({ name: '用户类型' }).then(response => {
-        this.userType = response.data[0].detail
-      })
       const res = showDictLabel(this.userType, row.type)
       return res
     }
