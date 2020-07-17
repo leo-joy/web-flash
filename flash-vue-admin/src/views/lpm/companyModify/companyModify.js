@@ -720,7 +720,7 @@ export default {
               const tempArr = arrayObject.concat(this.listCapitalModifyNew)
               console.log('response:', response)
               console.log('tempArr:', tempArr)
-              if (tempArr && tempArr.length > 0 && response.data.shareholderModifyState === 'true') {
+              if (tempArr && tempArr.length > 0 && (response.data.shareholderModifyState === 'true' || response.data.newRegisteredState === 'true')) {
                 for (let i = 0; i < tempArr.length; i++) {
                   const tempObj = tempArr[i]
                   saveCapitalModify({
