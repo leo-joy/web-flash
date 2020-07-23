@@ -921,6 +921,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="accessoryFilesList"
@@ -954,6 +955,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="companyReferenceRegisterFilesList"
@@ -989,6 +991,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="shareholdersDecideFilesList"
@@ -1021,6 +1024,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="seniorManagementFilesList"
@@ -1055,6 +1059,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="companyArticlesAssociationFilesList"
@@ -1087,6 +1092,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="appointDismissFilesList"
@@ -1121,6 +1127,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="promiseFilesList"
@@ -1153,6 +1160,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="delegationFilesList"
@@ -1188,6 +1196,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="approvalFilesList"
@@ -1220,6 +1229,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="businessLicenseFilesList"
@@ -1254,6 +1264,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="sealFilesList"
@@ -1286,6 +1297,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="openAccountFilesList"
@@ -1321,6 +1333,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="orgCreditCodeFilesList"
@@ -1353,6 +1366,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="authorizationFilesList"
@@ -1387,6 +1401,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="companyModifyRegisterFilesList"
@@ -1419,6 +1434,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="stockPledgeFilesList"
@@ -1453,6 +1469,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="liquidationFilesList"
@@ -1485,6 +1502,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="liquidationPersonFilesList"
@@ -1519,6 +1537,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="tallageFilesList"
@@ -1551,6 +1570,7 @@
                   <el-form-item label="" class="file-form-item">
                     <el-upload
                       class="upload-demo"
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="noticeFilesList"
@@ -1584,6 +1604,7 @@
                   </div>
                   <el-form-item label="" class="file-form-item">
                     <el-upload
+                      multiple
                       :action="uploadUrl"
                       :headers="uploadHeaders"
                       :file-list="otherFilesList"
