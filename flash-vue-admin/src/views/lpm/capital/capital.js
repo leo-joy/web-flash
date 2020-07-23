@@ -126,10 +126,10 @@ export default {
         ],
         subscribedCapitalContribution: [
           { required: true, message: '认缴出资额不能为空', trigger: 'blur' },
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         realityCapitalContribution: [
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         shareholderType: [
           { required: true, message: '请选择股东类型', trigger: 'blur' }
@@ -295,10 +295,10 @@ export default {
             enterpriseCode: this.form.enterpriseCode,
             shareholder: this.form.shareholder,
             subscribedCapitalType: this.form.subscribedCapitalType,
-            subscribedCapitalContribution: parseFloat(this.form.subscribedCapitalContribution).toFixed(4),
+            subscribedCapitalContribution: parseFloat(this.form.subscribedCapitalContribution).toFixed(6),
             subscribedCapitalDate: this.form.subscribedCapitalDate ? parseTime(this.form.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.form.realityCapitalType,
-            realityCapitalContribution: this.form.realityCapitalContribution ? parseFloat(this.form.realityCapitalContribution).toFixed(4) : '',
+            realityCapitalContribution: this.form.realityCapitalContribution ? parseFloat(this.form.realityCapitalContribution).toFixed(6) : '',
             realityCapitalDate: this.form.realityCapitalDate ? parseTime(this.form.realityCapitalDate, '{y}-{m}-{d}') : '',
             proportion: this.form.proportion,
             shareholderMold: this.form.shareholderMold,

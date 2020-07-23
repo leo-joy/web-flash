@@ -191,16 +191,16 @@ export default {
           { required: true, message: '请选中股东名称', trigger: 'blur' }
         ],
         registeredCapitalOld: [
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         registeredCapitalNew: [
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         subscribedCapitalContribution: [
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         realityCapitalContribution: [
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,4})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留四位小数' }
+          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ]
       },
       listQuery: {
@@ -618,8 +618,8 @@ export default {
             liquidationExitOld: this.form.liquidationExitOld,
             liquidationExitNew: this.form.liquidationExitNew,
             registeredCapitalState: this.form.registeredCapitalState ? this.form.registeredCapitalState : 'false',
-            registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(4) : 0,
-            registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(4) : 0,
+            registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(6) : 0,
+            registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(6) : 0,
             ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
             ownershipOld: this.form.ownershipOld,
             ownershipNew: this.form.ownershipNew,
@@ -731,10 +731,10 @@ export default {
                     serialNumber: tempObj.serialNumber,
                     shareholder: tempObj.shareholder,
                     subscribedCapitalType: tempObj.subscribedCapitalType,
-                    subscribedCapitalContribution: tempObj.subscribedCapitalContribution ? parseFloat(tempObj.subscribedCapitalContribution).toFixed(4) : 0,
+                    subscribedCapitalContribution: tempObj.subscribedCapitalContribution ? parseFloat(tempObj.subscribedCapitalContribution).toFixed(6) : 0,
                     subscribedCapitalDate: tempObj.subscribedCapitalDate ? parseTime(tempObj.subscribedCapitalDate, '{y}-{m}-{d}') : '',
                     realityCapitalType: tempObj.realityCapitalType,
-                    realityCapitalContribution: tempObj.realityCapitalContribution ? parseFloat(tempObj.realityCapitalContribution).toFixed(4) : 0,
+                    realityCapitalContribution: tempObj.realityCapitalContribution ? parseFloat(tempObj.realityCapitalContribution).toFixed(6) : 0,
                     realityCapitalDate: tempObj.realityCapitalDate ? parseTime(tempObj.realityCapitalDate, '{y}-{m}-{d}') : '',
                     responsiblePerson: tempObj.responsiblePerson,
                     shareholderType: tempObj.shareholderType,
@@ -1438,10 +1438,10 @@ export default {
             serialNumber: this.formCapitalModify.serialNumber,
             shareholder: this.formCapitalModify.shareholder,
             subscribedCapitalType: this.formCapitalModify.subscribedCapitalType,
-            subscribedCapitalContribution: this.formCapitalModify.subscribedCapitalContribution ? parseFloat(this.formCapitalModify.subscribedCapitalContribution).toFixed(4) : 0,
+            subscribedCapitalContribution: this.formCapitalModify.subscribedCapitalContribution ? parseFloat(this.formCapitalModify.subscribedCapitalContribution).toFixed(6) : 0,
             subscribedCapitalDate: this.formCapitalModify.subscribedCapitalDate ? parseTime(this.formCapitalModify.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.formCapitalModify.realityCapitalType,
-            realityCapitalContribution: this.formCapitalModify.realityCapitalContribution ? parseFloat(this.formCapitalModify.realityCapitalContribution).toFixed(4) : 0,
+            realityCapitalContribution: this.formCapitalModify.realityCapitalContribution ? parseFloat(this.formCapitalModify.realityCapitalContribution).toFixed(6) : 0,
             realityCapitalDate: this.formCapitalModify.realityCapitalDate ? parseTime(this.formCapitalModify.realityCapitalDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.formCapitalModify.responsiblePerson,
             shareholderType: this.formCapitalModify.shareholderType,
