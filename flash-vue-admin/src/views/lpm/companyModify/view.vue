@@ -93,9 +93,9 @@
                   <div v-if="item.registeredCapitalState+'' === 'true'" class="modifyList">
                     <span><b>注册资本变更：</b></span>
                     <span>由</span>
-                    <span><b style="color:red">{{ item.registeredCapitalOld }}</b></span>
+                    <span><b style="color:red">{{ item.registeredCapitalOld }}万{{ item.currencyOld }}</b></span>
                     <span>变更为</span>
-                    <span><b style="color:green">{{ item.registeredCapitalNew }}</b></span>
+                    <span><b style="color:green">{{ item.registeredCapitalNew }}万{{ item.currencyNew }}</b></span>
                   </div>
                   <div v-if="item.ownershipState+'' === 'true'" class="modifyList">
                     <span><b>企业类型变更：</b></span>

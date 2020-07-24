@@ -33,6 +33,7 @@ export default {
       mainmemberData: {}, // 主要人员相关数据
       companyList: [],
       noAccessoryCauseList: [], // 无附件原因，从数据字典中获取
+      currencyList: [], // 币种，从数据字典中获取
       companyTree: {
         show: false,
         defaultProps: {
@@ -82,6 +83,8 @@ export default {
         registeredCapitalState: '',
         registeredCapitalOld: 0,
         registeredCapitalNew: 0,
+        currencyOld: '',
+        currencyNew: '',
         ownershipState: '',
         ownershipOld: '',
         ownershipNew: '',
@@ -354,6 +357,10 @@ export default {
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCauseList = getDictList(response.data[0].detail)
       })
+
+      dictList({ name: '币种' }).then(response => {
+        this.currencyList = getDictList(response.data[0].detail)
+      })
     },
     fetchData() {
       this.listLoading = true
@@ -424,6 +431,9 @@ export default {
         registeredCapitalState: '',
         registeredCapitalOld: 0,
         registeredCapitalNew: 0,
+        currencyOld: '',
+        currencyNew: '',
+
         ownershipState: '',
         ownershipOld: '',
         ownershipNew: '',
@@ -626,6 +636,8 @@ export default {
             registeredCapitalOld: this.form.registeredCapitalOld ? parseFloat(this.form.registeredCapitalOld).toFixed(6) : 0,
             registeredCapitalNew: this.form.registeredCapitalNew ? parseFloat(this.form.registeredCapitalNew).toFixed(6) : 0,
             ownershipState: this.form.ownershipState ? this.form.ownershipState : 'false',
+            currencyOld: this.form.currencyOld,
+            currencyNew: this.form.currencyNew,
             ownershipOld: this.form.ownershipOld,
             ownershipNew: this.form.ownershipNew,
             operatingPeriodEndState: this.form.operatingPeriodEndState ? this.form.operatingPeriodEndState : 'false',

@@ -54,9 +54,9 @@
           <div v-if="scope.row.registeredCapitalState+'' === 'true'">
             <span><b>注册资本：</b></span>
             <span>由</span>
-            <span><b style="color:red">{{ scope.row.registeredCapitalOld }}万元</b></span>
+            <span><b style="color:red">{{ scope.row.registeredCapitalOld }}万{{ scope.row.currencyOld }}</b></span>
             <span>变更为</span>
-            <span><b style="color:green">{{ scope.row.registeredCapitalNew }}万元</b></span>
+            <span><b style="color:green">{{ scope.row.registeredCapitalNew }}万{{ scope.row.currencyNew }}</b></span>
           </div>
           <div v-if="scope.row.ownershipState+'' === 'true'">
             <span><b>企业类型：</b></span>
@@ -329,16 +329,44 @@
                     <span>注册资本</span>
                   </div>
                   <el-row>
-                    <el-col :span="12">
+                    <el-col :span="6">
+                      <el-form-item label="原币种">
+                        <el-select v-model="form.currencyOld" placeholder="请选择">
+                          <el-option
+                            v-for="item in currencyList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.label"
+                          />
+                        </el-select>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
                       <el-form-item label="原资本(万元)" prop="registeredCapitalOld">
                         <el-input v-model="form.registeredCapitalOld" />
                       </el-form-item>
                     </el-col>
-                    <el-col :span="12">
+                    <el-col :span="1">
+                      &nbsp;
+                    </el-col>
+                    <el-col :span="6">
+                      <el-form-item label="新币种">
+                        <el-select v-model="form.currencyNew" placeholder="请选择">
+                          <el-option
+                            v-for="item in currencyList"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.label"
+                          />
+                        </el-select>
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="5">
                       <el-form-item label="新资本(万元)" prop="registeredCapitalNew">
                         <el-input v-model="form.registeredCapitalNew" />
                       </el-form-item>
                     </el-col>
+                    
                   </el-row>
                 </el-card>
                 <br>
