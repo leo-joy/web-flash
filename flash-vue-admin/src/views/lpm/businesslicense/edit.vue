@@ -45,15 +45,15 @@
             </el-form-item>
           </el-col>
           <el-col :span="24">
-            <el-form-item label="英文名称">
+            <el-form-item label="企业英文名称">
               <el-input v-model="form.enterpriseNameEn" />
             </el-form-item>
           </el-col>
-          <!-- <el-col :span="24">
-            <el-form-item label="企业商用名称">
-              <el-input v-model="form.enterpriseNameBusiness" minlength="1"></el-input>
+          <el-col :span="24">
+            <el-form-item label="企业曾用名称">
+              <el-input v-model="form.enterpriseNameBusiness" />
             </el-form-item>
-          </el-col> -->
+          </el-col>
           <el-col :span="12">
             <el-form-item label="统一社会信用代码">
               <el-input

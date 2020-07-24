@@ -36,7 +36,10 @@
               <el-form-item label="企业名称：">{{ businesslicenseData.enterpriseName }}</el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item v-if="businesslicenseData.enterpriseNameEn" label="英文名称：">{{ businesslicenseData.enterpriseNameEn }}</el-form-item>
+              <el-form-item v-if="businesslicenseData.enterpriseNameEn" label="企业英文名称：">{{ businesslicenseData.enterpriseNameEn }}</el-form-item>
+            </el-col>
+            <el-col :span="24">
+              <el-form-item v-if="businesslicenseData.enterpriseNameBusiness" label="企业曾用名称：">{{ businesslicenseData.enterpriseNameBusiness }}</el-form-item>
             </el-col>
           </el-row>
 
