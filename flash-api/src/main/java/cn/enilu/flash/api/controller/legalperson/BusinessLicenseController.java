@@ -163,7 +163,7 @@ public class BusinessLicenseController {
 		//page.addFilter("registrationType", SearchFilter.Operator.EQ,registrationType);
 		page.addFilter("registrationStatus", SearchFilter.Operator.EQ,registrationStatus);
 		// 添加排序规则
-		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC,"type"));
+		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC,"customType"));
 		page.setSort(sort);
 		
 		page = businessLicenseService.queryPage(page);
