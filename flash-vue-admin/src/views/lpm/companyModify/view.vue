@@ -54,7 +54,7 @@
                           <el-row>
                             <el-col v-for="sonItemOld in item.shareholderOldList" :key="sonItemOld.id" :span="24">
                               <h4>股东：{{ sonItemOld.shareholder }}</h4>
-                              <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
+                              <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万{{ sonItemOld.currency }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
                               <div><hr></div>
                             </el-col>
                           </el-row>
@@ -160,7 +160,7 @@
                         <el-row>
                           <el-col v-for="sonItemOld in item.shareholderOldList" :key="sonItemOld.id" :span="24">
                             <h4>股东：{{ sonItemOld.shareholder }}</h4>
-                            <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
+                            <h5>认缴出资额：{{ sonItemOld.subscribedCapitalContribution }}万{{ sonItemOld.currency }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemOld.proportion }}%</h5>
                             <div><hr></div>
                           </el-col>
                         </el-row>
@@ -170,7 +170,7 @@
                         <el-row>
                           <el-col v-for="sonItemNew in item.shareholderNewList" :key="sonItemNew.id" :span="24">
                             <h4>股东：{{ sonItemNew.shareholder }}</h4>
-                            <h5>认缴出资额：{{ sonItemNew.subscribedCapitalContribution }}万元&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemNew.proportion }}%</h5>
+                            <h5>认缴出资额：{{ sonItemNew.subscribedCapitalContribution }}万{{ sonItemNew.currency }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;占比：{{ sonItemNew.proportion }}%</h5>
                             <div><hr></div>
                           </el-col>
                         </el-row>

@@ -1746,11 +1746,6 @@
               <el-input v-model="formCapitalModify.serialNumber" minlength="1" />
             </el-form-item>
           </el-col> -->
-          <el-col :span="12">
-            <el-form-item label="所属企业名称">
-              <el-input v-model="formCapitalModify.enterpriseName" :disabled="true" minlength="1" />
-            </el-form-item>
-          </el-col>
           <el-col :class="[isCapitalModifyAdd? 'dpShow' : 'dpHide']" :span="12">
             <el-form-item label="类型">
               <el-radio-group v-model="formCapitalModify.shareholderMold" @change="handleChangeRadio">
@@ -1759,13 +1754,13 @@
               </el-radio-group>
             </el-form-item>
           </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="12">
-            <el-form-item label="股东" prop="shareholder">
-              <el-input v-model="formCapitalModify.shareholder" :disabled="true" minlength="1" />
+            <el-form-item label="所属企业名称">
+              <el-input v-model="formCapitalModify.enterpriseName" :disabled="true" minlength="1" />
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
           <el-col :class="[formCapitalModify.shareholderMold*1===1 ? 'dpShow' : 'dpHide']" :span="12">
             <el-form-item label="企业股东">
               <el-autocomplete
@@ -1813,6 +1808,11 @@
                   <span class="addr">性别：{{ item.sexName }}</span>
                 </template>
               </el-autocomplete>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="股东" prop="shareholder">
+              <el-input v-model="formCapitalModify.shareholder" :disabled="true" minlength="1" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -1876,6 +1876,18 @@
         </el-row>
         <el-row>
           <el-col :span="8">
+            <el-form-item label="币种">
+              <el-select v-model="formCapitalModify.currency" placeholder="请选择">
+                <el-option
+                  v-for="item in currencyList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.label"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="8">
             <el-form-item label="股东类型">
               <el-select v-model="formCapitalModify.shareholderType" placeholder="请选择">
                 <el-option
@@ -1899,16 +1911,16 @@
               </el-select>
             </el-form-item>
           </el-col>
+        </el-row>
+        <el-row>
+          <el-col :span="16">
+            <el-form-item label="占比（%）">
+              <el-slider v-model="formCapitalModify.proportion" show-input />
+            </el-form-item>
+          </el-col>
           <el-col :span="8">
             <el-form-item label="经办人">
               <el-input v-model="formCapitalModify.responsiblePerson" minlength="1" />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="占比（%）">
-              <el-slider v-model="formCapitalModify.proportion" show-input />
             </el-form-item>
           </el-col>
         </el-row>

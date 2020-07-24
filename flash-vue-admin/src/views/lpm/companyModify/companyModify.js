@@ -265,6 +265,7 @@ export default {
         realityCapitalDate: '',
         responsiblePerson: '',
         shareholderType: '',
+        currency: '',
         shareholderMold: 1,
         proportion: 0,
         status: '',
@@ -755,6 +756,7 @@ export default {
                     realityCapitalDate: tempObj.realityCapitalDate ? parseTime(tempObj.realityCapitalDate, '{y}-{m}-{d}') : '',
                     responsiblePerson: tempObj.responsiblePerson,
                     shareholderType: tempObj.shareholderType,
+                    currency: tempObj.currency,
                     shareholderMold: tempObj.shareholderMold,
                     proportion: tempObj.proportion,
                     status: tempObj.status,
@@ -1354,7 +1356,6 @@ export default {
       } else {
         this.naturalPersonShareholders = userList
       }
-
       this.fetchCapitalModifyOldData()
       this.fetchCapitalModifyNewData()
     },
@@ -1419,6 +1420,7 @@ export default {
         responsiblePerson: '',
         shareholderMold: 1,
         shareholderType: '',
+        currency: '',
         proportion: 0,
         status: '',
         branchCompanyName: '',
@@ -1463,6 +1465,7 @@ export default {
             realityCapitalDate: this.formCapitalModify.realityCapitalDate ? parseTime(this.formCapitalModify.realityCapitalDate, '{y}-{m}-{d}') : '',
             responsiblePerson: this.formCapitalModify.responsiblePerson,
             shareholderType: this.formCapitalModify.shareholderType,
+            currency: this.formCapitalModify.currency,
             shareholderMold: this.formCapitalModify.shareholderMold,
             proportion: this.formCapitalModify.proportion,
             status: this.formCapitalModify.status,
