@@ -126,10 +126,10 @@ export default {
         ],
         subscribedCapitalContribution: [
           { required: true, message: '认缴出资额不能为空', trigger: 'blur' },
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
+          { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         realityCapitalContribution: [
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
+          { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         shareholderType: [
           { required: true, message: '请选择股东类型', trigger: 'blur' }
