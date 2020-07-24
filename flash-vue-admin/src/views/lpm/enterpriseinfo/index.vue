@@ -21,7 +21,7 @@
         <el-col :span="22">
           <template>
             <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
-            <!-- <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio> -->
+            <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio>
             <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
             <el-radio v-model="registrationTypeRadio" label="1,4" @change="handleRegistrationTypeRadioClick">国内企业</el-radio>
             <el-radio v-model="registrationTypeRadio" label="2" @change="handleRegistrationTypeRadioClick">境外/香港企业</el-radio>
@@ -171,10 +171,10 @@
             <el-table-column label="统一社会信用代码/登记号" width="200">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
             </el-table-column>
-            <el-table-column label="注册资本(万元)" width="120">
+            <el-table-column label="注册资本/股本(万元)" width="150">
               <template slot-scope="scope">{{ scope.row.registeredCapital }}</template>
             </el-table-column>
-            <el-table-column label="法定代表人" width="100">
+            <el-table-column v-if="registrationTypeRadio*1!==2" label="法定代表人" width="100">
               <template slot-scope="scope">{{ scope.row.legalRepresentative }}</template>
             </el-table-column>
             <el-table-column v-if="(searchType === 'chairman' || searchType === 'director' || searchType === 'supervisor' || searchType === 'generalManager') && keyword !== ''" label="董事长" width="100">
@@ -197,9 +197,9 @@
               label="状态"
               :formatter="formatterRegistrationStatus"
             />
-            <el-table-column v-if="moduleType !== 'dashboard'" label="投资同步状态" width="140">
+            <!-- <el-table-column v-if="moduleType !== 'dashboard'" label="投资同步状态" width="140">
               <template slot-scope="scope">{{ scope.row.initInvest*1 ===1?"已同步":'' }}</template>
-            </el-table-column>
+            </el-table-column> -->
             <el-table-column v-if="moduleType !== 'dashboard'" label="操作" width="80">
               <template slot-scope="scope">
                 <el-button v-if="moduleType == '2'" v-permission="['/editCompany']" type="text" @click="modify(scope.row)">{{ $t('button.modity') }}</el-button>
