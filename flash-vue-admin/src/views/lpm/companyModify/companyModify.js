@@ -596,7 +596,12 @@ export default {
         if (valid) {
           const shareholderIdsOldArr = this.getShareholderIds(this.listCapitalModifyOld)
           const shareholderIdsNewArr = this.getShareholderIds(this.listCapitalModifyNew)
-
+          this.saveingInstance = Loading.service({
+            lock: true,
+            text: '表单提交中...  如时间太长，可刷新界面重新填写提交！',
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+          })
           save({
             affiliatedUnit: this.form.affiliatedUnit,
             applyDepartment: this.form.applyDepartment,
@@ -756,6 +761,7 @@ export default {
               this.back()
             }
             this.fetchData()
+            this.saveingInstance.close()
             this.formVisible = false
           })
         } else {
