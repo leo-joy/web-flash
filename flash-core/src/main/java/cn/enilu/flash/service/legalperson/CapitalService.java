@@ -36,7 +36,7 @@ public class CapitalService extends BaseService<Capital,Long,CapitalRepository> 
         }
         for(CapitalNode capitalNode:nodes){
             for(CapitalNode child:nodes){
-                if(child.getEnterpriseCode()!=null && capitalNode.getBranchCompanyCode()!=null) {
+                if(child.getEnterpriseCode()!=null && capitalNode.getBranchCompanyCode()!=null && capitalNode.getShareholderMold()!=2) {
                     if(child.getEnterpriseCode().equals(capitalNode.getBranchCompanyCode()) ){
                         capitalNode.getChildren().add(child);
                     }
