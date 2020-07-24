@@ -91,6 +91,12 @@ public class CompanyModify extends BaseEntity {
     @Column(name="registered_capital_new", columnDefinition = "DECIMAL COMMENT '新注册资本'")
     private BigDecimal registeredCapitalNew;
 
+    @Column(name="currency_old", columnDefinition = "VARCHAR(32) COMMENT '旧币种'")
+    private String currencyOld;
+
+    @Column(name="currency_new", columnDefinition = "VARCHAR(32) COMMENT '新币种'")
+    private String currencyNew;
+
 
     @Column(name="business_scope_state", columnDefinition = "VARCHAR(16) COMMENT '经营范围变更状态'")
     private String businessScopeState;
