@@ -62,6 +62,9 @@ public class CapitalModify extends BaseEntity {
     @Column(name="reality_capital_date", columnDefinition = "DATE COMMENT '实缴出资日期'")
     private Date realityCapitalDate;
 
+    @Column(name="currency", columnDefinition = "VARCHAR(32) COMMENT '币种'")
+    private String currency;
+
     @Column(name="responsible_person", columnDefinition = "VARCHAR(32) COMMENT '经办人'")
     private String responsiblePerson;
 
