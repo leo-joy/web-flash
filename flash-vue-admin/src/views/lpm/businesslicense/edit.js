@@ -89,7 +89,10 @@ export default {
         ],
         registeredCapital: [
           { required: true, message: '请输入注册资本金额', trigger: 'blur' },
-          { pattern: /(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留两位小数' }
+          { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
+        ],
+        issuedShareCapital: [
+          { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
         // currency: [
         //   { required: true, message: '请选择币种', trigger: 'blur' }
