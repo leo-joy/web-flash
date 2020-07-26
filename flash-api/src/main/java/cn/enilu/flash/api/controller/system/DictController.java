@@ -11,6 +11,7 @@ import cn.enilu.flash.bean.vo.front.Rets;
 import cn.enilu.flash.service.system.DictService;
 import cn.enilu.flash.utils.BeanUtil;
 import cn.enilu.flash.utils.StringUtil;
+import cn.enilu.flash.warpper.DictDetailWarpper;
 import cn.enilu.flash.warpper.DictWarpper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,20 @@ public class DictController extends BaseController {
         }
         List<Dict> list = dictService.findByPid(0L);
         return Rets.success(new DictWarpper(BeanUtil.objectsToMaps(list)).warp());
+    }
+
+    /**
+     * 获取所有字典列表
+     */
+    @RequestMapping(value = "/depthlist",method = RequestMethod.GET)
+    public Object depthlist(String name) {
+
+        if(StringUtil.isNotEmpty(name)){
+            List<Dict> list = dictService.findByNameLike(name);
+            return Rets.success(new DictDetailWarpper(BeanUtil.objectsToMaps(list)).warp());
+        }
+        List<Dict> list = dictService.findByPid(0L);
+        return Rets.success(new DictDetailWarpper(BeanUtil.objectsToMaps(list)).warp());
     }
 
     @RequestMapping(method = RequestMethod.POST)
