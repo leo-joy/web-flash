@@ -41,6 +41,7 @@ export default {
     detailEnterpriseinfo: '企业详细信息',
     shareholderManage: '合作单位管理',
     editCompanyManage: '企业变更管理',
+    editCompanyManageHw: '海外企业变更管理',
     filesManage: '附件管理',
     // 子菜单
     businessLicense: '营业执照',
@@ -134,6 +135,7 @@ export default {
     add: '添加',
     edit: '修改',
     modity: '变更',
+    modityHw: '海外变更',
     delete: '删除',
     search: '搜索',
     reset: '重置',
