@@ -91,6 +91,7 @@ public class ShiroConfig {
 
         //数据字典列表请求获取不拦截
         filterRuleMap.put("/dict/list","anon");
+        filterRuleMap.put("/dict/depthlist","anon");
 
         //用户列表请求不拦截
         filterRuleMap.put("/user/list","anon");
@@ -104,6 +105,7 @@ public class ShiroConfig {
         filterRuleMap.put("/fileMgr/enterpriseFiles","anon");
 
         //文件上传下载不拦截
+        filterRuleMap.put("/file","anon");
         filterRuleMap.put("/file/upload","anon");
         filterRuleMap.put("/file/download","anon");
         filterRuleMap.put("/file/getImgStream","anon");
