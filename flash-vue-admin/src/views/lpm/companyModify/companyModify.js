@@ -77,6 +77,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        unifiedSocialCreditCodeState: '',
+        unifiedSocialCreditCodeOld: '',
+        unifiedSocialCreditCodeNew: '',
         liquidationExitState: '',
         liquidationExitOld: '',
         liquidationExitNew: '',
@@ -426,6 +429,9 @@ export default {
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
+        unifiedSocialCreditCodeState: '',
+        unifiedSocialCreditCodeOld: '',
+        unifiedSocialCreditCodeNew: '',
         liquidationExitState: '',
         liquidationExitOld: '',
         liquidationExitNew: '',
@@ -563,6 +569,7 @@ export default {
       this.form.enterpriseId = this.companyList[0].id
       this.form.enterpriseNameOld = this.companyList[0].enterpriseName
       this.form.registeredAddressOld = this.companyList[0].registeredAddress
+      this.form.unifiedSocialCreditCodeOld = this.companyList[0].unifiedSocialCreditCode
       this.form.liquidationExitOld = this.companyList[0].liquidationExit
       this.form.registeredCapitalOld = this.companyList[0].registeredCapital * 1
       this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
@@ -630,6 +637,9 @@ export default {
             registeredAddressState: this.form.registeredAddressState ? this.form.registeredAddressState : 'false',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,
+            unifiedSocialCreditCodeState: this.form.unifiedSocialCreditCodeState ? this.form.unifiedSocialCreditCodeState : 'false',
+            unifiedSocialCreditCodeOld: this.form.unifiedSocialCreditCodeOld,
+            unifiedSocialCreditCodeNew: this.form.unifiedSocialCreditCodeNew,
             liquidationExitState: this.form.liquidationExitState ? this.form.liquidationExitState : 'false',
             liquidationExitOld: this.form.liquidationExitOld,
             liquidationExitNew: this.form.liquidationExitNew,
@@ -829,6 +839,10 @@ export default {
 
         if (this.form.registeredAddressState === 'true') {
           this.form.registeredAddressState = true
+        }
+
+        if (this.form.unifiedSocialCreditCodeState === 'true') {
+          this.form.unifiedSocialCreditCodeState = true
         }
 
         if (this.form.liquidationExitState === 'true') {

@@ -32,6 +32,9 @@ export default {
         value: 'legalRepresentativeState',
         label: '法人变更'
       }, {
+        value: 'unifiedSocialCreditCodeState',
+        label: '社会统一信用代码变更'
+      }, {
         value: 'registeredAddressState',
         label: '地址变更'
       }, {

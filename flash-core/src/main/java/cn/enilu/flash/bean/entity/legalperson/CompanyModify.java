@@ -230,6 +230,15 @@ public class CompanyModify extends BaseEntity {
     @Column(name="liquidation_exit_new", columnDefinition = "VARCHAR(128) COMMENT '股权清算退出后'")
     private String liquidationExitNew;
 
+    @Column(name="unified_social_credit_code_state", columnDefinition = "VARCHAR(8) COMMENT '统一社会信用代码状态'")
+    private String unifiedSocialCreditCodeState;
+
+    @Column(name="unified_social_credit_code_old", columnDefinition = "VARCHAR(64) COMMENT '统一社会信用代码旧'")
+    private String unifiedSocialCreditCodeOld;
+
+    @Column(name="unified_social_credit_code_new", columnDefinition = "VARCHAR(64) COMMENT '统一社会信用代码新'")
+    private String unifiedSocialCreditCodeNew;
+
     @Column(name="new_registered_state", columnDefinition = "VARCHAR(8) COMMENT '企业新注册状态'")
     private String newRegisteredState;
 

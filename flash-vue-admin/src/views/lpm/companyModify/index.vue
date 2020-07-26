@@ -51,6 +51,13 @@
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.registeredAddressNew }}</b></span>
           </div>
+          <div v-if="scope.row.unifiedSocialCreditCodeState+'' === 'true'">
+            <span><b>统一社会信用代码：</b></span>
+            <span>由</span>
+            <span><b style="color:red">{{ scope.row.unifiedSocialCreditCodeOld }}</b></span>
+            <span>变更为</span>
+            <span><b style="color:green">{{ scope.row.unifiedSocialCreditCodeNew }}</b></span>
+          </div>
           <div v-if="scope.row.registeredCapitalState+'' === 'true'">
             <span><b>注册资本：</b></span>
             <span>由</span>
@@ -124,6 +131,7 @@
 
           <div v-if="scope.row.newRegisteredState+'' === 'true'">
             <div><b>企业名称： </b>{{ scope.row.enterpriseNameNew }}</div>
+            <div><b>统一社会信用代码： </b>{{ scope.row.unifiedSocialCreditCodeNew }}</div>
             <div><b>注册资本： </b>{{ scope.row.registeredCapitalNew }} 万元</div>
             <div><b>法定代表人： </b>{{ scope.row.legalRepresentativeNew }}</div>
             <div><b>经营期限： </b>{{ scope.row.operatingPeriodEndNew?scope.row.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</div>
@@ -141,6 +149,7 @@
             v-if="scope.row.enterpriseNameState+'' === 'false'
               && scope.row.legalRepresentativeState+'' === 'false'
               && scope.row.registeredAddressState+'' === 'false'
+              && scope.row.unifiedSocialCreditCodeState+'' === 'false'
               && scope.row.liquidationExitState+'' === 'false'
               && scope.row.registeredCapitalState+'' === 'false'
               && scope.row.ownershipState+'' === 'false'
@@ -229,6 +238,7 @@
                 <el-form-item label="变更类型">
                   <el-checkbox v-model="form.enterpriseNameState" label="企业名称" />
                   <el-checkbox v-model="form.registeredAddressState" label="注册地址" />
+                  <el-checkbox v-model="form.unifiedSocialCreditCodeState" label="统一社会信用代码" />
                   <el-checkbox v-model="form.registeredCapitalState" label="注册资本" />
                   <el-checkbox v-model="form.ownershipState" label="企业类型" />
                   <el-checkbox v-model="form.liquidationExitState" label="股权清算退出" />
@@ -289,6 +299,26 @@
                           placeholder="选择日期【如果是长期，为空即可】"
                           style="width: 100%;"
                         />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
+                </el-card>
+                <br>
+              </el-col>
+              <el-col v-if="form.unifiedSocialCreditCodeState === true" :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    <span>统一社会系统代码</span>
+                  </div>
+                  <el-row>
+                    <el-col :span="12">
+                      <el-form-item label="原社会信用代码">
+                        <el-input v-model="form.unifiedSocialCreditCodeOld" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="新社会信用代码">
+                        <el-input v-model="form.unifiedSocialCreditCodeNew" minlength="1" />
                       </el-form-item>
                     </el-col>
                   </el-row>
@@ -366,7 +396,7 @@
                         <el-input v-model="form.registeredCapitalNew" />
                       </el-form-item>
                     </el-col>
-                    
+
                   </el-row>
                 </el-card>
                 <br>
@@ -630,6 +660,11 @@
                       </el-form-item>
                     </el-col>
                     <el-col :span="12">
+                      <el-form-item label="社会信用代码">
+                        <el-input v-model="form.unifiedSocialCreditCodeNew" minlength="1" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
                       <el-form-item label="法定代表人">
                         <el-input v-model="form.legalRepresentativeNew" />
                       </el-form-item>
@@ -644,7 +679,7 @@
                         />
                       </el-form-item>
                     </el-col>
-                    <el-col :span="24">
+                    <el-col :span="12">
                       <el-form-item label="注册地址">
                         <el-input v-model="form.registeredAddressNew" minlength="1" />
                       </el-form-item>

@@ -37,6 +37,7 @@
                 <el-col :span="24">
                   <div v-if="item.newRegisteredState+'' === 'true'" class="modifyList">
                     <div class="modifyList"><b>企业名称： </b>{{ item.enterpriseNameNew }}</div>
+                    <div class="modifyList"><b>社会统一信用代码：</b>{{ item.unifiedSocialCreditCodeNew }}</div>
                     <div class="modifyList"><b>注册资本： </b>{{ item.registeredCapitalNew }} 万元</div>
                     <div class="modifyList"><b>法定代表人： </b>{{ item.legalRepresentativeNew }}</div>
                     <div class="modifyList"><b>经营期限： </b>{{ item.operatingPeriodEndNew?item.operatingPeriodEndNew.replace("00:00:00",""):'长期' }}</div>
@@ -75,6 +76,13 @@
                     <span><b style="color:red">{{ item.legalRepresentativeOld }}</b></span>
                     <span>变更为</span>
                     <span><b style="color:green">{{ item.legalRepresentativeNew }}</b></span>
+                  </div>
+                  <div v-if="item.unifiedSocialCreditCodeState+'' === 'true'" class="modifyList">
+                    <span><b>社会统一系统代码变更：</b></span>
+                    <span>由</span>
+                    <span><b style="color:red">{{ item.unifiedSocialCreditCodeOld }}</b></span>
+                    <span>变更为</span>
+                    <span><b style="color:green">{{ item.unifiedSocialCreditCodeNew }}</b></span>
                   </div>
                   <div v-if="item.registeredAddressState+'' === 'true'" class="modifyList">
                     <span><b>地址变更：</b></span>
