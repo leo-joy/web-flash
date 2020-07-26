@@ -432,6 +432,9 @@ export default {
     modify(row) {
       this.$router.push({ path: '/editCompany', query: { id: row.id }})
     },
+    modifyHw(row) {
+      this.$router.push({ path: '/editCompanyHw', query: { id: row.id }})
+    },
     // 格式化 企业类型
     formatterEnterpriseType(row) {
       // dictList({ name: '企业类型' }).then(response => {

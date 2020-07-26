@@ -242,6 +242,9 @@ public class CompanyModify extends BaseEntity {
     @Column(name="new_registered_state", columnDefinition = "VARCHAR(8) COMMENT '企业新注册状态'")
     private String newRegisteredState;
 
+    @Column(name="is_hw", columnDefinition = "VARCHAR(8) COMMENT '是否海外企业变更'")
+    private String isHw;
+
     @Column(name="accessory_files", columnDefinition = "VARCHAR(128) COMMENT '1内部审批文件'")
     private String accessoryFiles;
     @Column(name="company_reference_register_files", columnDefinition = "VARCHAR(64) COMMENT '2工商申请表'")
