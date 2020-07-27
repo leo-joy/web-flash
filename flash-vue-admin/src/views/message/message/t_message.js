@@ -141,7 +141,7 @@ export default {
         from: '530759611@qq.com',
         to: this.form.to,
         cc: '',
-        title: this.form.title,
+        title: '公司高管【' + personName + '】离职，请尽快发起相关企业高管变更流程！',
         content: content,
         type: '',
         id: this.form.id
