@@ -1,15 +1,18 @@
-import { clear, getList } from '@/api/message/message'
+import { clear, save, getList } from '@/api/message/message'
 
 export default {
   data() {
     return {
       formVisible: false,
-      formTitle: '添加历史消息',
+      formTitle: '添加消息',
       isAdd: true,
       form: {
-        tplCode: '',
+        tplCode: 'EMAIL_TEST',
+        from: '530759611@qq.com',
+        to: '',
+        cc: '',
+        title: '',
         content: '',
-        receiver: '',
         type: '',
         id: ''
       },
@@ -17,6 +20,18 @@ export default {
         page: 1,
         limit: 20,
         id: undefined
+      },
+      rules: {
+        title: [
+          { required: true, message: '邮件标题不能为空', trigger: 'blur' }
+        ],
+        to: [
+          { required: true, message: '邮箱地址不能为空', trigger: 'blur' },
+          { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+        ],
+        content: [
+          { required: true, message: '邮件内容不能为空', trigger: 'blur' }
+        ]
       },
       rangeDate: undefined,
       total: 0,
@@ -83,6 +98,70 @@ export default {
     changeSize(limit) {
       this.listQuery.limit = limit
       this.fetchData()
+    },
+    handleCurrentChange(currentRow, oldCurrentRow) {
+      this.selRow = currentRow
+    },
+    resetForm() {
+      this.form = {
+        tplCode: 'EMAIL_TEST',
+        from: '530759611@qq.com',
+        to: '',
+        cc: '',
+        title: '',
+        content: '',
+        type: '',
+        id: ''
+      }
+    },
+    add() {
+      this.resetForm()
+      this.formTitle = '发送高管离职预警提醒'
+      this.formVisible = true
+      this.isAdd = true
+    },
+    save() {
+      this.$refs['form'].validate((valid) => {
+        if (valid) {
+          save({
+            tplCode: 'EMAIL_TEST',
+            from: '530759611@qq.com',
+            to: this.form.to,
+            cc: '',
+            title: this.form.title,
+            content: this.form.content,
+            type: '',
+            id: this.form.id
+          }).then(response => {
+            this.$message({
+              message: this.$t('common.optionSuccess'),
+              type: 'success'
+            })
+            this.fetchData()
+            this.formVisible = false
+          })
+        } else {
+          return false
+        }
+      })
+    },
+    checkSel() {
+      if (this.selRow && this.selRow.id) {
+        return true
+      }
+      this.$message({
+        message: this.$t('common.mustSelectOne'),
+        type: 'warning'
+      })
+      return false
+    },
+    edit() {
+      if (this.checkSel()) {
+        this.isAdd = false
+        this.form = this.selRow
+        this.formTitle = '编辑消息模板'
+        this.formVisible = true
+      }
     },
     clear() {
       this.$confirm('确认清楚所有历史消息?', '提示', {

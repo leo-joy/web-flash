@@ -10,7 +10,7 @@ export function getList(params) {
 
 export function save(params) {
   return request({
-    url: '/message',
+    url: '/message/sendEmail',
     method: 'post',
     params
   })

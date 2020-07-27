@@ -11,10 +11,9 @@ import cn.enilu.flash.utils.DateUtil;
 import cn.enilu.flash.utils.factory.Page;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/message")
@@ -39,6 +38,21 @@ public class MessageController {
     @RequiresPermissions(value = {Permission.MSG_CLEAR})
     public Object clear() {
         messageService.clear();
+        return Rets.success();
+    }
+
+    @RequestMapping(value = "/sendEmail", method = RequestMethod.POST)
+    public Object sendEmail(@RequestParam(required = false) String tplCode,
+                            @RequestParam(required = false) String from,
+                            @RequestParam(required = false) String to,
+                            @RequestParam(required = false) String cc,
+                            @RequestParam(required = false) String title,
+                            @RequestParam(required = false) String content) {
+
+        // tplCode,from,to,cc,title,content
+        //messageService.
+        messageService.sendSimpleEmail(tplCode,from,to,cc,title,content);
+        //messageService.sendSms("REGISTER_CODE", "15365067296", "2322");
         return Rets.success();
     }
 }

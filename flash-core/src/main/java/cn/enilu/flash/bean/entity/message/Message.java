@@ -3,9 +3,11 @@ package cn.enilu.flash.bean.entity.message;
 import cn.enilu.flash.bean.entity.BaseEntity;
 import lombok.Data;
 import org.hibernate.annotations.Table;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 
 /**
  * 历史消息
@@ -13,6 +15,7 @@ import javax.persistence.Entity;
 @Data
 @Entity(name="t_message")
 @Table(appliesTo = "t_message",comment = "历史消息")
+@EntityListeners(AuditingEntityListener.class)
 public class Message extends BaseEntity {
     @Column(name="tpl_code",columnDefinition = "VARCHAR(32) COMMENT '模板编码'")
     private String tplCode;

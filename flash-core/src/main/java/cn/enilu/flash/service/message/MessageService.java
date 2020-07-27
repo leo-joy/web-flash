@@ -113,7 +113,7 @@ public class MessageService extends BaseService<Message,Long,MessageRepository> 
         Message message = new Message();
         message.setType(type);
         message.setTplCode(tplCode);
-        message.setType(0);
+        //message.setType(0);
         message.setState(sendResult ? 1 : 2);
         message.setReceiver(receiver);
         message.setContent(content);
