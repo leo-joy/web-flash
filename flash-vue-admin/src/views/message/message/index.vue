@@ -14,6 +14,7 @@
             value-format="yyyyMMddHHmmss"
             align="right"
           />
+          &nbsp;&nbsp;&nbsp;&nbsp;
           <el-button type="success" size="mini" icon="el-icon-search" @click.native="search">{{ $t('button.search') }}</el-button>
           <el-button type="primary" size="mini" icon="el-icon-refresh" @click.native="reset">{{ $t('button.reset') }}</el-button>
         </el-col>
@@ -69,7 +70,7 @@
         </template>
       </el-table-column>
     </el-table>
-
+    <br>
     <el-pagination
       background
       layout="total, sizes, prev, pager, next, jumper"
@@ -90,18 +91,33 @@
       <el-form ref="form" :model="form" :rules="rules" label-width="120px">
         <el-row>
           <el-col :span="14">
-            <el-form-item label="提醒标题" prop="title">
-              <el-input v-model="form.title" />
+            <el-form-item label="*高管姓名">
+              <el-autocomplete
+                v-model="form.personName"
+                style="width:100%"
+                popper-class="my-autocomplete"
+                :fetch-suggestions="querySearchAsync"
+                placeholder="请输入高管姓名"
+                @select="handleChairmanSelect"
+              >
+                <i
+                  slot="suffix"
+                  class="el-icon-circle-plus-outline el-input__icon"
+                  @click="handleIconClick"
+                />
+                <template slot-scope="{ item }">
+                  <div class="name">{{ item.name }} <span v-if="item.workNumber" class="addr"> &nbsp;&nbsp;&nbsp;&nbsp;工号：{{ item.workNumber }}</span></div>
+                  <span v-if="item.type*1 === 1" class="addr">类型：高级管理人员&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span v-if="item.type*1 === 2" class="addr">类型：自然人股东&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span v-if="item.jobName" class="addr">职务：{{ item.jobName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                  <span class="addr">性别：{{ item.sexName }}</span>
+                </template>
+              </el-autocomplete>
             </el-form-item>
           </el-col>
           <el-col :span="10">
             <el-form-item label="被提醒人邮箱" prop="to">
               <el-input v-model="form.to" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="提醒内容" prop="content">
-              <el-input v-model="form.content" type="textarea" rows="5" />
             </el-form-item>
           </el-col>
         </el-row>

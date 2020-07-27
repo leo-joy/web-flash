@@ -25,7 +25,7 @@ export default {
     druid: '监控管理',
     swagger: '接口文档',
     messageMgr: '消息管理',
-    msg: '历史消息',
+    msg: '离职提醒',
     msgTpl: '消息模板',
     msgSender: '消息发送器',
 

@@ -1,3 +1,7 @@
+import { getList as getBusinesslicenseList } from '@/api/lpm/businesslicense'
+import { getList as getMainmemberList } from '@/api/lpm/mainmember'
+import { getList as getUserList } from '@/api/system/user'
+
 import { clear, save, getList } from '@/api/message/message'
 
 export default {
@@ -7,6 +11,8 @@ export default {
       formTitle: '添加消息',
       isAdd: true,
       form: {
+        personId: '',
+        personName: '',
         tplCode: 'EMAIL_TEST',
         from: '530759611@qq.com',
         to: '',
@@ -22,22 +28,24 @@ export default {
         id: undefined
       },
       rules: {
-        title: [
-          { required: true, message: '邮件标题不能为空', trigger: 'blur' }
-        ],
         to: [
           { required: true, message: '邮箱地址不能为空', trigger: 'blur' },
           { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
-        ],
-        content: [
-          { required: true, message: '邮件内容不能为空', trigger: 'blur' }
         ]
       },
       rangeDate: undefined,
       total: 0,
       list: null,
       listLoading: true,
-      selRow: {}
+      selRow: {},
+      listUserQuery: {
+        page: 1,
+        limit: 50000,
+        type: '1,2',
+        account: undefined,
+        name: undefined
+      },
+      restaurants: []
     }
   },
   filters: {
@@ -56,6 +64,9 @@ export default {
   methods: {
     init() {
       this.fetchData()
+      getUserList(this.listUserQuery).then(response => {
+        this.restaurants = response.data.records
+      })
     },
     fetchData() {
       this.listLoading = true
@@ -104,6 +115,8 @@ export default {
     },
     resetForm() {
       this.form = {
+        personId: '',
+        personName: '',
         tplCode: 'EMAIL_TEST',
         from: '530759611@qq.com',
         to: '',
@@ -120,25 +133,85 @@ export default {
       this.formVisible = true
       this.isAdd = true
     },
+    sendEmail(personName, content) {
+      save({
+        personId: '',
+        personName: '',
+        tplCode: 'EMAIL_TEST',
+        from: '530759611@qq.com',
+        to: this.form.to,
+        cc: '',
+        title: this.form.title,
+        content: content,
+        type: '',
+        id: this.form.id
+      }).then(response => {
+        this.$message({
+          message: this.$t('common.optionSuccess'),
+          type: 'success'
+        })
+        this.fetchData()
+        this.formVisible = false
+      })
+    },
+    getEnterpriseList(response) {
+      const records = response.data.records
+      let enterpriseNameStr = ''
+      if (records && records.length > 0) {
+        for (let i = 0; i < records.length; i++) {
+          enterpriseNameStr = enterpriseNameStr + records[i].enterpriseName + ','
+        }
+      }
+      return enterpriseNameStr
+    },
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          save({
-            tplCode: 'EMAIL_TEST',
-            from: '530759611@qq.com',
-            to: this.form.to,
-            cc: '',
-            title: this.form.title,
-            content: this.form.content,
-            type: '',
-            id: this.form.id
-          }).then(response => {
-            this.$message({
-              message: this.$t('common.optionSuccess'),
-              type: 'success'
-            })
-            this.fetchData()
-            this.formVisible = false
+          const personName = this.form.personName
+          if (!personName) {
+            alert('请选择要离职的高管')
+            return
+          }
+          // 发送离职法人代表提醒
+          getBusinesslicenseList({ page: 1, limit: 3000, legalRepresentative: personName }).then(response => {
+            let enterpriseNameStr = this.getEnterpriseList(response)
+            if (enterpriseNameStr) {
+              enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【企业法人】'
+              this.sendEmail(personName, enterpriseNameStr)
+            }
+          })
+          // 发送离职董事长提醒
+          getMainmemberList({ page: 1, limit: 3000, chairman: personName }).then(response => {
+            let enterpriseNameStr = this.getEnterpriseList(response)
+            if (enterpriseNameStr) {
+              enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【董事长】'
+              this.sendEmail(personName, enterpriseNameStr)
+            }
+          })
+
+          // 发送离职董事提醒
+          getMainmemberList({ page: 1, limit: 3000, director: personName }).then(response => {
+            let enterpriseNameStr = this.getEnterpriseList(response)
+            if (enterpriseNameStr) {
+              enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【董事】'
+              this.sendEmail(personName, enterpriseNameStr)
+            }
+          })
+          // 发送离职监事提醒
+          getMainmemberList({ page: 1, limit: 3000, supervisor: personName }).then(response => {
+            let enterpriseNameStr = this.getEnterpriseList(response)
+            if (enterpriseNameStr) {
+              enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【监事】'
+              this.sendEmail(personName, enterpriseNameStr)
+            }
+          })
+          // 发送离职总经理提醒
+          getMainmemberList({ page: 1, limit: 3000, generalManager: personName }).then(response => {
+            let enterpriseNameStr = this.getEnterpriseList(response)
+            if (enterpriseNameStr) {
+              enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【总经理】'
+              this.sendEmail(personName, enterpriseNameStr)
+            }
           })
         } else {
           return false
@@ -163,8 +236,35 @@ export default {
         this.formVisible = true
       }
     },
+    querySearchAsync(queryString, cb) {
+      if (queryString) {
+        var restaurants = this.restaurants
+        var results = queryString ? restaurants.filter(this.createStateFilter(queryString)) : restaurants
+        if (results && results.length === 0) {
+          this.$message({
+            message: '您输入的信息没有匹配到相应的结果！请检查输入是否正确！如匹配到不可通过右侧➕搜索配置高级管理人员！',
+            type: 'warning'
+          })
+        }
+        cb(results)
+      }
+    },
+    createStateFilter(queryString) {
+      return (state) => {
+        // return (state.name.toLowerCase().indexOf(queryString.toLowerCase()) === 0)
+        return (state.name.indexOf(queryString) === 0)
+      }
+    },
+    handleChairmanSelect(item) {
+      this.form.personId = item.id
+      this.form.personName = item.name
+    },
+    handleIconClick(ev) {
+      alert('没有此高管')
+      // this.addAdvancedUser()
+    },
     clear() {
-      this.$confirm('确认清楚所有历史消息?', '提示', {
+      this.$confirm('确认清楚所有离职提醒?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
