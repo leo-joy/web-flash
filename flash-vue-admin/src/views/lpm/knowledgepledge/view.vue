@@ -20,7 +20,7 @@
               <el-form-item label="质权人">
                 <span>{{ props.row.pledgeeName }}</span>
               </el-form-item>
-              <el-form-item label="质权登记期限">
+              <el-form-item label="质权登记期限(年)">
                 <span>{{ props.row.pledgeeCertificateNumber }}</span>
               </el-form-item>
               <el-form-item label="状态">

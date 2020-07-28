@@ -55,7 +55,7 @@
       <el-table-column label="质权人名称" width="150">
         <template slot-scope="scope">{{ scope.row.pledgeeName }}</template>
       </el-table-column>
-      <el-table-column label="质权登记期限" width="150">
+      <el-table-column label="质权登记期限(年)" width="150">
         <template slot-scope="scope">{{ scope.row.pledgeeCertificateNumber }}</template>
       </el-table-column>
       <el-table-column prop="status" label="状态" width="150" :formatter="formatterKnowledgeStatus" />
@@ -117,7 +117,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="质权登记期限" prop="pledgeeCertificateNumber">
+            <el-form-item label="质权登记期限(年)" prop="pledgeeCertificateNumber">
               <el-input v-model="form.pledgeeCertificateNumber" minlength="1" />
             </el-form-item>
           </el-col>
