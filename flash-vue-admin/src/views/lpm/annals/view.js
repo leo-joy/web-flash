@@ -55,43 +55,34 @@ export default {
       // 企业年报数据
       annals({ enterpriseCode: id, page: 1, limit: 20 }).then(response => {
         this.annalsData = response.data.records
-        var accessoryArr = ['accessoryFiles']
-        this.getFilesList('Annals', accessoryArr, response.data.records)
+        this.initRecordFiles(this.annalsData)
       })
     },
 
-    // 获取原文列表
-    getFilesList(module, accessoryArr, record) {
-      if (record.length === 0) {
-        return false
-      }
-      for (let j = 0; j < accessoryArr.length; j++) {
-        const Module = module
+    // 初始化条目原文
+    initRecordFiles(records) {
+      for (let i = 0; i < records.length; i++) {
+        const filesTempArr = []
         var listQuery = {
           page: 1,
           limit: 20,
-          ids: record[0][accessoryArr[j]].replace(/(^\s*)|(\s*$)/g, '')
+          ids: records[i]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')
         }
-        if (record.length > 1 && accessoryArr[j] === 'accessoryFiles') {
-          let ids = ''
-          for (let p = 0; p < record.length; p++) {
-            if (record[p]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')) {
-              ids = record[p]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '') + ' ' + ids
+
+        getListIds(listQuery).then(response => {
+          for (let j = 0; j < response.data.records.length; j++) {
+            const file = {}
+            file.id = response.data.records[j].id
+            file.name = response.data.records[j].originalFileName
+            filesTempArr.push(file)
+            if (response.data.records.length - 1 === j) {
+              this.annalsData[i]['accessoryArrList'] = filesTempArr
             }
           }
-          listQuery.ids = ids
-        }
-        if (!listQuery.ids) {
-          // console.log('没有找到：' + accessoryArr[j] + 'List' + Module + ' 相关的原文！')
-        } else {
-          getListIds(listQuery).then(response => {
-            for (let i = 0; i < response.data.records.length; i++) {
-              const file = {}
-              file.id = response.data.records[i].id
-              file.name = response.data.records[i].originalFileName
-              this[accessoryArr[j] + 'List' + Module].push(file)
-            }
-          })
+        })
+
+        if (records.length - 1 === i) {
+          // console.log(this.annalsData)
         }
       }
     }
