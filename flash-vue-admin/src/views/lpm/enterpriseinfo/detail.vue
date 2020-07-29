@@ -56,9 +56,9 @@
           <el-tab-pane label="公司文件" name="second">
             <companymodify />
           </el-tab-pane>
-          <el-tab-pane label="产权文件" name="third">
+          <!-- <el-tab-pane label="产权文件" name="third">
             <div>开发中。。。</div>
-          </el-tab-pane>
+          </el-tab-pane> -->
         </el-tabs>
       </el-col>
     </el-row>
