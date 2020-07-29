@@ -123,7 +123,7 @@ export default {
     onprogress(e) {
       this.loadingInstance = Loading.service({
         lock: true,
-        text: (e * 100).toFixed(0),
+        text: '文件加载中...',
         spinner: 'el-icon-loading',
         background: 'rgba(0, 0, 0, 0.7)'
       })
