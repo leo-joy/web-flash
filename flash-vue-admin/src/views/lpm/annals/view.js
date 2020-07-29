@@ -63,26 +63,29 @@ export default {
     initRecordFiles(records) {
       for (let i = 0; i < records.length; i++) {
         const filesTempArr = []
-        var listQuery = {
-          page: 1,
-          limit: 20,
-          ids: records[i]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')
-        }
-
-        getListIds(listQuery).then(response => {
-          for (let j = 0; j < response.data.records.length; j++) {
-            const file = {}
-            file.id = response.data.records[j].id
-            file.name = response.data.records[j].originalFileName
-            filesTempArr.push(file)
-            if (response.data.records.length - 1 === j) {
-              this.annalsData[i]['accessoryArrList'] = filesTempArr
-            }
+        const ids = records[i]['accessoryFiles'].replace(/(^\s*)|(\s*$)/g, '')
+        if (ids) {
+          var listQuery = {
+            page: 1,
+            limit: 20,
+            ids: ids
           }
-        })
 
-        if (records.length - 1 === i) {
-          // console.log(this.annalsData)
+          getListIds(listQuery).then(response => {
+            for (let j = 0; j < response.data.records.length; j++) {
+              const file = {}
+              file.id = response.data.records[j].id
+              file.name = response.data.records[j].originalFileName
+              filesTempArr.push(file)
+              if (response.data.records.length - 1 === j) {
+                this.annalsData[i]['accessoryArrList'] = filesTempArr
+              }
+            }
+          })
+
+          if (records.length - 1 === i) {
+            // console.log(this.annalsData)
+          }
         }
       }
     }
