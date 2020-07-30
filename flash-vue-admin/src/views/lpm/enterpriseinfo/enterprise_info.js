@@ -467,13 +467,23 @@ export default {
       const _this = this
       if (list && list.length > 0) {
         for (let i = 0; i < list.length; i++) {
-          this.businessCirclesSyn(list[i], _this)
+          if (list[i].registrationType * 1 === 1 && list[i].initCa * 1 !== 1) {
+            // this.businessCirclesSyn(list[i], _this)
+            // 只更新搜索到的第一条数据
+            if (i === 0) {
+              this.businessCirclesSyn(list[i], _this)
+              _this.$message({
+                message: '只同步搜索的第一条数据，请精确搜索企业全名',
+                type: 'success'
+              })
+            }
+          }
         }
       }
     },
     // 单条工商数据同步
     businessCirclesSyn(oldItem, _this) {
-      if ((oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) && (oldItem.initCa) * 1 !== 1) {
+      if (oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) {
       // if (oldItem.unifiedSocialCreditCode || oldItem.enterpriseName) {
         let url = 'https://signtest.agile.com.cn:8082/ec-webservice/interface/everifyServer?appId=cfb6b6eef1b6462a8e0d360a9f9417cb'
         if (oldItem.unifiedSocialCreditCode) {
