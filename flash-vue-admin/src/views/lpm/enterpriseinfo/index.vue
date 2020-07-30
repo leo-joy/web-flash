@@ -23,6 +23,7 @@
             <el-radio v-model="tagRadio" label="1" @change="handleTagRadioClick">控股集团【股票代码：3383】</el-radio>
             <el-radio v-model="tagRadio" label="2" @change="handleTagRadioClick">雅生活集团【股票代码：3319】</el-radio>
             <el-radio v-model="tagRadio" label="3" @change="handleTagRadioClick">体外公司</el-radio>
+            <el-radio v-model="tagRadio" label="5" @change="handleTagRadioClick">跟投业务</el-radio>
             <el-radio v-model="registrationTypeRadio" label="1,4" @change="handleRegistrationTypeRadioClick">国内企业</el-radio>
             <el-radio v-model="registrationTypeRadio" label="2" @change="handleRegistrationTypeRadioClick">境外/香港企业</el-radio>
           </template>
@@ -46,6 +47,7 @@
             <el-radio v-model="deptRadio" label="-105_" @change="handleRadioClick">房管集团</el-radio>
             <el-radio v-model="deptRadio" label="-107_" @change="handleRadioClick">商业集团</el-radio>
             <el-radio v-model="deptRadio" label="-108_" @change="handleRadioClick">城更集团</el-radio>
+            <el-radio v-model="deptRadio" label="-248_" @change="handleRadioClick">跟投公司</el-radio>
           </template>
         </el-col>
       </el-row>
