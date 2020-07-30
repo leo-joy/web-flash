@@ -27,6 +27,7 @@
       :data="list"
       element-loading-text="Loading"
       border
+      height="600"
       fit
       highlight-current-row
       @current-change="handleCurrentChange"

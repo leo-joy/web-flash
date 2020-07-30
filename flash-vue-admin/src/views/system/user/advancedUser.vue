@@ -38,7 +38,7 @@
             @click.native="edit"
           >{{ $t('button.edit') }}</el-button>
           <el-button
-            v-permission="['/businesslicense/delete']"
+            v-permission="['/advanced/user/delete']"
             type="danger"
             size="small"
             icon="el-icon-delete"
