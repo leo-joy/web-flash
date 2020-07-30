@@ -7,8 +7,8 @@ const state = {
   token: getToken(),
   name: '',
   avatar: '',
-  permissions:null,
-  roles:[]
+  permissions: null,
+  roles: []
 }
 
 const mutations = {
@@ -21,16 +21,16 @@ const mutations = {
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
   },
-  SET_PROFILE:(state,profile) => {
+  SET_PROFILE: (state, profile) => {
     state.profile = profile
   },
-  SET_PERMISSIONS:(state,permissions) => {
+  SET_PERMISSIONS: (state, permissions) => {
     state.permissions = permissions
   },
-  SET_ROLES:(state,roles) => {
+  SET_ROLES: (state, roles) => {
     state.roles = roles
   },
-  SET_COMPANYS:(state,companys) => {
+  SET_COMPANYS: (state, companys) => {
     state.companys = companys
   }
 }
@@ -42,6 +42,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       login({ username: username.trim(), password: password }).then(response => {
         const { data } = response
+        console.log(response)
         commit('SET_TOKEN', data.token)
         setToken(data.token)
 
@@ -57,18 +58,18 @@ const actions = {
     return new Promise((resolve, reject) => {
       getInfo().then(response => {
         const { data } = response
-        if (!data) {
+        if (data) {
+          const { name, profile, permissions, roles, companys } = data
+          commit('SET_NAME', name)
+          commit('SET_AVATAR', profile.avatar)
+          commit('SET_PROFILE', profile)
+          commit('SET_ROLES', roles)
+          commit('SET_PERMISSIONS', permissions)
+          commit('SET_COMPANYS', companys)
+          resolve(data)
+        } else {
           reject('Verification failed, please Login again.')
         }
-        console.log('data',data)
-        const { name, profile,permissions,roles,companys } = data
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', profile.avatar)
-        commit('SET_PROFILE',profile)
-        commit('SET_ROLES',roles)
-        commit('SET_PERMISSIONS',permissions)
-        commit('SET_COMPANYS',companys)
-        resolve(data)
       }).catch(error => {
         reject(error)
       })
@@ -82,10 +83,10 @@ const actions = {
         commit('SET_TOKEN', '')
         commit('SET_NAME', '')
         commit('SET_AVATAR', '')
-        commit('SET_PROFILE',{})
-        commit('SET_ROLES',[])
-        commit('SET_PERMISSIONS',[])
-        commit('SET_COMPANYS',[])
+        commit('SET_PROFILE', {})
+        commit('SET_ROLES', [])
+        commit('SET_PERMISSIONS', [])
+        commit('SET_COMPANYS', [])
         removeToken()
         resetRouter()
         resolve()
@@ -103,8 +104,8 @@ const actions = {
       resolve()
     })
   },
-  updateToken({commit},{token}){
-    console.log('newToken',token)
+  updateToken({ commit }, { token }) {
+    console.log('newToken', token)
     commit('SET_TOKEN', token)
     setToken(token)
   }

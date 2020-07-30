@@ -18,10 +18,14 @@ const actions = {
   getSideMenus({ commit, state }) {
     return new Promise((resolve, reject) => {
       listForRouter().then(response => {
-        const menus = response.data
-        let remoteroutes = traverseRoutes(menus)
-        commit('SET_ROUTES',remoteroutes);
-        resolve(remoteroutes);
+        if (response.data && response.data.length > 0) {
+          const menus = response.data
+          const remoteroutes = traverseRoutes(menus)
+          commit('SET_ROUTES', remoteroutes)
+          resolve(remoteroutes)
+        } else {
+          reject('该用户没有权限访问该系统！')
+        }
       }).catch(error => {
         reject(error)
       })
