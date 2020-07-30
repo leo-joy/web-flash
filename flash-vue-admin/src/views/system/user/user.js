@@ -1,4 +1,4 @@
-import { getList, saveUser, remove, setRole, changeStatus } from '@/api/system/user'
+import { getList, saveUser, remove, setRole, changeStatus, resetPwd } from '@/api/system/user'
 import { list as deptList } from '@/api/system/dept'
 import { parseTime } from '@/utils/index'
 import { roleTreeListByIdUser } from '@/api/system/role'
@@ -205,8 +205,8 @@ export default {
             form.duty = form.duty
             form.experience = form.experience
             form.type = form.type
-            form.password = form.password?form.password:'123456' // 密码
-            form.rePassword = form.rePassword?form.rePassword:'123456' // 重复密码
+            form.password = form.password ? form.password : '123456' // 密码
+            form.rePassword = form.rePassword ? form.rePassword : '123456' // 重复密码
             console.log(form)
             saveUser(form).then(response => {
               this.$message({
@@ -247,6 +247,18 @@ export default {
         this.form.password = ''
         this.formTitle = '修改用户'
         this.formVisible = true
+      }
+    },
+    resetPwd() {
+      if (this.checkSel()) {
+        resetPwd({ 'account': this.selRow.account }).then(response => {
+          console.log(response)
+          this.$message({
+            message: '重置密码成功',
+            type: 'success'
+          })
+          // this.fetchData()
+        })
       }
     },
     remove() {

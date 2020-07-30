@@ -16,6 +16,14 @@ export function saveUser(params) {
   })
 }
 
+export function resetPwd(params) {
+  return request({
+    url: '/user/resetPwd',
+    method: 'post',
+    params
+  })
+}
+
 export function remove(userId) {
   return request({
     url: '/user',
