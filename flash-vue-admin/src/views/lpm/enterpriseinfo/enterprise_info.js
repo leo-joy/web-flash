@@ -175,7 +175,7 @@ export default {
           }
 
           // 如果进入企业管理模块和变更模块进行，公司权限过滤
-          if (this.moduleType === '1' || this.moduleType === '2') {
+          if (this.moduleType === '1' || this.moduleType === '2' || this.$store.state.user.roles[0] === 'faren-liyong') {
             this.companys = this.$store.state.user.companys
           }
           // pIds = pIds.reverse()
@@ -204,9 +204,10 @@ export default {
         })
       } else {
         // 如果进入企业管理模块和变更模块进行，公司权限过滤
-        if (this.moduleType === '1' || this.moduleType === '2') {
+        if (this.moduleType === '1' || this.moduleType === '2' || this.$store.state.user.roles[0] === 'faren-liyong') {
           this.companys = this.$store.state.user.companys
         }
+        console.log(this.$store.state.user)
         this.listQuery.registrationType = this.registrationTypeRadio
         this.listQuery.ids = this.companys ? this.companys.toString() : ''
         getList(this.listQuery).then(response => {
