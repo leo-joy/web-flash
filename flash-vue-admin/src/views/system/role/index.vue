@@ -170,7 +170,172 @@
       </el-form>
     </el-dialog>
 
-    <el-dialog title="公司权限配置" :visible.sync="permissonCompanyVisible" width="80%">
+    <el-dialog title="公司权限配置" :visible.sync="permissonCompanyVisible" width="100%">
+      <el-row>
+        <el-col :span="11">
+          <el-row>
+            <el-col :span="24">
+              <el-input
+                v-model="companyListQueryLeft.deptName"
+                placeholder="请选择所在部门"
+                readonly="readonly"
+                @click.native="deptTreeLeft.show = !deptTreeLeft.show"
+              />
+              <el-tree
+                v-if="deptTreeLeft.show"
+                style="height:300px"
+                empty-text="暂无数据"
+                :default-expand-all="true"
+                :expand-on-click-node="false"
+                :data="deptList"
+                :props="deptTreeLeft.defaultProps"
+                class="input-tree"
+                @node-click="handleCompanyDeptNodeClickLeft"
+              />
+            </el-col>
+          </el-row>
+          <br>
+          <el-row :gutter="24">
+            <el-col :span="6">
+              <el-select v-model="searchTypeLeft" placeholder="搜索类型">
+                <el-option
+                  v-for="item in optionsLeft"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-col>
+            <el-col :span="12">
+              <el-input v-model="keywordLeft" placeholder="请输入搜索关键字" />
+            </el-col>
+            <el-col :span="6">
+              <el-button
+                type="success"
+                icon="el-icon-search"
+                @click.native="searchCompanyLeft"
+              >{{ $t('button.search') }}</el-button>
+            </el-col>
+          </el-row>
+          <br>
+          <el-table
+            ref="companytableLeft"
+            v-loading="companyListLoadingLeft"
+            :data="companyListLeft"
+            height="550"
+            element-loading-text="Loading"
+            border
+            highlight-current-row
+            @selection-change="handleSelectionChangeLeft"
+          >
+            <el-table-column type="selection" width="55" />
+            <el-table-column label="企业名称">
+              <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
+            </el-table-column>
+          </el-table>
+          <br>
+          <el-pagination
+            background
+            layout="total, sizes, prev, pager, next"
+            :page-sizes="[5, 10, 20, 50, 100, 500, 1500]"
+            :page-size="companyListQueryLeft.limit"
+            :total="companyTotalLeft"
+            @size-change="changeCompanySizeLeft"
+            @current-change="fetchCompanyPageLeft"
+            @prev-click="fetchCompanyPrevLeft"
+            @next-click="fetchCompanyNextLeft"
+          />
+        </el-col>
+        <el-col :span="2" style="padding-top:300px;margin:0 autp;text-align:center;">
+          <br>
+          <br>
+          <el-button type="primary" size="small" @click="saveCompanyPermissions(1)">移入》》</el-button>
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <el-button type="primary" size="small" @click="saveCompanyPermissions(-1)">《《 移除</el-button>
+        </el-col>
+        <el-col :span="11">
+          <el-row>
+            <el-col :span="24">
+              <el-input
+                v-model="companyListQueryRight.deptName"
+                placeholder="请选择所在部门"
+                readonly="readonly"
+                @click.native="deptTreeRight.show = !deptTreeRight.show"
+              />
+              <el-tree
+                v-if="deptTreeRight.show"
+                style="height:300px"
+                empty-text="暂无数据"
+                :default-expand-all="true"
+                :expand-on-click-node="false"
+                :data="deptList"
+                :props="deptTreeRight.defaultProps"
+                class="input-tree"
+                @node-click="handleCompanyDeptNodeClickRight"
+              />
+            </el-col>
+          </el-row>
+          <br>
+          <el-row :gutter="24">
+            <el-col :span="6">
+              <el-select v-model="searchTypeRight" placeholder="搜索类型">
+                <el-option
+                  v-for="item in optionsRight"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-col>
+            <el-col :span="12">
+              <el-input v-model="keywordRight" placeholder="请输入搜索关键字" />
+            </el-col>
+            <el-col :span="6">
+              <el-button
+                type="success"
+                icon="el-icon-search"
+                @click.native="searchCompanyRight"
+              >{{ $t('button.search') }}</el-button>
+            </el-col>
+          </el-row>
+          <br>
+          <el-table
+            ref="companytableRight"
+            v-loading="companyListLoadingRight"
+            :data="companyListRight"
+            height="550"
+            element-loading-text="Loading"
+            border
+            highlight-current-row
+            @selection-change="handleSelectionChangeRight"
+          >
+            <el-table-column type="selection" width="55" />
+            <el-table-column label="企业名称">
+              <template slot-scope="scope">{{ scope.row.enterpriseName }}</template>
+            </el-table-column>
+          </el-table>
+          <br>
+          <el-pagination
+            background
+            layout="total, sizes, prev, pager, next"
+            :page-sizes="[5, 10, 20, 50, 100, 500, 1500]"
+            :page-size="companyListQueryRight.limit"
+            :total="companyTotalRight"
+            @size-change="changeCompanySizeRight"
+            @current-change="fetchCompanyPageRight"
+            @prev-click="fetchCompanyPrevRight"
+            @next-click="fetchCompanyNextRight"
+          />
+        </el-col>
+      </el-row>
+
+    </el-dialog>
+
+    <!-- <el-dialog title="公司权限配置" :visible.sync="permissonCompanyVisible" width="80%">
       <el-row>
         <el-col :span="18">
           <el-input
@@ -254,7 +419,7 @@
         @prev-click="fetchCompanyPrev"
         @next-click="fetchCompanyNext"
       />
-    </el-dialog>
+    </el-dialog> -->
 
   </div>
 </template>
