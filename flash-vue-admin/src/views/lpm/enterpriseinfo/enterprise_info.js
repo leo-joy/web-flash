@@ -29,6 +29,12 @@ export default {
         value: 'enterpriseName',
         label: '企业名称'
       }, {
+        value: 'enterpriseNameEn',
+        label: '英文名称'
+      }, {
+        value: 'enterpriseNameBusiness',
+        label: '曾用名称'
+      }, {
         value: 'unifiedSocialCreditCode',
         label: '社会信用代码'
       }, {
@@ -198,6 +204,8 @@ export default {
             this.total = response.data.total
             this.listQuery.page = response.data.current || 1
             this.listQuery.enterpriseName = ''
+            this.listQuery.enterpriseNameEn = ''
+            this.listQuery.enterpriseNameBusiness = ''
             this.listQuery.unifiedSocialCreditCode = ''
             this.listQuery.legalRepresentative = ''
           })
@@ -216,6 +224,8 @@ export default {
           this.total = response.data.total
           this.listQuery.page = response.data.current || 1
           this.listQuery.enterpriseName = ''
+          this.listQuery.enterpriseNameEn = ''
+          this.listQuery.enterpriseNameBusiness = ''
           this.listQuery.unifiedSocialCreditCode = ''
           this.listQuery.legalRepresentative = ''
         })
@@ -227,6 +237,12 @@ export default {
     initSearchParams() {
       if (this.searchType === 'enterpriseName') {
         this.listQuery.enterpriseName = this.keyword
+      }
+      if (this.searchType === 'enterpriseNameEn') {
+        this.listQuery.enterpriseNameEn = this.keyword
+      }
+      if (this.searchType === 'enterpriseNameBusiness') {
+        this.listQuery.enterpriseNameBusiness = this.keyword
       }
       if (this.searchType === 'unifiedSocialCreditCode') {
         this.listQuery.unifiedSocialCreditCode = this.keyword

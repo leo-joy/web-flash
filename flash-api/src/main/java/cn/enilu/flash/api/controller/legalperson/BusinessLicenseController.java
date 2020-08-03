@@ -137,6 +137,8 @@ public class BusinessLicenseController {
 
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
 	public Object list(@RequestParam(required = false) String enterpriseName,
+					   @RequestParam(required = false) String enterpriseNameEn,
+					   @RequestParam(required = false) String enterpriseNameBusiness,
 					   @RequestParam(required = false) String unifiedSocialCreditCode,
 					   @RequestParam(required = false) String legalRepresentative,
 					   @RequestParam(required = false) String pIds,
@@ -147,6 +149,8 @@ public class BusinessLicenseController {
 					   @RequestParam(required = false) Long id) {
 		Page<BusinessLicense> page = new PageFactory<BusinessLicense>().defaultPage();
 		page.addFilter("enterpriseName", SearchFilter.Operator.LIKE,enterpriseName);
+		page.addFilter("enterpriseNameEn", SearchFilter.Operator.LIKE,enterpriseNameEn);
+		page.addFilter("enterpriseNameBusiness", SearchFilter.Operator.LIKE,enterpriseNameBusiness);
 		page.addFilter("unifiedSocialCreditCode", SearchFilter.Operator.LIKE,unifiedSocialCreditCode);
 		page.addFilter("legalRepresentative", SearchFilter.Operator.LIKE,legalRepresentative);
 		page.addFilter("pIds", SearchFilter.Operator.LIKE,pIds);
