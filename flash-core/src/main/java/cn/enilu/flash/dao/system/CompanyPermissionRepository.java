@@ -13,5 +13,10 @@ public interface CompanyPermissionRepository extends BaseRepository<CompanyPermi
     @Modifying
     @Query(nativeQuery = true,value = "delete from t_sys_company_permission where roleid=?1")
     int deleteByRoleId(Long roleId);
+
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true,value = "delete from t_sys_company_permission where roleid=?1 and companyid=?2")
+    int deleteByRoleIdAndCompanyId(Long roleId, Long companyId);
 }
 

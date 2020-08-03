@@ -1,4 +1,4 @@
-import { remove, getList, save, savePermissons, saveCompanyPermissons, companyListByRoleId } from '@/api/system/role'
+import { remove, getList, save, savePermissons, saveCompanyPermissons, delCompanyPermissons, companyListByRoleId } from '@/api/system/role'
 import { list as getDeptList } from '@/api/system/dept'
 import { menuTreeListByRoleId } from '@/api/system/menu'
 import { getList as getCompanyList } from '@/api/lpm/businesslicense'
@@ -96,6 +96,7 @@ export default {
 
       permissonCompanyVisible: false,
       // 左侧企业
+      tagRadioLeft: '',
       deptTreeLeft: {
         show: false,
         defaultProps: {
@@ -131,6 +132,7 @@ export default {
       multipleSelectionLeft: [],
 
       // 右侧企业
+      tagRadioRight: '',
       deptTreeRight: {
         show: false,
         defaultProps: {
@@ -315,7 +317,7 @@ export default {
       }
     },
     openPermissions() { // 功能权限
-      this.companyListQuery.deptName = ''
+      // this.companyListQuery.deptName = ''
       this.deptTree.show = false
       if (this.checkSel()) {
         menuTreeListByRoleId(this.selRow.id).then(response => {
@@ -512,6 +514,12 @@ export default {
     },
 
     // 左侧企业
+    handleTagRadioClickLeft() {
+      this.companyListQueryLeft.registrationType = ''
+      this.companyListQueryLeft.tag = this.tagRadioLeft
+      this.companyListQueryLeft.page = 1
+      this.fetchCompanyDataLeft()
+    },
     searchCompanyLeft() {
       if (this.searchTypeLeft === 'enterpriseName') {
         this.companyListQueryLeft.enterpriseName = this.keywordLeft
@@ -534,6 +542,7 @@ export default {
 
       this.companyListQueryLeft.deptName = data.simplename
       this.deptTreeLeft.show = false
+      this.companyListQueryLeft.page = 1
       this.fetchCompanyDataLeft()
     },
     fetchCompanyDataLeft() {
@@ -571,6 +580,12 @@ export default {
     },
 
     // 右侧企业
+    handleTagRadioClickRight() {
+      this.companyListQueryRight.registrationType = ''
+      this.companyListQueryRight.tag = this.tagRadioRight
+      this.companyListQueryRight.page = 1
+      this.searchCompanyRight()
+    },
     searchCompanyRight() {
       if (this.searchTypeRight === 'enterpriseName') {
         this.companyListQueryRight.enterpriseName = this.keywordRight
@@ -592,6 +607,7 @@ export default {
       }
       this.companyListQueryRight.deptName = data.simplename
       this.deptTreeRight.show = false
+      this.companyListQueryRight.page = 1
       this.fetchCompanyDataRight()
     },
     fetchCompanyDataRight() {
@@ -645,34 +661,55 @@ export default {
     },
 
     saveCompanyPermissions(num) { // 公司权限保存
-      let companyPermissons = this.companyPermissons
+      const companyPermissons = this.companyPermissons
+      console.log(companyPermissons)
       if (num === 1) {
         const checkedNodes = this.multipleSelectionLeft
+        const companyIds = []
+
+        for (const i in checkedNodes) {
+          const id = checkedNodes[i].id
+          if (companyPermissons.indexOf(id) > -1) {} else {
+            companyIds.push(id)
+          }
+        }
+        console.log('添加公司权限ids：')
+        console.log(companyIds)
+
+        // companyPermissons = MergeArray(this.companyPermissons, companyIds)
+        const data = {
+          roleId: this.selRow.id,
+          permissions: companyIds.join(',')
+        }
+        saveCompanyPermissons(data).then(response => {
+          // this.permissonCompanyVisible = false
+          this.fetchCompanyDataRight()
+          this.$message({
+            message: '提交成功',
+            type: 'success'
+          })
+        })
+      } else {
+        const checkedNodes = this.multipleSelectionRight
         const companyIds = []
         for (var index in checkedNodes) {
           companyIds.push(checkedNodes[index].id)
         }
-        companyPermissons = MergeArray(this.companyPermissons, companyIds)
-      } else {
-        const checkedNodes = this.multipleSelectionRight
-        for (var index in checkedNodes) {
-          var key = companyPermissons.indexOf(checkedNodes[index].id)
-          companyPermissons.splice(key, 1)
+        console.log('删除公司权限ids：')
+        console.log(companyIds)
+        const data = {
+          roleId: this.selRow.id,
+          permissions: companyIds.join(',')
         }
-      }
-
-      const data = {
-        roleId: this.selRow.id,
-        permissions: companyPermissons.join(',')
-      }
-      saveCompanyPermissons(data).then(response => {
-        // this.permissonCompanyVisible = false
-        this.fetchCompanyDataRight()
-        this.$message({
-          message: '提交成功',
-          type: 'success'
+        delCompanyPermissons(data).then(response => {
+          // this.permissonCompanyVisible = false
+          this.fetchCompanyDataRight()
+          this.$message({
+            message: '提交成功',
+            type: 'success'
+          })
         })
-      })
+      }
     }
 
   }

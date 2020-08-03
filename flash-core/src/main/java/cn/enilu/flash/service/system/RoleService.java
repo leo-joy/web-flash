@@ -81,8 +81,6 @@ public class RoleService extends BaseService<Role,Long,RoleRepository> {
     }
 
     public void setCompanyAuthority(Long roleId, String ids) {
-        // 删除该角色所有公司的权限
-        companyPermissionRepository.deleteByRoleId(roleId);
 
         // 添加新的权限
         for (Long id : Convert.toLongArray(true, Convert.toStrArray(",", ids))) {
@@ -90,6 +88,16 @@ public class RoleService extends BaseService<Role,Long,RoleRepository> {
             companyPermission.setRoleid(roleId);
             companyPermission.setCompanyid(id);
             companyPermissionRepository.save(companyPermission);
+        }
+    }
+
+    public void delCompanyAuthority(Long roleId, String ids) {
+        // 删除该角色所有公司的权限
+        //companyPermissionRepository.deleteByRoleId(roleId);
+
+        // 删除新的权限
+        for (Long id : Convert.toLongArray(true, Convert.toStrArray(",", ids))) {
+            companyPermissionRepository.deleteByRoleIdAndCompanyId(roleId, id);
         }
     }
 

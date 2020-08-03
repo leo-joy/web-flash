@@ -103,7 +103,7 @@ public class RoleController extends BaseController {
     }
 
      @RequestMapping(value = "/saveCompanyPermisson",method = RequestMethod.POST)
-    @BussinessLog(value = "配置角色公司权限", key = "roleId", dict = RoleDict.class)
+    @BussinessLog(value = "新增角色公司权限", key = "roleId", dict = RoleDict.class)
     @RequiresPermissions(value = {Permission.ROLE_EDIT})
     public Object setCompanyAuthority(Long roleId, String
             permissions) {
@@ -111,6 +111,18 @@ public class RoleController extends BaseController {
             throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
         }
         roleService.setCompanyAuthority(roleId, permissions);
+        return Rets.success();
+    }
+
+    @RequestMapping(value = "/delCompanyPermisson",method = RequestMethod.POST)
+    @BussinessLog(value = "删除角色公司权限", key = "roleId", dict = RoleDict.class)
+    @RequiresPermissions(value = {Permission.ROLE_EDIT})
+    public Object delCompanyAuthority(Long roleId, String
+            permissions) {
+        if (ToolUtil.isOneEmpty(roleId)) {
+            throw new ApplicationException(BizExceptionEnum.REQUEST_NULL);
+        }
+        roleService.delCompanyAuthority(roleId, permissions);
         return Rets.success();
     }
 

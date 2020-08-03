@@ -174,6 +174,20 @@
       <el-row>
         <el-col :span="11">
           <el-row>
+            <el-col :span="4">
+              <template>
+                <el-radio v-model="tagRadioLeft" label="" @change="handleTagRadioClickLeft">全部标签</el-radio>
+              </template>
+            </el-col>
+            <el-col :span="20">
+              <el-radio v-model="tagRadioLeft" label="1" @change="handleTagRadioClickLeft">3383</el-radio>
+              <el-radio v-model="tagRadioLeft" label="2" @change="handleTagRadioClickLeft">3319</el-radio>
+              <el-radio v-model="tagRadioLeft" label="3" @change="handleTagRadioClickLeft">体外公司</el-radio>
+              <el-radio v-model="tagRadioLeft" label="5" @change="handleTagRadioClickLeft">跟投业务</el-radio>
+            </el-col>
+          </el-row>
+          <br>
+          <el-row>
             <el-col :span="24">
               <el-input
                 v-model="companyListQueryLeft.deptName"
@@ -258,6 +272,20 @@
           <el-button type="primary" size="small" @click="saveCompanyPermissions(-1)">《《 移除</el-button>
         </el-col>
         <el-col :span="11">
+          <el-row>
+            <el-col :span="4">
+              <template>
+                <el-radio v-model="tagRadioRight" label="" @change="handleTagRadioClickRight">全部标签</el-radio>
+              </template>
+            </el-col>
+            <el-col :span="20">
+              <el-radio v-model="tagRadioRight" label="1" @change="handleTagRadioClickRight">3383</el-radio>
+              <el-radio v-model="tagRadioRight" label="2" @change="handleTagRadioClickRight">3319</el-radio>
+              <el-radio v-model="tagRadioRight" label="3" @change="handleTagRadioClickRight">体外公司</el-radio>
+              <el-radio v-model="tagRadioRight" label="5" @change="handleTagRadioClickRight">跟投业务</el-radio>
+            </el-col>
+          </el-row>
+          <br>
           <el-row>
             <el-col :span="24">
               <el-input
