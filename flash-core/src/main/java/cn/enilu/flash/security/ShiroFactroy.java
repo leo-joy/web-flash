@@ -78,6 +78,7 @@ public class ShiroFactroy     {
         shiroUser.setPassword(user.getPassword());
         Long[] roleArray = Convert.toLongArray(",", user.getRoleid());
         List<Long> roleList = new ArrayList<Long>();
+        List<Long> roleDeptList = new ArrayList<Long>();
         List<String> roleNameList = new ArrayList<String>();
         List<String> roleCodeList = new ArrayList<String>();
         Set<String> permissions = new HashSet<String>();
@@ -85,6 +86,7 @@ public class ShiroFactroy     {
         for (Long roleId : roleArray) {
             roleList.add(roleId);
             Role role = roleRepository.getOne(roleId);
+            roleDeptList.add(role.getDeptid());
             roleNameList.add(role.getName());
             roleCodeList.add(role.getTips());
             permissions.addAll(menuRepository.getResCodesByRoleId(roleId));
@@ -98,6 +100,7 @@ public class ShiroFactroy     {
 
         }
         shiroUser.setRoleList(roleList);
+        shiroUser.setRoleDeptList(roleDeptList);
         shiroUser.setRoleNames(roleNameList);
         shiroUser.setRoleCodes(roleCodeList);
         shiroUser.setPermissions(permissions);

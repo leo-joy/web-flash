@@ -32,7 +32,8 @@
                 </el-col>
 
                 <el-col :span="3">
-                  <el-button v-permission="['/modifylog/edit']" style="float:right" type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
+                  <!-- v-permission="['/modifylog/edit']" -->
+                  <el-button v-if="viewFile" style="float:right" type="text" @click="openFilesDialog(item)">查看变更附件</el-button>
                 </el-col>
                 <el-col :span="24">
                   <div v-if="item.newRegisteredState+'' === 'true'" class="modifyList">

@@ -17,6 +17,7 @@ export default {
     return {
       id: '',
       currentCompany: {}, // 当前企业
+      viewFile: false, // 是否有查看变更附件权限
       /* 企业变更信息模块 */
       companyModifyData: [], // 企业变更信息数据
       companyModifyDataAll: [], // 全部企业变更信息数据
@@ -255,16 +256,20 @@ export default {
         this.noAccessoryCause = response.data[0].detail
       })
       const id = this.$route.query.id
+      const rolesDeptList = this.$store.state.user.profile.rolesDeptList
       businesslicense(id).then(response => {
-        console.log('当前公司')
-        console.log(response)
         this.currentCompany = response.data
+
+        // 根据角色中的部门权限判断，是否能查看企业变更文件
+        if (rolesDeptList && rolesDeptList.length > 0) {
+          for (let i = 0; i < rolesDeptList.length; i++) {
+            if (this.currentCompany.pIds.indexOf('-' + rolesDeptList[i] + '_') > -1) {
+              this.viewFile = true
+            }
+          }
+        }
       })
       this.getCompanyModifyList()
-      // const _this = this
-      // setTimeout(function() {
-      //   _this.getNewFilesList()
-      // }, 3000)
     },
 
     // 企业变更数据
