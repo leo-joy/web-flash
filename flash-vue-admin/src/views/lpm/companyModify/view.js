@@ -1,4 +1,5 @@
 import { getListIds } from '@/api/cms/fileInfo'
+import { get as businesslicense } from '@/api/lpm/businesslicense'
 import { getList as companyModify } from '@/api/lpm/companyModify'
 import FilesListComponent from '@/components/FilesList/minFilesList.vue'
 import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
@@ -15,6 +16,7 @@ export default {
   data() {
     return {
       id: '',
+      currentCompany: {}, // 当前企业
       /* 企业变更信息模块 */
       companyModifyData: [], // 企业变更信息数据
       companyModifyDataAll: [], // 全部企业变更信息数据
@@ -92,6 +94,22 @@ export default {
         { 'shareholdersDecideFiles': '股东会决议' }, // 3股东会决议
         { 'seniorManagementFiles': '董事会决议' }, // 4董事会决议
         { 'stockPledgeFiles': '质权合同' } // 16质权合同
+      ],
+      hwFileTypeArr: [
+        'accessoryFiles', // 1内部审批文件
+        'companyReferenceRegisterFiles', // 2工商申请表
+        'shareholdersDecideFiles', // 3股东会决议
+        'seniorManagementFiles', // 4董事会决议
+        'companyArticlesAssociationFiles', // 5公司章程
+        'appointDismissFiles' // 6任职免职书
+      ],
+      hwFileTypeObj: [
+        { 'accessoryFiles': '1、公司注册证' },
+        { 'companyReferenceRegisterFiles': '2、公司章程' },
+        { 'shareholdersDecideFiles': '3、商业登记证' },
+        { 'seniorManagementFiles': '4、股东名册' },
+        { 'companyArticlesAssociationFiles': '5、董事名册' },
+        { 'appointDismissFiles': '6、周年申报表' }
       ],
       fileTypeArr: [
         'accessoryFiles', // 1内部审批文件
@@ -236,6 +254,12 @@ export default {
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCause = response.data[0].detail
       })
+      const id = this.$route.query.id
+      businesslicense(id).then(response => {
+        console.log('当前公司')
+        console.log(response)
+        this.currentCompany = response.data
+      })
       this.getCompanyModifyList()
       // const _this = this
       // setTimeout(function() {
@@ -247,7 +271,7 @@ export default {
     getCompanyModifyList() {
       // 获取企业的id
       const id = this.$route.query.id
-      companyModify({ enterpriseId: id, page: 1, limit: 20 }).then(response => {
+      companyModify({ enterpriseId: id, page: 1, limit: 100 }).then(response => {
         var shareholderArr = ['shareholderOld', 'shareholderNew']
         this.getFilesList('CompanyModify', this.fileTypeArr, response.data, shareholderArr)
       })
@@ -401,7 +425,11 @@ export default {
       this.fileDialogVisible = true
       this.currentCompanyModify = results
       this.title = '本次变更文件'
-      this.initFilesList(results, this.fileTypeArr, this.fileTypeObj)
+      if (this.currentCompany.registrationType * 1 === 2) {
+        this.initFilesList(results, this.hwFileTypeArr, this.hwFileTypeObj)
+      } else {
+        this.initFilesList(results, this.fileTypeArr, this.fileTypeObj)
+      }
     },
 
     initFilesList(results, fileTypeArr, fileTypeObj) {
@@ -446,7 +474,11 @@ export default {
         this.fileDialogVisible = true
         this.currentCompanyModify = this.newFilesListObj
         this.title = '公司最新文件'
-        this.initFilesList(this.newFilesListObj, this.generalFileTypeArr, this.generalFileTypeObj)
+        if (this.currentCompany.registrationType * 1 === 2) {
+          this.initFilesList(this.newFilesListObj, this.hwFileTypeArr, this.hwFileTypeObj)
+        } else {
+          this.initFilesList(this.newFilesListObj, this.generalFileTypeArr, this.generalFileTypeObj)
+        }
       } else {
         this.$message('没有找到相关文件！')
       }
