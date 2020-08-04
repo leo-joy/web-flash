@@ -178,8 +178,11 @@
             <el-table-column v-if="registrationTypeRadio*1===2" label="登记号" width="100">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
             </el-table-column>
-            <el-table-column v-if="registrationTypeRadio*1===2" label="股本总额(万元)" width="150">
-              <template slot-scope="scope">{{ scope.row.registeredCapital }}</template>
+            <el-table-column v-if="registrationTypeRadio*1===2" label="已发行股本" width="150">
+              <template slot-scope="scope">{{ scope.row.issuedShareCapital }}</template>
+            </el-table-column>
+            <el-table-column v-if="registrationTypeRadio*1===2" label="股本" width="150">
+              <template slot-scope="scope">{{ scope.row.totalCapital }}</template>
             </el-table-column>
             <el-table-column v-if="registrationTypeRadio*1!==2" label="统一社会信用代码" width="200">
               <template slot-scope="scope">{{ scope.row.unifiedSocialCreditCode }}</template>
