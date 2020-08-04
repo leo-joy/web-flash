@@ -61,7 +61,7 @@
           </el-col> -->
           <el-col :span="12">
             <el-form-item label="企业名称">
-              <el-input v-model="form.enterpriseName" disabled="true" minlength="1" />
+              <el-input v-model="form.enterpriseName" :disabled="true" />
             </el-form-item>
           </el-col>
           <!-- <el-col :span="12">
@@ -71,7 +71,7 @@
           </el-col> -->
           <el-col :span="12">
             <el-form-item label="股东">
-              <el-input v-model="form.shareholder" disabled="true" minlength="1" />
+              <el-input v-model="form.shareholder" :disabled="true" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
