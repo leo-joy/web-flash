@@ -40,14 +40,11 @@
       <el-table-column label="股东">
         <template slot-scope="scope">{{ scope.row.shareholder }}</template>
       </el-table-column>
-      <el-table-column label="认缴股份数量" width="120">
+      <el-table-column label="股份数量" width="120">
         <template slot-scope="scope">{{ scope.row.numberOfShares }}</template>
       </el-table-column>
       <el-table-column label="已缴股份数量" width="120">
         <template slot-scope="scope">{{ scope.row.numberOfPaidShares }}</template>
-      </el-table-column>
-      <el-table-column label="每股面值" width="100">
-        <template slot-scope="scope">{{ scope.row.parValueShare!==0?scope.row.parValueShare:'无' }}</template>
       </el-table-column>
       <el-table-column label="已缴付股款（万元）" width="150">
         <template slot-scope="scope">{{ scope.row.subscribedCapitalContribution }}</template>
@@ -162,7 +159,7 @@
             </el-row>
             <el-row>
               <el-col :span="8">
-                <el-form-item label="认缴股份数量" prop="numberOfShares">
+                <el-form-item label="股份数量" prop="numberOfShares">
                   <el-input v-model.number="form.numberOfShares" minlength="1" />
                 </el-form-item>
               </el-col>
@@ -186,8 +183,15 @@
             </el-row>
             <el-row>
               <el-col :span="8">
-                <el-form-item label="每股面值" prop="parValueShare">
-                  <el-input v-model="form.parValueShare" />
+                <el-form-item label="每股面值">
+                  <el-select v-model="form.parValueShare" placeholder="请选择">
+                    <el-option
+                      v-for="item in parValueShareList"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
                 </el-form-item>
               </el-col>
               <el-col :span="8">

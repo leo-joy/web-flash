@@ -34,11 +34,13 @@ export default {
       realityCapitalTypeCapital: '', // 实缴出资方式
       shareholderTypeList: [], // 股东类型，从数据字典中获取
       shareTypeList: [], // 股份类型，从数据字典中获取
+      parValueShareList: [], // 每股面值，从数据字典中获取
       currencyList: [], // 币种，从数据字典中获取
       statusList: [], // 状态，从数据字典中获取
       shareholderMold: 1, // 股东分类
       shareholderType: '', // 股东类型
       shareType: '', // 股份类型
+      parValueShare: '', // 每股面值
       shareholderStatus: '', // 股东状态
       companyListQuery: {
         page: 1,
@@ -68,7 +70,7 @@ export default {
         shareholder: '',
         subscribedCapitalType: '',
         subscribedCapitalContribution: 0,
-        parValueShare: 0,
+        parValueShare: '',
         subscribedCapitalDate: '',
         realityCapitalType: '',
         realityCapitalContribution: '',
@@ -134,9 +136,6 @@ export default {
           { required: true, message: '认缴出资额不能为空', trigger: 'blur' },
           { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
-        parValueShare: [
-          { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
-        ],
         realityCapitalContribution: [
           { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
@@ -196,6 +195,10 @@ export default {
         this.shareTypeList = getDictList(response.data[0].detail)
       })
 
+      dictList({ name: '每股面值【股东信息】' }).then(response => {
+        this.parValueShareList = getDictList(response.data[0].detail)
+      })
+
       dictList({ name: '币种' }).then(response => {
         this.currencyList = getDictList(response.data[0].detail)
       })
@@ -251,7 +254,7 @@ export default {
         shareholder: '',
         subscribedCapitalType: '',
         subscribedCapitalContribution: 0,
-        parValueShare: 0,
+        parValueShare: '',
         subscribedCapitalDate: '',
         realityCapitalType: '',
         realityCapitalContribution: '',
@@ -311,7 +314,7 @@ export default {
             shareholder: this.form.shareholder,
             subscribedCapitalType: this.form.subscribedCapitalType,
             subscribedCapitalContribution: parseFloat(this.form.subscribedCapitalContribution).toFixed(6),
-            parValueShare: this.form.parValueShare ? parseFloat(this.form.parValueShare).toFixed(6) : 0,
+            parValueShare: this.form.parValueShare,
             subscribedCapitalDate: this.form.subscribedCapitalDate ? parseTime(this.form.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.form.realityCapitalType,
             realityCapitalContribution: this.form.realityCapitalContribution ? parseFloat(this.form.realityCapitalContribution).toFixed(6) : '',
@@ -526,6 +529,7 @@ export default {
       this.form.registrationType = item.registrationType
       this.form.registrationPlace = item.registrationPlace
       this.form.registeredCapital = item.registeredCapital
+      this.form.parValueShare = item.parValueShare
       this.form.currency = item.currency
       this.form.registrationStatus = item.registrationStatus
       this.form.remark = item.remark

@@ -52,9 +52,8 @@ public class Capital extends BaseEntity {
     @Column(name="number_of_paid_shares", columnDefinition = "DECIMAL COMMENT '已缴股份数量'")
     private BigDecimal numberOfPaidShares;
 
-    @Type(type="java.math.BigDecimal")
-    @Column(name="par_value_share", columnDefinition = "DECIMAL COMMENT '每股面值'")
-    private BigDecimal parValueShare;
+    @Column(name="par_value_share", columnDefinition = "VARCHAR(32) COMMENT '每股面值'")
+    private String parValueShare;
 
 
 
