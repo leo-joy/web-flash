@@ -247,7 +247,7 @@
           </el-col>
         </el-row>
 
-        <el-row>
+        <!-- <el-row>
           <el-col :span="24">
             <el-form-item label="">
               <div class="item-label">公司注册证<br>Certificate of Incorporation&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
@@ -366,7 +366,7 @@
               </el-upload>
             </el-form-item>
           </el-col>
-        </el-row>
+        </el-row> -->
         <el-row>
           <el-col :span="19">&nbsp;</el-col>
           <el-col :span="5">
