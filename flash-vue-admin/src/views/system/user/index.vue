@@ -26,7 +26,7 @@
             {{ $t('button.delete') }}
           </el-button>
           <el-button v-permission="['/mgr/setRole']" type="info" size="small" icon="el-icon-role" @click.native="openRole">角色分配</el-button>
-          <el-button v-permission="['/mgr/edit']" size="small" @click.native="resetPwd">
+          <el-button v-permission="['/mgr/resetPwd']" size="small" @click.native="resetPwd">
             重置密码
           </el-button>
         </el-col>
