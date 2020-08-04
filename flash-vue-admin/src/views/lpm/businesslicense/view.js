@@ -4,7 +4,7 @@ import { get as businesslicense } from '@/api/lpm/businesslicense'
 import { getList as dictList } from '@/api/system/dict'
 import { parentdept as getParentdept } from '@/api/system/dept'
 import { getList as logList } from '@/api/system/log'
-
+import { accMul } from '@/utils'
 import { showDictLabel } from '@/utils/common'
 import FilesListComponent from '@/components/FilesList/index.vue'
 
@@ -110,8 +110,7 @@ export default {
           this.translateDictList('企业标签', response.data.tags.split('-'), 'tagList')
         }
         if (this.businesslicenseData.registrationType * 1 === 2) {
-          this.businesslicenseData.registeredCapital = this.businesslicenseData.registeredCapital ? parseFloat(this.businesslicenseData.registeredCapital * 10000).toFixed(2) : 0
-          this.businesslicenseData.issuedShareCapital = this.businesslicenseData.issuedShareCapital ? parseFloat(this.businesslicenseData.issuedShareCapital * 10000).toFixed(2) : 0
+          this.businesslicenseData.registeredCapital = this.businesslicenseData.registeredCapital ? accMul(this.businesslicenseData.registeredCapital, 10000).toFixed(2) : 0
         }
         this.getFilesList('BL', accessoryArr, arr)
         getParentdept(response.data.pid).then(response => {

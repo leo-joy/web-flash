@@ -64,12 +64,16 @@ public class BusinessLicense extends BaseEntity {
     private String principal;
 
     @Type(type="java.math.BigDecimal")
-    @Column(name="registered_capital", columnDefinition = "DECIMAL COMMENT '注册资本/已发行股本'")
+    @Column(name="registered_capital", columnDefinition = "DECIMAL COMMENT '注册资本/股本总额（海外）'")
     private BigDecimal registeredCapital;
 
     @Type(type="java.math.BigDecimal")
-    @Column(name="issued_share_capital", columnDefinition = "DECIMAL COMMENT '法定股本'")
+    @Column(name="issued_share_capital", columnDefinition = "DECIMAL COMMENT '已发行股本（海外）'")
     private BigDecimal issuedShareCapital;
+
+    @Type(type="java.math.BigDecimal")
+    @Column(name="total_capital", columnDefinition = "DECIMAL COMMENT '法定股本（海外）'")
+    private BigDecimal totalCapital;
 
     @Column(name="currency", columnDefinition = "VARCHAR(32) COMMENT '币种'")
     private String currency;

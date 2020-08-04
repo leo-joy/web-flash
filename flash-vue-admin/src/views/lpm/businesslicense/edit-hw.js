@@ -6,7 +6,7 @@ import { getList as dictList } from '@/api/system/dict'
 import { getDictList, getCityDate } from '@/utils/common'
 import { get, save } from '@/api/lpm/businesslicense'
 import { getListIds } from '@/api/cms/fileInfo'
-import { parseTime } from '@/utils'
+import { parseTime, accMul } from '@/utils'
 import { getApiUrl } from '@/utils/utils'
 import { getToken } from '@/utils/auth'
 
@@ -16,6 +16,13 @@ export default {
   directives: { permission },
   components: { pdf },
   data() {
+    // var checkNumber = (rule, value, callback) => {
+    //   setTimeout(() => {
+    //     if (!Number.isInteger(value)) {
+    //       callback(new Error('请输入数字值'))
+    //     }
+    //   }, 1000)
+    // }
     return {
       deptTree: {
         show: false,
@@ -55,6 +62,7 @@ export default {
         legalRepresentative: '',
         registeredCapital: 0,
         issuedShareCapital: 0,
+        totalCapital: 0,
         realProportion: 0,
         currency: '',
         setupDate: '',
@@ -91,9 +99,9 @@ export default {
           { required: true, message: '请输入注册资本金额', trigger: 'blur' },
           { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
         ],
-        issuedShareCapital: [
-          { pattern: /(^[0-9]([0-9]+)?(\.[0-9]{1,6})?$)|(^(0){1}$)|(^[0-9]\.[0-9]([0-9])?$)/, message: '请输入正确额格式,可保留六位小数' }
-        ],
+        // issuedShareCapital: [
+        //   { validator: checkNumber, trigger: 'blur' }
+        // ],
         // currency: [
         //   { required: true, message: '请选择币种', trigger: 'blur' }
         // ],
@@ -213,8 +221,7 @@ export default {
           this.form.registrationPlace = this.form.registrationPlace ? this.form.registrationPlace.split('-') : ''
           this.form.tags = this.form.tags ? this.form.tags.split('-') : ''
           if (this.form.registrationType * 1 === 2) {
-            this.form.registeredCapital = this.form.registeredCapital ? this.form.registeredCapital * 10000 : 0
-            this.form.issuedShareCapital = this.form.issuedShareCapital ? this.form.issuedShareCapital * 10000 : 0
+            this.form.registeredCapital = this.form.registeredCapital ? accMul(this.form.registeredCapital, 10000) : 0
           }
           // this.listQuery.ids = response.data.businessLicense
           // getListIds(this.listQuery).then(response => {
@@ -250,6 +257,7 @@ export default {
         legalRepresentative: '',
         registeredCapital: 0,
         issuedShareCapital: 0,
+        totalCapital: 0,
         realProportion: 0,
         currency: '',
         setupDate: '',
@@ -295,11 +303,9 @@ export default {
           }
 
           let registeredCapital = this.form.registeredCapital ? this.form.registeredCapital : 0
-          let issuedShareCapital = this.form.issuedShareCapital ? this.form.issuedShareCapital : 0
           if (this.form.pid * 1 === 26) {
             this.form.registrationType = 2
-            registeredCapital = parseFloat(registeredCapital / 10000).toFixed(6)
-            issuedShareCapital = parseFloat(issuedShareCapital / 10000).toFixed(6)
+            registeredCapital = parseFloat(registeredCapital / 10000)
           }
           save({
             unifiedSocialCreditCode: this.form.unifiedSocialCreditCode,
@@ -314,7 +320,8 @@ export default {
             registrationPlaceName: this.form.registrationPlaceName,
             legalRepresentative: this.form.legalRepresentative,
             registeredCapital: registeredCapital,
-            issuedShareCapital: issuedShareCapital,
+            issuedShareCapital: this.form.issuedShareCapital,
+            totalCapital: this.form.totalCapital,
             realProportion: this.form.realProportion ? parseFloat(this.form.realProportion).toFixed(1) : 0,
             currency: this.form.currency,
             setupDate: this.form.setupDate ? parseTime(this.form.setupDate, '{y}-{m}-{d}') : '',

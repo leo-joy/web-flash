@@ -36,22 +36,27 @@
             </el-col>
           </el-row>
           <el-row>
-            <el-col :span="24">
+            <el-col :span="12">
               <el-form-item>
                 <div class="item-label">Company Name</div>
                 {{ businesslicenseData.enterpriseNameEn }}</el-form-item>
+            </el-col>
+            <el-col :span="12">
+              <el-form-item>
+                <div class="item-label">股本总额<br>Total Share Capital</div>
+                {{ businesslicenseData.registeredCapital }} {{ currencyBL }}</el-form-item>
             </el-col>
           </el-row>
           <el-row>
             <el-col :span="12">
               <el-form-item>
                 <div class="item-label">已发行股本<br>Issued Share Capital</div>
-                {{ businesslicenseData.registeredCapital }} {{ currencyBL }}</el-form-item>
+                {{ businesslicenseData.issuedShareCapital }}</el-form-item>
             </el-col>
             <el-col :span="12">
               <el-form-item>
-                <div class="item-label">法定股本<br>Authorized Share Capital</div>
-                {{ businesslicenseData.issuedShareCapital }} {{ currencyBL }}</el-form-item>
+                <div class="item-label">股本<br>Share Capital</div>
+                {{ businesslicenseData.totalCapital }}</el-form-item>
             </el-col>
           </el-row>
 

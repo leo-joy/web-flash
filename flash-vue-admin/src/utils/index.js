@@ -133,3 +133,16 @@ export function MergeArray(arr1, arr2) {
   }
   return _arr
 }
+
+/**
+ * 精确计算浮点数相乘， 减少误差
+ * @param {*} arg1 
+ * @param {*} arg2 
+ */
+export function accMul(arg1, arg2) {
+  var m = 0; var s1 = arg1.toString(); var s2 = arg2.toString()
+  try { m += s1.split('.')[1].length } catch (e) {}
+  try { m += s2.split('.')[1].length } catch (e) {}
+  return Number(s1.replace('.', '')) * Number(s2.replace('.', '')) / Math.pow(10, m)
+}
+

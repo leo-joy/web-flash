@@ -1,5 +1,5 @@
 import { getOne as getBusinesslicenseOne, remove, save } from '@/api/lpm/businesslicense'
-import { parseTime } from '@/utils'
+import { parseTime, accMul } from '@/utils'
 import { getList } from '@/api/lpm/businesslicense'
 import { getList as getInvestCompanyList, save as investCompanySave } from '@/api/lpm/investcompany'
 

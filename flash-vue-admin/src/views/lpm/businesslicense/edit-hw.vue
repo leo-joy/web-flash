@@ -97,15 +97,34 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="" prop="registeredCapital">
-              <div class="item-label">已发行股本<br>Issued Share Capital</div>
-              <el-input
-                v-model="form.registeredCapital"
+            <el-form-item label="">
+              <div class="item-label">成立日期<br>Register Date</div>
+              <el-date-picker
+                v-model="form.setupDate"
+                type="date"
+                placeholder="选择日期"
+                style="width: 100%;"
               />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
+          <el-col :span="12">
+            <el-form-item label="" prop="issuedShareCapital">
+              <div class="item-label">已发行股本<br>Issued Share Capital</div>
+              <el-input
+                v-model.number="form.issuedShareCapital" minlength="1"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="" prop="totalCapital">
+              <div class="item-label">股本<br>Share Capital</div>
+              <el-input
+                v-model.number="form.totalCapital" minlength="1"
+              />
+            </el-form-item>
+          </el-col>
           <el-col :span="12">
             <el-form-item label="" prop="currency">
               <div class="item-label">股本币种<br>Capital Currency</div>
@@ -120,26 +139,15 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="" prop="issuedShareCapital">
-              <div class="item-label">法定股本<br>Authorized Share Capital</div>
+            <el-form-item label="" prop="registeredCapital">
+              <div class="item-label">股本总额<br>Total Share Capital</div>
               <el-input
-                v-model="form.issuedShareCapital"
+                v-model="form.registeredCapital"
               />
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
-          <el-col :span="12">
-            <el-form-item label="">
-              <div class="item-label">成立日期<br>Register Date</div>
-              <el-date-picker
-                v-model="form.setupDate"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
-              />
-            </el-form-item>
-          </el-col>
           <el-col :span="12">
             <el-form-item label="" prop="registrationPlace">
               <div class="item-label">企业注册地<br>Place of Incorporation</div>
@@ -148,6 +156,12 @@
                 :options="provinces"
                 @change="handleRegistrationPlaceChange"
               />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="">
+              <div class="item-label">实际持有股权（%）<br>Shareholdings(%)</div>
+              <el-slider v-model="form.realProportion" show-input />
             </el-form-item>
           </el-col>
         </el-row>
@@ -161,14 +175,6 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="">
-              <div class="item-label">实际持有股权（%）<br>Shareholdings(%)</div>
-              <el-slider v-model="form.realProportion" show-input />
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-row>
           <el-col :span="12">
             <el-form-item label="">
               <div class="item-label">Registration Authority</div>
