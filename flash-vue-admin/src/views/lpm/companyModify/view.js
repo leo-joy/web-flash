@@ -102,7 +102,8 @@ export default {
         'shareholdersDecideFiles', // 3股东会决议
         'seniorManagementFiles', // 4董事会决议
         'companyArticlesAssociationFiles', // 5公司章程
-        'appointDismissFiles' // 6任职免职书
+        'appointDismissFiles', // 6任职免职书
+        'otherFiles' // 其他文件
       ],
       hwFileTypeObj: [
         { 'accessoryFiles': '1、公司注册证' },
@@ -110,7 +111,8 @@ export default {
         { 'shareholdersDecideFiles': '3、商业登记证' },
         { 'seniorManagementFiles': '4、股东名册' },
         { 'companyArticlesAssociationFiles': '5、董事名册' },
-        { 'appointDismissFiles': '6、周年申报表' }
+        { 'appointDismissFiles': '6、周年申报表' },
+        { 'otherFiles': '7、其他文件' }
       ],
       fileTypeArr: [
         'accessoryFiles', // 1内部审批文件

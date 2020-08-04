@@ -201,10 +201,13 @@
             <el-row lass="dp-row">
               <el-col :span="1">&nbsp;
               </el-col>
-              <el-col :span="11">
+              <el-col :span="9">
                 <h2 style="color:#176c6b;">企业名称：{{ businesslicenseData.enterpriseName }}</h2>
               </el-col>
-              <el-col :span="8">
+              <el-col :span="10">
+                <h2 style="color:#176c6b;">英文名称：{{ businesslicenseData.enterpriseNameEn }}</h2>
+              </el-col>
+              <el-col :span="4">
                 <h4>登记号：{{ businesslicenseData.unifiedSocialCreditCode }}</h4>
               </el-col>
               <!-- <el-col :span="4">
@@ -247,10 +250,10 @@
                   <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
                   <el-checkbox v-model="form.legalRepresentativeState" label="法定代表人" />
                   <el-checkbox v-model="form.chairmanState" label="董事长备案" /> -->
-                  <el-checkbox v-model="form.directorState" label="董事备案" />
+                  <el-checkbox v-model="form.directorState" label="董事变更" />
                   <!-- <el-checkbox v-model="form.supervisorState" label="监事备案" />
                   <el-checkbox v-model="form.generalManagerState" label="经理备案" /> -->
-                  <el-checkbox v-model="form.shareholderModifyState" label="股东变更" />
+                  <el-checkbox v-model="form.shareholderModifyState" label="股权变更" />
                   <!-- <el-checkbox v-model="form.newRegisteredState" label="新注册企业" /> -->
                 </el-form-item>
               </el-col>
@@ -550,7 +553,7 @@
               <el-col v-if="form.directorState === true" :span="24">
                 <el-card class="box-card">
                   <div slot="header" class="clearfix">
-                    <span>董事备案</span>
+                    <span>董事变更</span>
                   </div>
                   <el-row>
                     <el-col :span="24">
@@ -861,7 +864,7 @@
               <el-col v-if="form.shareholderModifyState === true" :span="24">
                 <el-card class="box-card">
                   <div slot="header" class="clearfix">
-                    <span>股东变更</span>
+                    <span>股权变更</span>
                   </div>
                   <el-row>
                     <el-col>
@@ -1181,6 +1184,30 @@
                 </el-card>
               </el-col>
             </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-card class="box-card">
+                  <div slot="header" class="clearfix">
+                    其它文件
+                  </div>
+                  <el-form-item label="" class="file-form-item">
+                    <el-upload
+                      multiple
+                      :action="uploadUrl"
+                      :headers="uploadHeaders"
+                      :file-list="otherFilesList"
+                      :before-upload="handleBeforeUpload"
+                      :on-remove="otherFilesRemove"
+                      :on-success="otherFilesUploadSuccess"
+                      :on-preview="hanglePreview"
+                    >
+                      <el-button size="small">点击上传</el-button>
+                      <span slot="tip" class="el-upload__tip">&nbsp;</span>
+                    </el-upload>
+                  </el-form-item>
+                </el-card>
+              </el-col>
+            </el-row> 
             <!-- <el-row>
               <el-col :span="12">
                 <el-card class="box-card">
@@ -1659,40 +1686,7 @@
                 </el-card>
               </el-col>
             </el-row>
-            <el-row>
-              <el-col :span="24">
-                <el-card class="box-card">
-                  <div slot="header" class="clearfix">
-                    其它文件
-                  </div>
-                  <el-form-item label="" class="file-form-item">
-                    <el-upload
-                      multiple
-                      :action="uploadUrl"
-                      :headers="uploadHeaders"
-                      :file-list="otherFilesList"
-                      :before-upload="handleBeforeUpload"
-                      :on-remove="otherFilesRemove"
-                      :on-success="otherFilesUploadSuccess"
-                      :on-preview="hanglePreview"
-                    >
-                      <el-button size="small">点击上传</el-button>
-                      <span slot="tip" class="el-upload__tip">&nbsp;</span>
-                    </el-upload>
-                  </el-form-item>
-                  <el-form-item v-if="form.otherFiles === ''" label="无附件原因" class="no-file-form-item">
-                    <el-select v-model="form.otherFilesRemark" placeholder="请选择">
-                      <el-option
-                        v-for="item in noAccessoryCauseList"
-                        :key="item.value"
-                        :label="item.label"
-                        :value="item.value"
-                      />
-                    </el-select>
-                  </el-form-item>
-                </el-card>
-              </el-col>
-            </el-row> -->
+            -->
             <el-row>
               <el-col :span="24">
                 &nbsp;
