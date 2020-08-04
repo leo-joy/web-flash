@@ -74,6 +74,8 @@ export default {
         enterpriseNameState: '',
         enterpriseNameOld: '',
         enterpriseNameNew: '',
+        enterpriseNameEnOld: '',
+        enterpriseNameEnNew: '',
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
@@ -426,6 +428,8 @@ export default {
         enterpriseNameState: '',
         enterpriseNameOld: '',
         enterpriseNameNew: '',
+        enterpriseNameEnOld: '',
+        enterpriseNameEnNew: '',
         registeredAddressState: '',
         registeredAddressOld: '',
         registeredAddressNew: '',
@@ -568,6 +572,7 @@ export default {
       this.businesslicenseData = this.companyList[0]
       this.form.enterpriseId = this.companyList[0].id
       this.form.enterpriseNameOld = this.companyList[0].enterpriseName
+      this.form.enterpriseNameEnOld = this.companyList[0].enterpriseNameEn
       this.form.registeredAddressOld = this.companyList[0].registeredAddress
       this.form.unifiedSocialCreditCodeOld = this.companyList[0].unifiedSocialCreditCode
       this.form.liquidationExitOld = this.companyList[0].liquidationExit
@@ -636,6 +641,8 @@ export default {
             enterpriseNameState: this.form.enterpriseNameState ? this.form.enterpriseNameState : 'false',
             enterpriseNameOld: this.form.enterpriseNameOld,
             enterpriseNameNew: this.form.enterpriseNameNew,
+            enterpriseNameEnOld: this.form.enterpriseNameEnOld,
+            enterpriseNameEnNew: this.form.enterpriseNameEnNew,
             registeredAddressState: this.form.registeredAddressState ? this.form.registeredAddressState : 'false',
             registeredAddressOld: this.form.registeredAddressOld,
             registeredAddressNew: this.form.registeredAddressNew,

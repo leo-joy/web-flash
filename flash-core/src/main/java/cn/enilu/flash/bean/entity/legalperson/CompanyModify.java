@@ -70,6 +70,11 @@ public class CompanyModify extends BaseEntity {
     @Column(name="enterprise_name_new", columnDefinition = "VARCHAR(128) COMMENT '新企业名称'")
     private String enterpriseNameNew;
 
+    @Column(name="enterprise_name_en_old", columnDefinition = "VARCHAR(128) COMMENT '旧企业英文名称'")
+    private String enterpriseNameEnOld;
+
+    @Column(name="enterprise_name_en_new", columnDefinition = "VARCHAR(128) COMMENT '新企业英文名称'")
+    private String enterpriseNameEnNew;
 
     @Column(name="registered_address_state", columnDefinition = "VARCHAR(16) COMMENT '注册地址变更状态'")
     private String registeredAddressState;

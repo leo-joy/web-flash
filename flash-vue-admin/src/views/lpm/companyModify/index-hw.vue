@@ -37,6 +37,13 @@
             <span>变更为</span>
             <span><b style="color:green">{{ scope.row.enterpriseNameNew }}</b></span>
           </div>
+          <div v-if="scope.row.enterpriseNameState+'' === 'true'">
+            <span><b>企业英文名称：</b></span>
+            <span>由</span>
+            <span><b style="color:red">{{ scope.row.enterpriseNameEnOld }}</b></span>
+            <span>变更为</span>
+            <span><b style="color:green">{{ scope.row.enterpriseNameEnNew }}</b></span>
+          </div>
           <div v-if="scope.row.legalRepresentativeState+'' === 'true'">
             <span><b>企业法人：</b></span>
             <span>由</span>
@@ -270,11 +277,22 @@
                     </el-col>
                     <el-col :span="12">
                       <el-form-item label="新企业名称">
-                        <el-input v-model="form.enterpriseNameNew" minlength="1" />
+                        <el-input v-model="form.enterpriseNameNew" />
                       </el-form-item>
                     </el-col>
                   </el-row>
-
+                  <el-row>
+                    <el-col :span="12">
+                      <el-form-item label="原英文名称">
+                        <el-input v-model="form.enterpriseNameEnOld" />
+                      </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                      <el-form-item label="新英文名称">
+                        <el-input v-model="form.enterpriseNameEnNew" />
+                      </el-form-item>
+                    </el-col>
+                  </el-row>
                 </el-card>
                 <br>
               </el-col>
