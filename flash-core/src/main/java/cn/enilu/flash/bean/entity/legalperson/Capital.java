@@ -38,8 +38,25 @@ public class Capital extends BaseEntity {
     private String subscribedCapitalType;
 
     @Type(type="java.math.BigDecimal")
-    @Column(name="subscribed_capital_contribution", columnDefinition = "DECIMAL COMMENT '认缴出资额（万元）'")
+    @Column(name="subscribed_capital_contribution", columnDefinition = "DECIMAL COMMENT '认缴出资额/已缴付股款（万元）'")
     private BigDecimal subscribedCapitalContribution;
+
+    @Column(name="share_type", columnDefinition = "VARCHAR(32) COMMENT '股份类别'")
+    private String shareType;
+
+    @Type(type="java.math.BigDecimal")
+    @Column(name="number_of_shares", columnDefinition = "DECIMAL COMMENT '认缴股份数量'")
+    private BigDecimal numberOfShares;
+
+    @Type(type="java.math.BigDecimal")
+    @Column(name="number_of_paid_shares", columnDefinition = "DECIMAL COMMENT '已缴股份数量'")
+    private BigDecimal numberOfPaidShares;
+
+    @Type(type="java.math.BigDecimal")
+    @Column(name="par_value_share", columnDefinition = "DECIMAL COMMENT '每股面值'")
+    private BigDecimal parValueShare;
+
+
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="subscribed_capital_date", columnDefinition = "DATE COMMENT '认缴出资日期'")

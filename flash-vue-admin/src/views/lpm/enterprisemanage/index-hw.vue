@@ -66,7 +66,7 @@ import PDFView from '@/components/PdfView/index.vue'
 
 import editHw from '@/views/lpm/businesslicense/edit-hw.vue'
 import mainmember from '@/views/lpm/mainmember/index.vue'
-import capital from '@/views/lpm/capital/index.vue'
+import capital from '@/views/lpm/capital/index-hw.vue'
 
 export default {
   name: 'CompanyLayout',

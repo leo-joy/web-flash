@@ -40,17 +40,20 @@
       <el-table-column label="股东">
         <template slot-scope="scope">{{ scope.row.shareholder }}</template>
       </el-table-column>
-      <el-table-column label="认缴出资额（万元）" width="150">
+      <el-table-column label="认缴股份数量" width="120">
+        <template slot-scope="scope">{{ scope.row.numberOfShares }}</template>
+      </el-table-column>
+      <el-table-column label="已缴股份数量" width="120">
+        <template slot-scope="scope">{{ scope.row.numberOfPaidShares }}</template>
+      </el-table-column>
+      <el-table-column label="每股面值" width="100">
+        <template slot-scope="scope">{{ scope.row.parValueShare!==0?scope.row.parValueShare:'无' }}</template>
+      </el-table-column>
+      <el-table-column label="已缴付股款（万元）" width="150">
         <template slot-scope="scope">{{ scope.row.subscribedCapitalContribution }}</template>
       </el-table-column>
-      <el-table-column label="实缴出资额（万元）" width="150">
-        <template slot-scope="scope">{{ scope.row.realityCapitalContribution }}</template>
-      </el-table-column>
-      <el-table-column label="占比（%）" width="100">
+      <el-table-column label="占比（%）">
         <template slot-scope="scope">{{ scope.row.proportion }}</template>
-      </el-table-column>
-      <el-table-column label="经办人" width="100">
-        <template slot-scope="scope">{{ scope.row.responsiblePerson }}</template>
       </el-table-column>
     </el-table>
     <br>
@@ -159,8 +162,13 @@
             </el-row>
             <el-row>
               <el-col :span="8">
-                <el-form-item label="认缴出资额（万元）" prop="subscribedCapitalContribution">
-                  <el-input v-model="form.subscribedCapitalContribution" />
+                <el-form-item label="认缴股份数量" prop="numberOfShares">
+                  <el-input v-model.number="form.numberOfShares" minlength="1" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="已缴股份数量" prop="numberOfPaidShares">
+                  <el-input v-model.number="form.numberOfPaidShares" minlength="1" />
                 </el-form-item>
               </el-col>
               <el-col :span="8">
@@ -175,39 +183,22 @@
                   </el-select>
                 </el-form-item>
               </el-col>
+            </el-row>
+            <el-row>
+              <el-col :span="8">
+                <el-form-item label="每股面值" prop="parValueShare">
+                  <el-input v-model="form.parValueShare" />
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="已缴付股款（万元）" prop="subscribedCapitalContribution">
+                  <el-input v-model="form.subscribedCapitalContribution" />
+                </el-form-item>
+              </el-col>
               <el-col :span="8">
                 <el-form-item label="认缴出资日期">
                   <el-date-picker
                     v-model="form.subscribedCapitalDate"
-                    type="date"
-                    placeholder="选择日期"
-                    style="width: 100%;"
-                  />
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row>
-              <el-col :span="8">
-                <el-form-item label="实缴出资额（万元）" prop="realityCapitalContribution">
-                  <el-input v-model="form.realityCapitalContribution" />
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="实缴出资方式">
-                  <el-select v-model="form.realityCapitalType" placeholder="请选择">
-                    <el-option
-                      v-for="item in realityCapitalTypeList"
-                      :key="item.value"
-                      :label="item.label"
-                      :value="item.value"
-                    />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="8">
-                <el-form-item label="实缴出资日期">
-                  <el-date-picker
-                    v-model="form.realityCapitalDate"
                     type="date"
                     placeholder="选择日期"
                     style="width: 100%;"
@@ -234,8 +225,15 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="经办人">
-                  <el-input v-model="form.responsiblePerson" minlength="1" />
+                <el-form-item label="股份类型" prop="shareType">
+                  <el-select v-model="form.shareType" placeholder="请选择">
+                    <el-option
+                      v-for="item in shareTypeList"
+                      :key="item.value"
+                      :label="item.label"
+                      :value="item.value"
+                    />
+                  </el-select>
                 </el-form-item>
               </el-col>
             </el-row>
@@ -262,6 +260,11 @@
                       :value="item.value"
                     />
                   </el-select>
+                </el-form-item>
+              </el-col>
+              <el-col :span="8">
+                <el-form-item label="经办人">
+                  <el-input v-model="form.responsiblePerson" minlength="1" />
                 </el-form-item>
               </el-col>
               <!-- <el-col :span="24">
@@ -333,213 +336,10 @@
         <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
       </span>
     </el-dialog>
-    <!-- <el-dialog :title="formTitle" :visible.sync="formVisible" width="70%">
-      <el-form ref="form" :model="form" :rules="rules" label-width="150px">
-        <el-row>
-          <el-col :span="24">
-            <el-form-item label="公司名称" prop="enterpriseName">
-              <el-input
-                v-model="form.enterpriseName"
-                :disabled="true"
-                placeholder="请选择公司"
-                readonly="readonly"
-                @click.native="companyTree.show = (!companyTree.show && false)"
-              />
-              <el-tree
-                v-if="companyTree.show"
-                empty-text="暂无数据"
-                :expand-on-click-node="false"
-                :data="companyList"
-                :props="companyTree.defaultProps"
-                class="input-tree"
-                @node-click="handleCompanyNodeClick"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :class="[isAdd? 'dpShow' : 'dpHide']" :span="24">
-            <el-form-item label="类型">
-              <el-radio-group v-model="form.shareholderMold" @change="handleChangeRadio">
-                <el-radio :label="1">企业股东</el-radio>
-                <el-radio :label="2">自然人股东</el-radio>
-              </el-radio-group>
-            </el-form-item>
-          </el-col>
-          <el-col :class="[form.shareholderMold===1 ? 'dpShow' : 'dpHide']" :span="24">
-            <el-form-item label="企业股东" prop="shareholder">
-              <el-autocomplete
-                v-model="form.shareholder"
-                popper-class="my-autocomplete"
-                style="min-width:600px;line-height:10px;"
-                :fetch-suggestions="querySearchAsync"
-                placeholder="请输入股东名称"
-                @select="handleBranchCompanySelect"
-              >
-                <i
-                  slot="suffix"
-                  class="el-icon-circle-plus-outline el-input__icon"
-                  @click="handleIconClick"
-                />
-                <template slot-scope="{ item }" style="width:300px">
-                  <div class="name">{{ item.enterpriseName }}</div>
-                  <span
-                    class="addr"
-                  >法人：{{ item.legalRepresentative }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span class="addr">地址：{{ item.businessAddress }}</span>
-                </template>
-              </el-autocomplete>
-            </el-form-item>
-          </el-col>
-          <el-col :class="[form.shareholderMold===2 ? 'dpShow' : 'dpHide']" :span="24">
-            <el-form-item label="自然人股东" prop="shareholder">
-              <el-autocomplete
-                v-model="form.shareholder"
-                popper-class="my-autocomplete"
-                style="min-width:600px;line-height:10px;"
-                :fetch-suggestions="querySearchNaturalPersonAsync"
-                placeholder="请输入股东名称"
-                @select="handleNaturalPersonSelect"
-              >
-                <i
-                  slot="suffix"
-                  class="el-icon-circle-plus-outline el-input__icon"
-                  @click="handleIconNaturalPersonClick"
-                />
-                <template slot-scope="{ item }" style="width:300px">
-                  <div class="name">{{ item.name }}</div>
-                  <span
-                    class="addr"
-                  >部门：{{ item.deptName }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  <span class="addr">性别：{{ item.sexName }}</span>
-                </template>
-              </el-autocomplete>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="序号">
-              <el-input v-model="form.serialNumber" minlength="1"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="股东">
-              <el-input v-model="form.shareholder" :disabled="true" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="认缴出资方式" prop="subscribedCapitalType">
-              <el-select v-model="form.subscribedCapitalType" placeholder="请选择">
-                <el-option
-                  v-for="item in subscribedCapitalTypeList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="认缴出资额（万元）" prop="subscribedCapitalContribution">
-              <el-input v-model.number="form.subscribedCapitalContribution" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="认缴出资日期">
-              <el-date-picker
-                v-model="form.subscribedCapitalDate"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="实缴出资方式" prop="realityCapitalType">
-              <el-select v-model="form.realityCapitalType" placeholder="请选择">
-                <el-option
-                  v-for="item in realityCapitalTypeList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="实缴出资额（万元）" prop="realityCapitalContribution">
-              <el-input v-model.number="form.realityCapitalContribution" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="实缴出资日期">
-              <el-date-picker
-                v-model="form.realityCapitalDate"
-                type="date"
-                placeholder="选择日期"
-                style="width: 100%;"
-              />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="占比（%）" prop="proportion">
-              <el-slider v-model="form.proportion" show-input />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="股东类型" prop="shareholderType">
-              <el-select v-model="form.shareholderType" placeholder="请选择">
-                <el-option
-                  v-for="item in typeList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="状态" prop="status">
-              <el-select v-model="form.status" placeholder="请选择">
-                <el-option
-                  v-for="item in statusList"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                />
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="经办人" prop="responsiblePerson">
-              <el-input v-model="form.responsiblePerson" minlength="1" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="24">
-            <el-form-item label="详情附件">
-              <el-upload
-                class="upload-demo"
-                :action="uploadUrl"
-                :headers="uploadHeaders"
-                :file-list="accessoryFilesList"
-                :before-upload="handleBeforeUpload"
-                :on-remove="handleRemoveFile"
-                :on-success="accessoryFilesUploadSuccess"
-                :on-preview="hanglePreview"
-              >
-                <el-button size="small" type="primary">点击上传</el-button>
-                <div slot="tip" class="el-upload__tip">只能上传文件，且不超过10MB</div>
-              </el-upload>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-form-item>
-          <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-          <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
-        </el-form-item>
-      </el-form>
-    </el-dialog> -->
   </div>
 </template>
 
-<script src="./capital.js"></script>
+<script src="./capital-hw.js"></script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 @import "src/styles/common.scss";
