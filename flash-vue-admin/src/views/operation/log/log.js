@@ -1,6 +1,8 @@
 import { clear, getList } from '@/api/system/log'
-
+// 权限判断指令
+import permission from '@/directive/permission/index.js'
 export default {
+  directives: { permission },
   data() {
     return {
       options: [{
