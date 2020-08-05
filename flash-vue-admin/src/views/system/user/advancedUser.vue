@@ -24,6 +24,7 @@
       <el-row>
         <el-col :span="12">
           <el-button
+            v-if="isSearch"
             v-permission="['/businesslicense/add']"
             type="success"
             size="small"
@@ -373,6 +374,7 @@ export default {
       },
       formVisible: false,
       formTitle: '添加人员',
+      isSearch: false, // 是否搜索
       academic: '', // 学历
       academicList: [], // 学历，从数据字典中获取
       specialty: '', // 专业
@@ -476,6 +478,7 @@ export default {
       })
     },
     search() {
+      this.isSearch = true
       this.listQuery.page = 1
       this.fetchData()
     },
@@ -548,6 +551,7 @@ export default {
       return true
     },
     saveUser() {
+      this.isSearch = false
       var self = this
       this.$refs['form'].validate(valid => {
         if (valid) {
