@@ -2,7 +2,7 @@ import { Loading } from 'element-ui'
 import { getApiUrl } from '@/utils/utils'
 import { getToken } from '@/utils/auth'
 import { getListIds } from '@/api/cms/fileInfo'
-import { parseTime } from '@/utils'
+import { parseTime, accMul } from '@/utils'
 import { getList as getEnterpriseList } from '@/api/lpm/businesslicense'
 import { getList as getUserList } from '@/api/system/user'
 
@@ -41,6 +41,7 @@ export default {
       shareholderType: '', // 股东类型
       shareType: '', // 股份类型
       parValueShare: '', // 每股面值
+      currentRegistrationType: '', // 当前公司的注册类型
       shareholderStatus: '', // 股东状态
       companyListQuery: {
         page: 1,
@@ -210,6 +211,7 @@ export default {
       this.companyListQuery.id = this.$route.query.id
       getEnterpriseList(this.companyListQuery).then(response => {
         this.companyList = response.data.records
+        this.currentRegistrationType = this.companyList[0].registrationType
         this.listLoading = false
       })
     },
@@ -292,7 +294,7 @@ export default {
       // 设置新增股东的初始值;
       this.form.enterpriseName = this.companyList[0].enterpriseName
       this.form.enterpriseCode = this.companyList[0].id
-
+      this.currentRegistrationType = this.companyList[0].registrationType
       //
       this.accessoryFilesList = []
 
@@ -307,13 +309,18 @@ export default {
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
+          let subscribedCapitalContribution = parseFloat(this.form.subscribedCapitalContribution).toFixed(6)
+          if (this.currentRegistrationType * 1 === 2) {
+            subscribedCapitalContribution = subscribedCapitalContribution / 10000
+          }
+
           save({
             serialNumber: this.form.serialNumber,
             enterpriseName: this.form.enterpriseName,
             enterpriseCode: this.form.enterpriseCode,
             shareholder: this.form.shareholder,
             subscribedCapitalType: this.form.subscribedCapitalType,
-            subscribedCapitalContribution: parseFloat(this.form.subscribedCapitalContribution).toFixed(6),
+            subscribedCapitalContribution: subscribedCapitalContribution,
             parValueShare: this.form.parValueShare,
             subscribedCapitalDate: this.form.subscribedCapitalDate ? parseTime(this.form.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.form.realityCapitalType,
@@ -371,6 +378,9 @@ export default {
         this.form = this.selRow
         this.formTitle = '编辑股权及出资信息'
         this.formVisible = true
+        if (this.currentRegistrationType * 1 === 2) {
+          this.form.subscribedCapitalContribution = this.form.subscribedCapitalContribution ? accMul(this.form.subscribedCapitalContribution, 10000) : 0
+        }
         if (this.selRow.accessoryFiles) {
           this.accessoryFilesList = []
           const filesListQuery = {
@@ -488,8 +498,6 @@ export default {
     },
 
     handleChangeRadio() {
-      console.log(this.isAdd)
-      console.log(this.form.shareholder)
       if (this.isAdd) {
         this.form.shareholder = ''
       }
@@ -509,7 +517,6 @@ export default {
       }
     },
     handleBranchCompanySelect(item) {
-      // console.log(this.list)
       if (item.id === this.form.enterpriseCode) {
         alert('不能选本身公司')
         return
@@ -540,7 +547,6 @@ export default {
       // })
       const routeUrl = this.$router.resolve({ path: '/lpm/businesslicenseEdit' })
       window.open(routeUrl.href, '_blank')
-      console.log(ev)
     },
 
     // 搜索自然人股东相关函数
@@ -564,7 +570,6 @@ export default {
       }
     },
     handleNaturalPersonSelect(item) {
-      // console.log(this.list)
       if (item.id === this.form.enterpriseCode) {
         alert('不能选本身公司')
         return
@@ -582,7 +587,6 @@ export default {
       const routeUrl = this.$router.resolve({ path: '/advancedUser/1' })
       window.open(routeUrl.href, '_blank')
       // this.$router.push({ path: '/advancedUser/1' })
-      console.log(ev)
     }
 
   }

@@ -46,8 +46,8 @@
       <el-table-column label="已缴股份数量" width="120">
         <template slot-scope="scope">{{ scope.row.numberOfPaidShares }}</template>
       </el-table-column>
-      <el-table-column label="已缴付股款（万元）" width="150">
-        <template slot-scope="scope">{{ scope.row.subscribedCapitalContribution }}</template>
+      <el-table-column label="已缴付股款（元）" width="150">
+        <template slot-scope="scope">{{ scope.row.subscribedCapitalContribution*10000 }}</template>
       </el-table-column>
       <el-table-column label="占比（%）">
         <template slot-scope="scope">{{ scope.row.proportion }}</template>
@@ -195,7 +195,7 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="已缴付股款（万元）" prop="subscribedCapitalContribution">
+                <el-form-item label="已缴付股款" prop="subscribedCapitalContribution">
                   <el-input v-model="form.subscribedCapitalContribution" />
                 </el-form-item>
               </el-col>
