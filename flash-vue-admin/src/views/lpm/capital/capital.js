@@ -227,7 +227,8 @@ export default {
       this.getList()
     },
     handleClose() {
-
+      this.formVisible = false
+      this.form.subscribedCapitalContribution = this.form.subscribedCapitalContribution / 10000
     },
     fetchNext() {
       this.listQuery.page = this.listQuery.page + 1
