@@ -101,7 +101,7 @@
             <div>{{ scope.row.businessScopeNew }}</div>
           </div>
           <div v-if="scope.row.constitutionState+'' === 'true'">
-            <div><b>章程：由 </b></div>
+            <div><b>章程\决议：由 </b></div>
             <div>{{ scope.row.constitutionOld }}</div>
             <br>
             <div><b>变更为:</b></div>
@@ -252,9 +252,9 @@
                   <el-checkbox v-model="form.registeredCapitalState" label="发行股本" />
                   <!-- <el-checkbox v-model="form.ownershipState" label="企业类型" /> -->
                   <el-checkbox v-model="form.liquidationExitState" label="股权清算退出" />
-                  <!-- <el-checkbox v-model="form.businessScopeState" label="经营范围" />
-                  <el-checkbox v-model="form.constitutionState" label="章程" />
-                  <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
+                  <!-- <el-checkbox v-model="form.businessScopeState" label="经营范围" /> -->
+                  <el-checkbox v-model="form.constitutionState" label="章程\决议" />
+                  <!-- <el-checkbox v-model="form.operatingPeriodEndState" label="经营期限" />
                   <el-checkbox v-model="form.legalRepresentativeState" label="法定代表人" />
                   <el-checkbox v-model="form.chairmanState" label="董事长备案" /> -->
                   <el-checkbox v-model="form.directorState" label="董事变更" />
@@ -453,12 +453,12 @@
               <el-col v-if="form.constitutionState === true" :span="24">
                 <el-card class="box-card">
                   <div slot="header" class="clearfix">
-                    <span>章程</span>
+                    <span>章程\决议</span>
                   </div>
-                  <el-form-item label="原章程修改部分">
+                  <el-form-item label="原章程\决议修改部分">
                     <el-input v-model="form.constitutionOld" type="textarea" rows="5" />
                   </el-form-item>
-                  <el-form-item label="新章程添加部分">
+                  <el-form-item label="新章程\决议添加部分">
                     <el-input v-model="form.constitutionNew" type="textarea" rows="5" />
                   </el-form-item>
                 </el-card>
@@ -1034,7 +1034,7 @@
               <el-col :span="12">
                 <el-card class="box-card">
                   <div slot="header" class="clearfix">
-                    公司章程
+                    公司章程\决议
                   </div>
                   <el-form-item label="" class="file-form-item">
                     <el-upload
