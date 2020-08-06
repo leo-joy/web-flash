@@ -52,6 +52,14 @@ export function saveCompanyPermissons(params) {
   })
 }
 
+export function delCompanyPermissons(params) {
+  return request({
+    url: '/role/delCompanyPermisson',
+    method: 'post',
+    params
+  })
+}
+
 export function companyListByRoleId(params) {
   return request({
     url: '/sys/company/permission/listByRoleId',
