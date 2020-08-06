@@ -30,9 +30,25 @@
         width="150"
         :formatter="formatterrealityCapitalType"
       /> -->
-      <el-table-column label="实缴出资额（万元）" width="150">
+      <!-- <el-table-column
+        prop="currency"
+        label="币种"
+        width="100"
+        :formatter="formatterCurrency"
+      /> -->
+      <el-table-column v-if="currentRegistrationType*1!==2" label="实缴出资额（万元）" width="150">
         <template slot-scope="scope">
           {{ scope.row.realityCapitalContribution }}
+        </template>
+      </el-table-column>
+      <el-table-column v-if="currentRegistrationType*1===2" label="实缴出资额（元）" width="150">
+        <template slot-scope="scope">
+          {{ scope.row.realityCapitalContribution*10000 }}
+        </template>
+      </el-table-column>
+      <el-table-column v-if="currentRegistrationType*1===2" label="实缴数量" width="100">
+        <template slot-scope="scope">
+          {{ scope.row.numberOfShares }}
         </template>
       </el-table-column>
       <el-table-column label="实缴出资日期" width="150">
@@ -50,7 +66,10 @@
       :title="formTitle"
       :visible.sync="realityFormVisible"
       :modal="false"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
       width="70%"
+      @close="handleClose"
     >
       <el-form ref="form" :model="form" :rules="rules" label-width="150px">
         <el-row>
@@ -87,7 +106,7 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
-            <el-form-item label="实缴出资额（万元）" prop="realityCapitalContribution">
+            <el-form-item :label="currentRegistrationType*1 ===2?'实缴出资额（元）':'实缴出资额（万元）'" prop="realityCapitalContribution">
               <el-input v-model="form.realityCapitalContribution" />
             </el-form-item>
           </el-col>
@@ -99,6 +118,23 @@
                 placeholder="选择日期"
                 style="width: 100%;"
               />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="币种" prop="currency">
+              <el-select v-model="form.currency" placeholder="请选择">
+                <el-option
+                  v-for="item in currencyList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="股本数量">
+              <el-input v-model="form.numberOfShares" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -114,7 +150,6 @@
         </el-row>
         <el-form-item>
           <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-          <el-button @click.native="realityFormVisible = false">{{ $t('button.cancel') }}</el-button>
         </el-form-item>
 
       </el-form>

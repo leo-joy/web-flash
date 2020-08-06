@@ -46,8 +46,8 @@
       <el-table-column label="已缴股份数量" width="120">
         <template slot-scope="scope">{{ scope.row.numberOfPaidShares }}</template>
       </el-table-column>
-      <el-table-column label="已缴付股款（元）" width="150">
-        <template slot-scope="scope">{{ scope.row.subscribedCapitalContribution*10000 }}</template>
+      <el-table-column label="已缴付股款（万元）" width="150">
+        <template slot-scope="scope">{{ scope.row.realityCapitalContribution }}</template>
       </el-table-column>
       <el-table-column label="占比（%）">
         <template slot-scope="scope">{{ scope.row.proportion }}</template>
@@ -176,10 +176,10 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="认缴出资方式" prop="subscribedCapitalType">
+                <el-form-item label="出资方式" prop="realityCapitalType">
                   <el-select v-model="form.subscribedCapitalType" placeholder="请选择">
                     <el-option
-                      v-for="item in subscribedCapitalTypeList"
+                      v-for="item in realityCapitalTypeList"
                       :key="item.value"
                       :label="item.label"
                       :value="item.value"
@@ -202,14 +202,14 @@
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="已缴付股款" prop="subscribedCapitalContribution">
-                  <el-input v-model="form.subscribedCapitalContribution" />
+                <el-form-item label="已缴付股款" prop="realityCapitalContribution">
+                  <el-input v-model="form.realityCapitalContribution" />
                 </el-form-item>
               </el-col>
               <el-col :span="8">
-                <el-form-item label="认缴出资日期">
+                <el-form-item label="出资日期">
                   <el-date-picker
-                    v-model="form.subscribedCapitalDate"
+                    v-model="form.realityCapitalDate"
                     type="date"
                     placeholder="选择日期"
                     style="width: 100%;"
@@ -308,6 +308,7 @@
               :enterprisename="form.enterpriseName"
               :shareholder="form.shareholder"
               :serialnumber="form.id"
+              :currentregistrationtype="currentRegistrationType"
             />
           </el-collapse-item>
           <el-collapse-item v-if="!isAdd" title="三、股东实缴记录" name="3">
@@ -317,6 +318,8 @@
               :enterprisename="form.enterpriseName"
               :shareholder="form.shareholder"
               :serialnumber="form.id"
+              :currentregistrationtype="currentRegistrationType"
+              :refresh="refreshCurrentShareholder"
             />
           </el-collapse-item>
           <el-collapse-item title="四、附件上传" name="4">

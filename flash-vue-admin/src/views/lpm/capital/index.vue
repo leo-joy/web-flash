@@ -65,7 +65,14 @@
       @prev-click="fetchPrev"
       @next-click="fetchNext"
     />
-    <el-dialog :title="formTitle" :visible.sync="formVisible" width="90%">
+    <el-dialog
+      :title="formTitle"
+      :visible.sync="formVisible"
+      width="90%"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
+      @close="handleClose"
+    >
       <el-collapse v-model="activeNames">
         <el-form ref="form" :model="form" :rules="rules" label-width="160px">
 
@@ -294,6 +301,7 @@
               :enterprisename="form.enterpriseName"
               :shareholder="form.shareholder"
               :serialnumber="form.id"
+              :currentregistrationtype="currentRegistrationType"
             />
           </el-collapse-item>
           <el-collapse-item v-if="!isAdd" title="三、股东实缴记录" name="3">
@@ -303,6 +311,7 @@
               :enterprisename="form.enterpriseName"
               :shareholder="form.shareholder"
               :serialnumber="form.id"
+              :currentregistrationtype="currentRegistrationType"
             />
           </el-collapse-item>
           <el-collapse-item title="四、附件上传" name="4">
@@ -330,7 +339,6 @@
       </el-collapse>
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
-        <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
       </span>
     </el-dialog>
     <!-- <el-dialog :title="formTitle" :visible.sync="formVisible" width="70%">

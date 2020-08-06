@@ -37,9 +37,11 @@ public class CapitalController {
 		return Rets.success(list);
 	}
 	@RequestMapping(value = "/list",method = RequestMethod.GET)
-	public Object list(@RequestParam(required = false) String enterpriseCode,
+	public Object list(@RequestParam(required = false) Long id,
+						@RequestParam(required = false) String enterpriseCode,
 					   @RequestParam(required = false) String branchCompanyCode) {
 	Page<Capital> page = new PageFactory<Capital>().defaultPage();
+		page.addFilter("id", SearchFilter.Operator.EQ,id);
 		page.addFilter("enterpriseCode", SearchFilter.Operator.EQ,enterpriseCode);
 		page.addFilter("branchCompanyCode", SearchFilter.Operator.EQ,branchCompanyCode);
 		page = capitalService.queryPage(page);

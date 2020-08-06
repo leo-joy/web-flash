@@ -74,7 +74,7 @@ export default {
         parValueShare: '',
         subscribedCapitalDate: '',
         realityCapitalType: '',
-        realityCapitalContribution: '',
+        realityCapitalContribution: 0,
         realityCapitalDate: '',
         proportion: 0,
         numberOfShares: 0,
@@ -228,7 +228,10 @@ export default {
     },
     handleClose() {
       this.formVisible = false
-      this.form.subscribedCapitalContribution = this.form.subscribedCapitalContribution / 10000
+      this.fetchData()
+      if (this.currentRegistrationType * 1 === 2) {
+        this.form.realityCapitalContribution = this.form.realityCapitalContribution / 10000
+      }
     },
     fetchNext() {
       this.listQuery.page = this.listQuery.page + 1
@@ -260,7 +263,7 @@ export default {
         parValueShare: '',
         subscribedCapitalDate: '',
         realityCapitalType: '',
-        realityCapitalContribution: '',
+        realityCapitalContribution: 0,
         realityCapitalDate: '',
         proportion: 0,
         numberOfShares: 0,
@@ -310,9 +313,9 @@ export default {
     save() {
       this.$refs['form'].validate((valid) => {
         if (valid) {
-          let subscribedCapitalContribution = parseFloat(this.form.subscribedCapitalContribution).toFixed(6)
+          let realityCapitalContribution = parseFloat(this.form.realityCapitalContribution).toFixed(6)
           if (this.currentRegistrationType * 1 === 2) {
-            subscribedCapitalContribution = subscribedCapitalContribution / 10000
+            realityCapitalContribution = realityCapitalContribution / 10000
           }
 
           save({
@@ -321,11 +324,11 @@ export default {
             enterpriseCode: this.form.enterpriseCode,
             shareholder: this.form.shareholder,
             subscribedCapitalType: this.form.subscribedCapitalType,
-            subscribedCapitalContribution: subscribedCapitalContribution,
+            subscribedCapitalContribution: this.form.subscribedCapitalContribution ? parseFloat(this.form.subscribedCapitalContribution).toFixed(6) : 0,
             parValueShare: this.form.parValueShare,
             subscribedCapitalDate: this.form.subscribedCapitalDate ? parseTime(this.form.subscribedCapitalDate, '{y}-{m}-{d}') : '',
             realityCapitalType: this.form.realityCapitalType,
-            realityCapitalContribution: this.form.realityCapitalContribution ? parseFloat(this.form.realityCapitalContribution).toFixed(6) : '',
+            realityCapitalContribution: realityCapitalContribution,
             realityCapitalDate: this.form.realityCapitalDate ? parseTime(this.form.realityCapitalDate, '{y}-{m}-{d}') : '',
             proportion: this.form.proportion,
             numberOfShares: this.form.numberOfShares,
@@ -380,7 +383,7 @@ export default {
         this.formTitle = '编辑股权及出资信息'
         this.formVisible = true
         if (this.currentRegistrationType * 1 === 2) {
-          this.form.subscribedCapitalContribution = this.form.subscribedCapitalContribution ? accMul(this.form.subscribedCapitalContribution, 10000) : 0
+          this.form.realityCapitalContribution = this.form.realityCapitalContribution ? accMul(this.form.realityCapitalContribution, 10000) : 0
         }
         if (this.selRow.accessoryFiles) {
           this.accessoryFilesList = []
@@ -588,7 +591,14 @@ export default {
       const routeUrl = this.$router.resolve({ path: '/advancedUser/1' })
       window.open(routeUrl.href, '_blank')
       // this.$router.push({ path: '/advancedUser/1' })
-    }
+    },
 
+    // 给子组件调用
+    refreshCurrentShareholder(id) {
+      getList({ page: 1, limit: 1, id: id }).then(response => {
+        this.form = response.data.records[0]
+        this.form.realityCapitalContribution = accMul(this.form.realityCapitalContribution, 10000)
+      })
+    }
   }
 }

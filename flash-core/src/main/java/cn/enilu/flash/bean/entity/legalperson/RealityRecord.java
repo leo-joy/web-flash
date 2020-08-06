@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.validation.constraints.NotBlank;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity(name="t_lpm_reality_record")
@@ -36,13 +37,20 @@ public class RealityRecord extends BaseEntity {
     @Column(name="reality_capital_type", columnDefinition = "VARCHAR(32) COMMENT '实缴出资方式'")
     private String realityCapitalType;
 
-    @Type(type="java.lang.Float")
-    @Column(name="reality_capital_contribution", columnDefinition = "FLOAT COMMENT '实缴出资额（万元）'")
-    private Float realityCapitalContribution;
+    @Type(type="java.math.BigDecimal")
+    @Column(name="reality_capital_contribution", columnDefinition = "DECIMAL COMMENT '实缴出资额（万元）'")
+    private BigDecimal realityCapitalContribution;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name="reality_capital_date", columnDefinition = "DATE COMMENT '实缴出资日期'")
     private Date realityCapitalDate;
+
+    @Type(type="java.math.BigDecimal")
+    @Column(name="number_of_shares", columnDefinition = "DECIMAL COMMENT '实缴数量'")
+    private BigDecimal numberOfShares;
+
+    @Column(name="currency", columnDefinition = "VARCHAR(32) COMMENT '币种'")
+    private String currency;
 
     @Column(name="responsible_person", columnDefinition = "VARCHAR(32) COMMENT '经办人'")
     private String responsiblePerson;
