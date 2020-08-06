@@ -94,6 +94,7 @@ public class ShiroConfig {
         filterRuleMap.put("/dict/depthlist","anon");
 
         //用户列表请求不拦截
+        filterRuleMap.put("/user","anon");
         filterRuleMap.put("/user/list","anon");
 
         //组织机构树列表请求不拦截
