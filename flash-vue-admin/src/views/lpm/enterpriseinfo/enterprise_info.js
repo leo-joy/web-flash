@@ -170,7 +170,7 @@ export default {
           this.searchType === 'generalManager') && this.keyword) {
         const listQuery = {
           page: 1,
-          limit: 3000
+          limit: 6000
         }
         listQuery[this.searchType] = this.keyword
         mainmemberList(listQuery).then(response => {

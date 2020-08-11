@@ -24,7 +24,7 @@ export default {
       activeNames: ['1', '2', '3'],
       companyListQuery: {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         id: undefined
       },
       user: {},
@@ -281,7 +281,7 @@ export default {
 
       // companyListQuery: {
       //   page: 1,
-      //   limit: 3000,
+      //   limit: 6000,
       //   id: undefined
       // },
       // companyList: [],
@@ -1361,7 +1361,7 @@ export default {
       // 请求公司股东全部列表
       getEnterpriseList({
         page: 1,
-        limit: 3000
+        limit: 6000
       }).then(response => {
         this.enterpriseShareholders = response.data.records
       })

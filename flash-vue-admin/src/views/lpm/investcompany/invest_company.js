@@ -19,7 +19,7 @@ export default {
       formTitle: '添加投资企业',
       companyListQuery: {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         id: undefined
       },
       currencyList: [], // 币种，从数据字典中获取
@@ -199,7 +199,7 @@ export default {
       // 请求投资公司全部列表
       getEnterpriseList({
         page: 1,
-        limit: 3000
+        limit: 6000
       }).then(response => {
         this.restaurants = response.data.records
       })
@@ -258,7 +258,7 @@ export default {
         // 请求投资公司全部列表
         getEnterpriseList({
           page: 1,
-          limit: 3000
+          limit: 6000
         }).then(response => {
           this.restaurants = response.data.records
         })

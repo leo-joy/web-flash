@@ -22,7 +22,7 @@ export default {
       licenseStatus: '', // 许可状态
       companyListQuery: {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         id: undefined
       },
       companyList: [],

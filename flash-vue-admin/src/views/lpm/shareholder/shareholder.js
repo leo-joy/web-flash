@@ -22,7 +22,7 @@ export default {
       shareholderStatus: '', // 股东状态
       companyListQuery: {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         id: undefined
       },
       companyList: [],

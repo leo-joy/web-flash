@@ -173,7 +173,7 @@ export default {
             return
           }
           // 发送离职法人代表提醒
-          getBusinesslicenseList({ page: 1, limit: 3000, legalRepresentative: personName }).then(response => {
+          getBusinesslicenseList({ page: 1, limit: 6000, legalRepresentative: personName }).then(response => {
             let enterpriseNameStr = this.getEnterpriseList(response)
             if (enterpriseNameStr) {
               enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【企业法人】'
@@ -181,7 +181,7 @@ export default {
             }
           })
           // 发送离职董事长提醒
-          getMainmemberList({ page: 1, limit: 3000, chairman: personName }).then(response => {
+          getMainmemberList({ page: 1, limit: 6000, chairman: personName }).then(response => {
             let enterpriseNameStr = this.getEnterpriseList(response)
             if (enterpriseNameStr) {
               enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【董事长】'
@@ -190,7 +190,7 @@ export default {
           })
 
           // 发送离职董事提醒
-          getMainmemberList({ page: 1, limit: 3000, director: personName }).then(response => {
+          getMainmemberList({ page: 1, limit: 6000, director: personName }).then(response => {
             let enterpriseNameStr = this.getEnterpriseList(response)
             if (enterpriseNameStr) {
               enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【董事】'
@@ -198,7 +198,7 @@ export default {
             }
           })
           // 发送离职监事提醒
-          getMainmemberList({ page: 1, limit: 3000, supervisor: personName }).then(response => {
+          getMainmemberList({ page: 1, limit: 6000, supervisor: personName }).then(response => {
             let enterpriseNameStr = this.getEnterpriseList(response)
             if (enterpriseNameStr) {
               enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【监事】'
@@ -206,7 +206,7 @@ export default {
             }
           })
           // 发送离职总经理提醒
-          getMainmemberList({ page: 1, limit: 3000, generalManager: personName }).then(response => {
+          getMainmemberList({ page: 1, limit: 6000, generalManager: personName }).then(response => {
             let enterpriseNameStr = this.getEnterpriseList(response)
             if (enterpriseNameStr) {
               enterpriseNameStr = '公司高管 【' + personName + '】 在【' + enterpriseNameStr + '】担任【总经理】'

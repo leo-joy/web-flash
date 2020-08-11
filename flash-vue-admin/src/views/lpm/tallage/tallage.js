@@ -21,7 +21,7 @@ export default {
       levyTypeList: [], // 征收类型
       companyListQuery: {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         id: undefined
       },
       companyList: [],

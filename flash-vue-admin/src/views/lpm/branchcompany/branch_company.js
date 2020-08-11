@@ -11,7 +11,7 @@ export default {
       formTitle: '添加分公司信息',
       companyListQuery: {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         id: undefined
       },
       companyList: [],
@@ -175,7 +175,7 @@ export default {
       // 请求分公司全部列表
       getEnterpriseList({
         page: 1,
-        limit: 3000
+        limit: 6000
       }).then(response => {
         this.restaurants = response.data.records
       })
@@ -233,7 +233,7 @@ export default {
         // 请求分公司全部列表
         getEnterpriseList({
           page: 1,
-          limit: 3000
+          limit: 6000
         }).then(response => {
           this.restaurants = response.data.records
         })

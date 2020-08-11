@@ -364,7 +364,7 @@ export default {
     //   if (this.checkSel()) {
     //     const companyRoleQuery = {
     //       page: 1,
-    //       limit: 3000,
+    //       limit: 6000,
     //       roleId: this.selRow.id
     //     }
     //     companyListByRoleId(companyRoleQuery).then(response => {
@@ -614,7 +614,7 @@ export default {
       this.companyListLoadingRight = true
       const companyRoleQuery = {
         page: 1,
-        limit: 3000,
+        limit: 6000,
         roleId: this.selRow.id
       }
       companyListByRoleId(companyRoleQuery).then(response => {
