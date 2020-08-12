@@ -2,6 +2,8 @@ import { remove, getList, save, savePermissons, saveCompanyPermissons, delCompan
 import { list as getDeptList } from '@/api/system/dept'
 import { menuTreeListByRoleId } from '@/api/system/menu'
 import { getList as getCompanyList } from '@/api/lpm/businesslicense'
+import { hasList as hasCompanyList } from '@/api/lpm/businesslicense'
+
 import { MergeArray } from '@/utils/index'
 export default {
   data() {
@@ -628,7 +630,7 @@ export default {
         }
         this.companyPermissons = tempArr
         this.companyListQueryRight.ids = tempArr.length > 0 ? tempArr.join(',') : '1000020000'
-        getCompanyList(this.companyListQueryRight).then(response => {
+        hasCompanyList(this.companyListQueryRight).then(response => {
           this.companyListRight = response.data.records
           this.companyListLoadingRight = false
           this.companyTotalRight = response.data.total

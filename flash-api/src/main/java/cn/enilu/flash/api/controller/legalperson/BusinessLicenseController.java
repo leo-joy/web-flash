@@ -174,6 +174,45 @@ public class BusinessLicenseController {
 		return Rets.success(page);
 	}
 
+	@RequestMapping(value = "/haslist",method = RequestMethod.POST)
+	public Object haslist(@RequestParam(required = false) String enterpriseName,
+					   @RequestParam(required = false) String enterpriseNameEn,
+					   @RequestParam(required = false) String enterpriseNameBusiness,
+					   @RequestParam(required = false) String unifiedSocialCreditCode,
+					   @RequestParam(required = false) String legalRepresentative,
+					   @RequestParam(required = false) String pIds,
+					   @RequestParam(required = false) String tag,
+					   @RequestParam(required = false) String registrationType,
+					   @RequestParam(required = false) String registrationStatus,
+					   @RequestParam(required = false) String ids,
+					   @RequestParam(required = false) Long id) {
+		Page<BusinessLicense> page = new PageFactory<BusinessLicense>().defaultPage();
+		page.addFilter("enterpriseName", SearchFilter.Operator.LIKE,enterpriseName);
+		page.addFilter("enterpriseNameEn", SearchFilter.Operator.LIKE,enterpriseNameEn);
+		page.addFilter("enterpriseNameBusiness", SearchFilter.Operator.LIKE,enterpriseNameBusiness);
+		page.addFilter("unifiedSocialCreditCode", SearchFilter.Operator.LIKE,unifiedSocialCreditCode);
+		page.addFilter("legalRepresentative", SearchFilter.Operator.LIKE,legalRepresentative);
+		page.addFilter("pIds", SearchFilter.Operator.LIKE,pIds);
+		page.addFilter("tags", SearchFilter.Operator.LIKE,tag);
+		page.addFilter("id", SearchFilter.Operator.EQ,id);
+		if(ids != null && !ids.isEmpty()) {
+			ArrayList lists = new ArrayList(Arrays.asList(ids.split(",")));
+			page.addFilter("id", SearchFilter.Operator.IN,lists);
+		}
+		if(registrationType != null && !registrationType.isEmpty()) {
+			ArrayList lists = new ArrayList(Arrays.asList(registrationType.split(",")));
+			page.addFilter("registrationType", SearchFilter.Operator.IN,lists);
+		}
+		//page.addFilter("registrationType", SearchFilter.Operator.EQ,registrationType);
+		page.addFilter("registrationStatus", SearchFilter.Operator.EQ,registrationStatus);
+		// 添加排序规则
+		Sort sort = new Sort(new Sort.Order(Sort.Direction.DESC,"customType"));
+		page.setSort(sort);
+
+		page = businessLicenseService.queryPage(page);
+		return Rets.success(page);
+	}
+
 	@RequestMapping(value = "/one",method = RequestMethod.GET)
 	public Object list(@RequestParam(required = false) String enterpriseName) {
 		Page<BusinessLicense> page = new PageFactory<BusinessLicense>().defaultPage();
