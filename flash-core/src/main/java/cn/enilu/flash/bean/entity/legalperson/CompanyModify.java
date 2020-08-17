@@ -202,10 +202,10 @@ public class CompanyModify extends BaseEntity {
     @Column(name="shareholder_modify_state", columnDefinition = "VARCHAR(8) COMMENT '股东变更状态'")
     private String shareholderModifyState;
 
-    @Column(name="shareholder_ids_old", columnDefinition = "VARCHAR(32) COMMENT '旧股东ids'")
+    @Column(name="shareholder_ids_old", columnDefinition = "VARCHAR(128) COMMENT '旧股东ids'")
     private String shareholderIdsOld;
 
-    @Column(name="shareholder_ids_new", columnDefinition = "VARCHAR(32) COMMENT '新股东ids'")
+    @Column(name="shareholder_ids_new", columnDefinition = "VARCHAR(128) COMMENT '新股东ids'")
     private String shareholderIdsNew;
 
     @Column(name="constitution_state", columnDefinition = "VARCHAR(8) COMMENT '公司章程变更状态'")
