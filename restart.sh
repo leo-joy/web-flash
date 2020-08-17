@@ -13,6 +13,11 @@ docker start mysqlFR tomcatFR nginxFR nodeFRInterface
 
 #3、创建nginx容器
 #docker run -d -p 80:80 --privileged=true --name nginxFR  -v $PWD/client/dist:/usr/share/nginx/html  nginx:1.17.3
+docker run --name nginxFRHTTPS \
+        -p 443:443\
+        -v $PWD/client/dist:/usr/share/nginx/html:rw\
+        -v $PWD/client/nginx/ssl:/ssl/:rw\
+        -d nginx:1.17.3
 
 #4、接口服务
 #docker run -itd -p 5008:3000 --privileged=true --name nodeFRInterface -v $PWD/service/nodeInterface:/usr/src/app -w /usr/src/app  node:10.16.3 npm start
