@@ -571,14 +571,14 @@ export default {
       // 设置企业旧的初始值;
       this.businesslicenseData = this.companyList[0]
       this.form.enterpriseId = this.companyList[0].id
-      this.form.enterpriseNameOld = this.companyList[0].enterpriseName
-      this.form.enterpriseNameEnOld = this.companyList[0].enterpriseNameEn
-      this.form.registeredAddressOld = this.companyList[0].registeredAddress
-      this.form.unifiedSocialCreditCodeOld = this.companyList[0].unifiedSocialCreditCode
-      this.form.liquidationExitOld = this.companyList[0].liquidationExit
-      this.form.registeredCapitalOld = this.companyList[0].registeredCapital * 1
-      this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
-      this.form.businessScopeOld = this.companyList[0].businessScope
+      // this.form.enterpriseNameOld = this.companyList[0].enterpriseName
+      // this.form.enterpriseNameEnOld = this.companyList[0].enterpriseNameEn
+      // this.form.registeredAddressOld = this.companyList[0].registeredAddress
+      // this.form.unifiedSocialCreditCodeOld = this.companyList[0].unifiedSocialCreditCode
+      // this.form.liquidationExitOld = this.companyList[0].liquidationExit
+      // this.form.registeredCapitalOld = this.companyList[0].registeredCapital * 1
+      // this.form.operatingPeriodEndOld = this.companyList[0].operatingPeriodEnd
+      // this.form.businessScopeOld = this.companyList[0].businessScope
 
       // 注释初始化数据 【法人】
       // this.form.legalRepresentativeOld = this.companyList[0].legalRepresentative
