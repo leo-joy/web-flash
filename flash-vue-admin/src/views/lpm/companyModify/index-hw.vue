@@ -1225,7 +1225,7 @@
                   </el-form-item>
                 </el-card>
               </el-col>
-            </el-row> 
+            </el-row>
             <!-- <el-row>
               <el-col :span="12">
                 <el-card class="box-card">
@@ -1764,6 +1764,17 @@
         <el-button type="primary" @click="save">{{ $t('button.submit') }}</el-button>
         <el-button @click.native="formVisible = false">{{ $t('button.cancel') }}</el-button>
       </span>
+    </el-dialog>
+
+    <!-- 高级管理人员 -->
+    <el-dialog
+      :title="formAdvancedUserTitle"
+      :visible.sync="formAdvancedUserVisible"
+      :append-to-body="true"
+      width="80%"
+      @close="initAdvancedUserList"
+    >
+      <advanced-user />
     </el-dialog>
 
     <el-dialog

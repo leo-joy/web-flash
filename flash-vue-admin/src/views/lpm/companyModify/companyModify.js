@@ -6,6 +6,7 @@ import { getList as getUserList } from '@/api/system/user'
 import { getList as dictList } from '@/api/system/dict'
 import { getDictList } from '@/utils/common'
 import { remove as removeCapitalModify, getList as getCapitalModifyList, save as saveCapitalModify } from '@/api/lpm/capitalModify'
+import advancedUser from '@/views/system/user/advancedUser.vue'
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
@@ -16,6 +17,7 @@ import { Loading } from 'element-ui'
 
 export default {
   directives: { permission },
+  components: { advancedUser },
   data() {
     return {
       loginInfo: {}, // 当前登录人信息
@@ -241,6 +243,10 @@ export default {
       tallageFilesList: [], // 19清税证明
       noticeFilesList: [], // 20公告报纸样张
       otherFilesList: [], // 21其它文件
+
+      // 高级管理人员添加
+      formAdvancedUserTitle: '添加高级管理人员',
+      formAdvancedUserVisible: false,
 
       /**
        * 股权变更 -----start------
@@ -1033,12 +1039,32 @@ export default {
         return (state.name.indexOf(queryString) === 0)
       }
     },
+    // handleIconClick(ev) {
+    //   const routeUrl = this.$router.resolve({ path: '/advancedUser/1' })
+    //   window.open(routeUrl.href, '_blank')
+    //   // this.$router.push({ path: '/advancedUser/1' })
+    //   console.log(ev)
+    // },
+
     handleIconClick(ev) {
-      const routeUrl = this.$router.resolve({ path: '/advancedUser/1' })
-      window.open(routeUrl.href, '_blank')
-      // this.$router.push({ path: '/advancedUser/1' })
-      console.log(ev)
+      this.addAdvancedUser()
     },
+    addAdvancedUser() {
+      this.formAdvancedUserTitle = '添加高级管理人员'
+      this.formAdvancedUserVisible = true
+      this.isAdvancedUserAdd = true
+    },
+    initAdvancedUserList() {
+      getUserList({
+        page: 1,
+        limit: 50000,
+        type: '1,2'
+      }).then(response => {
+        this.restaurants = response.data.records
+        this.naturalPersonShareholders = response.data.records
+      })
+    },
+
     handleChairmanSelect(item) {
       this.form.chairmanIdNew = item.id
       this.form.chairmanNew = item.name

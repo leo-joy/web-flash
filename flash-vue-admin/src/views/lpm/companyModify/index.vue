@@ -1754,6 +1754,17 @@
       </span>
     </el-dialog>
 
+    <!-- 高级管理人员 -->
+    <el-dialog
+      :title="formAdvancedUserTitle"
+      :visible.sync="formAdvancedUserVisible"
+      :append-to-body="true"
+      width="80%"
+      @close="initAdvancedUserList"
+    >
+      <advanced-user />
+    </el-dialog>
+
     <el-dialog
       :title="formCapitalModifyTitle"
       :visible.sync="formCapitalModifyVisible"

@@ -462,12 +462,15 @@ export default {
       if (this.$route.path) {
         const tempArr = this.$route.path.split('/')
         userType = tempArr[tempArr.length - 1]
+        if (userType !== 1 && userType !== 2) {
+          userType = '请选择用户类型'
+        }
       }
       // if( this.$route.path === '/advancedUser') {
       //   userType = 1
       // }
       // this.listQuery.type = userType || this.$attrs.userTypeValue
-      this.userParamType = userType || this.$attrs.userTypeValue
+      this.userParamType = userType || this.$attrs.userTypeValue || 1
       if (userType * 1 === 2) {
         this.listQuery.type = 2
       }
@@ -535,8 +538,15 @@ export default {
     },
     add() {
       this.resetForm()
-      this.formTitle =
-      this.userParamType === '1' ? '添加高级管理人员' : '添加股东信息'
+      let userParamType = '添加用户'
+      if (this.userParamType === '1') {
+        userParamType = '添加高级管理人员'
+      }
+
+      if (this.userParamType === '2') {
+        userParamType = '添加股东信息'
+      }
+      this.formTitle = userParamType
       this.formVisible = true
       this.isAdd = true
       console.log(this.form)
@@ -554,6 +564,10 @@ export default {
       this.isSearch = false
       var self = this
       this.$refs['form'].validate(valid => {
+        if (this.form.type === '请选择用户类型') {
+          alert('请选择用户类型')
+          return
+        }
         if (valid) {
           const form = self.form
           if (form.status === true) {
