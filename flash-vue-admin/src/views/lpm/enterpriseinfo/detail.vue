@@ -35,7 +35,7 @@
             <el-tabs :tab-position="tabPosition" style="height: auto;padding-top:10px">
               <el-tab-pane label="基本信息"><div><detailcommon /></div></el-tab-pane>
               <!-- <el-tab-pane label="主要人员信息"><mainmember /></el-tab-pane> -->
-              <el-tab-pane label="股东信息"><shareholder /></el-tab-pane>
+              <el-tab-pane v-if="isHasPermissions(['/shareholder/detail'])" label="股东信息"><shareholder /></el-tab-pane>
 
               <!-- <el-tab-pane label="股权及出资信息"><capital /></el-tab-pane> -->
               <!-- <el-tab-pane label="行政许可信息"><administrativelicense /></el-tab-pane> -->
@@ -124,6 +124,9 @@ import trademark from '@/views/lpm/trademark/view.vue'
 
 import companymodify from '@/views/lpm/companyModify/view.vue'
 
+// 权限判断指令
+import { isHasPermissions } from '@/utils/common'
+
 export default {
   name: 'CompanyLayout',
   components: {
@@ -197,6 +200,10 @@ export default {
     },
     handleClick(tab, event) {
       console.log(tab, event)
+    },
+    // 权限控制
+    isHasPermissions(value) {
+      return isHasPermissions(value)
     }
   }
 }

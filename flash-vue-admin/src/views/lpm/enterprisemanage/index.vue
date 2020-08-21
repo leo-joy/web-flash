@@ -28,7 +28,7 @@
     </el-radio-group> -->
     <el-tabs :tab-position="tabPosition" type="border-card">
       <el-tab-pane label="基本信息"><div><edit @viewfile="viewfile" /></div></el-tab-pane>
-      <el-tab-pane label="主要人员信息"><mainmember @viewfile="viewfile" /></el-tab-pane>
+      <el-tab-pane v-if="isHasPermissions(['/mainmember/view'])" label="主要人员信息"><mainmember @viewfile="viewfile" /></el-tab-pane>
       <!-- <el-tab-pane label="股东信息"><shareholder /></el-tab-pane> -->
       <el-tab-pane label="印章信息"><seal @viewfile="viewfile" /></el-tab-pane>
       <el-tab-pane label="年报信息"><annals @viewfile="viewfile" /></el-tab-pane>
@@ -81,6 +81,9 @@ import stockpledge from '@/views/lpm/stockpledge/index.vue'
 import knowledgepledge from '@/views/lpm/knowledgepledge/index.vue'
 import trademark from '@/views/lpm/trademark/index.vue'
 import tallage from '@/views/lpm/tallage/index.vue'
+// 权限判断指令
+import { isHasPermissions } from '@/utils/common'
+
 export default {
   name: 'CompanyLayout',
   components: {
@@ -132,6 +135,10 @@ export default {
       this.pdfVisible = true
       this.src =
         getApiUrl() + '/file/download?idFile=' + id + '&fileName=' + fileName
+    },
+    // 权限控制
+    isHasPermissions(value) {
+      return isHasPermissions(value)
     }
   }
 }

@@ -14,7 +14,7 @@
           </template>
           <div><businesslicense /></div>
         </el-collapse-item>
-        <el-collapse-item name="2" disabled>
+        <el-collapse-item v-if="isHasPermissions(['/mainmember/detail'])" name="2" disabled>
           <template slot="title">
             <i class="header-icon el-icon-user-solid" /> 人员信息
           </template>
@@ -145,6 +145,8 @@ import tallage from '@/views/lpm/tallage/view.vue'
 
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
+import { isHasPermissions } from '@/utils/common'
+
 export default {
   directives: { permission },
   components: {
@@ -611,6 +613,10 @@ export default {
       } else {
         console.log('数据还没有请求完成')
       }
+    },
+    // 权限控制
+    isHasPermissions(value) {
+      return isHasPermissions(value)
     }
   }
 }
