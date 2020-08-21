@@ -1,6 +1,7 @@
 /**
  * Created by zhanglei on 19/10/18.
  */
+import store from '@/store'
 
 /**
  * 根据数据字典名称获取数据字典列表
@@ -87,6 +88,28 @@ export function getDictNum(str, name) {
  */
 export function isPermissions(permissions, url) {
   return permissions && permissions.toString().indexOf(url) >= 0
+}
+
+/**
+ * 根据权限的url地址判断权限
+ * @param {string} url
+ * @returns {boolean}
+ */
+export function isHasPermissions(value) {
+  const permissions = store.getters && store.getters.permissions
+  if (value && value instanceof Array && value.length > 0) {
+    const permissionRoles = value
+    const hasPermission = permissions.some(permission => {
+      return permissionRoles.includes(permission)
+    })
+    if (hasPermission) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    throw new Error(`need roles! Like v-permission="['admin','editor']"`)
+  }
 }
 
 // uuid 生产器

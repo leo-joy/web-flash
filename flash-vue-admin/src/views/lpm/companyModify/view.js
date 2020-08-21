@@ -4,7 +4,7 @@ import { getList as companyModify } from '@/api/lpm/companyModify'
 import FilesListComponent from '@/components/FilesList/minFilesList.vue'
 import { getList as getCapitalModifyList } from '@/api/lpm/capitalModify'
 import { getList as dictList } from '@/api/system/dict'
-import { showDictLabel } from '@/utils/common'
+import { showDictLabel, isHasPermissions } from '@/utils/common'
 import PDFView from '@/components/PdfView/index.vue'
 import { getApiUrl } from '@/utils/utils'
 
@@ -257,20 +257,24 @@ export default {
       dictList({ name: '无附件原因【企业变更】' }).then(response => {
         this.noAccessoryCause = response.data[0].detail
       })
-      const id = this.$route.query.id
-      const rolesDeptList = this.$store.state.user.profile.rolesDeptList
-      businesslicense(id).then(response => {
-        this.currentCompany = response.data
 
-        // 根据角色中的部门权限判断，是否能查看企业变更文件
-        if (rolesDeptList && rolesDeptList.length > 0) {
-          for (let i = 0; i < rolesDeptList.length; i++) {
-            if (this.currentCompany.pIds.indexOf('-' + rolesDeptList[i] + '_') > -1) {
-              this.viewFile = true
+      if (isHasPermissions(['/historyFilesList'])) {
+        const id = this.$route.query.id
+        const rolesDeptList = this.$store.state.user.profile.rolesDeptList
+        businesslicense(id).then(response => {
+          this.currentCompany = response.data
+
+          // 根据角色中的部门权限判断，是否能查看企业变更文件
+          if (rolesDeptList && rolesDeptList.length > 0) {
+            for (let i = 0; i < rolesDeptList.length; i++) {
+              if (this.currentCompany.pIds.indexOf('-' + rolesDeptList[i] + '_') > -1) {
+                this.viewFile = true
+              }
             }
           }
-        }
-      })
+        })
+      }
+
       this.getCompanyModifyList()
     },
 

@@ -92,7 +92,7 @@
                 @click.native="addCompany('/lpm/businesslicenseEdit')"
               >{{ $t('button.add') }}</el-button> -->
             <el-button
-              v-permission="['/businesslicense/ca']"
+              v-permission="['/businesslicense/tz']"
               size="small"
               @click.native="investCompanySynErgodic()"
             >同步投资公司</el-button>

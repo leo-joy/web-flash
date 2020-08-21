@@ -7,7 +7,7 @@ import { list as deptList } from '@/api/system/dept'
 import { getList as dictList } from '@/api/system/dict'
 import { getList as mainmemberList } from '@/api/lpm/mainmember'
 
-import { showDictLabel, getDictNum } from '@/utils/common'
+import { showDictLabel, getDictNum, isHasPermissions } from '@/utils/common'
 // 权限判断指令
 import permission from '@/directive/permission/index.js'
 import axios from 'axios'
@@ -439,6 +439,13 @@ export default {
       this.$router.push({ path: '/enterprisemanage' + urlType, query: { id: row.id }})
     },
     detail(row) {
+      if (!isHasPermissions(['/lpm/enterpriseinfo/detail'])) {
+        this.$message({
+          message: '您好！您没有查看详情的权限！',
+          type: 'info'
+        })
+        return false
+      }
       let urlType = ''
       if (row.registrationType * 1 === 2) {
         urlType = 'Hw'
