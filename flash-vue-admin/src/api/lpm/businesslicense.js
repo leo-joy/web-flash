@@ -3,10 +3,15 @@ import Qs from 'qs'
 
 export function getList(params) {
   return request({
-    url: '/lpm/businesslicense/list',
-    method: 'get',
-    params
+    url: '/lpm/businesslicense/haslist',
+    method: 'post',
+    data: Qs.stringify(params) // 解决url中参数过长导致的400错误
   })
+  // return request({
+  //   url: '/lpm/businesslicense/list',
+  //   method: 'get',
+  //   params
+  // })
 }
 
 export function hasList(params) {
