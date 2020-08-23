@@ -75,14 +75,21 @@
           <el-col :span="12">
             <el-form-item label="">
               <div class="item-label">企业类型<br>Type of Company</div>
-              <el-select v-model="form.type" placeholder="请选择">
+              <!-- 使用自定义数据字典组件 -->
+              <dict-select
+                v-model="form.type"
+                dict-name="企业类型"
+                placeholder="请选择企业类型"
+                @change="changeDictTypeVal"
+              />
+              <!-- <el-select v-model="form.type" placeholder="请选择">
                 <el-option
                   v-for="item in typeList"
                   :key="item.value"
                   :label="item.label"
                   :value="item.value"
                 />
-              </el-select>
+              </el-select> -->
             </el-form-item>
           </el-col>
         </el-row>

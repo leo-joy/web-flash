@@ -8,6 +8,7 @@ import cn.enilu.flash.bean.enumeration.BizExceptionEnum;
 import cn.enilu.flash.bean.enumeration.Permission;
 import cn.enilu.flash.bean.exception.ApplicationException;
 import cn.enilu.flash.bean.vo.front.Rets;
+import cn.enilu.flash.cache.DictCache;
 import cn.enilu.flash.service.system.DictService;
 import cn.enilu.flash.utils.BeanUtil;
 import cn.enilu.flash.utils.StringUtil;
@@ -15,10 +16,7 @@ import cn.enilu.flash.warpper.DictDetailWarpper;
 import cn.enilu.flash.warpper.DictWarpper;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,6 +31,9 @@ import java.util.List;
 public class DictController extends BaseController {
     @Autowired
     private DictService dictService;
+
+    @Autowired
+    private DictCache dictCache;
 
     /**
      * 获取所有字典列表
@@ -91,6 +92,12 @@ public class DictController extends BaseController {
     public Object delete(@RequestParam Long id) {
         dictService.delteDict(id);
         return Rets.success();
+    }
+
+    @RequestMapping(value = "/getDicts/{dictName}", method = RequestMethod.GET)
+    public Object getDicts(@PathVariable("dictName") String dictName) {
+        List<Dict> dicts = dictCache.getDictsByPname(dictName);
+        return Rets.success(dicts);
     }
 
 }

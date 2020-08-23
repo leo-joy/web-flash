@@ -485,6 +485,10 @@ export default {
           }
         }
       }
+    },
+    changeDictTypeVal(val) {
+      console.log('get user select value', val)
+      this.form.type = val
     }
   }
 }

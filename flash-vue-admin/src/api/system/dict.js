@@ -33,3 +33,10 @@ export function remove(id) {
     }
   })
 }
+
+export function getDicts(dictName) {
+  return request({
+    url: '/dict/getDicts/' + dictName,
+    method: 'get'
+  })
+}

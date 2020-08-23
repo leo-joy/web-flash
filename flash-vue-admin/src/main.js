@@ -14,7 +14,11 @@ import router from './router'
 import i18n from './lang' // Internationalization
 import '@/icons' // icon
 import '@/permission' // permission control
-
+/**
+ * 全局引用自定义公共组件
+ */
+import DictSelect from './components/DictSelect'
+Vue.component('dict-select', DictSelect)
 /**
  * 全局引用第三方组件
  */
