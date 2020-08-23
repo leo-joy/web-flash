@@ -447,7 +447,7 @@
                     $('#load_data').hide();
                     if (data && data.data && data.data.length>0 && data.success) {
                         $('#no_data').hide();
-                        console.log(data)
+                        //console.log(data)
                         if(data.data[0].enterpriseName) {
                             gudongData['branchCompanyName']= data.data[0].enterpriseName
                         } else {
@@ -482,7 +482,7 @@
                     $('#load_data').hide();
                     if (data && data.data && data.data.length>0 && data.success) {
                         $('#no_data').hide();
-                        console.log(data)
+                        //console.log(data)
                         if(data.data[0].enterpriseName) {
                             touziData['branchCompanyName']= data.data[0].enterpriseName
                         } else {
@@ -510,7 +510,7 @@
         // type 为类型，1 是股东，绘制在上方， 2是投资公司，绘制在下方
         function transTree(data, type) {
             if (!data) return;
-            console.log(data)
+            //console.log(data)
             if(data.children && data.children.length>0) {
                 data.children = data.children;
             }
@@ -567,10 +567,31 @@
 
             // 绘制认缴金额
             if (type == 1 && data.subscribedCapitalContribution) {
-                data.subtext = '认缴金额：' + data.subscribedCapitalContribution +'万元';
+                if(data.currency && data.currency*1 === 2) {
+                    data.subtext = '股本：' + data.subscribedCapitalContribution +'万美元';
+                } else if(data.currency && data.currency*1 === 3) {
+                    data.subtext = '股本：' + data.subscribedCapitalContribution +'万港元';
+                } else if(data.currency && data.currency*1 === 4) {
+                    data.subtext = '股本：' + data.subscribedCapitalContribution +'万澳币';
+                } else if(data.currency && data.currency*1 === 5) {
+                    data.subtext = '股本：' + data.subscribedCapitalContribution +'万新加坡元';
+                } else {
+                    data.subtext = '股本：' + data.subscribedCapitalContribution +'万元';
+                }
+                
             }
             if (type == 2 && data.registeredCapital) {
-                data.subtext = '认缴金额：' + data.registeredCapital +'万元';
+                if(data.currency && data.currency*1 === 2) {
+                    data.subtext = '认缴金额：' + data.registeredCapital +'万美元';
+                } else if(data.currency && data.currency*1 === 3) {
+                    data.subtext = '认缴金额：' + data.registeredCapital +'万港元';
+                } else if(data.currency && data.currency*1 === 4) {
+                    data.subtext = '认缴金额：' + data.registeredCapital +'万澳币';
+                } else if(data.currency && data.currency*1 === 5) {
+                    data.subtext = '认缴金额：' + data.registeredCapital +'万新加坡元';
+                } else {
+                    data.subtext = '认缴金额：' + data.registeredCapital +'万元';
+                }
             }
 
             // 绘制tree的tag,在节点底部区域绘制
@@ -672,7 +693,7 @@
 
             var children = data.children;
             if (children && children.length>0) {
-                console.log('children---', children)
+                //console.log('children---', children)
                 for (var i = 0; i < children.length; i++) {
                     transTree(children[i], type);
                     children[i] = addTampArrow(children[i], fontSize);
@@ -726,7 +747,7 @@
         // 绘制子节点连接线
         function addTampArrow(cnode, fontSize) {
             var tamp = cnode;
-            console.log('cnode:',cnode)
+            //console.log('cnode:',cnode)
             var Ratio = (!cnode.proportion || cnode.proportion == '0%') ? '' : cnode.proportion;
             if (Ratio) {
                 Ratio = (parseFloat(cnode.proportion).toFixed(4)) * 10000 / 10000 + '%';
@@ -1067,7 +1088,7 @@
                     
                     
                 }
-                console.log('shapeList[i]._echartsData----',shapeList[i]._echartsData)
+                //console.log('shapeList[i]._echartsData----',shapeList[i]._echartsData)
                 if (shapeList[i]._echartsData && shapeList[i]._echartsData._data.extend && !jietu) {
                     var iconImg = '';
                     var isIE11 = (!!window.ActiveXObject || "ActiveXObject" in window);
